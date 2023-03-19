@@ -9,9 +9,13 @@ package service
 import (
 	"bytes"
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
 	"net"
 	"os"
+=======
+	"net"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 	"time"
 
@@ -71,11 +75,15 @@ type testTransientStore struct {
 func newTransientStore(t *testing.T) *testTransientStore {
 	s := &testTransientStore{}
 	var err error
+<<<<<<< HEAD
 	s.tempdir, err = ioutil.TempDir("", "ts")
 	if err != nil {
 		t.Fatalf("Failed to create test directory, got err %s", err)
 		return s
 	}
+=======
+	s.tempdir = t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	s.storeProvider, err = transientstore.NewStoreProvider(s.tempdir)
 	if err != nil {
 		t.Fatalf("Failed to open store, got err %s", err)
@@ -91,7 +99,10 @@ func newTransientStore(t *testing.T) *testTransientStore {
 
 func (s *testTransientStore) tearDown() {
 	s.storeProvider.Close()
+<<<<<<< HEAD
 	os.RemoveAll(s.tempdir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 func (s *testTransientStore) Persist(txid string, blockHeight uint64,
@@ -123,6 +134,10 @@ func TestInitGossipService(t *testing.T) {
 		signer,
 		deserManager,
 		cryptoProvider,
+<<<<<<< HEAD
+=======
+		nil,
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	)
 	secAdv := peergossip.NewSecurityAdvisor(deserManager)
 	gossipConfig, err := gossip.GlobalConfig(endpoint, nil)
@@ -304,7 +319,10 @@ func TestWithStaticDeliverClientNotLeader(t *testing.T) {
 	for i := 0; i < n; i++ {
 		peerIndexes[i] = i
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	addPeersToChannel(channelName, gossips, peerIndexes)
 
 	waitForFullMembershipOrFailNow(t, channelName, gossips, n, TIMEOUT, time.Second*2)

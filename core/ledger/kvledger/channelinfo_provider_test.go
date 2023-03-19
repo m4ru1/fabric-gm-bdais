@@ -10,7 +10,10 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+<<<<<<< HEAD
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/golang/protobuf/proto"
@@ -30,9 +33,13 @@ import (
 
 func TestNamespacesAndCollections(t *testing.T) {
 	channelName := "testnamespacesandcollections"
+<<<<<<< HEAD
 	basePath, err := ioutil.TempDir("", "testchannelinfoprovider")
 	require.NoError(t, err)
 	defer os.RemoveAll(basePath)
+=======
+	basePath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	blkStoreProvider, blkStore := openBlockStorage(t, channelName, basePath)
 	defer blkStoreProvider.Close()
 
@@ -92,9 +99,13 @@ func TestNamespacesAndCollections(t *testing.T) {
 // TestGetAllMSPIDs verifies getAllMSPIDs by adding and removing organizations to the channel config.
 func TestGetAllMSPIDs(t *testing.T) {
 	channelName := "testgetallmspids"
+<<<<<<< HEAD
 	basePath, err := ioutil.TempDir("", "testchannelinfoprovider")
 	require.NoError(t, err)
 	defer os.RemoveAll(basePath)
+=======
+	basePath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	blkStoreProvider, blkStore := openBlockStorage(t, channelName, basePath)
 	defer blkStoreProvider.Close()
@@ -110,7 +121,11 @@ func TestGetAllMSPIDs(t *testing.T) {
 
 	// add genesis block and verify GetAllMSPIDs when the channel has only genesis block
 	// the genesis block is created for org "SampleOrg" with MSPID "SampleOrg"
+<<<<<<< HEAD
 	configBlock, err = test.MakeGenesisBlock(channelName)
+=======
+	configBlock, err := test.MakeGenesisBlock(channelName)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.NoError(t, err)
 	require.NoError(t, blkStore.AddBlock(configBlock))
 	verifyGetAllMSPIDs(t, channelInfoProvider, []string{"SampleOrg"})
@@ -170,9 +185,13 @@ func TestGetAllMSPIDs(t *testing.T) {
 
 func TestGetAllMSPIDs_NegativeTests(t *testing.T) {
 	channelName := "testgetallmspidsnegativetests"
+<<<<<<< HEAD
 	basePath, err := ioutil.TempDir("", "testchannelinfoprovider_negativetests")
 	require.NoError(t, err)
 	defer os.RemoveAll(basePath)
+=======
+	basePath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	blkStoreProvider, blkStore := openBlockStorage(t, channelName, basePath)
 	defer blkStoreProvider.Close()
@@ -183,7 +202,11 @@ func TestGetAllMSPIDs_NegativeTests(t *testing.T) {
 	lastConfigBlockNum := uint64(0)
 
 	// add genesis block
+<<<<<<< HEAD
 	configBlock, err = test.MakeGenesisBlock(channelName)
+=======
+	configBlock, err := test.MakeGenesisBlock(channelName)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.NoError(t, err)
 	require.NoError(t, blkStore.AddBlock(configBlock))
 
@@ -210,7 +233,11 @@ func TestGetAllMSPIDs_NegativeTests(t *testing.T) {
 	configBlock.Metadata.Metadata[cb.BlockMetadataIndex_SIGNATURES] = []byte("invalid_bytes")
 	require.NoError(t, blkStore.AddBlock(configBlock))
 	_, err = channelInfoProvider.getAllMSPIDs()
+<<<<<<< HEAD
 	require.EqualError(t, err, "failed to retrieve metadata: error unmarshalling metadata at index [SIGNATURES]: unexpected EOF")
+=======
+	require.ErrorContains(t, err, "failed to retrieve metadata: error unmarshalling metadata at index [SIGNATURES]")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// test RetrieveBlockByNumber error (before calling GetLastConfigIndexFromBlock) by closing block store provider
 	blkStoreProvider.Close()

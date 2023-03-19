@@ -7,8 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package multichannel
 
 import (
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/golang/protobuf/proto"
@@ -70,9 +73,13 @@ func TestCreateBlock(t *testing.T) {
 }
 
 func TestBlockSignature(t *testing.T) {
+<<<<<<< HEAD
 	dir, err := ioutil.TempDir("", "file-ledger")
 	require.NoError(t, err)
 	defer os.RemoveAll(dir)
+=======
+	dir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	rlf, err := fileledger.New(dir, &disabled.Provider{})
 	require.NoError(t, err)
@@ -209,9 +216,13 @@ func TestGoodWriteConfig(t *testing.T) {
 	confSys := genesisconfig.Load(genesisconfig.SampleInsecureSoloProfile, configtest.GetDevConfigDir())
 	genesisBlockSys := encoder.New(confSys).GenesisBlock()
 
+<<<<<<< HEAD
 	tmpdir, err := ioutil.TempDir("", "file-ledger")
 	require.NoError(t, err)
 	defer os.RemoveAll(tmpdir)
+=======
+	tmpdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	_, l := newLedgerAndFactory(tmpdir, "testchannelid", genesisBlockSys)
 
@@ -256,9 +267,13 @@ func TestWriteConfigSynchronously(t *testing.T) {
 	confSys := genesisconfig.Load(genesisconfig.SampleInsecureSoloProfile, configtest.GetDevConfigDir())
 	genesisBlockSys := encoder.New(confSys).GenesisBlock()
 
+<<<<<<< HEAD
 	tmpdir, err := ioutil.TempDir("", "file-ledger")
 	require.NoError(t, err)
 	defer os.RemoveAll(tmpdir)
+=======
+	tmpdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	_, l := newLedgerAndFactory(tmpdir, "testchannelid", genesisBlockSys)
 
@@ -300,9 +315,13 @@ func TestMigrationWriteConfig(t *testing.T) {
 	confSys := genesisconfig.Load(genesisconfig.SampleInsecureSoloProfile, configtest.GetDevConfigDir())
 	genesisBlockSys := encoder.New(confSys).GenesisBlock()
 
+<<<<<<< HEAD
 	tmpdir, err := ioutil.TempDir("", "file-ledger")
 	require.NoError(t, err)
 	defer os.RemoveAll(tmpdir)
+=======
+	tmpdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	_, l := newLedgerAndFactory(tmpdir, "testchannelid", genesisBlockSys)
 
@@ -348,9 +367,13 @@ func TestRaceWriteConfig(t *testing.T) {
 	confSys := genesisconfig.Load(genesisconfig.SampleInsecureSoloProfile, configtest.GetDevConfigDir())
 	genesisBlockSys := encoder.New(confSys).GenesisBlock()
 
+<<<<<<< HEAD
 	tmpdir, err := ioutil.TempDir("", "file-ledger")
 	require.NoError(t, err)
 	defer os.RemoveAll(tmpdir)
+=======
+	tmpdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	_, l := newLedgerAndFactory(tmpdir, "testchannelid", genesisBlockSys)
 
@@ -411,9 +434,13 @@ func TestRaceWriteBlocks(t *testing.T) {
 	confSys := genesisconfig.Load(genesisconfig.SampleInsecureSoloProfile, configtest.GetDevConfigDir())
 	genesisBlockSys := encoder.New(confSys).GenesisBlock()
 
+<<<<<<< HEAD
 	tmpdir, err := ioutil.TempDir("", "file-ledger")
 	require.NoError(t, err)
 	defer os.RemoveAll(tmpdir)
+=======
+	tmpdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	_, l := newLedgerAndFactory(tmpdir, "testchannelid", genesisBlockSys)
 

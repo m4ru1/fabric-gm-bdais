@@ -150,12 +150,29 @@ Profiles:{{ range .Profiles }}
         AbsoluteMaxBytes: 98 MB
         PreferredMaxBytes: 512 KB
       Capabilities:
+<<<<<<< HEAD
         V2_0: true
       {{- if eq $w.Consensus.Type "kafka" }}
       Kafka:
         Brokers:{{ range $w.BrokerAddresses "HostPort" }}
         - {{ . }}
         {{- end }}
+=======
+        {{- if eq $w.Consensus.Type "BFT" }}
+        V3_0: true
+        {{- else }}
+        V2_0: true
+        {{- end }}
+      {{- if eq $w.Consensus.Type "BFT" }}
+      ConsenterMapping:{{ range $index, $orderer := .Orderers }}{{ with $w.Orderer . }}
+      - ID: {{ $index }}
+        Host: 127.0.0.1
+        Port: {{ $w.OrdererPort . "Cluster" }}
+        MSPID: {{ .Organization }}
+        ClientTLSCert: {{ $w.OrdererLocalCryptoDir . "tls" }}/server.crt
+        ServerTLSCert: {{ $w.OrdererLocalCryptoDir . "tls" }}/server.crt
+        {{- end }}{{- end }}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
       {{- end }}
       {{- if eq $w.Consensus.Type "etcdraft" }}
       EtcdRaft:

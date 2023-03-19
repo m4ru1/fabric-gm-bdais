@@ -18,7 +18,10 @@ import (
 	"path/filepath"
 	"runtime"
 	"sort"
+<<<<<<< HEAD
 	"strconv"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"strings"
 	"sync"
 	"syscall"
@@ -29,13 +32,21 @@ import (
 	"github.com/hyperledger/fabric/integration/nwo/commands"
 	"github.com/hyperledger/fabric/integration/nwo/fabricconfig"
 	"github.com/hyperledger/fabric/integration/nwo/runner"
+<<<<<<< HEAD
 	"github.com/onsi/ginkgo"
+=======
+	ginkgo "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
 	"github.com/onsi/gomega/gstruct"
 	"github.com/onsi/gomega/types"
 	"github.com/tedsuo/ifrit"
+<<<<<<< HEAD
 	"github.com/tedsuo/ifrit/ginkgomon"
+=======
+	ginkgomon "github.com/tedsuo/ifrit/ginkgomon_v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/tedsuo/ifrit/grouper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -65,6 +76,7 @@ type Consortium struct {
 	Organizations []string `yaml:"organizations,omitempty"`
 }
 
+<<<<<<< HEAD
 // Consensus indicates the orderer types and how many broker and zookeeper
 // instances.
 type Consensus struct {
@@ -72,6 +84,12 @@ type Consensus struct {
 	BootstrapMethod             string `yaml:"bootstrap_method,omitempty"`
 	Brokers                     int    `yaml:"brokers,omitempty"`
 	ZooKeepers                  int    `yaml:"zookeepers,omitempty"`
+=======
+// Consensus indicates the orderer types.
+type Consensus struct {
+	Type                        string `yaml:"type,omitempty"`
+	BootstrapMethod             string `yaml:"bootstrap_method,omitempty"`
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	ChannelParticipationEnabled bool   `yaml:"channel_participation_enabled,omitempty"`
 }
 
@@ -157,7 +175,10 @@ type Network struct {
 	TLSEnabled            bool
 	GatewayEnabled        bool
 
+<<<<<<< HEAD
 	PortsByBrokerID  map[string]Ports
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	PortsByOrdererID map[string]Ports
 	PortsByPeerID    map[string]Ports
 	Organizations    []*Organization
@@ -188,7 +209,10 @@ func New(c *Config, rootDir string, dockerClient *docker.Client, startPort int, 
 		NetworkID:         runner.UniqueName(),
 		EventuallyTimeout: time.Minute,
 		MetricsProvider:   "prometheus",
+<<<<<<< HEAD
 		PortsByBrokerID:   map[string]Ports{},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		PortsByOrdererID:  map[string]Ports{},
 		PortsByPeerID:     map[string]Ports{},
 
@@ -230,6 +254,7 @@ func New(c *Config, rootDir string, dockerClient *docker.Client, startPort int, 
 		network.SessionCreateInterval = time.Second
 	}
 
+<<<<<<< HEAD
 	for i := 0; i < network.Consensus.Brokers; i++ {
 		ports := Ports{}
 		for _, portName := range BrokerPortNames() {
@@ -238,6 +263,8 @@ func New(c *Config, rootDir string, dockerClient *docker.Client, startPort int, 
 		network.PortsByBrokerID[strconv.Itoa(i)] = ports
 	}
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	for _, o := range c.Orderers {
 		ports := Ports{}
 		for _, portName := range OrdererPortNames() {
@@ -1245,6 +1272,7 @@ func (n *Network) Osnadmin(command Command) (*gexec.Session, error) {
 	return n.StartSession(cmd, command.SessionName())
 }
 
+<<<<<<< HEAD
 // ZooKeeperRunner returns a runner for a ZooKeeper instance.
 func (n *Network) ZooKeeperRunner(idx int) *runner.ZooKeeper {
 	colorCode := n.nextColor()
@@ -1326,6 +1354,8 @@ func (n *Network) BrokerGroupRunner() ifrit.Runner {
 	return grouper.NewOrdered(syscall.SIGTERM, members)
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // OrdererRunner returns an ifrit.Runner for the specified orderer. The runner
 // can be used to start and manage an orderer process.
 func (n *Network) OrdererRunner(o *Orderer, env ...string) *ginkgomon.Runner {
@@ -1342,12 +1372,15 @@ func (n *Network) OrdererRunner(o *Orderer, env ...string) *ginkgomon.Runner {
 		StartCheckTimeout: 15 * time.Second,
 	}
 
+<<<<<<< HEAD
 	// After consensus-type migration, the #brokers is >0, but the type is etcdraft
 	if n.Consensus.Type == "kafka" && n.Consensus.Brokers != 0 {
 		config.StartCheck = "Start phase completed successfully"
 		config.StartCheckTimeout = 30 * time.Second
 	}
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return ginkgomon.New(config)
 }
 
@@ -1396,7 +1429,10 @@ func (n *Network) PeerGroupRunner() ifrit.Runner {
 // entire fabric network.
 func (n *Network) NetworkGroupRunner() ifrit.Runner {
 	members := grouper.Members{
+<<<<<<< HEAD
 		{Name: "brokers", Runner: n.BrokerGroupRunner()},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		{Name: "orderers", Runner: n.OrdererGroupRunner()},
 		{Name: "peers", Runner: n.PeerGroupRunner()},
 	}
@@ -1786,6 +1822,7 @@ func OrdererPortNames() []PortName {
 	return []PortName{ListenPort, ProfilePort, OperationsPort, ClusterPort, AdminPort}
 }
 
+<<<<<<< HEAD
 // BrokerPortNames returns the list of ports that need to be reserved for a
 // Kafka broker.
 func BrokerPortNames() []PortName {
@@ -1801,6 +1838,8 @@ func (n *Network) BrokerAddresses(portName PortName) []string {
 	return addresses
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // OrdererAddress returns the address (host and port) exposed by the Orderer
 // for the named port. Command line tools should use the returned address when
 // connecting to the orderer.

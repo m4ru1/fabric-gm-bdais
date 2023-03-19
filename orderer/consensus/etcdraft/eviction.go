@@ -16,7 +16,11 @@ import (
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/orderer/common/cluster"
 	"github.com/hyperledger/fabric/protoutil"
+<<<<<<< HEAD
 	"go.etcd.io/etcd/raft/raftpb"
+=======
+	"go.etcd.io/etcd/raft/v3/raftpb"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 // PeriodicCheck checks periodically a condition, and reports

@@ -37,7 +37,11 @@ Document how your workgroup will collaborate; meetings, chat and mailing lists
 can all be very effective. Making these mechanisms clear on your workgroup page
 can help build a community of translators.
 
+<<<<<<< HEAD
 Then use [Rocket chat channels](./advice_for_writers.html#rocket-chat) to let
+=======
+Then use [Discord](./advice_for_writers.html#discord) to let
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 other people know you've started a translation, and invite them to join the
 workgroup.
 
@@ -129,9 +133,15 @@ as spoken in Mexico:
    Your PR needs to be approved by one of the [documentation
    maintainers](https://github.com/orgs/hyperledger/teams/fabric-core-doc-maintainers).
    They will be automatically informed of your PR by email, and you can contact
+<<<<<<< HEAD
    them via Rocket chat.
 
 1. On the [`i18n rocket channel`](https://chat.hyperledger.org/channel/i18n)
+=======
+   them via Discord chat.
+
+1. On the [Discord](https://discord.com/invite/hyperledger) fabric-documentation channel
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
    request the creation of the new group of maintainers for your language,
    `@hyperledger/fabric-es_MX-doc-maintainers`. Provide your GitHubID for
    addition to this group.
@@ -181,9 +191,14 @@ workgroup, your translation can be published on the documentation website. For
 example, the Chinese language docs are available
 [here](https://hyperledger-fabric.readthedocs.io/zh_CN/{BRANCH_DOC}/).
 
+<<<<<<< HEAD
 You can now request, via the [`i18n rocket
 channel`](https://chat.hyperledger.org/channel/i18n), that your translation is
 included on the documentation website.
+=======
+You can now request, via the [Discord](https://discord.com/invite/hyperledger) fabric-documentation channel,
+that your translation is included on the documentation website.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 ## Translation tools
 

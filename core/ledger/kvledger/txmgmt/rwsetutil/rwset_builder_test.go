@@ -99,6 +99,12 @@ func TestTxSimulationResultWithPvtData(t *testing.T) {
 	rwSetBuilder.AddToHashedReadSet("ns2", "coll1", "key2", version.NewHeight(1, 1))
 	rwSetBuilder.AddToPvtAndHashedWriteSet("ns2", "coll2", "key1", []byte("pvt-ns2-coll2-key1-value"))
 
+<<<<<<< HEAD
+=======
+	// pvt rwset ns3
+	rwSetBuilder.AddToHashedWriteSetPurge("ns3", "coll1", "key1")
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	actualSimRes, err := rwSetBuilder.GetTxSimulationResults()
 	require.NoError(t, err)
 
@@ -151,6 +157,11 @@ func TestTxSimulationResultWithPvtData(t *testing.T) {
 		Writes: []*kvrwset.KVWrite{newKVWrite("key1", []byte("ns2-key1-value"))},
 	}
 
+<<<<<<< HEAD
+=======
+	pubNs3 := &kvrwset.KVRWSet{}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	hashedNs1Coll1 := &kvrwset.HashedRWSet{
 		HashedReads: []*kvrwset.KVReadHash{
 			constructTestPvtKVReadHash(t, "key1", version.NewHeight(1, 1)),
@@ -179,6 +190,15 @@ func TestTxSimulationResultWithPvtData(t *testing.T) {
 		},
 	}
 
+<<<<<<< HEAD
+=======
+	hashedNs3Coll1 := &kvrwset.HashedRWSet{
+		HashedWrites: []*kvrwset.KVWriteHash{
+			constructTestKVWriteHashPurge(t, "key1"),
+		},
+	}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	combinedNs1 := &rwset.NsReadWriteSet{
 		Namespace: "ns1",
 		Rwset:     serializeTestProtoMsg(t, pubNs1),
@@ -212,9 +232,28 @@ func TestTxSimulationResultWithPvtData(t *testing.T) {
 		},
 	}
 	require.Equal(t, combinedNs2, actualSimRes.PubSimulationResults.NsRwset[1])
+<<<<<<< HEAD
 	expectedPubRWSet := &rwset.TxReadWriteSet{
 		DataModel: rwset.TxReadWriteSet_KV,
 		NsRwset:   []*rwset.NsReadWriteSet{combinedNs1, combinedNs2},
+=======
+
+	combinedNs3 := &rwset.NsReadWriteSet{
+		Namespace: "ns3",
+		Rwset:     serializeTestProtoMsg(t, pubNs3),
+		CollectionHashedRwset: []*rwset.CollectionHashedReadWriteSet{
+			{
+				CollectionName: "coll1",
+				HashedRwset:    serializeTestProtoMsg(t, hashedNs3Coll1),
+			},
+		},
+	}
+	require.Equal(t, combinedNs3, actualSimRes.PubSimulationResults.NsRwset[2])
+
+	expectedPubRWSet := &rwset.TxReadWriteSet{
+		DataModel: rwset.TxReadWriteSet_KV,
+		NsRwset:   []*rwset.NsReadWriteSet{combinedNs1, combinedNs2, combinedNs3},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	require.Equal(t, expectedPubRWSet, actualSimRes.PubSimulationResults)
 }
@@ -356,6 +395,13 @@ func constructTestPvtKVWriteHash(t *testing.T, key string, value []byte) *kvrwse
 	return kvWriteHash
 }
 
+<<<<<<< HEAD
+=======
+func constructTestKVWriteHashPurge(t *testing.T, key string) *kvrwset.KVWriteHash {
+	return newKVWriteHashPurge(key)
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func serializeTestProtoMsg(t *testing.T, protoMsg proto.Message) []byte {
 	msgBytes, err := proto.Marshal(protoMsg)
 	require.NoError(t, err)

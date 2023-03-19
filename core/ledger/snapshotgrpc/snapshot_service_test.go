@@ -9,7 +9,10 @@ package snapshotgrpc
 import (
 	"context"
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/common"
@@ -34,8 +37,12 @@ type aclProvider interface {
 }
 
 func TestSnapshot(t *testing.T) {
+<<<<<<< HEAD
 	testDir, err := ioutil.TempDir("", "snapshotgrpc")
 	require.NoError(t, err)
+=======
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	ledgerID := "testsnapshot"
 	ledgermgmtInitializer := ledgermgmttest.NewInitializer(testDir)
@@ -91,7 +98,11 @@ func TestSnapshot(t *testing.T) {
 		{
 			name:          "unmarshal error",
 			signedRequest: &pb.SignedSnapshotRequest{Request: []byte("dummy")},
+<<<<<<< HEAD
 			errMsg:        "failed to unmarshal snapshot request: proto: can't skip unknown wire type 4",
+=======
+			errMsg:        "failed to unmarshal snapshot request",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		},
 		{
 			name:          "missing channel ID",
@@ -117,11 +128,22 @@ func TestSnapshot(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			_, err := snapshotSvc.Generate(context.Background(), test.signedRequest)
+<<<<<<< HEAD
 			require.EqualError(t, err, test.errMsg)
 			_, err = snapshotSvc.Cancel(context.Background(), test.signedRequest)
 			require.EqualError(t, err, test.errMsg)
 			_, err = snapshotSvc.QueryPendings(context.Background(), test.signedRequest)
 			require.EqualError(t, err, test.errMsg)
+=======
+			require.Error(t, err)
+			require.Contains(t, err.Error(), test.errMsg)
+			_, err = snapshotSvc.Cancel(context.Background(), test.signedRequest)
+			require.Error(t, err)
+			require.Contains(t, err.Error(), test.errMsg)
+			_, err = snapshotSvc.QueryPendings(context.Background(), test.signedRequest)
+			require.Error(t, err)
+			require.Contains(t, err.Error(), test.errMsg)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		})
 	}
 

@@ -33,6 +33,10 @@ func NewFileBasedKeyStore(pwd []byte, path string, readOnly bool) (bccsp.KeyStor
 
 // fileBasedKeyStore is a folder-based KeyStore.
 // Each key is stored in a separated file whose name contains the key's SKI
+<<<<<<< HEAD
+=======
+// SKI解释：Subject Key Identifier
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // and flags to identity the key's type. All the keys are stored in
 // a folder whose path is provided at initialization time.
 // The KeyStore can be initialized with a password, this password
@@ -288,7 +292,13 @@ func (ks *fileBasedKeyStore) storePublicKey(alias string, publicKey interface{})
 }
 
 func (ks *fileBasedKeyStore) storeKey(alias string, key []byte) error {
+<<<<<<< HEAD
 	pem, err := aesToEncryptedPEM(key, ks.pwd)
+=======
+	// 此方法用来存AES对称密钥
+	pem, err := aesToEncryptedPEM(key, ks.pwd)
+	// 在文件系统中存储的文件是PEM
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		logger.Errorf("Failed converting key to PEM [%s]: [%s]", alias, err)
 		return err

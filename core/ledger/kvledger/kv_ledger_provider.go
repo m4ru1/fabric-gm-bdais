@@ -159,6 +159,16 @@ func (p *Provider) initPvtDataStoreProvider() error {
 		PrivateDataConfig: p.initializer.Config.PrivateDataConfig,
 		StorePath:         PvtDataStorePath(p.initializer.Config.RootFSPath),
 	}
+<<<<<<< HEAD
+=======
+	ledgerIDs, err := p.idStore.getActiveAndInactiveLedgerIDs()
+	if err != nil {
+		return err
+	}
+	if err := pvtdatastorage.CheckAndConstructHashedIndex(privateDataConfig.StorePath, ledgerIDs); err != nil {
+		return err
+	}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	pvtdataStoreProvider, err := pvtdatastorage.NewProvider(privateDataConfig)
 	if err != nil {
 		return err
@@ -674,7 +684,28 @@ func (s *idStore) ledgerIDExists(ledgerID string) (bool, error) {
 	return val != nil, nil
 }
 
+<<<<<<< HEAD
 func (s *idStore) getActiveLedgerIDs() ([]string, error) {
+=======
+func (s *idStore) getActiveAndInactiveLedgerIDs() ([]string, error) {
+	return s.getLedgerIDs(
+		map[msgs.Status]struct{}{
+			msgs.Status_ACTIVE:   {},
+			msgs.Status_INACTIVE: {},
+		},
+	)
+}
+
+func (s *idStore) getActiveLedgerIDs() ([]string, error) {
+	return s.getLedgerIDs(
+		map[msgs.Status]struct{}{
+			msgs.Status_ACTIVE: {},
+		},
+	)
+}
+
+func (s *idStore) getLedgerIDs(filterIn map[msgs.Status]struct{}) ([]string, error) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	var ids []string
 	itr := s.db.GetIterator(metadataKeyPrefix, metadataKeyStop)
 	defer itr.Release()
@@ -684,7 +715,11 @@ func (s *idStore) getActiveLedgerIDs() ([]string, error) {
 			logger.Errorf("Error unmarshalling ledger metadata: %s", err)
 			return nil, errors.Wrapf(err, "error unmarshalling ledger metadata")
 		}
+<<<<<<< HEAD
 		if metadata.Status == msgs.Status_ACTIVE {
+=======
+		if _, ok := filterIn[metadata.Status]; ok {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			id := ledgerIDFromMetadataKey(itr.Key())
 			ids = append(ids, id)
 		}

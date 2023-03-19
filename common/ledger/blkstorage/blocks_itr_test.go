@@ -17,7 +17,11 @@ import (
 )
 
 func TestBlocksItrBlockingNext(t *testing.T) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	blkfileMgrWrapper := newTestBlockfileWrapper(env, "testLedger")
 	defer blkfileMgrWrapper.close()
@@ -41,7 +45,11 @@ func TestBlocksItrBlockingNext(t *testing.T) {
 }
 
 func TestBlockItrClose(t *testing.T) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	blkfileMgrWrapper := newTestBlockfileWrapper(env, "testLedger")
 	defer blkfileMgrWrapper.close()
@@ -63,7 +71,11 @@ func TestBlockItrClose(t *testing.T) {
 }
 
 func TestRaceToDeadlock(t *testing.T) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	blkfileMgrWrapper := newTestBlockfileWrapper(env, "testLedger")
 	defer blkfileMgrWrapper.close()
@@ -96,7 +108,11 @@ func TestRaceToDeadlock(t *testing.T) {
 }
 
 func TestBlockItrCloseWithoutRetrieve(t *testing.T) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	blkfileMgrWrapper := newTestBlockfileWrapper(env, "testLedger")
 	defer blkfileMgrWrapper.close()
@@ -110,7 +126,11 @@ func TestBlockItrCloseWithoutRetrieve(t *testing.T) {
 }
 
 func TestCloseMultipleItrsWaitForFutureBlock(t *testing.T) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	blkfileMgrWrapper := newTestBlockfileWrapper(env, "testLedger")
 	defer blkfileMgrWrapper.close()

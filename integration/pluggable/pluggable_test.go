@@ -19,7 +19,11 @@ import (
 	"github.com/hyperledger/fabric/integration/nwo"
 	"github.com/hyperledger/fabric/integration/nwo/commands"
 	"github.com/hyperledger/fabric/integration/nwo/fabricconfig"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
@@ -59,7 +63,11 @@ var _ = Describe("EndToEnd", func() {
 		SetValidationPluginActivationFolder(dir)
 
 		// Speed up test by reducing the number of peers we bring up
+<<<<<<< HEAD
 		soloConfig := nwo.BasicSolo()
+=======
+		soloConfig := nwo.BasicEtcdRaft()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		soloConfig.RemovePeer("Org1", "peer1")
 		soloConfig.RemovePeer("Org2", "peer1")
 		Expect(soloConfig.Peers).To(HaveLen(2))

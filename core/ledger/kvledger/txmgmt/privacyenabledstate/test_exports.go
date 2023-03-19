@@ -7,8 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package privacyenabledstate
 
 import (
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 	"time"
 
@@ -48,10 +51,14 @@ type LevelDBTestEnv struct {
 
 // Init implements corresponding function from interface TestEnv
 func (env *LevelDBTestEnv) Init(t testing.TB) {
+<<<<<<< HEAD
 	dbPath, err := ioutil.TempDir("", "cstestenv")
 	if err != nil {
 		t.Fatalf("Failed to create level db storage directory: %s", err)
 	}
+=======
+	dbPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	env.bookkeeperTestEnv = bookkeeping.NewTestEnv(t)
 	dbProvider, err := NewDBProvider(
 		env.bookkeeperTestEnv.TestProvider,
@@ -100,7 +107,10 @@ func (env *LevelDBTestEnv) GetName() string {
 func (env *LevelDBTestEnv) Cleanup() {
 	env.provider.Close()
 	env.bookkeeperTestEnv.Cleanup()
+<<<<<<< HEAD
 	os.RemoveAll(env.dbPath)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 ///////////// CouchDB Environment //////////////
@@ -133,10 +143,14 @@ func (env *CouchDBTestEnv) StopExternalResource() {
 
 // Init implements corresponding function from interface TestEnv
 func (env *CouchDBTestEnv) Init(t testing.TB) {
+<<<<<<< HEAD
 	redoPath, err := ioutil.TempDir("", "pestate")
 	if err != nil {
 		t.Fatalf("Failed to create redo log directory: %s", err)
 	}
+=======
+	redoPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	env.t = t
 	env.StartExternalResource()
@@ -195,7 +209,10 @@ func (env *CouchDBTestEnv) Cleanup() {
 	if env.provider != nil {
 		require.NoError(env.t, statecouchdb.DropApplicationDBs(env.couchDBConfig))
 	}
+<<<<<<< HEAD
 	os.RemoveAll(env.redoPath)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	env.bookkeeperTestEnv.Cleanup()
 	env.provider.Close()
 }

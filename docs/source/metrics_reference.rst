@@ -85,6 +85,7 @@ The following orderer metrics are exported for consumption by Prometheus.
 +----------------------------------------------+-----------+------------------------------------------------------------+-----------+--------------------------------------------------------------------+
 | consensus_etcdraft_snapshot_block_number     | gauge     | The block number of the latest snapshot.                   | channel   |                                                                    |
 +----------------------------------------------+-----------+------------------------------------------------------------+-----------+--------------------------------------------------------------------+
+<<<<<<< HEAD
 | consensus_kafka_batch_size                   | gauge     | The mean batch size in bytes sent to topics.               | topic     |                                                                    |
 +----------------------------------------------+-----------+------------------------------------------------------------+-----------+--------------------------------------------------------------------+
 | consensus_kafka_compression_ratio            | gauge     | The mean compression ratio (as percentage) for topics.     | topic     |                                                                    |
@@ -110,6 +111,8 @@ The following orderer metrics are exported for consumption by Prometheus.
 +----------------------------------------------+-----------+------------------------------------------------------------+-----------+--------------------------------------------------------------------+
 | consensus_kafka_response_size                | gauge     | The mean response size in bytes from brokers.              | broker_id |                                                                    |
 +----------------------------------------------+-----------+------------------------------------------------------------+-----------+--------------------------------------------------------------------+
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 | deliver_blocks_sent                          | counter   | The number of blocks sent by the deliver service.          | channel   |                                                                    |
 |                                              |           |                                                            +-----------+--------------------------------------------------------------------+
 |                                              |           |                                                            | filtered  |                                                                    |
@@ -263,6 +266,7 @@ associated with the metric.
 +---------------------------------------------------------------------------+-----------+------------------------------------------------------------+
 | consensus.etcdraft.snapshot_block_number.%{channel}                       | gauge     | The block number of the latest snapshot.                   |
 +---------------------------------------------------------------------------+-----------+------------------------------------------------------------+
+<<<<<<< HEAD
 | consensus.kafka.batch_size.%{topic}                                       | gauge     | The mean batch size in bytes sent to topics.               |
 +---------------------------------------------------------------------------+-----------+------------------------------------------------------------+
 | consensus.kafka.compression_ratio.%{topic}                                | gauge     | The mean compression ratio (as percentage) for topics.     |
@@ -288,6 +292,8 @@ associated with the metric.
 +---------------------------------------------------------------------------+-----------+------------------------------------------------------------+
 | consensus.kafka.response_size.%{broker_id}                                | gauge     | The mean response size in bytes from brokers.              |
 +---------------------------------------------------------------------------+-----------+------------------------------------------------------------+
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 | deliver.blocks_sent.%{channel}.%{filtered}.%{data_type}                   | counter   | The number of blocks sent by the deliver service.          |
 +---------------------------------------------------------------------------+-----------+------------------------------------------------------------+
 | deliver.requests_completed.%{channel}.%{filtered}.%{data_type}.%{success} | counter   | The number of deliver requests that have been completed.   |

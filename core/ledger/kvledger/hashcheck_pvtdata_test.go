@@ -21,8 +21,12 @@ import (
 )
 
 func TestConstructValidInvalidBlocksPvtData(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	nsCollBtlConfs := []*nsCollBtlConfig{
 		{
@@ -93,8 +97,12 @@ func TestConstructValidInvalidBlocksPvtData(t *testing.T) {
 
 	// generate snapshot at block-2
 	require.NoError(t, kvledger.generateSnapshot())
+<<<<<<< HEAD
 	freshConf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	freshConf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	freshProvider := testutilNewProviderWithCollectionConfig(
 		t,

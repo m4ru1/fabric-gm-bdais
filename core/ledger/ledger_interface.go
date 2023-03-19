@@ -322,6 +322,11 @@ type TxSimulator interface {
 	SetPrivateDataMultipleKeys(namespace, collection string, kvs map[string][]byte) error
 	// DeletePrivateData deletes the given tuple <namespace, collection, key> from private data
 	DeletePrivateData(namespace, collection, key string) error
+<<<<<<< HEAD
+=======
+	// PurgePrivateData purges the given tuple <namespace, collection, key> from private data
+	PurgePrivateData(namespace, collection, key string) error
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	// SetPrivateDataMetadata sets the metadata associated with an existing key-tuple <namespace, collection, key>
 	SetPrivateDataMetadata(namespace, collection, key string, metadata map[string][]byte) error
 	// DeletePrivateDataMetadata deletes the metadata associated with an existing key-tuple <namespace, collection, key>

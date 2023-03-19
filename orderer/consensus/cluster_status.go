@@ -13,7 +13,11 @@ import "github.com/hyperledger/fabric/orderer/common/types"
 // This information is used to generate the channelparticipation.ChannelInfo in response
 // to a "List" request on a particular channel.
 //
+<<<<<<< HEAD
 // Not all chains must implement this, in particular non-cluster-type (solo, kafka) are
+=======
+// Not all chains must implement this, in particular non-cluster-type (solo) are
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // assigned a StaticStatusReporter at construction time.
 type StatusReporter interface {
 	// StatusReport provides the cluster relation and status.

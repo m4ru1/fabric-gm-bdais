@@ -42,7 +42,11 @@ func TestImportFromSnapshot(t *testing.T) {
 	bootstrappedLedgerName := "bootstrappedLedger"
 
 	setup := func() {
+<<<<<<< HEAD
 		testDir = testPath()
+=======
+		testDir = t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		env = newTestEnv(t, NewConf(testDir, 0))
 		snapshotDir = filepath.Join(testDir, "snapshot")
 		require.NoError(t, os.Mkdir(snapshotDir, 0o755))
@@ -326,7 +330,11 @@ func TestImportFromSnapshot(t *testing.T) {
 }
 
 func TestBootstrapFromSnapshotErrorPaths(t *testing.T) {
+<<<<<<< HEAD
 	testPath := testPath()
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	env := newTestEnv(t, NewConf(testPath, 0))
 	defer func() {
 		env.Cleanup()

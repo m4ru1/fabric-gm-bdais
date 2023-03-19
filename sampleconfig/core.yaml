@@ -178,7 +178,11 @@ peer:
         # Message expiration factor for alive messages
         msgExpirationFactor: 20
         # This is an endpoint that is published to peers outside of the organization.
+<<<<<<< HEAD
         # If this isn't set, the peer will not be known to other organizations.
+=======
+        # If this isn't set, the peer will not be known to other organizations and will not be exposed via service discovery.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
         externalEndpoint:
         # Leader election service configuration
         election:
@@ -313,6 +317,10 @@ peer:
     # Path on the file system where peer will store data (eg ledger). This
     # location must be access control protected to prevent unintended
     # modification that might corrupt the peer operations.
+<<<<<<< HEAD
+=======
+    # The path may be relative to FABRIC_CFG_PATH or an absolute path.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     fileSystemPath: /var/hyperledger/production
 
     # BCCSP (Blockchain crypto provider): Select which crypto implementation or
@@ -346,6 +354,10 @@ peer:
             KeyIds:
 
     # Path on the file system where peer will find MSP local configurations
+<<<<<<< HEAD
+=======
+    # The path may be relative to FABRIC_CFG_PATH or an absolute path.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     mspConfigPath: msp
 
     # Identifier of the local MSP
@@ -593,6 +605,10 @@ chaincode:
     # builders in the order specified below.
     # If you don't need to fallback to the default Docker builder, also unconfigure vm.endpoint above.
     # To override this property via env variable use CORE_CHAINCODE_EXTERNALBUILDERS: [{name: x, path: dir1}, {name: y, path: dir2}]
+<<<<<<< HEAD
+=======
+    # The path must be an absolute path.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     externalBuilders:
        - name: ccaas_builder
          path: /opt/hyperledger/ccaas_builder
@@ -728,6 +744,10 @@ ledger:
 
   snapshots:
     # Path on the file system where peer will store ledger snapshots
+<<<<<<< HEAD
+=======
+    # The path must be an absolute path.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     rootDir: /var/hyperledger/production/snapshots
 
 ###############################################################################
@@ -745,6 +765,10 @@ operations:
         enabled: false
 
         # path to PEM encoded server certificate for the operations server
+<<<<<<< HEAD
+=======
+        # The paths in this section may be relative to FABRIC_CFG_PATH or an absolute path.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
         cert:
             file:
 

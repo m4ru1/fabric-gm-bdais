@@ -22,8 +22,12 @@ import (
 )
 
 func TestSnapshotRequestBookKeeper(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -87,8 +91,12 @@ func TestSnapshotRequestBookKeeper(t *testing.T) {
 }
 
 func TestSnapshotRequestBookKeeperErrorPaths(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -119,8 +127,12 @@ func TestSnapshotRequestBookKeeperErrorPaths(t *testing.T) {
 }
 
 func TestSnapshotRequests(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -231,8 +243,12 @@ func TestSnapshotRequests(t *testing.T) {
 }
 
 func TestSnapshotMgmtConcurrency(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -263,8 +279,12 @@ func TestSnapshotMgmtConcurrency(t *testing.T) {
 }
 
 func TestSnapshotMgrShutdown(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -300,8 +320,12 @@ func TestSnapshotMgrShutdown(t *testing.T) {
 }
 
 func TestSnapshotRequestsErrorPaths(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 
 	// create a ledger with genesis block

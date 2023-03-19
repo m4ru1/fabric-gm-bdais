@@ -540,9 +540,15 @@ func (l *kvLedger) GetBlocksIterator(startBlockNumber uint64) (commonledger.Resu
 
 // GetBlockByHash returns a block given it's hash
 func (l *kvLedger) GetBlockByHash(blockHash []byte) (*common.Block, error) {
+<<<<<<< HEAD
 	block, err := l.blockStore.RetrieveBlockByHash(blockHash)
 	l.blockAPIsRWLock.RLock()
 	l.blockAPIsRWLock.RUnlock() //lint:ignore SA2001 syncpoint
+=======
+	l.blockAPIsRWLock.RLock()
+	defer l.blockAPIsRWLock.RUnlock()
+	block, err := l.blockStore.RetrieveBlockByHash(blockHash)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return block, err
 }
 

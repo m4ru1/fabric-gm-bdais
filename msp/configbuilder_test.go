@@ -106,12 +106,19 @@ func TestGetPemMaterialFromDirWithFile(t *testing.T) {
 
 func TestGetPemMaterialFromDirWithSymlinks(t *testing.T) {
 	mspDir := configtest.GetDevMspDir()
+<<<<<<< HEAD
 	tempDir, err := ioutil.TempDir("", "fabric-msp-test")
 	require.NoError(t, err)
 	defer os.RemoveAll(tempDir)
 
 	dirSymlinkName := filepath.Join(tempDir, "..data")
 	err = os.Symlink(filepath.Join(mspDir, "signcerts"), dirSymlinkName)
+=======
+	tempDir := t.TempDir()
+
+	dirSymlinkName := filepath.Join(tempDir, "..data")
+	err := os.Symlink(filepath.Join(mspDir, "signcerts"), dirSymlinkName)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.NoError(t, err)
 
 	fileSymlinkTarget := filepath.Join("..data", "peer.pem")

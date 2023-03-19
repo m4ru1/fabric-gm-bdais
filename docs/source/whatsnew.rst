@@ -39,6 +39,7 @@ This command will be useful, for example, in the following scenarios:
 
 For more information, see the `peer lifecycle chaincode calculatepackageid` :doc:`command reference topic<commands/peerlifecycle>`.
 
+<<<<<<< HEAD
 'Chaincode as a service' builder delivered with fabric-peer image
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -50,6 +51,8 @@ Starting in v2.4.1 an external builder for 'chaincode as a service' is available
 removing the need to build your own external builder and repackage and configure the peer.
 
 For more information, see the :doc:`cc_service` topic.
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 .. note::
 

@@ -8,7 +8,10 @@ package peer
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -52,8 +55,12 @@ func TestMain(m *testing.M) {
 }
 
 func NewTestPeer(t *testing.T) (*Peer, func()) {
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "peer-test")
 	require.NoError(t, err, "failed to create temporary directory")
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// Initialize gossip service
 	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
@@ -68,6 +75,10 @@ func NewTestPeer(t *testing.T) (*Peer, func()) {
 		signer,
 		deserManager,
 		cryptoProvider,
+<<<<<<< HEAD
+=======
+		nil,
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	)
 	secAdv := peergossip.NewSecurityAdvisor(deserManager)
 	defaultSecureDialOpts := func() []grpc.DialOption { return []grpc.DialOption{grpc.WithInsecure()} }
@@ -110,7 +121,10 @@ func NewTestPeer(t *testing.T) (*Peer, func()) {
 
 	cleanup := func() {
 		ledgerMgr.Close()
+<<<<<<< HEAD
 		os.RemoveAll(tempdir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	return peerInstance, cleanup
 }
@@ -236,12 +250,19 @@ func TestCreateChannelBySnapshot(t *testing.T) {
 	testChannelID := "createchannelbysnapshot"
 
 	// create a temp dir to store snapshot
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", testChannelID)
 	require.NoError(t, err)
 	defer os.Remove(tempdir)
 
 	snapshotDir := ledgermgmttest.CreateSnapshotWithGenesisBlock(t, tempdir, testChannelID, &ConfigTxProcessor{})
 	err = peerInstance.CreateChannelFromSnapshot(snapshotDir, &ledgermocks.DeployedChaincodeInfoProvider{}, nil, nil)
+=======
+	tempdir := t.TempDir()
+
+	snapshotDir := ledgermgmttest.CreateSnapshotWithGenesisBlock(t, tempdir, testChannelID, &ConfigTxProcessor{})
+	err := peerInstance.CreateChannelFromSnapshot(snapshotDir, &ledgermocks.DeployedChaincodeInfoProvider{}, nil, nil)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.NoError(t, err)
 
 	expectedStatus := &pb.JoinBySnapshotStatus{InProgress: true, BootstrappingSnapshotDir: snapshotDir}

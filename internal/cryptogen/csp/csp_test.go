@@ -25,11 +25,15 @@ import (
 )
 
 func TestLoadPrivateKey(t *testing.T) {
+<<<<<<< HEAD
 	testDir, err := ioutil.TempDir("", "csp-test")
 	if err != nil {
 		t.Fatalf("Failed to create test directory: %s", err)
 	}
 	defer os.RemoveAll(testDir)
+=======
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	priv, err := csp.GeneratePrivateKey(testDir)
 	if err != nil {
 		t.Fatalf("Failed to generate private key: %s", err)
@@ -44,11 +48,15 @@ func TestLoadPrivateKey(t *testing.T) {
 }
 
 func TestLoadPrivateKey_BadPEM(t *testing.T) {
+<<<<<<< HEAD
 	testDir, err := ioutil.TempDir("", "csp-test")
 	if err != nil {
 		t.Fatalf("Failed to create test directory: %s", err)
 	}
 	defer os.RemoveAll(testDir)
+=======
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	badPEMFile := filepath.Join(testDir, "badpem_sk")
 
@@ -107,11 +115,15 @@ func TestLoadPrivateKey_BadPEM(t *testing.T) {
 }
 
 func TestGeneratePrivateKey(t *testing.T) {
+<<<<<<< HEAD
 	testDir, err := ioutil.TempDir("", "csp-test")
 	if err != nil {
 		t.Fatalf("Failed to create test directory: %s", err)
 	}
 	defer os.RemoveAll(testDir)
+=======
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	expectedFile := filepath.Join(testDir, "priv_sk")
 	priv, err := csp.GeneratePrivateKey(testDir)

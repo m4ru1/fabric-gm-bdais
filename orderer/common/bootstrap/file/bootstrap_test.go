@@ -22,9 +22,13 @@ const (
 )
 
 func TestGenesisBlock(t *testing.T) {
+<<<<<<< HEAD
 	testDir, err := ioutil.TempDir("", "unittest")
 	require.NoErrorf(t, err, "generate temporary test dir")
 	defer os.RemoveAll(testDir)
+=======
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	testFile := path.Join(testDir, file)
 
@@ -117,12 +121,19 @@ func TestReplaceGenesisBlockFile(t *testing.T) {
 	}
 	marshalledBlock, _ := proto.Marshal(block)
 
+<<<<<<< HEAD
 	testDir, err := ioutil.TempDir("", "unittest")
 	require.NoErrorf(t, err, "generate temporary test dir")
 	defer os.RemoveAll(testDir)
 
 	testFile := path.Join(testDir, file)
 	err = ioutil.WriteFile(testFile, marshalledBlock, 0o644)
+=======
+	testDir := t.TempDir()
+
+	testFile := path.Join(testDir, file)
+	err := ioutil.WriteFile(testFile, marshalledBlock, 0o644)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.NoErrorf(t, err, "generate temporary test file: %s", file)
 
 	testFileBak := path.Join(testDir, fileBak)

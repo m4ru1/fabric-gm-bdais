@@ -11,15 +11,30 @@ import (
 	"sync/atomic"
 	"time"
 
+<<<<<<< HEAD
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
+=======
+	"github.com/bits-and-blooms/bitset"
+	"github.com/golang/protobuf/proto"
+	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
+	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/common/ledger/util/leveldbhelper"
 	"github.com/hyperledger/fabric/core/ledger"
 	"github.com/hyperledger/fabric/core/ledger/confighistory"
+<<<<<<< HEAD
 	"github.com/hyperledger/fabric/core/ledger/pvtdatapolicy"
 	"github.com/pkg/errors"
 	"github.com/willf/bitset"
+=======
+	"github.com/hyperledger/fabric/core/ledger/internal/version"
+	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
+	"github.com/hyperledger/fabric/core/ledger/pvtdatapolicy"
+	"github.com/hyperledger/fabric/core/ledger/util"
+	"github.com/pkg/errors"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 var logger = flogging.MustGetLogger("pvtdatastorage")
@@ -83,6 +98,14 @@ type dataEntry struct {
 	value *rwset.CollectionPvtReadWriteSet
 }
 
+<<<<<<< HEAD
+=======
+type hashedIndexEntry struct {
+	key   *hashedIndexKey
+	value string
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 type expiryEntry struct {
 	key   *expiryKey
 	value *ExpiryData
@@ -114,8 +137,39 @@ type bootKVHashesKey struct {
 	coll   string
 }
 
+<<<<<<< HEAD
 type storeEntries struct {
 	dataEntries             []*dataEntry
+=======
+type hashedIndexKey struct {
+	ns, coll      string
+	pvtkeyHash    []byte
+	blkNum, txNum uint64
+}
+
+type PurgeMarker struct {
+	Ns, Coll      string
+	PvtkeyHash    []byte
+	BlkNum, TxNum uint64
+}
+
+type purgeMarkerKey struct {
+	ns, coll   string
+	pvtkeyHash []byte
+}
+
+type purgeMarkerVal struct {
+	blkNum, txNum uint64
+}
+
+type purgeMarkerCollKey struct {
+	ns, coll string
+}
+
+type storeEntries struct {
+	dataEntries             []*dataEntry
+	hashedIndexEntries      []*hashedIndexEntry
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	expiryEntries           []*expiryEntry
 	elgMissingDataEntries   map[missingDataKey]*bitset.BitSet
 	inelgMissingDataEntries map[missingDataKey]*bitset.BitSet
@@ -130,7 +184,15 @@ type lastUpdatedOldBlocksList []uint64
 
 // NewProvider instantiates a StoreProvider
 func NewProvider(conf *PrivateDataConfig) (*Provider, error) {
+<<<<<<< HEAD
 	dbProvider, err := leveldbhelper.NewProvider(&leveldbhelper.Conf{DBPath: conf.StorePath})
+=======
+	dbProvider, err := leveldbhelper.NewProvider(
+		&leveldbhelper.Conf{
+			DBPath:         conf.StorePath,
+			ExpectedFormat: currentDataVersion,
+		})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		return nil, err
 	}
@@ -278,6 +340,14 @@ func (s *Store) Commit(blockNum uint64, pvtData []*ledger.TxPvtData, missingPvtD
 		batch.Put(key, val)
 	}
 
+<<<<<<< HEAD
+=======
+	for _, hashedIndexEntry := range storeEntries.hashedIndexEntries {
+		key := encodeHashedIndexKey(hashedIndexEntry.key)
+		batch.Put(key, []byte(hashedIndexEntry.value))
+	}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	for _, expiryEntry := range storeEntries.expiryEntries {
 		key = encodeExpiryKey(expiryEntry.key)
 		if val, err = encodeExpiryValue(expiryEntry.value); err != nil {
@@ -385,6 +455,43 @@ func (s *Store) ResetLastUpdatedOldBlocksList() error {
 	return nil
 }
 
+<<<<<<< HEAD
+=======
+func (s *Store) addPurgeMarkers(p *PurgeMarker) error {
+	b := s.db.NewUpdateBatch()
+	b.Put(
+		encodePurgeMarkerCollKey(
+			&purgeMarkerCollKey{
+				ns:   p.Ns,
+				coll: p.Coll,
+			},
+		),
+		encodePurgeMarkerVal(
+			&purgeMarkerVal{
+				blkNum: p.BlkNum,
+				txNum:  p.TxNum,
+			},
+		),
+	)
+	b.Put(
+		encodePurgeMarkerKey(
+			&purgeMarkerKey{
+				ns:         p.Ns,
+				coll:       p.Coll,
+				pvtkeyHash: p.PvtkeyHash,
+			},
+		),
+		encodePurgeMarkerVal(
+			&purgeMarkerVal{
+				blkNum: p.BlkNum,
+				txNum:  p.TxNum,
+			},
+		),
+	)
+	return s.db.WriteBatch(b, true)
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // GetPvtDataByBlockNum returns only the pvt data  corresponding to the given block number
 // The pvt data is filtered by the list of 'ns/collections' supplied in the filter
 // A nil filter does not filter any results
@@ -412,6 +519,7 @@ func (s *Store) GetPvtDataByBlockNum(blockNum uint64, filter ledger.PvtNsCollFil
 
 	for itr.Next() {
 		dataKeyBytes := itr.Key()
+<<<<<<< HEAD
 		v11Fmt, err := v11Format(dataKeyBytes)
 		if err != nil {
 			return nil, err
@@ -419,6 +527,8 @@ func (s *Store) GetPvtDataByBlockNum(blockNum uint64, filter ledger.PvtNsCollFil
 		if v11Fmt {
 			return v11RetrievePvtdata(itr, filter)
 		}
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		dataValueBytes := itr.Value()
 		dataKey, err := decodeDatakey(dataKeyBytes)
 		if err != nil {
@@ -431,10 +541,13 @@ func (s *Store) GetPvtDataByBlockNum(blockNum uint64, filter ledger.PvtNsCollFil
 		if expired || !passesFilter(dataKey, filter) {
 			continue
 		}
+<<<<<<< HEAD
 		dataValue, err := decodeDataValue(dataValueBytes)
 		if err != nil {
 			return nil, err
 		}
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		if firstItr {
 			currentTxNum = dataKey.txNum
@@ -447,6 +560,19 @@ func (s *Store) GetPvtDataByBlockNum(blockNum uint64, filter ledger.PvtNsCollFil
 			currentTxNum = dataKey.txNum
 			currentTxWsetAssember = newTxPvtdataAssembler(blockNum, currentTxNum)
 		}
+<<<<<<< HEAD
+=======
+
+		dataValue, err := decodeDataValue(dataValueBytes)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := s.removePurgedDataFromCollPvtRWset(dataKey, dataValue); err != nil {
+			return nil, err
+		}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		currentTxWsetAssember.add(dataKey.ns, dataValue)
 	}
 	if currentTxWsetAssember != nil {
@@ -455,6 +581,97 @@ func (s *Store) GetPvtDataByBlockNum(blockNum uint64, filter ledger.PvtNsCollFil
 	return blockPvtdata, nil
 }
 
+<<<<<<< HEAD
+=======
+func (s *Store) retrieveLatestPurgeKeyCollMarkerHt(ns, coll string) (*version.Height, error) {
+	encVal, err := s.db.Get(
+		encodePurgeMarkerCollKey(
+			&purgeMarkerCollKey{
+				ns:   ns,
+				coll: coll,
+			},
+		),
+	)
+	if err != nil {
+		return nil, err
+	}
+	if encVal == nil {
+		return nil, nil
+	}
+	return decodePurgeMarkerVal(encVal)
+}
+
+// keyPotentiallyPurged returns false if `purgeMarkerCollKey` does not exists (which means never any key is purged from the given collection)
+// or the height of `purgeMarkerCollKey` is lower than the <ns, coll> in the data key (which means that the last purge of any key from the collection
+// was prior to the given key commit). The main purpose of this function is to optimize while filtering the purge data by avoiding computing hashes
+// of individual keys, all the time
+func (s *Store) keyPotentiallyPurged(k *dataKey) (bool, error) {
+	purgeKeyCollMarkerHt, err := s.retrieveLatestPurgeKeyCollMarkerHt(k.ns, k.coll)
+	if purgeKeyCollMarkerHt == nil || err != nil {
+		return false, err
+	}
+
+	keyHt := &version.Height{
+		BlockNum: k.blkNum,
+		TxNum:    k.txNum,
+	}
+
+	return keyHt.Compare(purgeKeyCollMarkerHt) <= 0, nil
+}
+
+func (s *Store) removePurgedDataFromCollPvtRWset(k *dataKey, v *rwset.CollectionPvtReadWriteSet) error {
+	purgePossible, err := s.keyPotentiallyPurged(k)
+	if !purgePossible || err != nil {
+		return err
+	}
+
+	collRWSet, err := rwsetutil.CollPvtRwSetFromProtoMsg(v)
+	if err != nil {
+		return err
+	}
+
+	keyHt := &version.Height{
+		BlockNum: k.blkNum,
+		TxNum:    k.txNum,
+	}
+
+	filterInKVWrites := []*kvrwset.KVWrite{}
+	for _, w := range collRWSet.KvRwSet.Writes {
+		potentialPurgeMarker := encodePurgeMarkerKey(&purgeMarkerKey{
+			ns:         k.ns,
+			coll:       k.coll,
+			pvtkeyHash: util.ComputeStringHash(w.Key),
+		})
+
+		encPurgeMarkerVal, err := s.db.Get(potentialPurgeMarker)
+		if err != nil {
+			return err
+		}
+
+		if encPurgeMarkerVal == nil {
+			filterInKVWrites = append(filterInKVWrites, w)
+			continue
+		}
+
+		purgeMarkerHt, err := decodePurgeMarkerVal(encPurgeMarkerVal)
+		if err != nil {
+			return err
+		}
+
+		if keyHt.Compare(purgeMarkerHt) >= 0 {
+			filterInKVWrites = append(filterInKVWrites, w)
+			continue
+		}
+	}
+
+	collRWSet.KvRwSet.Writes = filterInKVWrites
+	if v.Rwset, err = proto.Marshal(collRWSet.KvRwSet); err != nil {
+		return err
+	}
+	return nil
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // GetMissingPvtDataInfoForMostRecentBlocks returns the missing private data information for the
 // most recent `maxBlock` blocks which miss at least a private data of a eligible collection.
 func (s *Store) GetMissingPvtDataInfoForMostRecentBlocks(maxBlock int) (ledger.MissingPvtDataInfo, error) {
@@ -605,9 +822,19 @@ func (s *Store) performPurgeIfScheduled(latestCommittedBlk uint64) {
 		s.purgerLock.Lock()
 		logger.Debugf("Purger started: Purging expired private data till block number [%d]", latestCommittedBlk)
 		defer s.purgerLock.Unlock()
+<<<<<<< HEAD
 		err := s.purgeExpiredData(0, latestCommittedBlk)
 		if err != nil {
 			logger.Warningf("Could not purge data from pvtdata store:%s", err)
+=======
+
+		if err := s.purgeExpiredData(0, latestCommittedBlk); err != nil {
+			logger.Warningf("Could not purge expired data from pvtdata store:%s", err)
+		}
+
+		if err := s.deleteDataMarkedForPurge(); err != nil {
+			logger.Warningf("Could not purge data marked for purge from pvtdata store:%s", err)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		}
 		logger.Debug("Purger finished")
 	}()
@@ -644,6 +871,21 @@ func (s *Store) purgeExpiredData(minBlkNum, maxBlkNum uint64) error {
 			batch.Delete(encodeBootKVHashesKey(bootKVHashesKey))
 		}
 
+<<<<<<< HEAD
+=======
+		dataEntries, err := s.retrieveDataEntries(dataKeys)
+		if err != nil {
+			return err
+		}
+		hashedIndexEntries, err := prepareHashedIndexEntries(dataEntries)
+		if err != nil {
+			return err
+		}
+		for _, hashedIndexEntry := range hashedIndexEntries {
+			batch.Delete(encodeHashedIndexKey(hashedIndexEntry.key))
+		}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		if err := s.db.WriteBatch(batch, false); err != nil {
 			return err
 		}
@@ -654,6 +896,39 @@ func (s *Store) purgeExpiredData(minBlkNum, maxBlkNum uint64) error {
 	return nil
 }
 
+<<<<<<< HEAD
+=======
+func (s *Store) deleteDataMarkedForPurge() error {
+	maxBatchSize := 4 * 1024 * 1024 // 4Mb
+	p := newPurgeUpdatesProcessor(s.db, maxBatchSize)
+	pStart, pEnd := rangeScanKeysForPurgeMarkers()
+	purgeMarkerIter, err := s.db.GetIterator(pStart, pEnd)
+	if err != nil {
+		return err
+	}
+
+	for purgeMarkerIter.Next() {
+		if err := purgeMarkerIter.Error(); err != nil {
+			return err
+		}
+		hStart, hEnd := driveHashedIndexKeyRangeFromPurgeMarker(purgeMarkerIter.Key(), purgeMarkerIter.Value())
+		hashedIndexIter, err := s.db.GetIterator(hStart, hEnd)
+		if err != nil {
+			return err
+		}
+		for hashedIndexIter.Next() {
+			if err := hashedIndexIter.Error(); err != nil {
+				return err
+			}
+			if err := p.process(hashedIndexIter.Key(), hashedIndexIter.Value()); err != nil {
+				return err
+			}
+		}
+	}
+	return p.commitPendingChanges()
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func (s *Store) retrieveExpiryEntries(minBlkNum, maxBlkNum uint64) ([]*expiryEntry, error) {
 	startKey, endKey := getExpiryKeysForRangeScan(minBlkNum, maxBlkNum)
 	logger.Debugf("retrieveExpiryEntries(): startKey=%#v, endKey=%#v", startKey, endKey)
@@ -680,6 +955,31 @@ func (s *Store) retrieveExpiryEntries(minBlkNum, maxBlkNum uint64) ([]*expiryEnt
 	return expiryEntries, nil
 }
 
+<<<<<<< HEAD
+=======
+func (s *Store) retrieveDataEntries(dataKeys []*dataKey) ([]*dataEntry, error) {
+	dataEntries := []*dataEntry{}
+	for _, k := range dataKeys {
+		v, err := s.db.Get(encodeDataKey(k))
+		if err != nil {
+			return nil, err
+		}
+
+		collWS, err := decodeDataValue(v)
+		if err != nil {
+			return nil, err
+		}
+
+		dataEntries = append(dataEntries,
+			&dataEntry{
+				key:   k,
+				value: collWS,
+			})
+	}
+	return dataEntries, nil
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func (s *Store) launchCollElgProc() {
 	go func() {
 		if err := s.processCollElgEvents(); err != nil {
@@ -854,3 +1154,96 @@ func (c *collElgProcSync) done() {
 func (c *collElgProcSync) waitForDone() {
 	<-c.procComplete
 }
+<<<<<<< HEAD
+=======
+
+type purgeUpdatesProcessor struct {
+	db           *leveldbhelper.DBHandle
+	maxBatchSize int
+
+	pvtWrites map[string]*rwsetutil.CollPvtRwSet
+	batch     *leveldbhelper.UpdateBatch
+
+	currentSize int
+}
+
+// newPurgeUpdatesProcessor is used for processing the purge markers - i.e., delete the private data versions that are marked for purge from
+// the pvtdata store.
+func newPurgeUpdatesProcessor(db *leveldbhelper.DBHandle, maxBatchSize int) *purgeUpdatesProcessor {
+	return &purgeUpdatesProcessor{
+		db:           db,
+		maxBatchSize: maxBatchSize,
+		pvtWrites:    map[string]*rwsetutil.CollPvtRwSet{},
+		batch:        db.NewUpdateBatch(),
+	}
+}
+
+// process takes one hashedIndex Key, value (that points to a private key in a particular writeset) at a time and retrieves the
+// corresponding writeset from the store. It then deletes the intended key from the writeset and write the trimmed writset back.
+// Note that one writeset may contain more than one keys and this function may get invoked mutilple time for different keys in the same
+// writeset, hence in every invocation, we should not fetch the writeset from pvtdata store - this is required for correctness reasons not for the performance reasons.
+// Otherwise, previously performed delete operations on the same writeset will become void, as fetching from store will always give the full writeset (as the trimmed one is not yet committed).
+// The deletion of hashedIndexKey is also included in the same batch
+func (p *purgeUpdatesProcessor) process(hashedIndexKey, hashedIndexVal []byte) error {
+	dataKey, err := deriveDataKeyFromEncodedHashedIndexKey(hashedIndexKey)
+	if err != nil {
+		return err
+	}
+
+	if _, ok := p.pvtWrites[string(dataKey)]; !ok {
+		dataValue, err := p.db.Get(dataKey)
+		if err != nil {
+			return err
+		}
+		collPvtRWSetProto, err := decodeDataValue(dataValue)
+		if err != nil {
+			return err
+		}
+		collPvtRWSet, err := rwsetutil.CollPvtRwSetFromProtoMsg(collPvtRWSetProto)
+		if err != nil {
+			return err
+		}
+		p.pvtWrites[string(dataKey)] = collPvtRWSet
+		p.currentSize += len(dataKey) + len(dataValue)
+	}
+
+	collWS := p.pvtWrites[string(dataKey)]
+	writes := collWS.KvRwSet.Writes
+	for i, w := range writes {
+		// hashedIndexVal represents the raw private data key
+		if w.Key == string(hashedIndexVal) {
+			collWS.KvRwSet.Writes = append(writes[:i], writes[i+1:]...)
+			p.currentSize -= len(w.Key) + len(w.Value)
+			break
+		}
+	}
+	p.batch.Delete(hashedIndexKey)
+	if p.currentSize+p.batch.Size() > p.maxBatchSize {
+		if err := p.commitPendingChanges(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (p *purgeUpdatesProcessor) commitPendingChanges() error {
+	for k, w := range p.pvtWrites {
+		pvtWSProto, err := w.ToProtoMsg()
+		if err != nil {
+			return err
+		}
+		encDataValue, err := encodeDataValue(pvtWSProto)
+		if err != nil {
+			return err
+		}
+		p.batch.Put([]byte(k), encDataValue)
+	}
+	if err := p.db.WriteBatch(p.batch, true); err != nil {
+		return err
+	}
+
+	p.pvtWrites = map[string]*rwsetutil.CollPvtRwSet{}
+	p.batch.Reset()
+	return nil
+}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19

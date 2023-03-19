@@ -245,6 +245,19 @@ func TestVersionConversion(t *testing.T) {
 	require.Equal(t, protoVer, newProtoVersion(internalVer))
 }
 
+<<<<<<< HEAD
+=======
+func TestNewKVWriteHashPurge(t *testing.T) {
+	sampleKey := "purge-key1"
+	sampleKVWriteHash := &kvrwset.KVWriteHash{
+		KeyHash:  util.ComputeStringHash(sampleKey),
+		IsDelete: true,
+		IsPurge:  true,
+	}
+	require.Equal(t, sampleKVWriteHash, newKVWriteHashPurge(sampleKey))
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func TestIsDelete(t *testing.T) {
 	t.Run("kvWrite", func(t *testing.T) {
 		kvWritesToBeInterpretedAsDelete := []*kvrwset.KVWrite{

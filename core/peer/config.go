@@ -306,7 +306,11 @@ func (c *Config) load() error {
 		if builder.Name == "" {
 			return fmt.Errorf("external builder at path %s has no name attribute", builder.Path)
 		}
+<<<<<<< HEAD
 		if builder.Environment != nil && builder.PropagateEnvironment == nil {
+=======
+		if builder.Environment != nil && len(builder.PropagateEnvironment) == 0 {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			c.ExternalBuilders[builderIndex].PropagateEnvironment = builder.Environment
 		}
 	}

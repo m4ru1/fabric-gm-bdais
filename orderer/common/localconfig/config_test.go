@@ -5,7 +5,10 @@ package localconfig
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os"
 	"path/filepath"
 	"testing"
@@ -34,18 +37,30 @@ func TestMissingConfigValueOverridden(t *testing.T) {
 		cfg, err := cc.load()
 		require.NotNil(t, cfg, "Could not load config")
 		require.NoError(t, err, "Load good config returned unexpected error")
+<<<<<<< HEAD
 		require.Nil(t, cfg.Kafka.TLS.ClientRootCAs)
 	})
 
 	t.Run("when the value is missing and is overridden", func(t *testing.T) {
 		os.Setenv("ORDERER_KAFKA_TLS_CLIENTROOTCAS", "msp/tlscacerts/tlsroot.pem")
+=======
+		require.Nil(t, cfg.General.TLS.ClientRootCAs)
+	})
+
+	t.Run("when the value is missing and is overridden", func(t *testing.T) {
+		os.Setenv("ORDERER_GENERAL_TLS_CLIENTROOTCAS", "msp/tlscacerts/tlsroot.pem")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		cleanup := configtest.SetDevFabricConfigPath(t)
 		defer cleanup()
 		cache := &configCache{}
 		cfg, err := cache.load()
 		require.NotNil(t, cfg, "Could not load config")
 		require.NoError(t, err, "Load good config returned unexpected error")
+<<<<<<< HEAD
 		require.NotNil(t, cfg.Kafka.TLS.ClientRootCAs)
+=======
+		require.NotNil(t, cfg.Admin.TLS.ClientRootCAs)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 }
 
@@ -57,7 +72,11 @@ func TestLoadCached(t *testing.T) {
 	// With the caching behavior, the update should not be reflected
 	initial, err := Load()
 	require.NoError(t, err)
+<<<<<<< HEAD
 	os.Setenv("ORDERER_KAFKA_RETRY_SHORTINTERVAL", "120s")
+=======
+	os.Setenv("ORDERER_GENERAL_KEEPALIVE_SERVERTIMEOUT", "120s")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	updated, err := Load()
 	require.NoError(t, err)
 	require.Equal(t, initial, updated, "expected %#v to equal %#v", updated, initial)
@@ -83,12 +102,16 @@ func TestLoadMissingConfigFile(t *testing.T) {
 }
 
 func TestLoadMalformedConfigFile(t *testing.T) {
+<<<<<<< HEAD
 	name, err := ioutil.TempDir("", "hyperledger_fabric")
 	require.Nil(t, err, "Error creating temp dir: %s", err)
 	defer func() {
 		err = os.RemoveAll(name)
 		require.Nil(t, os.RemoveAll(name), "Error removing temp dir: %s", err)
 	}()
+=======
+	name := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// Create a malformed orderer.yaml file in temp dir
 	f, err := os.OpenFile(filepath.Join(name, "orderer.yaml"), os.O_RDWR|os.O_CREATE|os.O_EXCL, 0o600)
@@ -114,7 +137,11 @@ func TestLoadMalformedConfigFile(t *testing.T) {
 func TestEnvInnerVar(t *testing.T) {
 	envVar1 := "ORDERER_GENERAL_LISTENPORT"
 	envVal1 := uint16(80)
+<<<<<<< HEAD
 	envVar2 := "ORDERER_KAFKA_RETRY_SHORTINTERVAL"
+=======
+	envVar2 := "ORDERER_GENERAL_KEEPALIVE_SERVERTIMEOUT"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	envVal2 := "42s"
 	os.Setenv(envVar1, fmt.Sprintf("%d", envVal1))
 	os.Setenv(envVar2, envVal2)
@@ -131,6 +158,7 @@ func TestEnvInnerVar(t *testing.T) {
 	require.Equal(t, config.General.ListenPort, envVal1, "Environmental override of inner config test 1 did not work")
 
 	v2, _ := time.ParseDuration(envVal2)
+<<<<<<< HEAD
 	require.Equal(t, config.Kafka.Retry.ShortInterval, v2, "Environmental override of inner config test 2 did not work")
 }
 
@@ -179,6 +207,9 @@ func TestKafkaSASLPlain(t *testing.T) {
 			}
 		})
 	}
+=======
+	require.Equal(t, config.General.Keepalive.ServerTimeout, v2, "Environmental override of inner config test 2 did not work")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 func TestAdminTLSConfig(t *testing.T) {
@@ -235,12 +266,16 @@ func TestClusterDefaults(t *testing.T) {
 }
 
 func TestConsensusConfig(t *testing.T) {
+<<<<<<< HEAD
 	name, err := ioutil.TempDir("", "hyperledger_fabric")
 	require.Nil(t, err, "Error creating temp dir: %s", err)
 	defer func() {
 		err = os.RemoveAll(name)
 		require.Nil(t, os.RemoveAll(name), "Error removing temp dir: %s", err)
 	}()
+=======
+	name := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	content := `---
 Consensus:

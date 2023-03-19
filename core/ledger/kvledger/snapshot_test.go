@@ -40,8 +40,12 @@ import (
 )
 
 func TestSnapshotGenerationAndNewLedgerCreation(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	snapshotRootDir := conf.SnapshotsConfig.RootDir
 	nsCollBtlConfs := []*nsCollBtlConfig{
 		{
@@ -210,9 +214,14 @@ func TestSnapshotGenerationAndNewLedgerCreation(t *testing.T) {
 }
 
 func TestSnapshotDBTypeCouchDB(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	fmt.Printf("snapshotRootDir %s\n", conf.SnapshotsConfig.RootDir)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+	fmt.Printf("snapshotRootDir %s\n", conf.SnapshotsConfig.RootDir)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -240,8 +249,12 @@ func TestSnapshotDBTypeCouchDB(t *testing.T) {
 
 func TestSnapshotCouchDBIndexCreation(t *testing.T) {
 	setup := func() (string, *ledger.CouchDBConfig, *Provider) {
+<<<<<<< HEAD
 		conf, cleanup := testConfig(t)
 		t.Cleanup(cleanup)
+=======
+		conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		snapshotRootDir := conf.SnapshotsConfig.RootDir
 		provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
@@ -280,8 +293,12 @@ func TestSnapshotCouchDBIndexCreation(t *testing.T) {
 			RedoLogPath:         filepath.Join(conf.RootFSPath, "couchdbRedoLogs"),
 		}
 
+<<<<<<< HEAD
 		destConf, destCleanup := testConfig(t)
 		t.Cleanup(destCleanup)
+=======
+		destConf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		destConf.StateDBConfig = &ledger.StateDBConfig{
 			StateDatabase: ledger.CouchDB,
 			CouchDB:       couchDBConfig,
@@ -455,8 +472,12 @@ func TestSnapshotDirPaths(t *testing.T) {
 }
 
 func TestSnapshotDirPathsCreation(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer func() {
 		provider.Close()
@@ -509,16 +530,24 @@ func TestSnapshotsDirInitializingErrors(t *testing.T) {
 	}
 
 	t.Run("invalid-path", func(t *testing.T) {
+<<<<<<< HEAD
 		conf, cleanup := testConfig(t)
 		defer cleanup()
+=======
+		conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		conf.SnapshotsConfig.RootDir = "./a-relative-path"
 		err := initKVLedgerProvider(conf)
 		require.EqualError(t, err, "invalid path: ./a-relative-path. The path for the snapshot dir is expected to be an absolute path")
 	})
 
 	t.Run("snapshots final dir creation returns error", func(t *testing.T) {
+<<<<<<< HEAD
 		conf, cleanup := testConfig(t)
 		defer cleanup()
+=======
+		conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		completedSnapshotsPath := CompletedSnapshotsPath(conf.SnapshotsConfig.RootDir)
 		require.NoError(t, os.MkdirAll(filepath.Dir(completedSnapshotsPath), 0o755))
@@ -530,8 +559,12 @@ func TestSnapshotsDirInitializingErrors(t *testing.T) {
 }
 
 func TestGenerateSnapshotErrors(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer func() {
 		provider.Close()
@@ -626,7 +659,11 @@ func testCreateLedgerFromSnapshotErrorPaths(t *testing.T, originalSnapshotDir st
 	var additionalMetadataFile string
 
 	init := func(t *testing.T) {
+<<<<<<< HEAD
 		conf, cleanupFunc := testConfig(t)
+=======
+		conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		// make a copy of originalSnapshotDir
 		snapshotDirForTest = filepath.Join(conf.RootFSPath, "snapshot")
 		require.NoError(t, os.MkdirAll(snapshotDirForTest, 0o700))
@@ -650,7 +687,10 @@ func testCreateLedgerFromSnapshotErrorPaths(t *testing.T, originalSnapshotDir st
 		provider = testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 		cleanup = func() {
 			provider.Close()
+<<<<<<< HEAD
 			cleanupFunc()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		}
 	}
 
@@ -922,8 +962,12 @@ func verifySnapshotOutput(
 }
 
 func testCreateLedgerFromSnapshot(t *testing.T, snapshotDir string, expectedChannelID string) *kvLedger {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	p := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	destLedger, channelID, err := p.CreateFromSnapshot(snapshotDir)
 	require.NoError(t, err)
@@ -1008,8 +1052,12 @@ func addDummyEntryInCollectionConfigHistory(
 }
 
 func TestMostRecentCollectionConfigFetcher(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	ledgerID := "test-ledger"
 	chaincodeName := "test-chaincode"

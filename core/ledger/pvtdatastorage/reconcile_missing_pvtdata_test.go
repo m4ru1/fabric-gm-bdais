@@ -10,10 +10,17 @@ import (
 	"fmt"
 	"testing"
 
+<<<<<<< HEAD
 	"github.com/hyperledger/fabric/core/ledger"
 	btltestutil "github.com/hyperledger/fabric/core/ledger/pvtdatapolicy/testutil"
 	"github.com/stretchr/testify/require"
 	"github.com/willf/bitset"
+=======
+	"github.com/bits-and-blooms/bitset"
+	"github.com/hyperledger/fabric/core/ledger"
+	btltestutil "github.com/hyperledger/fabric/core/ledger/pvtdatapolicy/testutil"
+	"github.com/stretchr/testify/require"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 type blockTxPvtDataInfoForTest struct {

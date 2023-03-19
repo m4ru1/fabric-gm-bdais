@@ -42,7 +42,11 @@ The application is bootstrapped knowing about a group of peers which are
 trusted by the application developer/administrator to provide authentic responses
 to discovery queries. A good candidate peer to be used by the client application
 is one that is in the same organization. Note that in order for peers to be known
+<<<<<<< HEAD
 to the discovery service, they must have an ``EXTERNAL_ENDPOINT`` defined. To see
+=======
+to the discovery service, they must have a ``peer.gossip.externalEndpoint`` defined. To see
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 how to do this, check out our :doc:`discovery-cli` documentation.
 
 The application issues a configuration query to the discovery service and obtains

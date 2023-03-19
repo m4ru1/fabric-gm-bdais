@@ -10,7 +10,10 @@ import (
 	"sync"
 	"time"
 
+<<<<<<< HEAD
 	"github.com/Shopify/sarama"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	bccsp "github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/common/viperutil"
@@ -24,7 +27,10 @@ var logger = flogging.MustGetLogger("localconfig")
 type TopLevel struct {
 	General              General
 	FileLedger           FileLedger
+<<<<<<< HEAD
 	Kafka                Kafka
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	Debug                Debug
 	Consensus            interface{}
 	Operations           Operations
@@ -92,6 +98,7 @@ type TLS struct {
 	TLSHandshakeTimeShift time.Duration
 }
 
+<<<<<<< HEAD
 // SASLPlain contains configuration for SASL/PLAIN authentication
 type SASLPlain struct {
 	Enabled  bool
@@ -99,6 +106,8 @@ type SASLPlain struct {
 	Password string
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // Authentication contains configuration parameters related to authenticating
 // client messages.
 type Authentication struct {
@@ -118,6 +127,7 @@ type FileLedger struct {
 	Prefix   string // For compatibility only. This setting is no longer supported.
 }
 
+<<<<<<< HEAD
 // Kafka contains configuration for the Kafka-based orderer.
 type Kafka struct {
 	Retry     Retry
@@ -176,6 +186,8 @@ type Topic struct {
 	ReplicationFactor int16
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // Debug contains configuration for the orderer's debug parameters.
 type Debug struct {
 	BroadcastTraceDir string
@@ -249,6 +261,7 @@ var Defaults = TopLevel{
 	FileLedger: FileLedger{
 		Location: "/var/hyperledger/production/orderer",
 	},
+<<<<<<< HEAD
 	Kafka: Kafka{
 		Retry: Retry{
 			ShortInterval: 1 * time.Minute,
@@ -281,6 +294,8 @@ var Defaults = TopLevel{
 			ReplicationFactor: 3,
 		},
 	},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	Debug: Debug{
 		BroadcastTraceDir: "",
 		DeliverTraceDir:   "",
@@ -419,6 +434,7 @@ func (c *TopLevel) completeInitialization(configDir string) {
 			c.General.Cluster.ReplicationBackgroundRefreshInterval = Defaults.General.Cluster.ReplicationBackgroundRefreshInterval
 		case c.General.Cluster.CertExpirationWarningThreshold == 0:
 			c.General.Cluster.CertExpirationWarningThreshold = Defaults.General.Cluster.CertExpirationWarningThreshold
+<<<<<<< HEAD
 		case c.Kafka.TLS.Enabled && c.Kafka.TLS.Certificate == "":
 			logger.Panicf("General.Kafka.TLS.Certificate must be set if General.Kafka.TLS.Enabled is set to true.")
 		case c.Kafka.TLS.Enabled && c.Kafka.TLS.PrivateKey == "":
@@ -430,6 +446,8 @@ func (c *TopLevel) completeInitialization(configDir string) {
 			logger.Panic("General.Kafka.SASLPlain.User must be set if General.Kafka.SASLPlain.Enabled is set to true.")
 		case c.Kafka.SASLPlain.Enabled && c.Kafka.SASLPlain.Password == "":
 			logger.Panic("General.Kafka.SASLPlain.Password must be set if General.Kafka.SASLPlain.Enabled is set to true.")
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		case c.General.Profile.Enabled && c.General.Profile.Address == "":
 			logger.Infof("Profiling enabled and General.Profile.Address unset, setting to %s", Defaults.General.Profile.Address)
@@ -446,6 +464,7 @@ func (c *TopLevel) completeInitialization(configDir string) {
 			logger.Infof("General.Authentication.TimeWindow unset, setting to %s", Defaults.General.Authentication.TimeWindow)
 			c.General.Authentication.TimeWindow = Defaults.General.Authentication.TimeWindow
 
+<<<<<<< HEAD
 		case c.Kafka.Retry.ShortInterval == 0:
 			logger.Infof("Kafka.Retry.ShortInterval unset, setting to %v", Defaults.Kafka.Retry.ShortInterval)
 			c.Kafka.Retry.ShortInterval = Defaults.Kafka.Retry.ShortInterval
@@ -491,6 +510,8 @@ func (c *TopLevel) completeInitialization(configDir string) {
 			logger.Infof("Kafka.Version unset, setting to %v", Defaults.Kafka.Version)
 			c.Kafka.Version = Defaults.Kafka.Version
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		case c.Admin.TLS.Enabled && !c.Admin.TLS.ClientAuthRequired:
 			logger.Panic("Admin.TLS.ClientAuthRequired must be set to true if Admin.TLS.Enabled is set to true")
 

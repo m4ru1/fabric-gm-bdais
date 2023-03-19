@@ -9,7 +9,10 @@ package chaincode
 import (
 	"fmt"
 	"io/ioutil"
+<<<<<<< HEAD
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/golang/protobuf/proto"
@@ -45,8 +48,12 @@ func signExistingPackage(env *pcommon.Envelope, infile, outfile string, cryptoPr
 func TestSignExistingPackage(t *testing.T) {
 	resetFlags()
 	defer resetFlags()
+<<<<<<< HEAD
 	pdir := newTempDir()
 	defer os.RemoveAll(pdir)
+=======
+	pdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
 	require.NoError(t, err)
@@ -103,8 +110,12 @@ func TestSignExistingPackage(t *testing.T) {
 func TestFailSignUnsignedPackage(t *testing.T) {
 	resetFlags()
 	defer resetFlags()
+<<<<<<< HEAD
 	pdir := newTempDir()
 	defer os.RemoveAll(pdir)
+=======
+	pdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
 	require.NoError(t, err)
 

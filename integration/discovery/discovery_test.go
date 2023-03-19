@@ -25,7 +25,11 @@ import (
 	"github.com/hyperledger/fabric/integration/nwo/commands"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/protoutil"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
@@ -52,7 +56,11 @@ var _ = Describe("DiscoveryService", func() {
 		client, err = docker.NewClientFromEnv()
 		Expect(err).NotTo(HaveOccurred())
 
+<<<<<<< HEAD
 		config := nwo.BasicSolo()
+=======
+		config := nwo.BasicEtcdRaft()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		config.RemovePeer("Org1", "peer1")
 		config.RemovePeer("Org2", "peer1")
 		Expect(config.Peers).To(HaveLen(2))

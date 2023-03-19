@@ -28,7 +28,11 @@ import (
 	"github.com/hyperledger/fabric/integration/nwo"
 	"github.com/hyperledger/fabric/integration/nwo/fabricconfig"
 	"github.com/miekg/pkcs11"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/tedsuo/ifrit"
 )
@@ -46,7 +50,11 @@ var _ = Describe("PKCS11 enabled network", func() {
 		tempDir, err = ioutil.TempDir("", "p11")
 		Expect(err).NotTo(HaveOccurred())
 
+<<<<<<< HEAD
 		network = nwo.New(nwo.BasicSolo(), tempDir, nil, StartPort(), components)
+=======
+		network = nwo.New(nwo.BasicEtcdRaft(), tempDir, nil, StartPort(), components)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		network.GenerateConfigTree()
 		network.Bootstrap()
 
@@ -84,7 +92,11 @@ var _ = Describe("PKCS11 enabled network", func() {
 			Eventually(process.Ready(), network.EventuallyTimeout).Should(BeClosed())
 		})
 
+<<<<<<< HEAD
 		It("executes transactions against a basic solo network", func() {
+=======
+		It("executes transactions against a basic etcdraft network", func() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			orderer := network.Orderer("orderer")
 			network.CreateAndJoinChannels(orderer)
 
@@ -105,7 +117,11 @@ var _ = Describe("PKCS11 enabled network", func() {
 			Eventually(process.Ready(), network.EventuallyTimeout).Should(BeClosed())
 		})
 
+<<<<<<< HEAD
 		It("executes transactions against a basic solo network", func() {
+=======
+		It("executes transactions against a basic etcdraft network", func() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			orderer := network.Orderer("orderer")
 			network.CreateAndJoinChannels(orderer)
 

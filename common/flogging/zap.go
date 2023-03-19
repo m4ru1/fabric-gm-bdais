@@ -33,7 +33,11 @@ func NewZapLogger(core zapcore.Core, options ...zap.Option) *zap.Logger {
 func NewGRPCLogger(l *zap.Logger) *zapgrpc.Logger {
 	l = l.WithOptions(
 		zap.AddCaller(),
+<<<<<<< HEAD
 		zap.AddCallerSkip(3),
+=======
+		zap.AddCallerSkip(4),
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	)
 	return zapgrpc.NewLogger(l, zapgrpc.WithDebug())
 }

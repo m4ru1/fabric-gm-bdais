@@ -207,6 +207,11 @@ func (h *Handler) handleMessageReadyState(msg *pb.ChaincodeMessage) error {
 		go h.HandleTransaction(msg, h.HandleGetStateMetadata)
 	case pb.ChaincodeMessage_PUT_STATE_METADATA:
 		go h.HandleTransaction(msg, h.HandlePutStateMetadata)
+<<<<<<< HEAD
+=======
+	case pb.ChaincodeMessage_PURGE_PRIVATE_DATA:
+		go h.HandleTransaction(msg, h.HandlePurgePrivateData)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	default:
 		return fmt.Errorf("[%s] Fabric side handler cannot handle message (%s) while in ready state", msg.Txid, msg.Type)
 	}
@@ -551,6 +556,21 @@ func (h *Handler) checkMetadataCap(msg *pb.ChaincodeMessage) error {
 	return nil
 }
 
+<<<<<<< HEAD
+=======
+func (h *Handler) checkPurgePrivateDataCap(msg *pb.ChaincodeMessage) error {
+	ac, exists := h.AppConfig.GetApplicationConfig(msg.ChannelId)
+	if !exists {
+		return errors.Errorf("application config does not exist for %s", msg.ChannelId)
+	}
+
+	if !ac.Capabilities().PurgePvtData() {
+		return errors.New("purge private data is not enabled, channel application capability of V2_5 or later is required")
+	}
+	return nil
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func errorIfCreatorHasNoReadPermission(chaincodeName, collection string, txContext *TransactionContext) error {
 	rwPermission, err := getReadWritePermission(chaincodeName, collection, txContext)
 	if err != nil {
@@ -1077,6 +1097,41 @@ func (h *Handler) HandleDelState(msg *pb.ChaincodeMessage, txContext *Transactio
 	return &pb.ChaincodeMessage{Type: pb.ChaincodeMessage_RESPONSE, Txid: msg.Txid, ChannelId: msg.ChannelId}, nil
 }
 
+<<<<<<< HEAD
+=======
+func (h *Handler) HandlePurgePrivateData(msg *pb.ChaincodeMessage, txContext *TransactionContext) (*pb.ChaincodeMessage, error) {
+	err := h.checkPurgePrivateDataCap(msg)
+	if err != nil {
+		return nil, err
+	}
+	delState := &pb.DelState{}
+	if err := proto.Unmarshal(msg.Payload, delState); err != nil {
+		return nil, errors.Wrap(err, "unmarshal failed")
+	}
+
+	namespaceID := txContext.NamespaceID
+	collection := delState.Collection
+	if collection == "" {
+		return nil, errors.New("only applicable for private data")
+	}
+
+	if txContext.IsInitTransaction {
+		return nil, errors.New("private data APIs are not allowed in chaincode Init()")
+	}
+
+	if err := errorIfCreatorHasNoWritePermission(namespaceID, collection, txContext); err != nil {
+		return nil, err
+	}
+
+	if err := txContext.TXSimulator.PurgePrivateData(namespaceID, collection, delState.Key); err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	// Send response msg back to chaincode.
+	return &pb.ChaincodeMessage{Type: pb.ChaincodeMessage_RESPONSE, Txid: msg.Txid, ChannelId: msg.ChannelId}, nil
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // Handles requests that modify ledger state
 func (h *Handler) HandleInvokeChaincode(msg *pb.ChaincodeMessage, txContext *TransactionContext) (*pb.ChaincodeMessage, error) {
 	chaincodeLogger.Debugf("[%s] C-call-C", shorttxid(msg.Txid))

@@ -15,7 +15,11 @@ import (
 	endorsertx "github.com/hyperledger/fabric/core/tx/endorser"
 	"github.com/hyperledger/fabric/pkg/tx"
 	"github.com/hyperledger/fabric/protoutil"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 )
 
@@ -107,7 +111,11 @@ var _ = Describe("Parser", func() {
 
 			It("returns an error", func() {
 				pe, err := endorsertx.UnmarshalEndorserTxAndValidate(txenv)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("error unmarshalling Transaction: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("error unmarshalling Transaction"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				Expect(pe).To(BeNil())
 			})
 		})
@@ -149,7 +157,11 @@ var _ = Describe("Parser", func() {
 
 			It("returns an error", func() {
 				pe, err := endorsertx.UnmarshalEndorserTxAndValidate(txenv)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("error unmarshalling ChaincodeActionPayload: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("error unmarshalling ChaincodeActionPayload"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				Expect(pe).To(BeNil())
 			})
 		})
@@ -196,7 +208,11 @@ var _ = Describe("Parser", func() {
 
 			It("returns an error", func() {
 				pe, err := endorsertx.UnmarshalEndorserTxAndValidate(txenv)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("error unmarshalling ChaincodeHeaderExtension: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("error unmarshalling ChaincodeHeaderExtension"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				Expect(pe).To(BeNil())
 			})
 		})
@@ -220,7 +236,11 @@ var _ = Describe("Parser", func() {
 
 			It("returns an error", func() {
 				pe, err := endorsertx.UnmarshalEndorserTxAndValidate(txenv)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("error unmarshalling ProposalResponsePayload: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("error unmarshalling ProposalResponsePayload"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				Expect(pe).To(BeNil())
 			})
 		})
@@ -244,7 +264,11 @@ var _ = Describe("Parser", func() {
 
 			It("returns an error", func() {
 				pe, err := endorsertx.UnmarshalEndorserTxAndValidate(txenv)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("error unmarshalling ChaincodeAction: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("error unmarshalling ChaincodeAction"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				Expect(pe).To(BeNil())
 			})
 		})

@@ -8,7 +8,10 @@ package blkstorage
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"math"
 	"os"
 	"testing"
@@ -28,6 +31,7 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
+<<<<<<< HEAD
 func testPath() string {
 	if path, err := ioutil.TempDir("", "blkstorage-"); err != nil {
 		panic(err)
@@ -36,6 +40,8 @@ func testPath() string {
 	}
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 type testEnv struct {
 	t        testing.TB
 	provider *BlockStoreProvider
@@ -65,12 +71,15 @@ func newTestEnvSelectiveIndexing(t testing.TB, conf *Conf, attrsToIndex []Indexa
 
 func (env *testEnv) Cleanup() {
 	env.provider.Close()
+<<<<<<< HEAD
 	env.removeFSPath()
 }
 
 func (env *testEnv) removeFSPath() {
 	fsPath := env.provider.conf.blockStorageDir
 	os.RemoveAll(fsPath)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 type testBlockfileMgrWrapper struct {

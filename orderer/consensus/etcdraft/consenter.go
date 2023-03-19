@@ -31,7 +31,11 @@ import (
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
+<<<<<<< HEAD
 	"go.etcd.io/etcd/raft"
+=======
+	"go.etcd.io/etcd/raft/v3"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 //go:generate counterfeiter -o mocks/inactive_chain_registry.go --fake-name InactiveChainRegistry . InactiveChainRegistry

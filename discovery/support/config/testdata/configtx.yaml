@@ -240,8 +240,13 @@ Application: &ApplicationDefaults
 Orderer: &OrdererDefaults
 
     # Orderer Type: The orderer implementation to start
+<<<<<<< HEAD
     # Available types are "solo" and "kafka"
     OrdererType: kafka
+=======
+    # Available types are "solo" and "etcdraft"
+    OrdererType: solo
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
     Addresses:
         - orderer.example.com:7050
@@ -264,6 +269,7 @@ Orderer: &OrdererDefaults
         # max bytes will result in a batch larger than preferred max bytes.
         PreferredMaxBytes: 512 KB
 
+<<<<<<< HEAD
     Kafka:
         # Brokers: A list of Kafka brokers to which the orderer connects. Edit
         # this list to identify the brokers of the ordering service.
@@ -274,6 +280,8 @@ Orderer: &OrdererDefaults
             - kafka2:9092
             - kafka3:9092
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network
     Organizations:

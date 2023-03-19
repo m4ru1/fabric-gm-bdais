@@ -14,11 +14,19 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/ledger/queryresult"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
+<<<<<<< HEAD
+=======
+	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/common/ledger/testutil"
 	"github.com/hyperledger/fabric/common/util"
 	"github.com/hyperledger/fabric/core/ledger"
+<<<<<<< HEAD
+=======
+	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validation"
 	"github.com/hyperledger/fabric/core/ledger/mock"
 	"github.com/hyperledger/fabric/core/ledger/pvtdatapolicy"
@@ -61,8 +69,12 @@ func TestKVLedgerNilHistoryDBProvider(t *testing.T) {
 
 func TestKVLedgerBlockStorage(t *testing.T) {
 	t.Run("green-path", func(t *testing.T) {
+<<<<<<< HEAD
 		conf, cleanup := testConfig(t)
 		defer cleanup()
+=======
+		conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 		defer provider.Close()
 
@@ -159,8 +171,12 @@ func TestKVLedgerBlockStorage(t *testing.T) {
 	})
 
 	t.Run("error-path", func(t *testing.T) {
+<<<<<<< HEAD
 		conf, cleanup := testConfig(t)
 		defer cleanup()
+=======
+		conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 		defer provider.Close()
 
@@ -177,8 +193,12 @@ func TestKVLedgerBlockStorage(t *testing.T) {
 }
 
 func TestAddCommitHash(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -230,8 +250,12 @@ func TestAddCommitHash(t *testing.T) {
 
 func TestKVLedgerBlockStorageWithPvtdata(t *testing.T) {
 	t.Skip()
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -296,8 +320,12 @@ func TestKVLedgerBlockStorageWithPvtdata(t *testing.T) {
 }
 
 func TestKVLedgerDBRecovery(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	nsCollBtlConfs := []*nsCollBtlConfig{
 		{
 			namespace: "ns",
@@ -515,8 +543,12 @@ func TestKVLedgerDBRecovery(t *testing.T) {
 }
 
 func TestLedgerWithCouchDbEnabledWithBinaryAndJSONData(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 	bg, gb := testutil.NewBlockGenerator(t, "testLedger", false)
@@ -627,8 +659,12 @@ func TestLedgerWithCouchDbEnabledWithBinaryAndJSONData(t *testing.T) {
 }
 
 func TestPvtDataAPIs(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -713,8 +749,12 @@ func TestPvtDataAPIs(t *testing.T) {
 }
 
 func TestCrashAfterPvtdataStoreCommit(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	ccInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	ccInfoProvider.CollectionInfoReturns(&peer.StaticCollectionConfig{BlockToLive: 0}, nil)
 	provider := testutilNewProvider(conf, t, ccInfoProvider)
@@ -814,8 +854,12 @@ func testVerifyPvtData(t *testing.T, lgr ledger.PeerLedger, blockNum uint64, exp
 }
 
 func TestPvtStoreAheadOfBlockStore(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	ccInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	ccInfoProvider.CollectionInfoReturns(&peer.StaticCollectionConfig{BlockToLive: 0}, nil)
 	provider := testutilNewProvider(conf, t, ccInfoProvider)
@@ -913,8 +957,12 @@ func TestPvtStoreAheadOfBlockStore(t *testing.T) {
 }
 
 func TestCommitToPvtAndBlockstoreError(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	ccInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	ccInfoProvider.CollectionInfoReturns(&peer.StaticCollectionConfig{BlockToLive: 0}, nil)
 	provider1 := testutilNewProvider(conf, t, ccInfoProvider)
@@ -966,7 +1014,11 @@ func TestCollectionConfigHistoryRetriever(t *testing.T) {
 
 	init := func() {
 		var err error
+<<<<<<< HEAD
 		conf, cleanupFunc := testConfig(t)
+=======
+		conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		mockDeployedCCInfoProvider = &mock.DeployedChaincodeInfoProvider{}
 		provider = testutilNewProvider(conf, t, mockDeployedCCInfoProvider)
 		ledgerID := "testLedger"
@@ -976,7 +1028,10 @@ func TestCollectionConfigHistoryRetriever(t *testing.T) {
 		cleanup = func() {
 			lgr.Close()
 			provider.Close()
+<<<<<<< HEAD
 			cleanupFunc()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		}
 	}
 
@@ -1226,8 +1281,12 @@ func TestCommitNotifications(t *testing.T) {
 }
 
 func TestCommitNotificationsOnBlockCommit(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
 
@@ -1399,6 +1458,7 @@ func sampleDataWithPvtdataForAllTxs(t *testing.T, bg *testutil.BlockGenerator) [
 }
 
 func samplePvtData(t *testing.T, txNums []uint64) map[uint64]*ledger.TxPvtData {
+<<<<<<< HEAD
 	pvtWriteSet := &rwset.TxPvtReadWriteSet{DataModel: rwset.TxReadWriteSet_KV}
 	pvtWriteSet.NsPvtRwset = []*rwset.NsPvtReadWriteSet{
 		{
@@ -1411,10 +1471,46 @@ func samplePvtData(t *testing.T, txNums []uint64) map[uint64]*ledger.TxPvtData {
 				{
 					CollectionName: "coll-2",
 					Rwset:          []byte("RandomBytes-PvtRWSet-ns1-coll2"),
+=======
+	txPvtWS := &rwsetutil.TxPvtRwSet{
+		NsPvtRwSet: []*rwsetutil.NsPvtRwSet{
+			{
+				NameSpace: "ns-1",
+				CollPvtRwSets: []*rwsetutil.CollPvtRwSet{
+					{
+						CollectionName: "coll-1",
+						KvRwSet: &kvrwset.KVRWSet{
+							Writes: []*kvrwset.KVWrite{
+								{
+									Key:   "testKey",
+									Value: []byte("testValue"),
+								},
+							},
+						},
+					},
+					{
+						CollectionName: "coll-2",
+						KvRwSet: &kvrwset.KVRWSet{
+							Writes: []*kvrwset.KVWrite{
+								{
+									Key:   "testKey",
+									Value: []byte("testValue"),
+								},
+							},
+						},
+					},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				},
 			},
 		},
 	}
+<<<<<<< HEAD
+=======
+
+	pvtWriteSet, err := txPvtWS.ToProtoMsg()
+	require.NoError(t, err)
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	var pvtData []*ledger.TxPvtData
 	for _, txNum := range txNums {
 		pvtData = append(pvtData, &ledger.TxPvtData{SeqInBlock: txNum, WriteSet: pvtWriteSet})

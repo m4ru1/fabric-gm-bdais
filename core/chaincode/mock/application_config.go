@@ -47,15 +47,27 @@ func (fake *ApplicationConfig) APIPolicyMapper() channelconfig.PolicyMapper {
 	ret, specificReturn := fake.aPIPolicyMapperReturnsOnCall[len(fake.aPIPolicyMapperArgsForCall)]
 	fake.aPIPolicyMapperArgsForCall = append(fake.aPIPolicyMapperArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("APIPolicyMapper", []interface{}{})
 	fake.aPIPolicyMapperMutex.Unlock()
 	if fake.APIPolicyMapperStub != nil {
 		return fake.APIPolicyMapperStub()
+=======
+	stub := fake.APIPolicyMapperStub
+	fakeReturns := fake.aPIPolicyMapperReturns
+	fake.recordInvocation("APIPolicyMapper", []interface{}{})
+	fake.aPIPolicyMapperMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.aPIPolicyMapperReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -99,15 +111,27 @@ func (fake *ApplicationConfig) Capabilities() channelconfig.ApplicationCapabilit
 	ret, specificReturn := fake.capabilitiesReturnsOnCall[len(fake.capabilitiesArgsForCall)]
 	fake.capabilitiesArgsForCall = append(fake.capabilitiesArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("Capabilities", []interface{}{})
 	fake.capabilitiesMutex.Unlock()
 	if fake.CapabilitiesStub != nil {
 		return fake.CapabilitiesStub()
+=======
+	stub := fake.CapabilitiesStub
+	fakeReturns := fake.capabilitiesReturns
+	fake.recordInvocation("Capabilities", []interface{}{})
+	fake.capabilitiesMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.capabilitiesReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -151,15 +175,27 @@ func (fake *ApplicationConfig) Organizations() map[string]channelconfig.Applicat
 	ret, specificReturn := fake.organizationsReturnsOnCall[len(fake.organizationsArgsForCall)]
 	fake.organizationsArgsForCall = append(fake.organizationsArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("Organizations", []interface{}{})
 	fake.organizationsMutex.Unlock()
 	if fake.OrganizationsStub != nil {
 		return fake.OrganizationsStub()
+=======
+	stub := fake.OrganizationsStub
+	fakeReturns := fake.organizationsReturns
+	fake.recordInvocation("Organizations", []interface{}{})
+	fake.organizationsMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.organizationsReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 

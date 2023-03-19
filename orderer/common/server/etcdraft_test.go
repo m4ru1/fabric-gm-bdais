@@ -43,9 +43,13 @@ func TestSpawnEtcdRaft(t *testing.T) {
 
 	defer gexec.CleanupBuildArtifacts()
 
+<<<<<<< HEAD
 	tempSharedDir, err := ioutil.TempDir("", "etcdraft-test")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(tempSharedDir)
+=======
+	tempSharedDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	copyYamlFiles(gt, "testdata", tempSharedDir)
 

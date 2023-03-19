@@ -70,7 +70,11 @@ General:
 
     # Genesis method: The method by which the genesis block for the orderer
     # system channel is specified. The option can be one of:
+<<<<<<< HEAD
     #   "file" - path to a faile containing the genesis block or config block of system channel
+=======
+    #   "file" - path to a file containing the genesis block or config block of system channel
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     #   "none" - allows an orderer to start without a system channel configuration
     GenesisMethod: file
 
@@ -138,6 +142,7 @@ FileLedger:
 
 ################################################################################
 #
+<<<<<<< HEAD
 #   SECTION: Kafka
 #
 #   - This section applies to the configuration of the Kafka-based orderer, and
@@ -243,6 +248,8 @@ Kafka:
 
 ################################################################################
 #
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 #   Debug Configuration
 #
 #   - This controls the debugging options for the orderer

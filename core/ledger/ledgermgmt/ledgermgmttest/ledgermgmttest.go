@@ -8,8 +8,11 @@ package ledgermgmttest
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"path/filepath"
 	"testing"
 	"time"
@@ -63,9 +66,13 @@ func NewInitializer(testLedgerDir string) *ledgermgmt.Initializer {
 // the snapshot directory. It is intended to be used for creating a ledger by snapshot for testing purpose.
 func CreateSnapshotWithGenesisBlock(t *testing.T, testDir string, ledgerID string, configTxProcessor ledger.CustomTxProcessor) string {
 	// use a tmpdir to create the ledger for ledgerID so that we can create the snapshot
+<<<<<<< HEAD
 	tmpDir, err := ioutil.TempDir("", "createsnapshotwithgenesisblock")
 	require.NoError(t, err)
 	defer os.RemoveAll(tmpDir)
+=======
+	tmpDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	initializer := NewInitializer(tmpDir)
 	initializer.CustomTxProcessors = map[common.HeaderType]ledger.CustomTxProcessor{

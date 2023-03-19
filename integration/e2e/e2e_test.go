@@ -31,12 +31,20 @@ import (
 	"github.com/hyperledger/fabric/integration/nwo"
 	"github.com/hyperledger/fabric/integration/nwo/commands"
 	"github.com/hyperledger/fabric/integration/nwo/fabricconfig"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"github.com/tedsuo/ifrit"
+<<<<<<< HEAD
 	"github.com/tedsuo/ifrit/ginkgomon"
+=======
+	ginkgomon "github.com/tedsuo/ifrit/ginkgomon_v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 var _ = Describe("EndToEnd", func() {
@@ -81,7 +89,11 @@ var _ = Describe("EndToEnd", func() {
 		os.RemoveAll(testDir)
 	})
 
+<<<<<<< HEAD
 	Describe("basic solo network with 2 orgs and no docker", func() {
+=======
+	Describe("basic etcdraft network with 2 orgs and no docker", func() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		var (
 			metricsReader        *MetricsReader
 			runArtifactsFilePath string
@@ -91,7 +103,11 @@ var _ = Describe("EndToEnd", func() {
 			metricsReader = NewMetricsReader()
 			go metricsReader.Start()
 
+<<<<<<< HEAD
 			network = nwo.New(nwo.BasicSolo(), testDir, nil, StartPort(), components)
+=======
+			network = nwo.New(nwo.BasicEtcdRaft(), testDir, nil, StartPort(), components)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			network.MetricsProvider = "statsd"
 			network.StatsdEndpoint = metricsReader.Address()
 			network.Consensus.ChannelParticipationEnabled = true
@@ -104,7 +120,11 @@ var _ = Describe("EndToEnd", func() {
 			network.Channels = append(network.Channels, &nwo.Channel{
 				Name:        "baseprofilechannel",
 				Profile:     "TwoOrgsBaseProfileChannel",
+<<<<<<< HEAD
 				BaseProfile: "TwoOrgsOrdererGenesis",
+=======
+				BaseProfile: "SampleDevModeEtcdRaft",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 
 			runArtifactsFilePath = filepath.Join(testDir, "run-artifacts.txt")
@@ -152,13 +172,21 @@ var _ = Describe("EndToEnd", func() {
 			}
 		})
 
+<<<<<<< HEAD
 		It("executes a basic solo network with 2 orgs and no docker", func() {
+=======
+		It("executes a basic etcdraft network with 2 orgs and no docker", func() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			By("getting the orderer by name")
 			orderer := network.Orderer("orderer")
 
 			By("setting up the channel")
 			network.CreateAndJoinChannel(orderer, "testchannel")
+<<<<<<< HEAD
 			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_0", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+=======
+			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_5", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("listing channels with osnadmin")
 			tlsdir := network.OrdererLocalTLSDir(orderer)
@@ -285,7 +313,11 @@ var _ = Describe("EndToEnd", func() {
 			cl := channelparticipation.List(network, orderer)
 			channelparticipation.ChannelListMatcher(cl, []string{"testchannel"}, []string{"systemchannel"}...)
 
+<<<<<<< HEAD
 			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_0", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+=======
+			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_5", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			// package, install, and approve by org1 - module chaincode
 			packageInstallApproveChaincode(network, "testchannel", orderer, chaincode, network.Peer("Org1", "peer0"))
@@ -415,7 +447,11 @@ var _ = Describe("EndToEnd", func() {
 
 			By("Create first channel and deploy the chaincode")
 			network.CreateAndJoinChannel(orderer, "testchannel")
+<<<<<<< HEAD
 			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_0", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+=======
+			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_5", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			nwo.DeployChaincode(network, "testchannel", orderer, chaincode)
 			RunQueryInvokeQuery(network, orderer, peer, "testchannel")
 
@@ -425,7 +461,11 @@ var _ = Describe("EndToEnd", func() {
 			channelparticipation.ChannelListMatcher(cl, []string{"testchannel", "testchannel2"}, []string{"systemchannel"}...)
 
 			peers := network.PeersWithChannel("testchannel2")
+<<<<<<< HEAD
 			nwo.EnableCapabilities(network, "testchannel2", "Application", "V2_0", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+=======
+			nwo.EnableCapabilities(network, "testchannel2", "Application", "V2_5", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			nwo.ApproveChaincodeForMyOrg(network, "testchannel2", orderer, chaincode, peers...)
 			nwo.CheckCommitReadinessUntilReady(network, "testchannel2", chaincode, network.PeerOrgs(), peers...)
 			nwo.CommitChaincode(network, "testchannel2", orderer, chaincode, peers[0], peers...)
@@ -503,6 +543,7 @@ var _ = Describe("EndToEnd", func() {
 
 			// The below call waits for the config update to commit on the peer, so
 			// it will fail if the orderer addresses are wrong.
+<<<<<<< HEAD
 			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_0", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
 		})
 	})
@@ -510,6 +551,15 @@ var _ = Describe("EndToEnd", func() {
 	Describe("basic solo network with containers being interrupted", func() {
 		BeforeEach(func() {
 			network = nwo.New(nwo.FullSolo(), testDir, client, StartPort(), components)
+=======
+			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_5", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+		})
+	})
+
+	Describe("basic etcdraft network with containers being interrupted", func() {
+		BeforeEach(func() {
+			network = nwo.New(nwo.FullEtcdRaft(), testDir, client, StartPort(), components)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			network.GenerateConfigTree()
 			network.Bootstrap()
@@ -540,7 +590,11 @@ var _ = Describe("EndToEnd", func() {
 			network.CreateAndJoinChannels(orderer)
 
 			By("enabling new lifecycle capabilities")
+<<<<<<< HEAD
 			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_0", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+=======
+			nwo.EnableCapabilities(network, "testchannel", "Application", "V2_5", orderer, network.Peer("Org1", "peer0"), network.Peer("Org2", "peer0"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			By("deploying the chaincode")
 			nwo.DeployChaincode(network, "testchannel", orderer, chaincode)
 

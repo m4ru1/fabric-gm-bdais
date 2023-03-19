@@ -19,7 +19,11 @@ WORKDIR $GOPATH/src/github.com/hyperledger/fabric
 
 FROM golang as tools
 ARG GO_TAGS
+<<<<<<< HEAD
 RUN make tools GO_TAGS=${GO_TAGS}
+=======
+RUN CGO_ENABLED=0 make tools GO_TAGS=${GO_TAGS}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 FROM golang:${GO_VER}-alpine${ALPINE_VER}
 # git is required to support `go list -m`

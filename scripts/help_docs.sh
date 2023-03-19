@@ -141,7 +141,11 @@ generateOrCheck \
         docs/wrappers/osnadmin_channel_postscript.md \
         "${commands[@]}"
 
+<<<<<<< HEAD
 commands=("ledgerutil compare")
+=======
+commands=("ledgerutil compare" "ledgerutil identifytxs")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 generateOrCheck \
         docs/source/commands/ledgerutil.md \
         docs/wrappers/ledgerutil_preamble.md \

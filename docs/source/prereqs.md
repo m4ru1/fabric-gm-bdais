@@ -99,7 +99,11 @@ jq-1.6
 ```
 </div>
 
+<<<<<<< HEAD
 ## **Linux**
+=======
+## **Linux (Ubuntu/Debian based distro)**
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 <!--- Indent entire section -->
 <div style="margin-left: 1.5em;">

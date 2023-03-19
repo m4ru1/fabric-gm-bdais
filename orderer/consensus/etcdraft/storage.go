@@ -16,12 +16,21 @@ import (
 
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/pkg/errors"
+<<<<<<< HEAD
 	"go.etcd.io/etcd/etcdserver/api/snap"
 	"go.etcd.io/etcd/pkg/fileutil"
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"
 	"go.etcd.io/etcd/wal"
 	"go.etcd.io/etcd/wal/walpb"
+=======
+	"go.etcd.io/etcd/client/pkg/v3/fileutil"
+	raft "go.etcd.io/etcd/raft/v3"
+	"go.etcd.io/etcd/raft/v3/raftpb"
+	"go.etcd.io/etcd/server/v3/etcdserver/api/snap"
+	"go.etcd.io/etcd/server/v3/wal"
+	"go.etcd.io/etcd/server/v3/wal/walpb"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 // MaxSnapshotFiles defines max number of etcd/raft snapshot files to retain
@@ -84,7 +93,11 @@ func CreateStorage(
 	} else {
 		// snapshot found
 		lg.Debugf("Loaded snapshot at Term %d and Index %d, Nodes: %+v",
+<<<<<<< HEAD
 			snapshot.Metadata.Term, snapshot.Metadata.Index, snapshot.Metadata.ConfState.Nodes)
+=======
+			snapshot.Metadata.Term, snapshot.Metadata.Index, snapshot.Metadata.ConfState.Voters)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	w, st, ents, err := createOrReadWAL(lg, walDir, snapshot)
@@ -274,8 +287,14 @@ func (rs *RaftStorage) saveSnap(snap raftpb.Snapshot) error {
 	// snapshot to maintain the invariant that we only Open the
 	// wal at previously-saved snapshot indexes.
 	walsnap := walpb.Snapshot{
+<<<<<<< HEAD
 		Index: snap.Metadata.Index,
 		Term:  snap.Metadata.Term,
+=======
+		Index:     snap.Metadata.Index,
+		Term:      snap.Metadata.Term,
+		ConfState: &snap.Metadata.ConfState,
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	if err := rs.wal.SaveSnapshot(walsnap); err != nil {

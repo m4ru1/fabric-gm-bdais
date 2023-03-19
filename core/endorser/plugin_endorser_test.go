@@ -7,8 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package endorser_test
 
 import (
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/golang/protobuf/proto"
@@ -44,11 +47,15 @@ type testTransientStore struct {
 func newTransientStore(t *testing.T) *testTransientStore {
 	s := &testTransientStore{}
 	var err error
+<<<<<<< HEAD
 	s.tempdir, err = ioutil.TempDir("", "ts")
 	if err != nil {
 		t.Fatalf("Failed to create test directory, got err %s", err)
 		return s
 	}
+=======
+	s.tempdir = t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	s.storeProvider, err = transientstore.NewStoreProvider(s.tempdir)
 	if err != nil {
 		t.Fatalf("Failed to open store, got err %s", err)
@@ -64,7 +71,10 @@ func newTransientStore(t *testing.T) *testTransientStore {
 
 func (s *testTransientStore) tearDown() {
 	s.storeProvider.Close()
+<<<<<<< HEAD
 	os.RemoveAll(s.tempdir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 func (s *testTransientStore) Persist(txid string, blockHeight uint64,

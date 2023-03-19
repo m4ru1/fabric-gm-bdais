@@ -178,6 +178,10 @@ func TestPayloadDifferenceReadMissingProtos(t *testing.T) {
 		t, &responseT{payload: []byte("my_value"), status: 200, message: "no error"},
 		[]*readT{
 			{namespace: "ns1", key: "key1", block: math.MaxInt64},
+<<<<<<< HEAD
+=======
+			{namespace: "ns1"},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		},
 		[]*writeT{},
 		[]*metaWriteT{},
@@ -204,6 +208,10 @@ func TestPayloadDifferenceReadMissingProtos(t *testing.T) {
 
 	expected := [][]interface{}{
 		{"type", "extraneous read", "namespace", "ns1", "key", "key1", "initial-endorser-value", "0", "invoked-endorser-value", "4"},
+<<<<<<< HEAD
+=======
+		{"type", "extraneous read", "namespace", "ns1", "key", "", "initial-endorser-value", "0", "invoked-endorser-value", "0"},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	require.ElementsMatch(t, expected, diff.details())
 }
@@ -504,6 +512,13 @@ func collateReadWriteSets(t *testing.T, reads []*readT, writes []*writeT, metaWr
 			rwset = &kvrwset.KVRWSet{}
 			grouped[r.namespace] = rwset
 		}
+<<<<<<< HEAD
+=======
+		if r.key == "" && r.block == 0 { // signifies nil Read proto in these tests
+			rwset.Reads = append(rwset.Reads, nil)
+			continue
+		}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		var version *kvrwset.Version
 		if r.block != math.MaxInt64 { // signifies missing version in these tests
 			version = &kvrwset.Version{BlockNum: r.block}

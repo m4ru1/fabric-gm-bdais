@@ -8,7 +8,10 @@ package ledgermgmt
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os"
 	"path/filepath"
 	"testing"
@@ -28,7 +31,11 @@ import (
 )
 
 func TestLedgerMgmt(t *testing.T) {
+<<<<<<< HEAD
 	initializer, ledgerMgr, cleanup := setup(t, "ledgermgmt")
+=======
+	initializer, ledgerMgr, cleanup := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer cleanup()
 
 	numLedgers := 10
@@ -75,14 +82,22 @@ func TestLedgerMgmt(t *testing.T) {
 // TestCreateLedgerFromSnapshot first creates a ledger using a genesis block and generates a snapshot.
 // After it, it tests creating ledger from the snapshot.
 func TestCreateLedgerFromSnapshot(t *testing.T) {
+<<<<<<< HEAD
 	initializer, lgrMgr, cleanup := setup(t, "createledgerfromsnapshot")
+=======
+	initializer, lgrMgr, cleanup := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer cleanup()
 
 	channelID := "testcreatefromsnapshot"
 	snapshotDir, gb := generateSnapshot(t, lgrMgr, initializer, channelID)
 
 	t.Run("create_ledger_from_snapshot_internal", func(t *testing.T) {
+<<<<<<< HEAD
 		_, ledgerMgr, cleanup := setup(t, "createledgerfromsnapshot_internal")
+=======
+		_, ledgerMgr, cleanup := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		defer cleanup()
 
 		l, _, err := ledgerMgr.createFromSnapshot(snapshotDir)
@@ -99,7 +114,11 @@ func TestCreateLedgerFromSnapshot(t *testing.T) {
 	})
 
 	t.Run("create_ledger_from_snapshot_async", func(t *testing.T) {
+<<<<<<< HEAD
 		_, ledgerMgr, cleanup := setup(t, "createledgerfromsnapshot_async")
+=======
+		_, ledgerMgr, cleanup := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		defer cleanup()
 
 		callbackCounter := 0
@@ -127,9 +146,13 @@ func TestCreateLedgerFromSnapshot(t *testing.T) {
 	})
 
 	t.Run("create_ledger_from_nonexist_or_empty_dir_returns_error", func(t *testing.T) {
+<<<<<<< HEAD
 		testDir, err := ioutil.TempDir("", "invalidsnapshotdir")
 		require.NoError(t, err)
 		defer os.RemoveAll(testDir)
+=======
+		testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		nonExistDir := filepath.Join(testDir, "nonexistdir")
 		require.EqualError(t, lgrMgr.CreateLedgerFromSnapshot(nonExistDir, nil),
@@ -140,7 +163,11 @@ func TestCreateLedgerFromSnapshot(t *testing.T) {
 	})
 
 	t.Run("callback_func_is_not_called_if_create_ledger_from_snapshot_failed", func(t *testing.T) {
+<<<<<<< HEAD
 		initializer, ledgerMgr, cleanup := setup(t, "callbackfuncisnotcalled")
+=======
+		initializer, ledgerMgr, cleanup := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		defer cleanup()
 
 		// copy snapshotDir to a new dir and remove a metadata file so that kvledger.CreateFromSnapshot will fail
@@ -171,7 +198,11 @@ func TestCreateLedgerFromSnapshot(t *testing.T) {
 }
 
 func TestConcurrentCreateLedgerFromGB(t *testing.T) {
+<<<<<<< HEAD
 	_, ledgerMgr, cleanup := setup(t, "concurrentcreateledgerfromgb")
+=======
+	_, ledgerMgr, cleanup := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer cleanup()
 
 	var err error
@@ -200,7 +231,11 @@ func TestConcurrentCreateLedgerFromGB(t *testing.T) {
 }
 
 func TestConcurrentCreateLedgerFromSnapshot(t *testing.T) {
+<<<<<<< HEAD
 	initializer, ledgerMgr, cleanup := setup(t, "concurrentcreateledgerfromsnapshot")
+=======
+	initializer, ledgerMgr, cleanup := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer cleanup()
 
 	// generate 2 snapshots for 2 channels
@@ -212,7 +247,11 @@ func TestConcurrentCreateLedgerFromSnapshot(t *testing.T) {
 	ledgerMgr.Close()
 
 	// create a new ledger mgr to import snapshot
+<<<<<<< HEAD
 	_, ledgerMgr2, cleanup2 := setup(t, "concurrentcreateledgerfromsnapshot2")
+=======
+	_, ledgerMgr2, cleanup2 := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer cleanup2()
 
 	// use a channel to keep the callback func waiting so that we can test concurrent CreateLedger/CreateLedgerBySnapshot calls
@@ -265,7 +304,11 @@ func TestConcurrentCreateLedgerFromSnapshot(t *testing.T) {
 }
 
 func TestChaincodeInfoProvider(t *testing.T) {
+<<<<<<< HEAD
 	_, ledgerMgr, cleanup := setup(t, "chaincodeinfoprovider")
+=======
+	_, ledgerMgr, cleanup := setup(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer cleanup()
 
 	gb, _ := test.MakeGenesisBlock("ledger1")
@@ -298,15 +341,23 @@ func TestChaincodeInfoProvider(t *testing.T) {
 	require.Equal(t, constructTestCCInfo("cc1", "cc1", "cc1"), ccInfo)
 }
 
+<<<<<<< HEAD
 func setup(t *testing.T, basename string) (*Initializer, *LedgerMgr, func()) {
 	testDir, err := ioutil.TempDir("", basename)
 	require.NoError(t, err)
+=======
+func setup(t *testing.T) (*Initializer, *LedgerMgr, func()) {
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	initializer, err := constructDefaultInitializer(testDir)
 	require.NoError(t, err)
 	ledgerMgr := NewLedgerMgr(initializer)
 	cleanup := func() {
 		ledgerMgr.Close()
+<<<<<<< HEAD
 		os.Remove(testDir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	return initializer, ledgerMgr, cleanup
 }

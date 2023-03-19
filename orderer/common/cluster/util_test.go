@@ -8,11 +8,19 @@ package cluster_test
 
 import (
 	"bytes"
+<<<<<<< HEAD
+=======
+	"context"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"crypto/x509"
 	"encoding/pem"
 	"errors"
 	"fmt"
 	"io/ioutil"
+<<<<<<< HEAD
+=======
+	"math"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"strings"
 	"sync"
 	"testing"
@@ -21,6 +29,11 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/msp"
+<<<<<<< HEAD
+=======
+	"github.com/hyperledger/fabric-protos-go/orderer"
+	"github.com/hyperledger/fabric/bccsp"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/bccsp/sw"
 	"github.com/hyperledger/fabric/common/capabilities"
 	"github.com/hyperledger/fabric/common/channelconfig"
@@ -28,6 +41,10 @@ import (
 	"github.com/hyperledger/fabric/common/configtx/test"
 	"github.com/hyperledger/fabric/common/crypto/tlsgen"
 	"github.com/hyperledger/fabric/common/flogging"
+<<<<<<< HEAD
+=======
+	"github.com/hyperledger/fabric/common/metrics/disabled"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/common/policies"
 	"github.com/hyperledger/fabric/core/config/configtest"
 	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
@@ -691,12 +708,20 @@ func TestConfigFromBlockBadInput(t *testing.T) {
 		},
 		{
 			name:          "invalid payload",
+<<<<<<< HEAD
 			expectedError: "error unmarshalling Envelope: proto: common.Envelope: illegal tag 0 (wire type 1)",
+=======
+			expectedError: "error unmarshalling Envelope",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block:         &common.Block{Data: &common.BlockData{Data: [][]byte{{1, 2, 3}}}},
 		},
 		{
 			name:          "bad genesis block",
+<<<<<<< HEAD
 			expectedError: "invalid config envelope: proto: common.ConfigEnvelope: illegal tag 0 (wire type 1)",
+=======
+			expectedError: "invalid config envelope",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Header: &common.BlockHeader{}, Data: &common.BlockData{Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
 					Payload: protoutil.MarshalOrPanic(&common.Payload{
@@ -707,19 +732,31 @@ func TestConfigFromBlockBadInput(t *testing.T) {
 		},
 		{
 			name:          "invalid envelope in block",
+<<<<<<< HEAD
 			expectedError: "error unmarshalling Envelope: proto: common.Envelope: illegal tag 0 (wire type 1)",
+=======
+			expectedError: "error unmarshalling Envelope",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block:         &common.Block{Data: &common.BlockData{Data: [][]byte{{1, 2, 3}}}},
 		},
 		{
 			name:          "invalid payload in block envelope",
+<<<<<<< HEAD
 			expectedError: "error unmarshalling Payload: proto: common.Payload: illegal tag 0 (wire type 1)",
+=======
+			expectedError: "error unmarshalling Payload",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{Data: &common.BlockData{Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
 				Payload: []byte{1, 2, 3},
 			})}}},
 		},
 		{
 			name:          "invalid channel header",
+<<<<<<< HEAD
 			expectedError: "error unmarshalling ChannelHeader: proto: common.ChannelHeader: illegal tag 0 (wire type 1)",
+=======
+			expectedError: "error unmarshalling ChannelHeader",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Header: &common.BlockHeader{Number: 1},
 				Data: &common.BlockData{Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
@@ -733,7 +770,11 @@ func TestConfigFromBlockBadInput(t *testing.T) {
 		},
 		{
 			name:          "invalid config block",
+<<<<<<< HEAD
 			expectedError: "invalid config envelope: proto: common.ConfigEnvelope: illegal tag 0 (wire type 1)",
+=======
+			expectedError: "invalid config envelope",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Header: &common.BlockHeader{},
 				Data: &common.BlockData{Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
@@ -752,7 +793,12 @@ func TestConfigFromBlockBadInput(t *testing.T) {
 		t.Run(testCase.name, func(t *testing.T) {
 			conf, err := cluster.ConfigFromBlock(testCase.block)
 			require.Nil(t, conf)
+<<<<<<< HEAD
 			require.EqualError(t, err, testCase.expectedError)
+=======
+			require.Error(t, err)
+			require.Contains(t, err.Error(), testCase.expectedError)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		})
 	}
 }
@@ -1226,3 +1272,186 @@ func TestComparisonMemoizer(t *testing.T) {
 		require.LessOrEqual(t, m.Size(), int(m.MaxEntries))
 	}
 }
+<<<<<<< HEAD
+=======
+
+//go:generate counterfeiter -o mocks/bccsp.go --fake-name BCCSP . iBCCSP
+
+type iBCCSP interface {
+	bccsp.BCCSP
+}
+
+func TestBlockVerifierBuilderEmptyBlock(t *testing.T) {
+	bvfunc := cluster.BlockVerifierBuilder(&mocks.BCCSP{})
+	block := &common.Block{}
+	verifier := bvfunc(block)
+	require.ErrorContains(t, verifier(nil, nil), "initialized with an invalid config block: block contains no data")
+}
+
+func TestBlockVerifierBuilderNoConfigBlock(t *testing.T) {
+	bvfunc := cluster.BlockVerifierBuilder(&mocks.BCCSP{})
+	block := createBlockChain(3, 3)[0]
+	verifier := bvfunc(block)
+	md := &common.BlockMetadata{}
+	require.ErrorContains(t, verifier(nil, md), "initialized with an invalid config block: channelconfig Config cannot be nil")
+}
+
+func TestBlockVerifierFunc(t *testing.T) {
+	block := sampleConfigBlock()
+	bvfunc := cluster.BlockVerifierBuilder(&mocks.BCCSP{})
+
+	verifier := bvfunc(block)
+
+	header := &common.BlockHeader{}
+	md := &common.BlockMetadata{
+		Metadata: [][]byte{
+			protoutil.MarshalOrPanic(&common.Metadata{Signatures: []*common.MetadataSignature{
+				{
+					Signature:        []byte{},
+					IdentifierHeader: protoutil.MarshalOrPanic(&common.IdentifierHeader{Identifier: 1}),
+				},
+			}}),
+		},
+	}
+
+	err := verifier(header, md)
+	require.NoError(t, err)
+}
+
+func sampleConfigBlock() *common.Block {
+	return &common.Block{
+		Header: &common.BlockHeader{
+			PreviousHash: []byte("foo"),
+		},
+		Data: &common.BlockData{
+			Data: [][]byte{
+				protoutil.MarshalOrPanic(&common.Envelope{
+					Payload: protoutil.MarshalOrPanic(&common.Payload{
+						Header: &common.Header{
+							ChannelHeader: protoutil.MarshalOrPanic(&common.ChannelHeader{
+								Type:      int32(common.HeaderType_CONFIG),
+								ChannelId: "mychannel",
+							}),
+						},
+						Data: protoutil.MarshalOrPanic(&common.ConfigEnvelope{
+							Config: &common.Config{
+								ChannelGroup: &common.ConfigGroup{
+									Values: map[string]*common.ConfigValue{
+										"Capabilities": {
+											Value: protoutil.MarshalOrPanic(&common.Capabilities{
+												Capabilities: map[string]*common.Capability{"V3_0": {}},
+											}),
+										},
+										"HashingAlgorithm": {
+											Value: protoutil.MarshalOrPanic(&common.HashingAlgorithm{Name: "SHA256"}),
+										},
+										"BlockDataHashingStructure": {
+											Value: protoutil.MarshalOrPanic(&common.BlockDataHashingStructure{Width: math.MaxUint32}),
+										},
+									},
+									Groups: map[string]*common.ConfigGroup{
+										"Orderer": {
+											Policies: map[string]*common.ConfigPolicy{
+												"BlockValidation": {
+													Policy: &common.Policy{
+														Type: 3,
+													},
+												},
+											},
+											Values: map[string]*common.ConfigValue{
+												"BatchSize": {
+													Value: protoutil.MarshalOrPanic(&orderer.BatchSize{
+														MaxMessageCount:   500,
+														AbsoluteMaxBytes:  10485760,
+														PreferredMaxBytes: 2097152,
+													}),
+												},
+												"BatchTimeout": {
+													Value: protoutil.MarshalOrPanic(&orderer.BatchTimeout{
+														Timeout: "2s",
+													}),
+												},
+												"Capabilities": {
+													Value: protoutil.MarshalOrPanic(&common.Capabilities{
+														Capabilities: map[string]*common.Capability{"V3_0": {}},
+													}),
+												},
+												"ConsensusType": {
+													Value: protoutil.MarshalOrPanic(&common.BlockData{Data: [][]byte{[]byte("BFT")}}),
+												},
+												"Orderers": {
+													Value: protoutil.MarshalOrPanic(&common.Orderers{
+														ConsenterMapping: []*common.Consenter{
+															{
+																Id:       1,
+																Host:     "host1",
+																Port:     8001,
+																MspId:    "msp1",
+																Identity: []byte("identity1"),
+															},
+														},
+													}),
+												},
+											},
+										},
+									},
+								},
+							},
+						}),
+					}),
+					Signature: []byte("bar"),
+				}),
+			},
+		},
+	}
+}
+
+func TestGetTLSSessionBinding(t *testing.T) {
+	serverCert, err := ca.NewServerCertKeyPair("127.0.0.1")
+	require.NoError(t, err)
+
+	srv, err := comm.NewGRPCServer("127.0.0.1:0", comm.ServerConfig{
+		SecOpts: comm.SecureOptions{
+			Certificate: serverCert.Cert,
+			Key:         serverCert.Key,
+			UseTLS:      true,
+		},
+	})
+	require.NoError(t, err)
+
+	handler := &mocks.Handler{}
+
+	svc := &cluster.ClusterService{
+		MinimumExpirationWarningInterval: time.Second * 2,
+		StreamCountReporter: &cluster.StreamCountReporter{
+			Metrics: cluster.NewMetrics(&disabled.Provider{}),
+		},
+		Logger:              flogging.MustGetLogger("test"),
+		StepLogger:          flogging.MustGetLogger("test"),
+		RequestHandler:      handler,
+		MembershipByChannel: make(map[string]*cluster.ChannelMembersConfig),
+	}
+
+	orderer.RegisterClusterNodeServiceServer(srv.Server(), svc)
+	go srv.Start()
+	defer srv.Stop()
+
+	clientConf := comm.ClientConfig{
+		DialTimeout: time.Second * 3,
+		SecOpts: comm.SecureOptions{
+			ServerRootCAs: [][]byte{ca.CertBytes()},
+			UseTLS:        true,
+		},
+	}
+	conn, err := clientConf.Dial(srv.Address())
+	require.NoError(t, err)
+
+	cl := orderer.NewClusterNodeServiceClient(conn)
+	stream, err := cl.Step(context.Background())
+	require.NoError(t, err)
+
+	binding, err := cluster.GetTLSSessionBinding(stream.Context(), []byte{1, 2, 3, 4, 5})
+	require.NoError(t, err)
+	require.Len(t, binding, 32)
+}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19

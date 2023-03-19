@@ -9,7 +9,11 @@ package lifecycle_test
 import (
 	"fmt"
 
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 
 	"github.com/golang/protobuf/proto"
@@ -214,7 +218,11 @@ var _ = Describe("Serializer", func() {
 
 				It("wraps and returns the error", func() {
 					err := s.Serialize("namespaces", "fake", testStruct, fakeState)
+<<<<<<< HEAD
 					Expect(err).To(MatchError("could not deserialize metadata for namespace namespaces/fake: could not unmarshal metadata for namespace namespaces/fake: unexpected EOF"))
+=======
+					Expect(err.Error()).To(ContainSubstring("could not deserialize metadata for namespace namespaces/fake: could not unmarshal metadata for namespace namespaces/fake"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				})
 			})
 		})
@@ -413,7 +421,11 @@ var _ = Describe("Serializer", func() {
 			It("fails", func() {
 				testStruct := &TestStruct{}
 				err := s.Deserialize("namespaces", "fake", metadata, testStruct, fakeState)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not unmarshal state for key namespaces/fields/fake/Int: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("could not unmarshal state for key namespaces/fields/fake/Int"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -815,7 +827,11 @@ var _ = Describe("Serializer", func() {
 
 			It("returns an error", func() {
 				_, err := s.DeserializeAllMetadata("namespaces", fakeState)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("error unmarshalling metadata for key namespaces/metadata/bad: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("error unmarshalling metadata for key namespaces/metadata/bad"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})
@@ -867,7 +883,11 @@ var _ = Describe("Serializer", func() {
 
 			It("returns an error", func() {
 				_, _, err := s.DeserializeMetadata("namespaces", "fake", fakeState)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not unmarshal metadata for namespace namespaces/fake: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("could not unmarshal metadata for namespace namespaces/fake"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})
@@ -962,7 +982,12 @@ var _ = Describe("Serializer", func() {
 
 			It("wraps and returns the error", func() {
 				err := s.DeserializeFieldAsProto("namespaces", "fake", "field", fakeState, &lb.InstallChaincodeResult{})
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not unmarshal key namespaces/fields/fake/field to *lifecycle.InstallChaincodeResult: proto: can't skip unknown wire type 7"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("could not unmarshal key namespaces/fields/fake/field to *lifecycle.InstallChaincodeResult"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})
@@ -1013,7 +1038,11 @@ var _ = Describe("Serializer", func() {
 
 			It("returns an error", func() {
 				_, err := s.DeserializeFieldAsInt64("namespaces", "fake", "field", fakeState)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not unmarshal state for key namespaces/fields/fake/field: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("could not unmarshal state for key namespaces/fields/fake/field"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})
@@ -1064,7 +1093,11 @@ var _ = Describe("Serializer", func() {
 
 			It("returns an error", func() {
 				_, err := s.DeserializeFieldAsString("namespaces", "fake", "field", fakeState)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not unmarshal state for key namespaces/fields/fake/field: unexpected EOF"))
+=======
+				Expect(err.Error()).To(ContainSubstring("could not unmarshal state for key namespaces/fields/fake/field"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})

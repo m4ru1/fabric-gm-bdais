@@ -55,6 +55,42 @@ type Provider struct {
 	dbHandles map[string]*DBHandle
 }
 
+<<<<<<< HEAD
+=======
+// DataFormatInfo contains the information about the version of the data format
+type DataFormatInfo struct {
+	FormatVerison string // version of the data format
+	IsDBEmpty     bool   // set to true if the db does not contain any data
+}
+
+// RetrieveDataFormatInfo retrieves the DataFormatInfo for the db at the supplied `dbPath`
+func RetrieveDataFormatInfo(dbPath string) (*DataFormatInfo, error) {
+	db := CreateDB(&Conf{DBPath: dbPath})
+	db.Open()
+	defer db.Close()
+
+	dbEmpty, err := db.IsEmpty()
+	if err != nil {
+		return nil, err
+	}
+
+	internalDB := &DBHandle{
+		db:     db,
+		dbName: internalDBName,
+	}
+
+	formatVersion, err := internalDB.Get(formatVersionKey)
+	if err != nil {
+		return nil, err
+	}
+
+	return &DataFormatInfo{
+		IsDBEmpty:     dbEmpty,
+		FormatVerison: string(formatVersion),
+	}, nil
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // NewProvider constructs a Provider
 func NewProvider(conf *Conf) (*Provider, error) {
 	db, err := openDBAndCheckFormat(conf)
@@ -120,6 +156,14 @@ func (p *Provider) GetDataFormat() (string, error) {
 	return string(f), err
 }
 
+<<<<<<< HEAD
+=======
+func (p *Provider) SetDataFormat(format string) error {
+	db := p.GetDBHandle(internalDBName)
+	return db.Put(formatVersionKey, []byte(format), true)
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // GetDBHandle returns a handle to a named db
 func (p *Provider) GetDBHandle(dbName string) *DBHandle {
 	p.mux.Lock()
@@ -229,17 +273,29 @@ func (h *DBHandle) IsEmpty() (bool, error) {
 // NewUpdateBatch returns a new UpdateBatch that can be used to update the db
 func (h *DBHandle) NewUpdateBatch() *UpdateBatch {
 	return &UpdateBatch{
+<<<<<<< HEAD
 		dbName: h.dbName,
 		Batch:  &leveldb.Batch{},
+=======
+		dbName:       h.dbName,
+		leveldbBatch: &leveldb.Batch{},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 }
 
 // WriteBatch writes a batch in an atomic way
 func (h *DBHandle) WriteBatch(batch *UpdateBatch, sync bool) error {
+<<<<<<< HEAD
 	if batch == nil || batch.Len() == 0 {
 		return nil
 	}
 	if err := h.db.WriteBatch(batch.Batch, sync); err != nil {
+=======
+	if batch == nil || batch.leveldbBatch.Len() == 0 {
+		return nil
+	}
+	if err := h.db.WriteBatch(batch.leveldbBatch, sync); err != nil {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		return err
 	}
 	return nil
@@ -273,8 +329,14 @@ func (h *DBHandle) Close() {
 
 // UpdateBatch encloses the details of multiple `updates`
 type UpdateBatch struct {
+<<<<<<< HEAD
 	*leveldb.Batch
 	dbName string
+=======
+	leveldbBatch *leveldb.Batch
+	dbName       string
+	size         int
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 // Put adds a KV
@@ -282,12 +344,40 @@ func (b *UpdateBatch) Put(key []byte, value []byte) {
 	if value == nil {
 		panic("Nil value not allowed")
 	}
+<<<<<<< HEAD
 	b.Batch.Put(constructLevelKey(b.dbName, key), value)
+=======
+	k := constructLevelKey(b.dbName, key)
+	b.leveldbBatch.Put(k, value)
+	b.size += len(k) + len(value)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 // Delete deletes a Key and associated value
 func (b *UpdateBatch) Delete(key []byte) {
+<<<<<<< HEAD
 	b.Batch.Delete(constructLevelKey(b.dbName, key))
+=======
+	k := constructLevelKey(b.dbName, key)
+	b.size += len(k)
+	b.leveldbBatch.Delete(k)
+}
+
+// Size returns the current size of the batch
+func (b *UpdateBatch) Size() int {
+	return b.size
+}
+
+// Len returns number of records in the batch
+func (b *UpdateBatch) Len() int {
+	return b.leveldbBatch.Len()
+}
+
+// Reset resets the batch
+func (b *UpdateBatch) Reset() {
+	b.leveldbBatch.Reset()
+	b.size = 0
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 // Iterator extends actual leveldb iterator

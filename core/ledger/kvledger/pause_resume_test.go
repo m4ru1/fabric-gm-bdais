@@ -17,9 +17,14 @@ import (
 )
 
 func TestPauseAndResume(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	conf.HistoryDBConfig.Enabled = false
 	defer cleanup()
+=======
+	conf := testConfig(t)
+	conf.HistoryDBConfig.Enabled = false
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 
 	numLedgers := 10
@@ -73,9 +78,14 @@ func TestPauseAndResume(t *testing.T) {
 }
 
 func TestPauseAndResumeErrors(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	conf.HistoryDBConfig.Enabled = false
 	defer cleanup()
+=======
+	conf := testConfig(t)
+	conf.HistoryDBConfig.Enabled = false
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 
 	ledgerID := constructTestLedgerID(0)
@@ -103,10 +113,17 @@ func TestPauseAndResumeErrors(t *testing.T) {
 
 	// error if metadata cannot be unmarshaled
 	err = PauseChannel(conf.RootFSPath, ledgerID)
+<<<<<<< HEAD
 	require.EqualError(t, err, "error unmarshalling ledger metadata: unexpected EOF")
 
 	err = ResumeChannel(conf.RootFSPath, ledgerID)
 	require.EqualError(t, err, "error unmarshalling ledger metadata: unexpected EOF")
+=======
+	require.ErrorContains(t, err, "error unmarshalling ledger metadata")
+
+	err = ResumeChannel(conf.RootFSPath, ledgerID)
+	require.ErrorContains(t, err, "error unmarshalling ledger metadata")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 // verify status for paused ledgers and non-paused ledgers

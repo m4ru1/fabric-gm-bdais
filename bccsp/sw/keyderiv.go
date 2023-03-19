@@ -28,6 +28,13 @@ import (
 
 type ecdsaPublicKeyKeyDeriver struct{}
 
+<<<<<<< HEAD
+=======
+// 只对公钥做派生的神奇用途，反正我不理解
+// 只保存新公钥而不保存对应的新私钥是没有意义的，因为如果需要使用这个新公钥进行解密操作，就必须要有对应的私钥。
+// 在ECDSA算法中，只对公钥做密钥派生主要是为了方便某些场景下的密钥管理，比如密钥轮换、密钥备份等，同时保证新生成的密钥与原始密钥有一定的关联性，
+// 以确保密钥的连续性和可追溯性。但是需要注意的是，在使用新公钥进行加密操作时，必须要同时保证对应的新私钥也能够及时生成和保存，以便在需要时进行解密操作。
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func (kd *ecdsaPublicKeyKeyDeriver) KeyDeriv(key bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
 	// Validate opts
 	if opts == nil {

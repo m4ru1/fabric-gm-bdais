@@ -143,6 +143,76 @@ func FullSolo() *Config {
 	return config
 }
 
+<<<<<<< HEAD
+=======
+// ThreeOrgEtcdRaft returns a simple configuration with three organizations instead
+// of two.
+func ThreeOrgEtcdRaft() *Config {
+	config := BasicEtcdRaft()
+	config.Organizations = append(
+		config.Organizations,
+		&Organization{
+			Name:   "Org3",
+			MSPID:  "Org3MSP",
+			Domain: "org3.example.com",
+			Users:  2,
+			CA:     &CA{Hostname: "ca"},
+		},
+	)
+	config.Consortiums[0].Organizations = append(
+		config.Consortiums[0].Organizations,
+		"Org3",
+	)
+	config.SystemChannel.Profile = "ThreeOrgsOrdererGenesis"
+	config.Channels[0].Profile = "ThreeOrgsChannel"
+	config.Peers = append(
+		config.Peers,
+		&Peer{
+			Name:         "peer0",
+			Organization: "Org3",
+			Channels: []*PeerChannel{
+				{Name: "testchannel", Anchor: true},
+			},
+		},
+	)
+	config.Profiles = []*Profile{{
+		Name:     "ThreeOrgsOrdererGenesis",
+		Orderers: []string{"orderer"},
+	}, {
+		Name:          "ThreeOrgsChannel",
+		Consortium:    "SampleConsortium",
+		Organizations: []string{"Org1", "Org2", "Org3"},
+	}}
+
+	return config
+}
+
+// FullEtcdRaft is a configuration with two organizations and two peers per org.
+func FullEtcdRaft() *Config {
+	config := BasicEtcdRaft()
+
+	config.Peers = append(
+		config.Peers,
+		&Peer{
+			Name:         "peer1",
+			Organization: "Org1",
+			Channels: []*PeerChannel{
+				{Name: "testchannel", Anchor: false},
+			},
+		},
+		&Peer{
+			Name:         "peer1",
+			Organization: "Org2",
+			Channels: []*PeerChannel{
+				{Name: "testchannel", Anchor: false},
+			},
+		},
+	)
+
+	return config
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func BasicSoloWithIdemix() *Config {
 	config := BasicSolo()
 
@@ -181,6 +251,7 @@ func MultiChannelBasicSolo() *Config {
 	return config
 }
 
+<<<<<<< HEAD
 func BasicKafka() *Config {
 	config := BasicSolo()
 
@@ -191,6 +262,8 @@ func BasicKafka() *Config {
 	return config
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func BasicEtcdRaft() *Config {
 	config := BasicSolo()
 
@@ -302,3 +375,28 @@ func MultiNodeEtcdRaft() *Config {
 	}}
 	return config
 }
+<<<<<<< HEAD
+=======
+
+func MultiNodeBFT() *Config {
+	config := BasicSolo()
+
+	config.Consensus.Type = "BFT"
+	config.Orderers = []*Orderer{
+		{Name: "orderer1", Organization: "OrdererOrg"},
+		{Name: "orderer2", Organization: "OrdererOrg"},
+		{Name: "orderer3", Organization: "OrdererOrg"},
+	}
+	config.Profiles = []*Profile{{
+		Name:     "SampleDevModeBFT",
+		Orderers: []string{"orderer1", "orderer2", "orderer3"},
+	}, {
+		Name:          "TwoOrgsChannel",
+		Consortium:    "SampleConsortium",
+		Organizations: []string{"Org1", "Org2"},
+	}}
+	config.SystemChannel.Profile = "SampleDevModeBFT"
+
+	return config
+}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19

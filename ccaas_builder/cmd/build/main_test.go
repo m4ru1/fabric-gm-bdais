@@ -7,15 +7,25 @@ SPDX-License-Identifier: Apache-2.0
 package main
 
 import (
+<<<<<<< HEAD
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
 	"testing"
 	"time"
+<<<<<<< HEAD
+=======
+
+	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/onsi/gomega/gexec"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 func TestArguements(t *testing.T) {
@@ -61,9 +71,13 @@ func TestGoodPath(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer gexec.CleanupBuildArtifacts()
 
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "test-ccaas-build-")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// create a basic structure of a chaincode
 	os.MkdirAll(path.Join(testPath, "in-builder-dir", "META-INF"), 0755)
@@ -121,9 +135,13 @@ func TestTemplating(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer gexec.CleanupBuildArtifacts()
 
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "test-ccaas-build-")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// create a basic structure of the chaincode to use
 	os.MkdirAll(path.Join(testPath, "in-builder-dir", "META-INF"), 0755)
@@ -195,9 +213,13 @@ func TestTemplatingFailure(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer gexec.CleanupBuildArtifacts()
 
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "test-ccaas-build-")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// create a basic structure of the chaincode to use
 	os.MkdirAll(path.Join(testPath, "in-builder-dir", "META-INF"), 0755)
@@ -249,9 +271,13 @@ func TestMissingConnection(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer gexec.CleanupBuildArtifacts()
 
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "test-ccaas-build-")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// create a basic structure of a chaincode
 	os.MkdirAll(path.Join(testPath, "in-builder-dir", "META-INF"), 0755)
@@ -292,9 +318,13 @@ func TestMissingMetadata(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer gexec.CleanupBuildArtifacts()
 
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "test-ccaas-build-")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// create a basic structure of a chaincode
 	os.MkdirAll(path.Join(testPath, "in-builder-dir", "META-INF"), 0755)

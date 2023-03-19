@@ -73,7 +73,11 @@ Some features of a Fabric ledger:
 - A channel's ledger contains a configuration block defining policies, access control lists, and other pertinent information
 - Channels contain :ref:`MSP` instances allowing for crypto materials to be derived from different certificate authorities
 
+<<<<<<< HEAD
 See the :doc:`ledger` topic for a deeper dive on the databases, storage structure, and "query-ability."
+=======
+See the :doc:`ledger/ledger` topic for a deeper dive on the databases, storage structure, and "query-ability."
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 
 Privacy

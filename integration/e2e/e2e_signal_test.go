@@ -13,11 +13,19 @@ import (
 
 	docker "github.com/fsouza/go-dockerclient"
 	"github.com/hyperledger/fabric/integration/nwo"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/tedsuo/ifrit"
 	"github.com/tedsuo/ifrit/ginkgomon"
+=======
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/tedsuo/ifrit"
+	ginkgomon "github.com/tedsuo/ifrit/ginkgomon_v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 var _ = Describe("SignalHandling", func() {
@@ -38,7 +46,11 @@ var _ = Describe("SignalHandling", func() {
 		client, err = docker.NewClientFromEnv()
 		Expect(err).NotTo(HaveOccurred())
 
+<<<<<<< HEAD
 		network = nwo.New(nwo.BasicSolo(), testDir, client, StartPort(), components)
+=======
+		network = nwo.New(nwo.BasicEtcdRaft(), testDir, client, StartPort(), components)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		network.GenerateConfigTree()
 		network.Bootstrap()
 

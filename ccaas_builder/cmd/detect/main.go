@@ -69,7 +69,11 @@ func run() error {
 		return fmt.Errorf("chaincode type not supported: %s", metadata.Type)
 	}
 
+<<<<<<< HEAD
 	// returning nil indicates to the peer a successfull detection
+=======
+	// returning nil indicates to the peer a successful detection
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return nil
 
 }

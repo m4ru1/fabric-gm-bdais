@@ -18,7 +18,11 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric/integration/nwo"
 	"github.com/hyperledger/fabric/integration/nwo/commands"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
@@ -67,9 +71,15 @@ var _ = Describe("SBE_E2E", func() {
 		os.RemoveAll(testDir)
 	})
 
+<<<<<<< HEAD
 	Describe("basic solo network with 2 orgs", func() {
 		BeforeEach(func() {
 			network = nwo.New(nwo.BasicSolo(), testDir, client, StartPort(), components)
+=======
+	Describe("basic etcdraft network with 2 orgs", func() {
+		BeforeEach(func() {
+			network = nwo.New(nwo.BasicEtcdRaft(), testDir, client, StartPort(), components)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			network.GenerateConfigTree()
 			network.Bootstrap()
 
@@ -78,7 +88,11 @@ var _ = Describe("SBE_E2E", func() {
 			Eventually(process.Ready(), network.EventuallyTimeout).Should(BeClosed())
 		})
 
+<<<<<<< HEAD
 		It("executes a basic solo network with 2 orgs and SBE checks", func() {
+=======
+		It("executes a basic etcdraft network with 2 orgs and SBE checks", func() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			By("getting the orderer by name")
 			orderer := network.Orderer("orderer")
 
@@ -99,7 +113,11 @@ var _ = Describe("SBE_E2E", func() {
 			RunSBE(network, orderer, "priv")
 		})
 
+<<<<<<< HEAD
 		It("executes a basic solo network with 2 orgs and SBE checks with _lifecycle", func() {
+=======
+		It("executes a basic etcdraft network with 2 orgs and SBE checks with _lifecycle", func() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			chaincode = nwo.Chaincode{
 				Name:              "mycc",
 				Version:           "0.0",

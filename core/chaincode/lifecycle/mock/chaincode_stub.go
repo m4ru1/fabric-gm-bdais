@@ -4,9 +4,15 @@ package mock
 import (
 	"sync"
 
+<<<<<<< HEAD
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 	"github.com/hyperledger/fabric-protos-go/peer"
+=======
+	"github.com/hyperledger/fabric-chaincode-go/shim"
+	"github.com/hyperledger/fabric-protos-go/peer"
+	"google.golang.org/protobuf/types/known/timestamppb"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 type ChaincodeStub struct {
@@ -388,16 +394,28 @@ type ChaincodeStub struct {
 	getTxIDReturnsOnCall map[int]struct {
 		result1 string
 	}
+<<<<<<< HEAD
 	GetTxTimestampStub        func() (*timestamp.Timestamp, error)
+=======
+	GetTxTimestampStub        func() (*timestamppb.Timestamp, error)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	getTxTimestampMutex       sync.RWMutex
 	getTxTimestampArgsForCall []struct {
 	}
 	getTxTimestampReturns struct {
+<<<<<<< HEAD
 		result1 *timestamp.Timestamp
 		result2 error
 	}
 	getTxTimestampReturnsOnCall map[int]struct {
 		result1 *timestamp.Timestamp
+=======
+		result1 *timestamppb.Timestamp
+		result2 error
+	}
+	getTxTimestampReturnsOnCall map[int]struct {
+		result1 *timestamppb.Timestamp
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		result2 error
 	}
 	InvokeChaincodeStub        func(string, [][]byte, string) peer.Response
@@ -413,6 +431,21 @@ type ChaincodeStub struct {
 	invokeChaincodeReturnsOnCall map[int]struct {
 		result1 peer.Response
 	}
+<<<<<<< HEAD
+=======
+	PurgePrivateDataStub        func(string, string) error
+	purgePrivateDataMutex       sync.RWMutex
+	purgePrivateDataArgsForCall []struct {
+		arg1 string
+		arg2 string
+	}
+	purgePrivateDataReturns struct {
+		result1 error
+	}
+	purgePrivateDataReturnsOnCall map[int]struct {
+		result1 error
+	}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	PutPrivateDataStub        func(string, string, []byte) error
 	putPrivateDataMutex       sync.RWMutex
 	putPrivateDataArgsForCall []struct {
@@ -506,15 +539,27 @@ func (fake *ChaincodeStub) CreateCompositeKey(arg1 string, arg2 []string) (strin
 		arg1 string
 		arg2 []string
 	}{arg1, arg2Copy})
+<<<<<<< HEAD
 	fake.recordInvocation("CreateCompositeKey", []interface{}{arg1, arg2Copy})
 	fake.createCompositeKeyMutex.Unlock()
 	if fake.CreateCompositeKeyStub != nil {
 		return fake.CreateCompositeKeyStub(arg1, arg2)
+=======
+	stub := fake.CreateCompositeKeyStub
+	fakeReturns := fake.createCompositeKeyReturns
+	fake.recordInvocation("CreateCompositeKey", []interface{}{arg1, arg2Copy})
+	fake.createCompositeKeyMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.createCompositeKeyReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -570,15 +615,27 @@ func (fake *ChaincodeStub) DelPrivateData(arg1 string, arg2 string) error {
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+<<<<<<< HEAD
 	fake.recordInvocation("DelPrivateData", []interface{}{arg1, arg2})
 	fake.delPrivateDataMutex.Unlock()
 	if fake.DelPrivateDataStub != nil {
 		return fake.DelPrivateDataStub(arg1, arg2)
+=======
+	stub := fake.DelPrivateDataStub
+	fakeReturns := fake.delPrivateDataReturns
+	fake.recordInvocation("DelPrivateData", []interface{}{arg1, arg2})
+	fake.delPrivateDataMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.delPrivateDataReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -630,15 +687,27 @@ func (fake *ChaincodeStub) DelState(arg1 string) error {
 	fake.delStateArgsForCall = append(fake.delStateArgsForCall, struct {
 		arg1 string
 	}{arg1})
+<<<<<<< HEAD
 	fake.recordInvocation("DelState", []interface{}{arg1})
 	fake.delStateMutex.Unlock()
 	if fake.DelStateStub != nil {
 		return fake.DelStateStub(arg1)
+=======
+	stub := fake.DelStateStub
+	fakeReturns := fake.delStateReturns
+	fake.recordInvocation("DelState", []interface{}{arg1})
+	fake.delStateMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.delStateReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -689,15 +758,27 @@ func (fake *ChaincodeStub) GetArgs() [][]byte {
 	ret, specificReturn := fake.getArgsReturnsOnCall[len(fake.getArgsArgsForCall)]
 	fake.getArgsArgsForCall = append(fake.getArgsArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetArgs", []interface{}{})
 	fake.getArgsMutex.Unlock()
 	if fake.GetArgsStub != nil {
 		return fake.GetArgsStub()
+=======
+	stub := fake.GetArgsStub
+	fakeReturns := fake.getArgsReturns
+	fake.recordInvocation("GetArgs", []interface{}{})
+	fake.getArgsMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getArgsReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -741,15 +822,27 @@ func (fake *ChaincodeStub) GetArgsSlice() ([]byte, error) {
 	ret, specificReturn := fake.getArgsSliceReturnsOnCall[len(fake.getArgsSliceArgsForCall)]
 	fake.getArgsSliceArgsForCall = append(fake.getArgsSliceArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetArgsSlice", []interface{}{})
 	fake.getArgsSliceMutex.Unlock()
 	if fake.GetArgsSliceStub != nil {
 		return fake.GetArgsSliceStub()
+=======
+	stub := fake.GetArgsSliceStub
+	fakeReturns := fake.getArgsSliceReturns
+	fake.recordInvocation("GetArgsSlice", []interface{}{})
+	fake.getArgsSliceMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getArgsSliceReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -796,15 +889,27 @@ func (fake *ChaincodeStub) GetBinding() ([]byte, error) {
 	ret, specificReturn := fake.getBindingReturnsOnCall[len(fake.getBindingArgsForCall)]
 	fake.getBindingArgsForCall = append(fake.getBindingArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetBinding", []interface{}{})
 	fake.getBindingMutex.Unlock()
 	if fake.GetBindingStub != nil {
 		return fake.GetBindingStub()
+=======
+	stub := fake.GetBindingStub
+	fakeReturns := fake.getBindingReturns
+	fake.recordInvocation("GetBinding", []interface{}{})
+	fake.getBindingMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getBindingReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -851,15 +956,27 @@ func (fake *ChaincodeStub) GetChannelID() string {
 	ret, specificReturn := fake.getChannelIDReturnsOnCall[len(fake.getChannelIDArgsForCall)]
 	fake.getChannelIDArgsForCall = append(fake.getChannelIDArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetChannelID", []interface{}{})
 	fake.getChannelIDMutex.Unlock()
 	if fake.GetChannelIDStub != nil {
 		return fake.GetChannelIDStub()
+=======
+	stub := fake.GetChannelIDStub
+	fakeReturns := fake.getChannelIDReturns
+	fake.recordInvocation("GetChannelID", []interface{}{})
+	fake.getChannelIDMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getChannelIDReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -903,15 +1020,27 @@ func (fake *ChaincodeStub) GetCreator() ([]byte, error) {
 	ret, specificReturn := fake.getCreatorReturnsOnCall[len(fake.getCreatorArgsForCall)]
 	fake.getCreatorArgsForCall = append(fake.getCreatorArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetCreator", []interface{}{})
 	fake.getCreatorMutex.Unlock()
 	if fake.GetCreatorStub != nil {
 		return fake.GetCreatorStub()
+=======
+	stub := fake.GetCreatorStub
+	fakeReturns := fake.getCreatorReturns
+	fake.recordInvocation("GetCreator", []interface{}{})
+	fake.getCreatorMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getCreatorReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -958,15 +1087,27 @@ func (fake *ChaincodeStub) GetDecorations() map[string][]byte {
 	ret, specificReturn := fake.getDecorationsReturnsOnCall[len(fake.getDecorationsArgsForCall)]
 	fake.getDecorationsArgsForCall = append(fake.getDecorationsArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetDecorations", []interface{}{})
 	fake.getDecorationsMutex.Unlock()
 	if fake.GetDecorationsStub != nil {
 		return fake.GetDecorationsStub()
+=======
+	stub := fake.GetDecorationsStub
+	fakeReturns := fake.getDecorationsReturns
+	fake.recordInvocation("GetDecorations", []interface{}{})
+	fake.getDecorationsMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getDecorationsReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -1010,15 +1151,27 @@ func (fake *ChaincodeStub) GetFunctionAndParameters() (string, []string) {
 	ret, specificReturn := fake.getFunctionAndParametersReturnsOnCall[len(fake.getFunctionAndParametersArgsForCall)]
 	fake.getFunctionAndParametersArgsForCall = append(fake.getFunctionAndParametersArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetFunctionAndParameters", []interface{}{})
 	fake.getFunctionAndParametersMutex.Unlock()
 	if fake.GetFunctionAndParametersStub != nil {
 		return fake.GetFunctionAndParametersStub()
+=======
+	stub := fake.GetFunctionAndParametersStub
+	fakeReturns := fake.getFunctionAndParametersReturns
+	fake.recordInvocation("GetFunctionAndParameters", []interface{}{})
+	fake.getFunctionAndParametersMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getFunctionAndParametersReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1066,15 +1219,27 @@ func (fake *ChaincodeStub) GetHistoryForKey(arg1 string) (shim.HistoryQueryItera
 	fake.getHistoryForKeyArgsForCall = append(fake.getHistoryForKeyArgsForCall, struct {
 		arg1 string
 	}{arg1})
+<<<<<<< HEAD
 	fake.recordInvocation("GetHistoryForKey", []interface{}{arg1})
 	fake.getHistoryForKeyMutex.Unlock()
 	if fake.GetHistoryForKeyStub != nil {
 		return fake.GetHistoryForKeyStub(arg1)
+=======
+	stub := fake.GetHistoryForKeyStub
+	fakeReturns := fake.getHistoryForKeyReturns
+	fake.recordInvocation("GetHistoryForKey", []interface{}{arg1})
+	fake.getHistoryForKeyMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getHistoryForKeyReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1130,15 +1295,27 @@ func (fake *ChaincodeStub) GetPrivateData(arg1 string, arg2 string) ([]byte, err
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+<<<<<<< HEAD
 	fake.recordInvocation("GetPrivateData", []interface{}{arg1, arg2})
 	fake.getPrivateDataMutex.Unlock()
 	if fake.GetPrivateDataStub != nil {
 		return fake.GetPrivateDataStub(arg1, arg2)
+=======
+	stub := fake.GetPrivateDataStub
+	fakeReturns := fake.getPrivateDataReturns
+	fake.recordInvocation("GetPrivateData", []interface{}{arg1, arg2})
+	fake.getPrivateDataMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getPrivateDataReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1200,15 +1377,27 @@ func (fake *ChaincodeStub) GetPrivateDataByPartialCompositeKey(arg1 string, arg2
 		arg2 string
 		arg3 []string
 	}{arg1, arg2, arg3Copy})
+<<<<<<< HEAD
 	fake.recordInvocation("GetPrivateDataByPartialCompositeKey", []interface{}{arg1, arg2, arg3Copy})
 	fake.getPrivateDataByPartialCompositeKeyMutex.Unlock()
 	if fake.GetPrivateDataByPartialCompositeKeyStub != nil {
 		return fake.GetPrivateDataByPartialCompositeKeyStub(arg1, arg2, arg3)
+=======
+	stub := fake.GetPrivateDataByPartialCompositeKeyStub
+	fakeReturns := fake.getPrivateDataByPartialCompositeKeyReturns
+	fake.recordInvocation("GetPrivateDataByPartialCompositeKey", []interface{}{arg1, arg2, arg3Copy})
+	fake.getPrivateDataByPartialCompositeKeyMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getPrivateDataByPartialCompositeKeyReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1265,15 +1454,27 @@ func (fake *ChaincodeStub) GetPrivateDataByRange(arg1 string, arg2 string, arg3 
 		arg2 string
 		arg3 string
 	}{arg1, arg2, arg3})
+<<<<<<< HEAD
 	fake.recordInvocation("GetPrivateDataByRange", []interface{}{arg1, arg2, arg3})
 	fake.getPrivateDataByRangeMutex.Unlock()
 	if fake.GetPrivateDataByRangeStub != nil {
 		return fake.GetPrivateDataByRangeStub(arg1, arg2, arg3)
+=======
+	stub := fake.GetPrivateDataByRangeStub
+	fakeReturns := fake.getPrivateDataByRangeReturns
+	fake.recordInvocation("GetPrivateDataByRange", []interface{}{arg1, arg2, arg3})
+	fake.getPrivateDataByRangeMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getPrivateDataByRangeReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1329,15 +1530,27 @@ func (fake *ChaincodeStub) GetPrivateDataHash(arg1 string, arg2 string) ([]byte,
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+<<<<<<< HEAD
 	fake.recordInvocation("GetPrivateDataHash", []interface{}{arg1, arg2})
 	fake.getPrivateDataHashMutex.Unlock()
 	if fake.GetPrivateDataHashStub != nil {
 		return fake.GetPrivateDataHashStub(arg1, arg2)
+=======
+	stub := fake.GetPrivateDataHashStub
+	fakeReturns := fake.getPrivateDataHashReturns
+	fake.recordInvocation("GetPrivateDataHash", []interface{}{arg1, arg2})
+	fake.getPrivateDataHashMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getPrivateDataHashReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1393,15 +1606,27 @@ func (fake *ChaincodeStub) GetPrivateDataQueryResult(arg1 string, arg2 string) (
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+<<<<<<< HEAD
 	fake.recordInvocation("GetPrivateDataQueryResult", []interface{}{arg1, arg2})
 	fake.getPrivateDataQueryResultMutex.Unlock()
 	if fake.GetPrivateDataQueryResultStub != nil {
 		return fake.GetPrivateDataQueryResultStub(arg1, arg2)
+=======
+	stub := fake.GetPrivateDataQueryResultStub
+	fakeReturns := fake.getPrivateDataQueryResultReturns
+	fake.recordInvocation("GetPrivateDataQueryResult", []interface{}{arg1, arg2})
+	fake.getPrivateDataQueryResultMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getPrivateDataQueryResultReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1457,15 +1682,27 @@ func (fake *ChaincodeStub) GetPrivateDataValidationParameter(arg1 string, arg2 s
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+<<<<<<< HEAD
 	fake.recordInvocation("GetPrivateDataValidationParameter", []interface{}{arg1, arg2})
 	fake.getPrivateDataValidationParameterMutex.Unlock()
 	if fake.GetPrivateDataValidationParameterStub != nil {
 		return fake.GetPrivateDataValidationParameterStub(arg1, arg2)
+=======
+	stub := fake.GetPrivateDataValidationParameterStub
+	fakeReturns := fake.getPrivateDataValidationParameterReturns
+	fake.recordInvocation("GetPrivateDataValidationParameter", []interface{}{arg1, arg2})
+	fake.getPrivateDataValidationParameterMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getPrivateDataValidationParameterReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1520,15 +1757,27 @@ func (fake *ChaincodeStub) GetQueryResult(arg1 string) (shim.StateQueryIteratorI
 	fake.getQueryResultArgsForCall = append(fake.getQueryResultArgsForCall, struct {
 		arg1 string
 	}{arg1})
+<<<<<<< HEAD
 	fake.recordInvocation("GetQueryResult", []interface{}{arg1})
 	fake.getQueryResultMutex.Unlock()
 	if fake.GetQueryResultStub != nil {
 		return fake.GetQueryResultStub(arg1)
+=======
+	stub := fake.GetQueryResultStub
+	fakeReturns := fake.getQueryResultReturns
+	fake.recordInvocation("GetQueryResult", []interface{}{arg1})
+	fake.getQueryResultMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getQueryResultReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1585,15 +1834,27 @@ func (fake *ChaincodeStub) GetQueryResultWithPagination(arg1 string, arg2 int32,
 		arg2 int32
 		arg3 string
 	}{arg1, arg2, arg3})
+<<<<<<< HEAD
 	fake.recordInvocation("GetQueryResultWithPagination", []interface{}{arg1, arg2, arg3})
 	fake.getQueryResultWithPaginationMutex.Unlock()
 	if fake.GetQueryResultWithPaginationStub != nil {
 		return fake.GetQueryResultWithPaginationStub(arg1, arg2, arg3)
+=======
+	stub := fake.GetQueryResultWithPaginationStub
+	fakeReturns := fake.getQueryResultWithPaginationReturns
+	fake.recordInvocation("GetQueryResultWithPagination", []interface{}{arg1, arg2, arg3})
+	fake.getQueryResultWithPaginationMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getQueryResultWithPaginationReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -1650,15 +1911,27 @@ func (fake *ChaincodeStub) GetSignedProposal() (*peer.SignedProposal, error) {
 	ret, specificReturn := fake.getSignedProposalReturnsOnCall[len(fake.getSignedProposalArgsForCall)]
 	fake.getSignedProposalArgsForCall = append(fake.getSignedProposalArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetSignedProposal", []interface{}{})
 	fake.getSignedProposalMutex.Unlock()
 	if fake.GetSignedProposalStub != nil {
 		return fake.GetSignedProposalStub()
+=======
+	stub := fake.GetSignedProposalStub
+	fakeReturns := fake.getSignedProposalReturns
+	fake.recordInvocation("GetSignedProposal", []interface{}{})
+	fake.getSignedProposalMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getSignedProposalReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1706,15 +1979,27 @@ func (fake *ChaincodeStub) GetState(arg1 string) ([]byte, error) {
 	fake.getStateArgsForCall = append(fake.getStateArgsForCall, struct {
 		arg1 string
 	}{arg1})
+<<<<<<< HEAD
 	fake.recordInvocation("GetState", []interface{}{arg1})
 	fake.getStateMutex.Unlock()
 	if fake.GetStateStub != nil {
 		return fake.GetStateStub(arg1)
+=======
+	stub := fake.GetStateStub
+	fakeReturns := fake.getStateReturns
+	fake.recordInvocation("GetState", []interface{}{arg1})
+	fake.getStateMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getStateReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1775,15 +2060,27 @@ func (fake *ChaincodeStub) GetStateByPartialCompositeKey(arg1 string, arg2 []str
 		arg1 string
 		arg2 []string
 	}{arg1, arg2Copy})
+<<<<<<< HEAD
 	fake.recordInvocation("GetStateByPartialCompositeKey", []interface{}{arg1, arg2Copy})
 	fake.getStateByPartialCompositeKeyMutex.Unlock()
 	if fake.GetStateByPartialCompositeKeyStub != nil {
 		return fake.GetStateByPartialCompositeKeyStub(arg1, arg2)
+=======
+	stub := fake.GetStateByPartialCompositeKeyStub
+	fakeReturns := fake.getStateByPartialCompositeKeyReturns
+	fake.recordInvocation("GetStateByPartialCompositeKey", []interface{}{arg1, arg2Copy})
+	fake.getStateByPartialCompositeKeyMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getStateByPartialCompositeKeyReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1846,15 +2143,27 @@ func (fake *ChaincodeStub) GetStateByPartialCompositeKeyWithPagination(arg1 stri
 		arg3 int32
 		arg4 string
 	}{arg1, arg2Copy, arg3, arg4})
+<<<<<<< HEAD
 	fake.recordInvocation("GetStateByPartialCompositeKeyWithPagination", []interface{}{arg1, arg2Copy, arg3, arg4})
 	fake.getStateByPartialCompositeKeyWithPaginationMutex.Unlock()
 	if fake.GetStateByPartialCompositeKeyWithPaginationStub != nil {
 		return fake.GetStateByPartialCompositeKeyWithPaginationStub(arg1, arg2, arg3, arg4)
+=======
+	stub := fake.GetStateByPartialCompositeKeyWithPaginationStub
+	fakeReturns := fake.getStateByPartialCompositeKeyWithPaginationReturns
+	fake.recordInvocation("GetStateByPartialCompositeKeyWithPagination", []interface{}{arg1, arg2Copy, arg3, arg4})
+	fake.getStateByPartialCompositeKeyWithPaginationMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getStateByPartialCompositeKeyWithPaginationReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -1913,15 +2222,27 @@ func (fake *ChaincodeStub) GetStateByRange(arg1 string, arg2 string) (shim.State
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+<<<<<<< HEAD
 	fake.recordInvocation("GetStateByRange", []interface{}{arg1, arg2})
 	fake.getStateByRangeMutex.Unlock()
 	if fake.GetStateByRangeStub != nil {
 		return fake.GetStateByRangeStub(arg1, arg2)
+=======
+	stub := fake.GetStateByRangeStub
+	fakeReturns := fake.getStateByRangeReturns
+	fake.recordInvocation("GetStateByRange", []interface{}{arg1, arg2})
+	fake.getStateByRangeMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getStateByRangeReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -1979,15 +2300,27 @@ func (fake *ChaincodeStub) GetStateByRangeWithPagination(arg1 string, arg2 strin
 		arg3 int32
 		arg4 string
 	}{arg1, arg2, arg3, arg4})
+<<<<<<< HEAD
 	fake.recordInvocation("GetStateByRangeWithPagination", []interface{}{arg1, arg2, arg3, arg4})
 	fake.getStateByRangeWithPaginationMutex.Unlock()
 	if fake.GetStateByRangeWithPaginationStub != nil {
 		return fake.GetStateByRangeWithPaginationStub(arg1, arg2, arg3, arg4)
+=======
+	stub := fake.GetStateByRangeWithPaginationStub
+	fakeReturns := fake.getStateByRangeWithPaginationReturns
+	fake.recordInvocation("GetStateByRangeWithPagination", []interface{}{arg1, arg2, arg3, arg4})
+	fake.getStateByRangeWithPaginationMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getStateByRangeWithPaginationReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -2045,15 +2378,27 @@ func (fake *ChaincodeStub) GetStateValidationParameter(arg1 string) ([]byte, err
 	fake.getStateValidationParameterArgsForCall = append(fake.getStateValidationParameterArgsForCall, struct {
 		arg1 string
 	}{arg1})
+<<<<<<< HEAD
 	fake.recordInvocation("GetStateValidationParameter", []interface{}{arg1})
 	fake.getStateValidationParameterMutex.Unlock()
 	if fake.GetStateValidationParameterStub != nil {
 		return fake.GetStateValidationParameterStub(arg1)
+=======
+	stub := fake.GetStateValidationParameterStub
+	fakeReturns := fake.getStateValidationParameterReturns
+	fake.recordInvocation("GetStateValidationParameter", []interface{}{arg1})
+	fake.getStateValidationParameterMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getStateValidationParameterReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -2107,15 +2452,27 @@ func (fake *ChaincodeStub) GetStringArgs() []string {
 	ret, specificReturn := fake.getStringArgsReturnsOnCall[len(fake.getStringArgsArgsForCall)]
 	fake.getStringArgsArgsForCall = append(fake.getStringArgsArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetStringArgs", []interface{}{})
 	fake.getStringArgsMutex.Unlock()
 	if fake.GetStringArgsStub != nil {
 		return fake.GetStringArgsStub()
+=======
+	stub := fake.GetStringArgsStub
+	fakeReturns := fake.getStringArgsReturns
+	fake.recordInvocation("GetStringArgs", []interface{}{})
+	fake.getStringArgsMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getStringArgsReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -2159,15 +2516,27 @@ func (fake *ChaincodeStub) GetTransient() (map[string][]byte, error) {
 	ret, specificReturn := fake.getTransientReturnsOnCall[len(fake.getTransientArgsForCall)]
 	fake.getTransientArgsForCall = append(fake.getTransientArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetTransient", []interface{}{})
 	fake.getTransientMutex.Unlock()
 	if fake.GetTransientStub != nil {
 		return fake.GetTransientStub()
+=======
+	stub := fake.GetTransientStub
+	fakeReturns := fake.getTransientReturns
+	fake.recordInvocation("GetTransient", []interface{}{})
+	fake.getTransientMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getTransientReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -2214,15 +2583,27 @@ func (fake *ChaincodeStub) GetTxID() string {
 	ret, specificReturn := fake.getTxIDReturnsOnCall[len(fake.getTxIDArgsForCall)]
 	fake.getTxIDArgsForCall = append(fake.getTxIDArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetTxID", []interface{}{})
 	fake.getTxIDMutex.Unlock()
 	if fake.GetTxIDStub != nil {
 		return fake.GetTxIDStub()
+=======
+	stub := fake.GetTxIDStub
+	fakeReturns := fake.getTxIDReturns
+	fake.recordInvocation("GetTxID", []interface{}{})
+	fake.getTxIDMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getTxIDReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -2261,20 +2642,36 @@ func (fake *ChaincodeStub) GetTxIDReturnsOnCall(i int, result1 string) {
 	}{result1}
 }
 
+<<<<<<< HEAD
 func (fake *ChaincodeStub) GetTxTimestamp() (*timestamp.Timestamp, error) {
+=======
+func (fake *ChaincodeStub) GetTxTimestamp() (*timestamppb.Timestamp, error) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	fake.getTxTimestampMutex.Lock()
 	ret, specificReturn := fake.getTxTimestampReturnsOnCall[len(fake.getTxTimestampArgsForCall)]
 	fake.getTxTimestampArgsForCall = append(fake.getTxTimestampArgsForCall, struct {
 	}{})
+<<<<<<< HEAD
 	fake.recordInvocation("GetTxTimestamp", []interface{}{})
 	fake.getTxTimestampMutex.Unlock()
 	if fake.GetTxTimestampStub != nil {
 		return fake.GetTxTimestampStub()
+=======
+	stub := fake.GetTxTimestampStub
+	fakeReturns := fake.getTxTimestampReturns
+	fake.recordInvocation("GetTxTimestamp", []interface{}{})
+	fake.getTxTimestampMutex.Unlock()
+	if stub != nil {
+		return stub()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.getTxTimestampReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -2284,34 +2681,58 @@ func (fake *ChaincodeStub) GetTxTimestampCallCount() int {
 	return len(fake.getTxTimestampArgsForCall)
 }
 
+<<<<<<< HEAD
 func (fake *ChaincodeStub) GetTxTimestampCalls(stub func() (*timestamp.Timestamp, error)) {
+=======
+func (fake *ChaincodeStub) GetTxTimestampCalls(stub func() (*timestamppb.Timestamp, error)) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	fake.getTxTimestampMutex.Lock()
 	defer fake.getTxTimestampMutex.Unlock()
 	fake.GetTxTimestampStub = stub
 }
 
+<<<<<<< HEAD
 func (fake *ChaincodeStub) GetTxTimestampReturns(result1 *timestamp.Timestamp, result2 error) {
+=======
+func (fake *ChaincodeStub) GetTxTimestampReturns(result1 *timestamppb.Timestamp, result2 error) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	fake.getTxTimestampMutex.Lock()
 	defer fake.getTxTimestampMutex.Unlock()
 	fake.GetTxTimestampStub = nil
 	fake.getTxTimestampReturns = struct {
+<<<<<<< HEAD
 		result1 *timestamp.Timestamp
+=======
+		result1 *timestamppb.Timestamp
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		result2 error
 	}{result1, result2}
 }
 
+<<<<<<< HEAD
 func (fake *ChaincodeStub) GetTxTimestampReturnsOnCall(i int, result1 *timestamp.Timestamp, result2 error) {
+=======
+func (fake *ChaincodeStub) GetTxTimestampReturnsOnCall(i int, result1 *timestamppb.Timestamp, result2 error) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	fake.getTxTimestampMutex.Lock()
 	defer fake.getTxTimestampMutex.Unlock()
 	fake.GetTxTimestampStub = nil
 	if fake.getTxTimestampReturnsOnCall == nil {
 		fake.getTxTimestampReturnsOnCall = make(map[int]struct {
+<<<<<<< HEAD
 			result1 *timestamp.Timestamp
+=======
+			result1 *timestamppb.Timestamp
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			result2 error
 		})
 	}
 	fake.getTxTimestampReturnsOnCall[i] = struct {
+<<<<<<< HEAD
 		result1 *timestamp.Timestamp
+=======
+		result1 *timestamppb.Timestamp
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		result2 error
 	}{result1, result2}
 }
@@ -2329,15 +2750,27 @@ func (fake *ChaincodeStub) InvokeChaincode(arg1 string, arg2 [][]byte, arg3 stri
 		arg2 [][]byte
 		arg3 string
 	}{arg1, arg2Copy, arg3})
+<<<<<<< HEAD
 	fake.recordInvocation("InvokeChaincode", []interface{}{arg1, arg2Copy, arg3})
 	fake.invokeChaincodeMutex.Unlock()
 	if fake.InvokeChaincodeStub != nil {
 		return fake.InvokeChaincodeStub(arg1, arg2, arg3)
+=======
+	stub := fake.InvokeChaincodeStub
+	fakeReturns := fake.invokeChaincodeReturns
+	fake.recordInvocation("InvokeChaincode", []interface{}{arg1, arg2Copy, arg3})
+	fake.invokeChaincodeMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.invokeChaincodeReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -2383,6 +2816,71 @@ func (fake *ChaincodeStub) InvokeChaincodeReturnsOnCall(i int, result1 peer.Resp
 	}{result1}
 }
 
+<<<<<<< HEAD
+=======
+func (fake *ChaincodeStub) PurgePrivateData(arg1 string, arg2 string) error {
+	fake.purgePrivateDataMutex.Lock()
+	ret, specificReturn := fake.purgePrivateDataReturnsOnCall[len(fake.purgePrivateDataArgsForCall)]
+	fake.purgePrivateDataArgsForCall = append(fake.purgePrivateDataArgsForCall, struct {
+		arg1 string
+		arg2 string
+	}{arg1, arg2})
+	stub := fake.PurgePrivateDataStub
+	fakeReturns := fake.purgePrivateDataReturns
+	fake.recordInvocation("PurgePrivateData", []interface{}{arg1, arg2})
+	fake.purgePrivateDataMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+	}
+	if specificReturn {
+		return ret.result1
+	}
+	return fakeReturns.result1
+}
+
+func (fake *ChaincodeStub) PurgePrivateDataCallCount() int {
+	fake.purgePrivateDataMutex.RLock()
+	defer fake.purgePrivateDataMutex.RUnlock()
+	return len(fake.purgePrivateDataArgsForCall)
+}
+
+func (fake *ChaincodeStub) PurgePrivateDataCalls(stub func(string, string) error) {
+	fake.purgePrivateDataMutex.Lock()
+	defer fake.purgePrivateDataMutex.Unlock()
+	fake.PurgePrivateDataStub = stub
+}
+
+func (fake *ChaincodeStub) PurgePrivateDataArgsForCall(i int) (string, string) {
+	fake.purgePrivateDataMutex.RLock()
+	defer fake.purgePrivateDataMutex.RUnlock()
+	argsForCall := fake.purgePrivateDataArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2
+}
+
+func (fake *ChaincodeStub) PurgePrivateDataReturns(result1 error) {
+	fake.purgePrivateDataMutex.Lock()
+	defer fake.purgePrivateDataMutex.Unlock()
+	fake.PurgePrivateDataStub = nil
+	fake.purgePrivateDataReturns = struct {
+		result1 error
+	}{result1}
+}
+
+func (fake *ChaincodeStub) PurgePrivateDataReturnsOnCall(i int, result1 error) {
+	fake.purgePrivateDataMutex.Lock()
+	defer fake.purgePrivateDataMutex.Unlock()
+	fake.PurgePrivateDataStub = nil
+	if fake.purgePrivateDataReturnsOnCall == nil {
+		fake.purgePrivateDataReturnsOnCall = make(map[int]struct {
+			result1 error
+		})
+	}
+	fake.purgePrivateDataReturnsOnCall[i] = struct {
+		result1 error
+	}{result1}
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func (fake *ChaincodeStub) PutPrivateData(arg1 string, arg2 string, arg3 []byte) error {
 	var arg3Copy []byte
 	if arg3 != nil {
@@ -2396,15 +2894,27 @@ func (fake *ChaincodeStub) PutPrivateData(arg1 string, arg2 string, arg3 []byte)
 		arg2 string
 		arg3 []byte
 	}{arg1, arg2, arg3Copy})
+<<<<<<< HEAD
 	fake.recordInvocation("PutPrivateData", []interface{}{arg1, arg2, arg3Copy})
 	fake.putPrivateDataMutex.Unlock()
 	if fake.PutPrivateDataStub != nil {
 		return fake.PutPrivateDataStub(arg1, arg2, arg3)
+=======
+	stub := fake.PutPrivateDataStub
+	fakeReturns := fake.putPrivateDataReturns
+	fake.recordInvocation("PutPrivateData", []interface{}{arg1, arg2, arg3Copy})
+	fake.putPrivateDataMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.putPrivateDataReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -2462,15 +2972,27 @@ func (fake *ChaincodeStub) PutState(arg1 string, arg2 []byte) error {
 		arg1 string
 		arg2 []byte
 	}{arg1, arg2Copy})
+<<<<<<< HEAD
 	fake.recordInvocation("PutState", []interface{}{arg1, arg2Copy})
 	fake.putStateMutex.Unlock()
 	if fake.PutStateStub != nil {
 		return fake.PutStateStub(arg1, arg2)
+=======
+	stub := fake.PutStateStub
+	fakeReturns := fake.putStateReturns
+	fake.recordInvocation("PutState", []interface{}{arg1, arg2Copy})
+	fake.putStateMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.putStateReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -2528,15 +3050,27 @@ func (fake *ChaincodeStub) SetEvent(arg1 string, arg2 []byte) error {
 		arg1 string
 		arg2 []byte
 	}{arg1, arg2Copy})
+<<<<<<< HEAD
 	fake.recordInvocation("SetEvent", []interface{}{arg1, arg2Copy})
 	fake.setEventMutex.Unlock()
 	if fake.SetEventStub != nil {
 		return fake.SetEventStub(arg1, arg2)
+=======
+	stub := fake.SetEventStub
+	fakeReturns := fake.setEventReturns
+	fake.recordInvocation("SetEvent", []interface{}{arg1, arg2Copy})
+	fake.setEventMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.setEventReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -2595,15 +3129,27 @@ func (fake *ChaincodeStub) SetPrivateDataValidationParameter(arg1 string, arg2 s
 		arg2 string
 		arg3 []byte
 	}{arg1, arg2, arg3Copy})
+<<<<<<< HEAD
 	fake.recordInvocation("SetPrivateDataValidationParameter", []interface{}{arg1, arg2, arg3Copy})
 	fake.setPrivateDataValidationParameterMutex.Unlock()
 	if fake.SetPrivateDataValidationParameterStub != nil {
 		return fake.SetPrivateDataValidationParameterStub(arg1, arg2, arg3)
+=======
+	stub := fake.SetPrivateDataValidationParameterStub
+	fakeReturns := fake.setPrivateDataValidationParameterReturns
+	fake.recordInvocation("SetPrivateDataValidationParameter", []interface{}{arg1, arg2, arg3Copy})
+	fake.setPrivateDataValidationParameterMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.setPrivateDataValidationParameterReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -2661,15 +3207,27 @@ func (fake *ChaincodeStub) SetStateValidationParameter(arg1 string, arg2 []byte)
 		arg1 string
 		arg2 []byte
 	}{arg1, arg2Copy})
+<<<<<<< HEAD
 	fake.recordInvocation("SetStateValidationParameter", []interface{}{arg1, arg2Copy})
 	fake.setStateValidationParameterMutex.Unlock()
 	if fake.SetStateValidationParameterStub != nil {
 		return fake.SetStateValidationParameterStub(arg1, arg2)
+=======
+	stub := fake.SetStateValidationParameterStub
+	fakeReturns := fake.setStateValidationParameterReturns
+	fake.recordInvocation("SetStateValidationParameter", []interface{}{arg1, arg2Copy})
+	fake.setStateValidationParameterMutex.Unlock()
+	if stub != nil {
+		return stub(arg1, arg2)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.setStateValidationParameterReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1
 }
 
@@ -2721,15 +3279,27 @@ func (fake *ChaincodeStub) SplitCompositeKey(arg1 string) (string, []string, err
 	fake.splitCompositeKeyArgsForCall = append(fake.splitCompositeKeyArgsForCall, struct {
 		arg1 string
 	}{arg1})
+<<<<<<< HEAD
 	fake.recordInvocation("SplitCompositeKey", []interface{}{arg1})
 	fake.splitCompositeKeyMutex.Unlock()
 	if fake.SplitCompositeKeyStub != nil {
 		return fake.SplitCompositeKeyStub(arg1)
+=======
+	stub := fake.SplitCompositeKeyStub
+	fakeReturns := fake.splitCompositeKeyReturns
+	fake.recordInvocation("SplitCompositeKey", []interface{}{arg1})
+	fake.splitCompositeKeyMutex.Unlock()
+	if stub != nil {
+		return stub(arg1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
+<<<<<<< HEAD
 	fakeReturns := fake.splitCompositeKeyReturns
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -2846,6 +3416,11 @@ func (fake *ChaincodeStub) Invocations() map[string][][]interface{} {
 	defer fake.getTxTimestampMutex.RUnlock()
 	fake.invokeChaincodeMutex.RLock()
 	defer fake.invokeChaincodeMutex.RUnlock()
+<<<<<<< HEAD
+=======
+	fake.purgePrivateDataMutex.RLock()
+	defer fake.purgePrivateDataMutex.RUnlock()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	fake.putPrivateDataMutex.RLock()
 	defer fake.putPrivateDataMutex.RUnlock()
 	fake.putStateMutex.RLock()
@@ -2876,3 +3451,8 @@ func (fake *ChaincodeStub) recordInvocation(key string, args []interface{}) {
 	}
 	fake.invocations[key] = append(fake.invocations[key], args)
 }
+<<<<<<< HEAD
+=======
+
+var _ shim.ChaincodeStubInterface = new(ChaincodeStub)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19

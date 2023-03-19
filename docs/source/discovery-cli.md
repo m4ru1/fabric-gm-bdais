@@ -48,12 +48,20 @@ Commands:
 Configuring external endpoints
 ------------------------------
 
+<<<<<<< HEAD
 Currently, to see peers in service discovery they need to have `EXTERNAL_ENDPOINT`
 to be configured for them. Otherwise, Fabric assumes the peer should not be
 disclosed.
 
 To define these endpoints, you need to specify them in the `core.yaml` of the
 peer, replacing the sample endpoint below with the ones of your peer.
+=======
+For a peer to be exposed to service discovery, they need to have `peer.gossip.externalEndpoint`
+configured in `core.yaml`. Otherwise, Fabric assumes the peer should not be
+disclosed.
+
+The `core.yaml` value can also be overridden using an environment variable.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 ```
 CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.example.com:8051

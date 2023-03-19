@@ -751,8 +751,12 @@ func TestParticipant(t *testing.T) {
 					Metadata: [][]byte{{1, 2, 3}},
 				},
 			},
+<<<<<<< HEAD
 			expectedError: "failed to retrieve metadata: error unmarshalling metadata" +
 				" at index [SIGNATURES]: proto: common.Metadata: illegal tag 0 (wire type 1)",
+=======
+			expectedError: "failed to retrieve metadata: error unmarshalling metadata at index [SIGNATURES]",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		},
 		{
 			name: "Pulled block's LAST_CONFIG metadata is malformed",
@@ -765,8 +769,12 @@ func TestParticipant(t *testing.T) {
 					Metadata: [][]byte{{}, {1, 2, 3}},
 				},
 			},
+<<<<<<< HEAD
 			expectedError: "failed to retrieve metadata: error unmarshalling metadata" +
 				" at index [LAST_CONFIG]: proto: common.Metadata: illegal tag 0 (wire type 1)",
+=======
+			expectedError: "failed to retrieve metadata: error unmarshalling metadata at index [LAST_CONFIG]",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		},
 		{
 			name: "Pulled block's metadata is valid and has a last config",
@@ -830,7 +838,12 @@ func TestParticipant(t *testing.T) {
 
 			err := cluster.Participant(puller, predicate)
 			if testCase.expectedError != "" {
+<<<<<<< HEAD
 				require.EqualError(t, err, testCase.expectedError)
+=======
+				require.Error(t, err)
+				require.Contains(t, err.Error(), testCase.expectedError)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				require.Len(t, configBlocks, 0)
 			} else {
 				require.Len(t, configBlocks, 1)
@@ -866,11 +879,16 @@ func TestBlockPullerFromConfigBlockFailures(t *testing.T) {
 			block:       &common.Block{},
 		},
 		{
+<<<<<<< HEAD
 			name: "bad envelope inside block",
 			expectedErr: "failed extracting bundle from envelope: " +
 				"failed to unmarshal payload from envelope: " +
 				"error unmarshalling Payload: " +
 				"proto: common.Payload: illegal tag 0 (wire type 1)",
+=======
+			name:        "bad envelope inside block",
+			expectedErr: "failed extracting bundle from envelope: failed to unmarshal payload from envelope: error unmarshalling Payload",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Data: &common.BlockData{
 					Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
@@ -892,7 +910,12 @@ func TestBlockPullerFromConfigBlockFailures(t *testing.T) {
 			verifierRetriever := &mocks.VerifierRetriever{}
 			verifierRetriever.On("RetrieveVerifier", mock.Anything).Return(&cluster.NoopBlockVerifier{})
 			bp, err := cluster.BlockPullerFromConfigBlock(testCase.pullerConfig, testCase.block, verifierRetriever, cryptoProvider)
+<<<<<<< HEAD
 			require.EqualError(t, err, testCase.expectedErr)
+=======
+			require.Error(t, err)
+			require.Contains(t, err.Error(), testCase.expectedErr)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			require.Nil(t, bp)
 		})
 	}
@@ -973,12 +996,20 @@ func testBlockPullerFromConfig(t *testing.T, blockVerifiers []cluster.BlockVerif
 		Signer:              &mocks.SignerSerializer{},
 		Timeout:             time.Hour,
 	}, validBlock, verifierRetriever, cryptoProvider)
+<<<<<<< HEAD
 	bp.RetryTimeout = time.Millisecond * 10
 	require.NoError(t, err)
 	defer bp.Close()
 
 	var seenExpectedLogMsg bool
 
+=======
+	require.NoError(t, err)
+	bp.RetryTimeout = time.Millisecond * 10
+	defer bp.Close()
+
+	var seenExpectedLogMsg bool
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	bp.Logger = bp.Logger.WithOptions(zap.Hooks(func(entry zapcore.Entry) error {
 		if strings.Contains(entry.Message, expectedLogMsg) {
 			seenExpectedLogMsg = true
@@ -1116,9 +1147,17 @@ func injectTLSCACert(t *testing.T, block *common.Block, tlsCA []byte) {
 	mspKey := confEnv.Config.ChannelGroup.Groups[channelconfig.OrdererGroupKey].Groups["OrdererOrg"].Values[channelconfig.MSPKey]
 	rawMSPConfig := mspKey.Value
 	mspConf := &msp.MSPConfig{}
+<<<<<<< HEAD
 	proto.Unmarshal(rawMSPConfig, mspConf)
 	fabricMSPConf := &msp.FabricMSPConfig{}
 	proto.Unmarshal(mspConf.Config, fabricMSPConf)
+=======
+	err = proto.Unmarshal(rawMSPConfig, mspConf)
+	require.NoError(t, err)
+	fabricMSPConf := &msp.FabricMSPConfig{}
+	err = proto.Unmarshal(mspConf.Config, fabricMSPConf)
+	require.NoError(t, err)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	// Replace the TLS root certs with the given ones
 	fabricMSPConf.TlsRootCerts = [][]byte{tlsCA}
 	// And put it back into the block
@@ -1147,9 +1186,14 @@ func TestExtractGenesisBlock(t *testing.T) {
 			block:       &common.Block{},
 		},
 		{
+<<<<<<< HEAD
 			name: "corrupt envelope in block",
 			expectedErr: "block data does not carry an" +
 				" envelope at index 0: error unmarshalling Envelope: proto: common.Envelope: illegal tag 0 (wire type 1)",
+=======
+			name:        "corrupt envelope in block",
+			expectedErr: "block data does not carry an envelope at index 0: error unmarshalling Envelope",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Data: &common.BlockData{
 					Data: [][]byte{{1, 2, 3}},
@@ -1158,7 +1202,11 @@ func TestExtractGenesisBlock(t *testing.T) {
 		},
 		{
 			name:        "corrupt payload in envelope",
+<<<<<<< HEAD
 			expectedErr: "error unmarshalling Payload: proto: common.Payload: illegal tag 0 (wire type 1)",
+=======
+			expectedErr: "error unmarshalling Payload",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Data: &common.BlockData{
 					Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
@@ -1179,9 +1227,14 @@ func TestExtractGenesisBlock(t *testing.T) {
 			},
 		},
 		{
+<<<<<<< HEAD
 			name: "corrupt channel header",
 			expectedErr: "error unmarshalling ChannelHeader:" +
 				" proto: common.ChannelHeader: illegal tag 0 (wire type 1)",
+=======
+			name:        "corrupt channel header",
+			expectedErr: "error unmarshalling ChannelHeader",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Data: &common.BlockData{
 					Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
@@ -1213,7 +1266,11 @@ func TestExtractGenesisBlock(t *testing.T) {
 		},
 		{
 			name:        "orderer transaction with corrupt inner envelope",
+<<<<<<< HEAD
 			expectedErr: "error unmarshalling Envelope: proto: common.Envelope: illegal tag 0 (wire type 1)",
+=======
+			expectedErr: "error unmarshalling Envelope",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Data: &common.BlockData{
 					Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
@@ -1231,7 +1288,11 @@ func TestExtractGenesisBlock(t *testing.T) {
 		},
 		{
 			name:        "orderer transaction with corrupt inner payload",
+<<<<<<< HEAD
 			expectedErr: "error unmarshalling Payload: proto: common.Payload: illegal tag 0 (wire type 1)",
+=======
+			expectedErr: "error unmarshalling Payload",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Data: &common.BlockData{
 					Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
@@ -1271,7 +1332,11 @@ func TestExtractGenesisBlock(t *testing.T) {
 		},
 		{
 			name:        "orderer transaction with corrupt inner channel header",
+<<<<<<< HEAD
 			expectedErr: "error unmarshalling ChannelHeader: proto: common.ChannelHeader: illegal tag 0 (wire type 1)",
+=======
+			expectedErr: "error unmarshalling ChannelHeader",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			block: &common.Block{
 				Data: &common.BlockData{
 					Data: [][]byte{protoutil.MarshalOrPanic(&common.Envelope{
@@ -1381,7 +1446,12 @@ func TestExtractGenesisBlock(t *testing.T) {
 		t.Run(testCase.name, func(t *testing.T) {
 			channelName, gb, err := cluster.ExtractGenesisBlock(flogging.MustGetLogger("test"), testCase.block)
 			if testCase.expectedErr != "" {
+<<<<<<< HEAD
 				require.EqualError(t, err, testCase.expectedErr)
+=======
+				require.Error(t, err)
+				require.Contains(t, err.Error(), testCase.expectedErr)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			} else {
 				require.NoError(t, err)
 			}
@@ -1494,10 +1564,14 @@ func TestChannels(t *testing.T) {
 				systemChain[len(systemChain)-2].Data.Data = [][]byte{{1, 2, 3}}
 			},
 			assertion: func(t *testing.T, ci *cluster.ChainInspector) {
+<<<<<<< HEAD
 				panicValue := "Failed extracting channel genesis block from config block: " +
 					"block data does not carry an envelope at index 0: error unmarshalling " +
 					"Envelope: proto: common.Envelope: illegal tag 0 (wire type 1)"
 				require.PanicsWithValue(t, panicValue, func() {
+=======
+				require.Panics(t, func() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 					ci.Channels()
 				})
 			},

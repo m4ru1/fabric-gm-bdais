@@ -8,8 +8,11 @@ package history
 
 import (
 	"crypto/sha256"
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/hyperledger/fabric/common/ledger/blkstorage"
@@ -50,10 +53,14 @@ func newTestHistoryEnv(t *testing.T) *levelDBLockBasedHistoryEnv {
 	testDB := testDBEnv.GetDBHandle(testLedgerID)
 	testBookkeepingEnv := bookkeeping.NewTestEnv(t)
 
+<<<<<<< HEAD
 	testHistoryDBPath, err := ioutil.TempDir("", "historyldb")
 	if err != nil {
 		t.Fatalf("Failed to create history database directory: %s", err)
 	}
+=======
+	testHistoryDBPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	txmgrInitializer := &txmgr.Initializer{
 		LedgerID:            testLedgerID,
@@ -91,7 +98,10 @@ func (env *levelDBLockBasedHistoryEnv) cleanup() {
 	env.testBookkeepingEnv.Cleanup()
 	// clean up history
 	env.testHistoryDBProvider.Close()
+<<<<<<< HEAD
 	os.RemoveAll(env.testHistoryDBPath)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 /////// testBlockStoreEnv//////
@@ -103,10 +113,14 @@ type testBlockStoreEnv struct {
 }
 
 func newBlockStorageTestEnv(t testing.TB) *testBlockStoreEnv {
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "historyleveldb-")
 	if err != nil {
 		panic(err)
 	}
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	conf := blkstorage.NewConf(testPath, 0)
 
 	attrsToIndex := []blkstorage.IndexableAttr{
@@ -124,10 +138,13 @@ func newBlockStorageTestEnv(t testing.TB) *testBlockStoreEnv {
 
 func (env *testBlockStoreEnv) cleanup() {
 	env.provider.Close()
+<<<<<<< HEAD
 	env.removeFSPath()
 }
 
 func (env *testBlockStoreEnv) removeFSPath() {
 	fsPath := env.blockStorageDir
 	os.RemoveAll(fsPath)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }

@@ -8,7 +8,10 @@ package channel
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os"
 	"path/filepath"
 	"testing"
@@ -44,11 +47,15 @@ func TestFetch(t *testing.T) {
 		DeliverClient:    getMockDeliverClient(mockchain),
 	}
 
+<<<<<<< HEAD
 	tempDir, err := ioutil.TempDir("", "fetch-output")
 	if err != nil {
 		t.Fatalf("failed to create temporary directory")
 	}
 	defer os.RemoveAll(tempDir)
+=======
+	tempDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	cmd := fetchCmd(mockCF)
 	AddFlags(cmd)

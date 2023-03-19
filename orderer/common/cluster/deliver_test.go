@@ -113,7 +113,11 @@ func (d *countingDialer) Dial(address cluster.EndpointCriteria) (*grpc.ClientCon
 	defer cancel()
 
 	gRPCBalancerLock.Lock()
+<<<<<<< HEAD
 	balancer := grpc.WithBalancerName(d.name)
+=======
+	balancer := grpc.WithDefaultServiceConfig(fmt.Sprintf(`{"loadBalancingConfig": [{"%s":{}}]}`, d.name))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	gRPCBalancerLock.Unlock()
 	return grpc.DialContext(ctx, address.Endpoint, grpc.WithBlock(), grpc.WithInsecure(), balancer)
 }

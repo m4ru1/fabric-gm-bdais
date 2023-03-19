@@ -11,7 +11,10 @@ import (
 	"context"
 	"crypto/x509"
 	"encoding/pem"
+<<<<<<< HEAD
 	"fmt"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"sync"
 	"sync/atomic"
 	"time"
@@ -21,7 +24,10 @@ import (
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/common/util"
 	"github.com/pkg/errors"
+<<<<<<< HEAD
 	"go.uber.org/zap"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 )
@@ -38,6 +44,7 @@ var (
 	errTimeout  = errors.New("rpc timeout expired")
 )
 
+<<<<<<< HEAD
 // ChannelExtractor extracts the channel of a given message,
 // or returns an empty string if that's not possible
 type ChannelExtractor interface {
@@ -86,6 +93,8 @@ type Communicator interface {
 	Shutdown()
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // MembersByChannel is a mapping from channel name
 // to MemberMapping
 type MembersByChannel map[string]MemberMapping
@@ -345,6 +354,19 @@ func (c *Comm) createRemoteContext(stub *Stub, channel string) func() (*RemoteCo
 		}
 
 		clusterClient := orderer.NewClusterClient(conn)
+<<<<<<< HEAD
+=======
+		getStream := func(ctx context.Context) (StepClientStream, error) {
+			stream, err := clusterClient.Step(ctx)
+			if err != nil {
+				return nil, err
+			}
+			stepClientStream := &CommClientStream{
+				StepClient: stream,
+			}
+			return stepClientStream, nil
+		}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		workerCountReporter := workerCountReporter{
 			channel: channel,
@@ -363,7 +385,11 @@ func (c *Comm) createRemoteContext(stub *Stub, channel string) func() (*RemoteCo
 			Logger:                           c.Logger,
 			ProbeConn:                        probeConnection,
 			conn:                             conn,
+<<<<<<< HEAD
 			Client:                           clusterClient,
+=======
+			GetStreamFunc:                    getStream,
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		}
 		return rc, nil
 	}
@@ -384,6 +410,7 @@ func (c *Comm) getOrCreateMapping(channel string) MemberMapping {
 	return mapping
 }
 
+<<<<<<< HEAD
 // Stub holds all information about the remote node,
 // including the RemoteContext for it, and serializes
 // some operations on it.
@@ -750,6 +777,8 @@ func (rc *RemoteContext) Abort() {
 	})
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func commonNameFromContext(ctx context.Context) string {
 	cert := util.ExtractCertificateFromContext(ctx)
 	if cert == nil {
@@ -792,3 +821,26 @@ func (wcr *workerCountReporter) decrement(m *Metrics) {
 	count := atomic.AddUint32(&wcr.workerCount, ^uint32(0))
 	m.reportWorkerCount(wcr.channel, count)
 }
+<<<<<<< HEAD
+=======
+
+type CommClientStream struct {
+	StepClient orderer.Cluster_StepClient
+}
+
+func (cs *CommClientStream) Send(request *orderer.StepRequest) error {
+	return cs.StepClient.Send(request)
+}
+
+func (cs *CommClientStream) Recv() (*orderer.StepResponse, error) {
+	return cs.StepClient.Recv()
+}
+
+func (cs *CommClientStream) Auth() error {
+	return nil
+}
+
+func (cs *CommClientStream) Context() context.Context {
+	return cs.StepClient.Context()
+}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19

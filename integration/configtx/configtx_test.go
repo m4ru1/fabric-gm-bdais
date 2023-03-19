@@ -24,7 +24,11 @@ import (
 	"github.com/hyperledger/fabric/integration/ordererclient"
 	"github.com/tedsuo/ifrit"
 
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 )
 
@@ -44,7 +48,11 @@ var _ = Describe("ConfigTx", func() {
 		client, err = docker.NewClientFromEnv()
 		Expect(err).NotTo(HaveOccurred())
 
+<<<<<<< HEAD
 		network = nwo.New(nwo.BasicSolo(), testDir, client, StartPort(), components)
+=======
+		network = nwo.New(nwo.BasicEtcdRaft(), testDir, client, StartPort(), components)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		// Generate config
 		network.GenerateConfigTree()

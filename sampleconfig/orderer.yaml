@@ -180,6 +180,7 @@ FileLedger:
 
 ################################################################################
 #
+<<<<<<< HEAD
 #   SECTION: Kafka
 #
 #   - This section applies to the configuration of the Kafka-based orderer, and
@@ -285,6 +286,8 @@ Kafka:
 
 ################################################################################
 #
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 #   Debug Configuration
 #
 #   - This controls the debugging options for the orderer

@@ -15,20 +15,34 @@ import (
 )
 
 var (
+<<<<<<< HEAD
 	defaultBCCSP       bccsp.BCCSP // default BCCSP
 	factoriesInitOnce  sync.Once   // factories' Sync on Initialization
+=======
+	defaultBCCSP       bccsp.BCCSP // default BCCSP，说是默认，但是是作为整个包内的全局变量，服务启动后始终使用这一实例
+	factoriesInitOnce  sync.Once   // factories' Sync on Initialization，sync.Once的Do方法可以确保作为参数的方法只会执行一遍，也就是说工厂的初始化只走一遍
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	factoriesInitError error       // Factories' Initialization Error
 
 	// when InitFactories has not been called yet (should only happen
 	// in test cases), use this BCCSP temporarily
+<<<<<<< HEAD
 	bootBCCSP         bccsp.BCCSP
 	bootBCCSPInitOnce sync.Once
+=======
+	bootBCCSP         bccsp.BCCSP //
+	bootBCCSPInitOnce sync.Once   //
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	logger = flogging.MustGetLogger("bccsp")
 )
 
 // BCCSPFactory is used to get instances of the BCCSP interface.
 // A Factory has name used to address it.
+<<<<<<< HEAD
+=======
+// 工厂接口中的Get方法返回一个BCCSP的实例，我们主要关注的是SWBCCSP，其中的SWBCCSPFactory结构实现了这一接口
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 type BCCSPFactory interface {
 
 	// Name returns the name of this factory

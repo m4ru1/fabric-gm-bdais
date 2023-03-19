@@ -46,7 +46,10 @@ func TestUtilsBasic(t *testing.T) {
 	basicTest(t, BatchSizeValue(1, 2, 3))
 	basicTest(t, BatchTimeoutValue("1s"))
 	basicTest(t, ChannelRestrictionsValue(7))
+<<<<<<< HEAD
 	basicTest(t, KafkaBrokersValue([]string{"foo:1", "bar:2"}))
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	basicTest(t, MSPValue(&mspprotos.MSPConfig{}))
 	basicTest(t, CapabilitiesValue(map[string]bool{"foo": true, "bar": false}))
 	basicTest(t, AnchorPeersValue([]*pb.AnchorPeer{{}, {}}))

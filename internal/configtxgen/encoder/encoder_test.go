@@ -8,8 +8,14 @@ package encoder_test
 
 import (
 	"fmt"
+<<<<<<< HEAD
 
 	. "github.com/onsi/ginkgo"
+=======
+	"time"
+
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 
 	"github.com/golang/protobuf/proto"
@@ -390,6 +396,7 @@ var _ = Describe("Encoder", func() {
 			})
 		})
 
+<<<<<<< HEAD
 		Context("when the consensus type is Kafka", func() {
 			BeforeEach(func() {
 				conf.OrdererType = "kafka"
@@ -403,6 +410,8 @@ var _ = Describe("Encoder", func() {
 			})
 		})
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		Context("when the consensus type is etcd/raft", func() {
 			BeforeEach(func() {
 				conf.OrdererType = "etcdraft"
@@ -443,6 +452,49 @@ var _ = Describe("Encoder", func() {
 			})
 		})
 
+<<<<<<< HEAD
+=======
+		Context("when the consensus type is BFT", func() {
+			BeforeEach(func() {
+				conf.OrdererType = "BFT"
+				conf.ConsenterMapping = []*genesisconfig.Consenter{
+					{
+						ID:    1,
+						Host:  "host1",
+						Port:  1001,
+						MSPID: "MSP1",
+					},
+					{
+						ID:            2,
+						Host:          "host2",
+						Port:          1002,
+						MSPID:         "MSP2",
+						ClientTLSCert: "../../../sampleconfig/msp/admincerts/admincert.pem",
+						ServerTLSCert: "../../../sampleconfig/msp/admincerts/admincert.pem",
+						Identity:      "../../../sampleconfig/msp/admincerts/admincert.pem",
+					},
+				}
+			})
+
+			It("adds the Orderers key", func() {
+				cg, err := encoder.NewOrdererGroup(conf)
+				Expect(err).NotTo(HaveOccurred())
+				Expect(len(cg.Values)).To(Equal(6))
+				Expect(cg.Values["Orderers"]).NotTo(BeNil())
+				orderersType := &cb.Orderers{}
+				err = proto.Unmarshal(cg.Values["Orderers"].Value, orderersType)
+				Expect(err).NotTo(HaveOccurred())
+				Expect(len(orderersType.ConsenterMapping)).To(Equal(2))
+				consenter1 := orderersType.ConsenterMapping[0]
+				Expect(consenter1.Id).To(Equal(uint32(1)))
+				Expect(consenter1.ClientTlsCert).To(BeNil())
+				consenter2 := orderersType.ConsenterMapping[1]
+				Expect(consenter2.Id).To(Equal(uint32(2)))
+				Expect(consenter2.ClientTlsCert).ToNot(BeNil())
+			})
+		})
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		Context("when the consensus type is unknown", func() {
 			BeforeEach(func() {
 				conf.OrdererType = "bad-type"
@@ -1084,8 +1136,14 @@ var _ = Describe("Encoder", func() {
 				sysChannelConf = &genesisconfig.Profile{
 					Policies: CreateStandardPolicies(),
 					Orderer: &genesisconfig.Orderer{
+<<<<<<< HEAD
 						OrdererType: "kafka",
 						Policies:    CreateStandardOrdererPolicies(),
+=======
+						OrdererType:  "solo",
+						BatchTimeout: time.Hour,
+						Policies:     CreateStandardOrdererPolicies(),
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 					},
 					Consortiums: map[string]*genesisconfig.Consortium{
 						"SampleConsortium": {
@@ -1127,7 +1185,11 @@ var _ = Describe("Encoder", func() {
 				Expect(configUpdate.WriteSet.Groups["Application"].Groups["Org1"].Version).To(Equal(uint64(1)))
 				Expect(configUpdate.WriteSet.Groups["Application"].Groups["Org1"].Values["AnchorPeers"]).NotTo(BeNil())
 				Expect(configUpdate.WriteSet.Groups["Application"].Groups["Org2"].Version).To(Equal(uint64(0)))
+<<<<<<< HEAD
 				Expect(configUpdate.WriteSet.Groups["Orderer"].Values["ConsensusType"].Version).To(Equal(uint64(1)))
+=======
+				Expect(configUpdate.WriteSet.Groups["Orderer"].Values["BatchTimeout"].Version).To(Equal(uint64(1)))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 
 			Context("when the system channel config is bad", func() {
@@ -1245,7 +1307,11 @@ var _ = Describe("Encoder", func() {
 				sysChannelGroup, err = encoder.NewChannelGroup(&genesisconfig.Profile{
 					Policies: CreateStandardPolicies(),
 					Orderer: &genesisconfig.Orderer{
+<<<<<<< HEAD
 						OrdererType: "kafka",
+=======
+						OrdererType: "solo",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 						Policies:    CreateStandardOrdererPolicies(),
 					},
 					Consortiums: map[string]*genesisconfig.Consortium{

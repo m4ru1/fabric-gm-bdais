@@ -288,15 +288,21 @@ func TestMain(m *testing.M) {
 	// setup the MSP manager so that we can sign/verify
 	err := msptesttools.LoadMSPSetupForTesting()
 	if err != nil {
+<<<<<<< HEAD
 		os.Exit(-1)
 		fmt.Printf("Could not initialize msp")
 		return
+=======
+		fmt.Printf("Could not initialize msp")
+		os.Exit(-1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
 	if err != nil {
 		fmt.Printf("Initialize cryptoProvider bccsp failed: %s", cryptoProvider)
 		os.Exit(-1)
+<<<<<<< HEAD
 		return
 	}
 	localmsp = mspmgmt.GetLocalMSP(cryptoProvider)
@@ -310,13 +316,30 @@ func TestMain(m *testing.M) {
 		os.Exit(-1)
 		fmt.Printf("Could not get signer")
 		return
+=======
+	}
+	localmsp = mspmgmt.GetLocalMSP(cryptoProvider)
+	if localmsp == nil {
+		fmt.Printf("Could not get msp")
+		os.Exit(-1)
+	}
+	signer, err = localmsp.GetDefaultSigningIdentity()
+	if err != nil {
+		fmt.Printf("Could not get signer")
+		os.Exit(-1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	signerSerialized, err = signer.Serialize()
 	if err != nil {
+<<<<<<< HEAD
 		os.Exit(-1)
 		fmt.Printf("Could not serialize identity")
 		return
+=======
+		fmt.Printf("Could not serialize identity")
+		os.Exit(-1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	os.Exit(m.Run())

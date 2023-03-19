@@ -47,7 +47,10 @@ func NewMaintenanceFilter(support MaintenanceFilterSupport, bccsp bccsp.BCCSP) *
 	}
 	mf.permittedTargetConsensusTypes["etcdraft"] = true
 	mf.permittedTargetConsensusTypes["solo"] = true
+<<<<<<< HEAD
 	mf.permittedTargetConsensusTypes["kafka"] = true
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return mf
 }
 
@@ -118,7 +121,11 @@ func (mf *MaintenanceFilter) inspect(configEnvelope *cb.ConfigEnvelope, ordererC
 	}
 
 	// ConsensusType.Type can only change in maintenance-mode, and only within the set of permitted types.
+<<<<<<< HEAD
 	// Note: only kafka to etcdraft or solo to etcdraft transitions are actually supported.
+=======
+	// Note: only solo to etcdraft transitions are supported.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if ordererConfig.ConsensusType() != nextOrdererConfig.ConsensusType() {
 		if ordererConfig.ConsensusState() == orderer.ConsensusType_STATE_NORMAL {
 			return errors.Errorf("attempted to change consensus type from %s to %s, but current config ConsensusType.State is not in maintenance mode",

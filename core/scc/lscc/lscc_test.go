@@ -11,7 +11,10 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os"
 	"strings"
 	"testing"
@@ -150,9 +153,13 @@ func getMSPManager(cid string) msp.MSPManager { return mspmgmt.GetManagerForChai
 // TestInstall tests the install function with various inputs
 func TestInstall(t *testing.T) {
 	// Initialize ledgermgmt that inturn initializes internal components (such as cceventmgmt on which this test depends)
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "lscc-test")
 	require.NoError(t, err, "failed to create temporary directory")
 	defer os.RemoveAll(tempdir)
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	initializer := ledgermgmttest.NewInitializer(tempdir)
 
@@ -316,7 +323,11 @@ func TestDeploy(t *testing.T) {
 
 	res = stub.MockInvokeWithSignedProposal("1", [][]byte{[]byte("deploy"), []byte("chain"), []byte("barf")}, nil)
 	require.NotEqual(t, int32(shim.OK), res.Status)
+<<<<<<< HEAD
 	require.Equal(t, "error unmarshalling ChaincodeDeploymentSpec: unexpected EOF", res.Message)
+=======
+	require.Contains(t, res.Message, "error unmarshalling ChaincodeDeploymentSpec")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	testDeploy(t, "example02", "1.0", path, false, false, true, "", scc, stub, nil)
 	testDeploy(t, "example02", "1.0", path, false, false, true, "chaincode with name 'example02' already exists", scc, stub, nil)

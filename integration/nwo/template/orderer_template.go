@@ -53,6 +53,7 @@ General:
     TimeWindow: 15m
 FileLedger:
   Location: {{ .OrdererDir Orderer }}/system
+<<<<<<< HEAD
 {{ if eq .Consensus.Type "kafka" -}}
 Kafka:
   Retry:
@@ -85,6 +86,8 @@ Kafka:
     User:
     Password:
   Version:{{ end }}
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 Debug:
   BroadcastTraceDir:
   DeliverTraceDir:

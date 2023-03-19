@@ -7,8 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package peer
 
 import (
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/golang/protobuf/proto"
@@ -29,8 +32,12 @@ import (
 func TestConfigTxCreateLedger(t *testing.T) {
 	helper := newTestHelper(t)
 	channelID := "testchain1"
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "peer-test")
 	require.NoError(t, err, "failed to create temporary directory")
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	ledgerMgr, err := constructLedgerMgrWithTestDefaults(tempdir)
 	if err != nil {
@@ -39,7 +46,10 @@ func TestConfigTxCreateLedger(t *testing.T) {
 
 	defer func() {
 		ledgerMgr.Close()
+<<<<<<< HEAD
 		os.RemoveAll(tempdir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}()
 
 	chanConf := helper.sampleChannelConfig(1, true)
@@ -72,8 +82,12 @@ func TestConfigTxErrorScenarios(t *testing.T) {
 func TestConfigTxUpdateChanConfig(t *testing.T) {
 	helper := newTestHelper(t)
 	channelID := "testchain1"
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "peer-test")
 	require.NoError(t, err, "failed to create temporary directory")
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	ledgerMgr, err := constructLedgerMgrWithTestDefaults(tempdir)
 	if err != nil {
@@ -82,7 +96,10 @@ func TestConfigTxUpdateChanConfig(t *testing.T) {
 
 	defer func() {
 		ledgerMgr.Close()
+<<<<<<< HEAD
 		os.RemoveAll(tempdir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}()
 
 	chanConf := helper.sampleChannelConfig(1, true)
@@ -115,8 +132,12 @@ func TestConfigTxUpdateChanConfig(t *testing.T) {
 func TestGenesisBlockCreateLedger(t *testing.T) {
 	b, err := configtxtest.MakeGenesisBlock("testchain")
 	require.NoError(t, err)
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "peer-test")
 	require.NoError(t, err, "failed to create temporary directory")
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	ledgerMgr, err := constructLedgerMgrWithTestDefaults(tempdir)
 	if err != nil {
@@ -125,7 +146,10 @@ func TestGenesisBlockCreateLedger(t *testing.T) {
 
 	defer func() {
 		ledgerMgr.Close()
+<<<<<<< HEAD
 		os.RemoveAll(tempdir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}()
 
 	lgr, err := ledgerMgr.CreateLedger("testchain", b)

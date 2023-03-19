@@ -39,7 +39,11 @@ func TestBlockIndexSync(t *testing.T) {
 func testBlockIndexSync(t *testing.T, numBlocks int, numBlocksToIndex int, syncByRestart bool) {
 	testName := fmt.Sprintf("%v/%v/%v", numBlocks, numBlocksToIndex, syncByRestart)
 	t.Run(testName, func(t *testing.T) {
+<<<<<<< HEAD
 		env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+		env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		defer env.Cleanup()
 		ledgerid := "testledger"
 		blkfileMgrWrapper := newTestBlockfileWrapper(env, ledgerid)
@@ -105,7 +109,11 @@ func testBlockIndexSelectiveIndexing(t *testing.T, indexItems []IndexableAttr) {
 		testName = testName + string(s)
 	}
 	t.Run(testName, func(t *testing.T) {
+<<<<<<< HEAD
 		env := newTestEnvSelectiveIndexing(t, NewConf(testPath(), 0), indexItems, &disabled.Provider{})
+=======
+		env := newTestEnvSelectiveIndexing(t, NewConf(t.TempDir(), 0), indexItems, &disabled.Provider{})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		defer env.Cleanup()
 		blkfileMgrWrapper := newTestBlockfileWrapper(env, "testledger")
 		defer blkfileMgrWrapper.close()
@@ -269,15 +277,23 @@ func TestTxIDKeyDecodingInvalidInputs(t *testing.T) {
 }
 
 func TestExportUniqueTxIDs(t *testing.T) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	ledgerid := "testledger"
 	blkfileMgrWrapper := newTestBlockfileWrapper(env, ledgerid)
 	defer blkfileMgrWrapper.close()
 	blkfileMgr := blkfileMgrWrapper.blockfileMgr
 
+<<<<<<< HEAD
 	testSnapshotDir := testPath()
 	defer os.RemoveAll(testSnapshotDir)
+=======
+	testSnapshotDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// empty store generates no output
 	fileHashes, err := blkfileMgr.index.exportUniqueTxIDs(testSnapshotDir, testNewHashFunc)
@@ -334,7 +350,11 @@ func TestExportUniqueTxIDs(t *testing.T) {
 }
 
 func TestExportUniqueTxIDsWhenTxIDsNotIndexed(t *testing.T) {
+<<<<<<< HEAD
 	env := newTestEnvSelectiveIndexing(t, NewConf(testPath(), 0), []IndexableAttr{IndexableAttrBlockNum}, &disabled.Provider{})
+=======
+	env := newTestEnvSelectiveIndexing(t, NewConf(t.TempDir(), 0), []IndexableAttr{IndexableAttrBlockNum}, &disabled.Provider{})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	blkfileMgrWrapper := newTestBlockfileWrapper(env, "testledger")
 	defer blkfileMgrWrapper.close()
@@ -342,14 +362,22 @@ func TestExportUniqueTxIDsWhenTxIDsNotIndexed(t *testing.T) {
 	blocks := testutil.ConstructTestBlocks(t, 5)
 	blkfileMgrWrapper.addBlocks(blocks)
 
+<<<<<<< HEAD
 	testSnapshotDir := testPath()
 	defer os.RemoveAll(testSnapshotDir)
+=======
+	testSnapshotDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	_, err := blkfileMgrWrapper.blockfileMgr.index.exportUniqueTxIDs(testSnapshotDir, testNewHashFunc)
 	require.EqualError(t, err, "transaction IDs not maintained in index")
 }
 
 func TestExportUniqueTxIDsErrorCases(t *testing.T) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	ledgerid := "testledger"
 	blkfileMgrWrapper := newTestBlockfileWrapper(env, ledgerid)
@@ -360,8 +388,12 @@ func TestExportUniqueTxIDsErrorCases(t *testing.T) {
 	blockfileMgr := blkfileMgrWrapper.blockfileMgr
 	index := blockfileMgr.index
 
+<<<<<<< HEAD
 	testSnapshotDir := testPath()
 	defer os.RemoveAll(testSnapshotDir)
+=======
+	testSnapshotDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// error during data file creation
 	dataFilePath := filepath.Join(testSnapshotDir, snapshotDataFileName)

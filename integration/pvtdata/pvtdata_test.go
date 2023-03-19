@@ -22,7 +22,11 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
@@ -182,7 +186,10 @@ var _ bool = Describe("PrivateData", func() {
 			network.Bootstrap()
 
 			members := grouper.Members{
+<<<<<<< HEAD
 				{Name: "brokers", Runner: network.BrokerGroupRunner()},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				{Name: "orderers", Runner: network.OrdererGroupRunner()},
 			}
 			networkRunner := grouper.NewOrdered(syscall.SIGTERM, members)
@@ -946,7 +953,11 @@ func initThreeOrgsSetup(removePeer1 bool) *nwo.Network {
 	client, err := docker.NewClientFromEnv()
 	Expect(err).NotTo(HaveOccurred())
 
+<<<<<<< HEAD
 	config := nwo.FullSolo()
+=======
+	config := nwo.FullEtcdRaft()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// add org3 with one peer
 	config.Organizations = append(config.Organizations, &nwo.Organization{

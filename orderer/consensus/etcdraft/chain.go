@@ -27,9 +27,15 @@ import (
 	"github.com/hyperledger/fabric/orderer/consensus"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/pkg/errors"
+<<<<<<< HEAD
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"
 	"go.etcd.io/etcd/wal"
+=======
+	"go.etcd.io/etcd/raft/v3"
+	"go.etcd.io/etcd/raft/v3/raftpb"
+	"go.etcd.io/etcd/server/v3/wal"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 const (
@@ -340,6 +346,10 @@ func NewChain(
 			logger: c.logger,
 		},
 	}
+<<<<<<< HEAD
+=======
+	c.Node.confState.Store(&cc)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	return c, nil
 }
@@ -1093,9 +1103,15 @@ func (c *Chain) apply(ents []raftpb.Entry) {
 
 			switch cc.Type {
 			case raftpb.ConfChangeAddNode:
+<<<<<<< HEAD
 				c.logger.Infof("Applied config change to add node %d, current nodes in channel: %+v", cc.NodeID, c.confState.Nodes)
 			case raftpb.ConfChangeRemoveNode:
 				c.logger.Infof("Applied config change to remove node %d, current nodes in channel: %+v", cc.NodeID, c.confState.Nodes)
+=======
+				c.logger.Infof("Applied config change to add node %d, current nodes in channel: %+v", cc.NodeID, c.confState.Voters)
+			case raftpb.ConfChangeRemoveNode:
+				c.logger.Infof("Applied config change to remove node %d, current nodes in channel: %+v", cc.NodeID, c.confState.Voters)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			default:
 				c.logger.Panic("Programming error, encountered unsupported raft config change")
 			}
@@ -1144,14 +1160,25 @@ func (c *Chain) apply(ents []raftpb.Entry) {
 		}
 	}
 
+<<<<<<< HEAD
 	if c.accDataSize >= c.sizeLimit {
 		b := protoutil.UnmarshalBlockOrPanic(ents[position].Data)
 
+=======
+	// at postion==0, ents[position].Type is ambiguous, it can be either of {raftpb.EntryNormal, raftpb.EntryConfChange}
+	// take a snapshot only for ents[position].Type == raftpb.EntryNormal
+	if c.accDataSize >= c.sizeLimit && ents[position].Type == raftpb.EntryNormal && len(ents[position].Data) > 0 {
+		b := protoutil.UnmarshalBlockOrPanic(ents[position].Data)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		select {
 		case c.gcC <- &gc{index: c.appliedIndex, state: c.confState, data: ents[position].Data}:
 			c.logger.Infof("Accumulated %d bytes since last snapshot, exceeding size limit (%d bytes), "+
 				"taking snapshot at block [%d] (index: %d), last snapshotted block number is %d, current nodes: %+v",
+<<<<<<< HEAD
 				c.accDataSize, c.sizeLimit, b.Header.Number, c.appliedIndex, c.lastSnapBlockNum, c.confState.Nodes)
+=======
+				c.accDataSize, c.sizeLimit, b.Header.Number, c.appliedIndex, c.lastSnapBlockNum, c.confState.Voters)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			c.accDataSize = 0
 			c.lastSnapBlockNum = b.Header.Number
 			c.Metrics.SnapshotBlockNumber.Set(float64(b.Header.Number))
@@ -1217,10 +1244,21 @@ func (c *Chain) remotePeers() ([]cluster.RemoteNode, error) {
 			return nil, errors.WithStack(err)
 		}
 		nodes = append(nodes, cluster.RemoteNode{
+<<<<<<< HEAD
 			ID:            raftID,
 			Endpoint:      fmt.Sprintf("%s:%d", consenter.Host, consenter.Port),
 			ServerTLSCert: serverCertAsDER,
 			ClientTLSCert: clientCertAsDER,
+=======
+			NodeAddress: cluster.NodeAddress{
+				ID:       raftID,
+				Endpoint: fmt.Sprintf("%s:%d", consenter.Host, consenter.Port),
+			},
+			NodeCerts: cluster.NodeCerts{
+				ServerTLSCert: serverCertAsDER,
+				ClientTLSCert: clientCertAsDER,
+			},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		})
 	}
 	return nodes, nil
@@ -1342,7 +1380,11 @@ func (c *Chain) getInFlightConfChange() *raftpb.ConfChange {
 	// extracting current Raft configuration state
 	confState := c.Node.ApplyConfChange(raftpb.ConfChange{})
 
+<<<<<<< HEAD
 	if len(confState.Nodes) == len(c.opts.BlockMetadata.ConsenterIds) {
+=======
+	if len(confState.Voters) == len(c.opts.BlockMetadata.ConsenterIds) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		// Raft configuration change could only add one node or
 		// remove one node at a time, if raft conf state size is
 		// equal to membership stored in block metadata field,

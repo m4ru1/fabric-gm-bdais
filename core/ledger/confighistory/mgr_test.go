@@ -35,11 +35,15 @@ func TestMain(m *testing.M) {
 }
 
 func TestWithNoCollectionConfig(t *testing.T) {
+<<<<<<< HEAD
 	dbPath, err := ioutil.TempDir("", "confighistory")
 	if err != nil {
 		t.Fatalf("Failed to create config history directory: %s", err)
 	}
 	defer os.RemoveAll(dbPath)
+=======
+	dbPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	mockCCInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	mgr, err := NewMgr(dbPath, mockCCInfoProvider)
 	require.NoError(t, err)
@@ -57,11 +61,15 @@ func TestWithNoCollectionConfig(t *testing.T) {
 }
 
 func TestWithEmptyCollectionConfig(t *testing.T) {
+<<<<<<< HEAD
 	dbPath, err := ioutil.TempDir("", "confighistory")
 	if err != nil {
 		t.Fatalf("Failed to create config history directory: %s", err)
 	}
 	defer os.RemoveAll(dbPath)
+=======
+	dbPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	mockCCInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	mgr, err := NewMgr(dbPath, mockCCInfoProvider)
 	require.NoError(t, err)
@@ -83,11 +91,15 @@ func TestWithEmptyCollectionConfig(t *testing.T) {
 }
 
 func TestMgrQueries(t *testing.T) {
+<<<<<<< HEAD
 	dbPath, err := ioutil.TempDir("", "confighistory")
 	if err != nil {
 		t.Fatalf("Failed to create config history directory: %s", err)
 	}
 	defer os.RemoveAll(dbPath)
+=======
+	dbPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	mockCCInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	mgr, err := NewMgr(dbPath, mockCCInfoProvider)
 	require.NoError(t, err)
@@ -133,9 +145,13 @@ func TestMgrQueries(t *testing.T) {
 }
 
 func TestDrop(t *testing.T) {
+<<<<<<< HEAD
 	dbPath, err := ioutil.TempDir("", "confighistory")
 	require.NoError(t, err)
 	defer os.RemoveAll(dbPath)
+=======
+	dbPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	mockCCInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	mgr, err := NewMgr(dbPath, mockCCInfoProvider)
 	require.NoError(t, err)
@@ -183,11 +199,15 @@ func TestDrop(t *testing.T) {
 }
 
 func TestWithImplicitColls(t *testing.T) {
+<<<<<<< HEAD
 	dbPath, err := ioutil.TempDir("", "confighistory")
 	if err != nil {
 		t.Fatalf("Failed to create config history directory: %s", err)
 	}
 	defer os.RemoveAll(dbPath)
+=======
+	dbPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	collConfigPackage := testutilCreateCollConfigPkg([]string{"Explicit-coll-1", "Explicit-coll-2"})
 	mockCCInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	mockCCInfoProvider.ImplicitCollectionsReturns(
@@ -252,6 +272,7 @@ func TestWithImplicitColls(t *testing.T) {
 type testEnvForSnapshot struct {
 	mgr             *Mgr
 	testSnapshotDir string
+<<<<<<< HEAD
 	cleanup         func()
 }
 
@@ -276,6 +297,21 @@ func newTestEnvForSnapshot(t *testing.T) *testEnvForSnapshot {
 			os.RemoveAll(dbPath)
 			os.RemoveAll(testSnapshotDir)
 		},
+=======
+}
+
+func newTestEnvForSnapshot(t *testing.T) *testEnvForSnapshot {
+	dbPath := t.TempDir()
+	mgr, err := NewMgr(dbPath, &mock.DeployedChaincodeInfoProvider{})
+	if err != nil {
+		t.Fatalf("Failed to create new config history manager: %s", err)
+	}
+
+	testSnapshotDir := t.TempDir()
+	return &testEnvForSnapshot{
+		mgr:             mgr,
+		testSnapshotDir: testSnapshotDir,
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 }
 
@@ -374,7 +410,10 @@ func TestExportAndImportConfigHistory(t *testing.T) {
 
 	t.Run("confighistory is empty", func(t *testing.T) {
 		env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 		defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		retriever := env.mgr.GetRetriever("ledger1")
 		fileHashes, err := retriever.ExportConfigHistory(env.testSnapshotDir, testNewHashFunc)
 		require.NoError(t, err)
@@ -387,7 +426,10 @@ func TestExportAndImportConfigHistory(t *testing.T) {
 	t.Run("export confighistory", func(t *testing.T) {
 		// setup ledger1 => export ledger1
 		env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 		defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		storedKVs, _ := setupWithSampleData(env, "ledger1")
 		retriever := env.mgr.GetRetriever("ledger1")
 		fileHashes, err := retriever.ExportConfigHistory(env.testSnapshotDir, testNewHashFunc)
@@ -398,7 +440,10 @@ func TestExportAndImportConfigHistory(t *testing.T) {
 	t.Run("import confighistory and verify queries", func(t *testing.T) {
 		// setup ledger1 => export ledger1 => import into ledger2
 		env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 		defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		_, ccConfigInfo := setupWithSampleData(env, "ledger1")
 		retriever := env.mgr.GetRetriever("ledger1")
 		_, err := retriever.ExportConfigHistory(env.testSnapshotDir, testNewHashFunc)
@@ -414,7 +459,10 @@ func TestExportAndImportConfigHistory(t *testing.T) {
 	t.Run("export from an imported confighistory", func(t *testing.T) {
 		// setup ledger1 => export ledger1 => import into ledger2 => export ledger2
 		env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 		defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		storedKVs, _ := setupWithSampleData(env, "ledger1")
 		retriever := env.mgr.GetRetriever("ledger1")
 		_, err := retriever.ExportConfigHistory(env.testSnapshotDir, testNewHashFunc)
@@ -433,7 +481,10 @@ func TestExportAndImportConfigHistory(t *testing.T) {
 
 	t.Run("import confighistory with no data and metadata files", func(t *testing.T) {
 		env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 		defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		require.NoFileExists(t, filepath.Join(env.testSnapshotDir, snapshotDataFileName))
 		require.NoFileExists(t, filepath.Join(env.testSnapshotDir, snapshotMetadataFileName))
 		err := env.mgr.ImportFromSnapshot("ledger1", env.testSnapshotDir)
@@ -442,7 +493,10 @@ func TestExportAndImportConfigHistory(t *testing.T) {
 
 	t.Run("import confighistory - ledger exists error", func(t *testing.T) {
 		env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 		defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		setupWithSampleData(env, "ledger1")
 		dataFileWriter, err := snapshot.CreateFile(filepath.Join(env.testSnapshotDir, snapshotDataFileName), snapshotFileFormat, testNewHashFunc)
 		require.NoError(t, err)
@@ -454,7 +508,10 @@ func TestExportAndImportConfigHistory(t *testing.T) {
 
 	t.Run("import confighistory - EOF error", func(t *testing.T) {
 		env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 		defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		dataFileWriter1, err := snapshot.CreateFile(filepath.Join(env.testSnapshotDir, snapshotMetadataFileName), snapshotFileFormat, testNewHashFunc)
 		require.NoError(t, err)
 		defer dataFileWriter1.Close()
@@ -479,7 +536,10 @@ func TestExportAndImportConfigHistory(t *testing.T) {
 
 	t.Run("import confighistory - leveldb iter error", func(t *testing.T) {
 		env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 		defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		env.mgr.dbProvider.Close()
 		dataFileWriter, err := snapshot.CreateFile(filepath.Join(env.testSnapshotDir, snapshotDataFileName), snapshotFileFormat, testNewHashFunc)
 		require.NoError(t, err)
@@ -543,7 +603,10 @@ func verifyImportedConfigHistory(t *testing.T, retriever *Retriever, expectedCCC
 
 func TestExportConfigHistoryErrorCase(t *testing.T) {
 	env := newTestEnvForSnapshot(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	db := env.mgr.dbProvider.getDB("ledger1")
 	cc1collConfigPackage := testutilCreateCollConfigPkg([]string{"Explicit-cc1-coll-1", "Explicit-cc1-coll-2"})

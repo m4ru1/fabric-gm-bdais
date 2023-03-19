@@ -152,10 +152,19 @@ func privateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, error
 }
 
 func derToPrivateKey(der []byte) (key interface{}, err error) {
+<<<<<<< HEAD
+=======
+
+	// PKCS1 定义了一种密钥编码格式，用于 RSA 密钥对的存储和传输。它支持的密钥类型包括 RSA 公钥和私钥。
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if key, err = x509.ParsePKCS1PrivateKey(der); err == nil {
 		return key, nil
 	}
 
+<<<<<<< HEAD
+=======
+	// PKCS8 则定义了一种通用的密钥编码格式，它支持的密钥类型包括 RSA、DSA、ECDSA 等公钥密码算法和相应的私钥。
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if key, err = x509.ParsePKCS8PrivateKey(der); err == nil {
 		switch key.(type) {
 		case *ecdsa.PrivateKey:

@@ -16,12 +16,20 @@ import (
 	docker "github.com/fsouza/go-dockerclient"
 	"github.com/hyperledger/fabric/integration/nwo"
 	"github.com/hyperledger/fabric/integration/nwo/commands"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"github.com/tedsuo/ifrit"
+<<<<<<< HEAD
 	"github.com/tedsuo/ifrit/ginkgomon"
+=======
+	ginkgomon "github.com/tedsuo/ifrit/ginkgomon_v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 var _ = Describe("Gossip State Transfer and Membership", func() {
@@ -42,7 +50,11 @@ var _ = Describe("Gossip State Transfer and Membership", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		channelName = "testchannel"
+<<<<<<< HEAD
 		network = nwo.New(nwo.FullSolo(), testDir, dockerClient, StartPort(), components)
+=======
+		network = nwo.New(nwo.FullEtcdRaft(), testDir, dockerClient, StartPort(), components)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		network.GenerateConfigTree()
 
 		nwprocs = &networkProcesses{

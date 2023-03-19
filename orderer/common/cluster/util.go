@@ -8,18 +8,36 @@ package cluster
 
 import (
 	"bytes"
+<<<<<<< HEAD
+=======
+	"context"
+	"crypto/ecdsa"
+	"crypto/sha256"
+	"crypto/tls"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"crypto/x509"
 	"encoding/hex"
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
 	"math/rand"
+<<<<<<< HEAD
+=======
+	"strconv"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"sync"
 	"sync/atomic"
 	"time"
 
+<<<<<<< HEAD
 	"github.com/hyperledger/fabric-config/protolator"
 	"github.com/hyperledger/fabric-protos-go/common"
+=======
+	"github.com/golang/protobuf/proto"
+	"github.com/hyperledger/fabric-config/protolator"
+	"github.com/hyperledger/fabric-protos-go/common"
+	"github.com/hyperledger/fabric-protos-go/orderer"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/common/channelconfig"
 	"github.com/hyperledger/fabric/common/configtx"
@@ -30,12 +48,23 @@ import (
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
+<<<<<<< HEAD
+=======
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/peer"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 // ConnByCertMap maps certificates represented as strings
 // to gRPC connections
 type ConnByCertMap map[string]*grpc.ClientConn
 
+<<<<<<< HEAD
+=======
+// Lable used for TLS Export Keying Material call
+const KeyingMaterialLabel = "orderer v3 authentication label"
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // Lookup looks up a certificate and returns the connection that was mapped
 // to the certificate, and whether it was found or not
 func (cbc ConnByCertMap) Lookup(cert []byte) (*grpc.ClientConn, bool) {
@@ -100,6 +129,19 @@ func (mp MemberMapping) LookupByClientCert(cert []byte) *Stub {
 	return nil
 }
 
+<<<<<<< HEAD
+=======
+// LookupByIdentity retrieves a Stub by Identity
+func (mp MemberMapping) LookupByIdentity(identity []byte) *Stub {
+	for _, stub := range mp.id2stub {
+		if bytes.Equal(identity, stub.Identity) {
+			return stub
+		}
+	}
+	return nil
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // ServerCertificates returns a set of the server certificates
 // represented as strings
 func (mp MemberMapping) ServerCertificates() StringSet {
@@ -487,6 +529,60 @@ func globalEndpointsFromConfig(aggregatedTLSCerts [][]byte, bundle *channelconfi
 	return globalEndpoints
 }
 
+<<<<<<< HEAD
+=======
+func BlockVerifierBuilder(bccsp bccsp.BCCSP) func(block *common.Block) protoutil.BlockVerifierFunc {
+	return func(block *common.Block) protoutil.BlockVerifierFunc {
+		bundle, failed := bundleFromConfigBlock(block, bccsp)
+		if failed != nil {
+			return failed
+		}
+
+		policy, exists := bundle.PolicyManager().GetPolicy(policies.BlockValidation)
+		if !exists {
+			return createErrorFunc(errors.New("no policies in config block"))
+		}
+
+		bftEnabled := bundle.ChannelConfig().Capabilities().ConsensusTypeBFT()
+
+		var consenters []*common.Consenter
+		if bftEnabled {
+			cfg, ok := bundle.OrdererConfig()
+			if !ok {
+				return createErrorFunc(errors.New("no orderer section in config block"))
+			}
+			consenters = cfg.Consenters()
+		}
+
+		return protoutil.BlockSignatureVerifier(bftEnabled, consenters, policy)
+	}
+}
+
+func bundleFromConfigBlock(block *common.Block, bccsp bccsp.BCCSP) (*channelconfig.Bundle, protoutil.BlockVerifierFunc) {
+	if block.Data == nil || len(block.Data.Data) == 0 {
+		return nil, createErrorFunc(errors.New("block contains no data"))
+	}
+
+	env := &common.Envelope{}
+	if err := proto.Unmarshal(block.Data.Data[0], env); err != nil {
+		return nil, createErrorFunc(err)
+	}
+
+	bundle, err := channelconfig.NewBundleFromEnvelope(env, bccsp)
+	if err != nil {
+		return nil, createErrorFunc(err)
+	}
+
+	return bundle, nil
+}
+
+func createErrorFunc(err error) protoutil.BlockVerifierFunc {
+	return func(_ *common.BlockHeader, _ *common.BlockMetadata) error {
+		return errors.Wrap(err, "initialized with an invalid config block")
+	}
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 //go:generate mockery -dir . -name VerifierFactory -case underscore -output ./mocks/
 
 // VerifierFactory creates BlockVerifiers.
@@ -793,3 +889,84 @@ func (cm *ComparisonMemoizer) setup() {
 	cm.rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 	cm.cache = make(map[arguments]bool)
 }
+<<<<<<< HEAD
+=======
+
+func requestAsString(request *orderer.StepRequest) string {
+	switch t := request.GetPayload().(type) {
+	case *orderer.StepRequest_SubmitRequest:
+		if t.SubmitRequest == nil || t.SubmitRequest.Payload == nil {
+			return fmt.Sprintf("Empty SubmitRequest: %v", t.SubmitRequest)
+		}
+		return fmt.Sprintf("SubmitRequest for channel %s with payload of size %d",
+			t.SubmitRequest.Channel, len(t.SubmitRequest.Payload.Payload))
+	case *orderer.StepRequest_ConsensusRequest:
+		return fmt.Sprintf("ConsensusRequest for channel %s with payload of size %d",
+			t.ConsensusRequest.Channel, len(t.ConsensusRequest.Payload))
+	default:
+		return fmt.Sprintf("unknown type: %v", request)
+	}
+}
+
+func exportKM(cs tls.ConnectionState, label string, context []byte) ([]byte, error) {
+	tlsBinding, err := cs.ExportKeyingMaterial(label, context, 32)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed generating TLS Binding material")
+	}
+	return tlsBinding, nil
+}
+
+func GetSessionBindingHash(authReq *orderer.NodeAuthRequest) []byte {
+	return util.ComputeSHA256(util.ConcatenateBytes(
+		[]byte(strconv.FormatUint(uint64(authReq.Version), 10)),
+		[]byte(authReq.Timestamp.String()),
+		[]byte(strconv.FormatUint(authReq.FromId, 10)),
+		[]byte(strconv.FormatUint(authReq.ToId, 10)),
+		[]byte(authReq.Channel),
+	))
+}
+
+func GetTLSSessionBinding(ctx context.Context, bindingPayload []byte) ([]byte, error) {
+	peerInfo, ok := peer.FromContext(ctx)
+	if !ok {
+		return nil, errors.New("failed extracting stream context")
+	}
+	connState := peerInfo.AuthInfo.(credentials.TLSInfo).State
+
+	tlsBinding, err := exportKM(connState, KeyingMaterialLabel, bindingPayload)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed exporting keying material")
+	}
+
+	return tlsBinding, nil
+}
+
+func VerifySignature(identity, msgHash, signature []byte) error {
+	block, _ := pem.Decode(identity)
+	if block == nil {
+		return errors.New("pem decoding failed")
+	}
+
+	cert, err := x509.ParseCertificate(block.Bytes)
+	if err != nil {
+		return errors.Wrap(err, "key extraction failed")
+	}
+
+	pubKey, isECDSA := cert.PublicKey.(*ecdsa.PublicKey)
+	if !isECDSA {
+		return errors.New("not valid public key")
+	}
+
+	validSignature := ecdsa.VerifyASN1(pubKey, msgHash, signature)
+
+	if !validSignature {
+		return errors.New("signature invalid")
+	}
+	return nil
+}
+
+func SHA256Digest(data []byte) []byte {
+	hash := sha256.Sum256(data)
+	return hash[:]
+}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19

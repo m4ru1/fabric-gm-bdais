@@ -19,8 +19,11 @@ import (
 	"strconv"
 	"strings"
 
+<<<<<<< HEAD
 	"github.com/Shopify/sarama"
 	version "github.com/hashicorp/go-version"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/mitchellh/mapstructure"
@@ -359,6 +362,7 @@ func pemBlocksFromFileDecodeHook(f reflect.Kind, t reflect.Kind, data interface{
 	return data, nil
 }
 
+<<<<<<< HEAD
 var kafkaVersionConstraints map[sarama.KafkaVersion]version.Constraints
 
 func init() {
@@ -395,6 +399,8 @@ func kafkaVersionDecodeHook(f reflect.Type, t reflect.Type, data interface{}) (i
 	return nil, fmt.Errorf("Unsupported Kafka version: '%s'", data)
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func bccspHook(f reflect.Type, t reflect.Type, data interface{}) (interface{}, error) {
 	if t != reflect.TypeOf(&factory.FactoryOpts{}) {
 		return data, nil
@@ -439,7 +445,10 @@ func (c *ConfigParser) EnhancedExactUnmarshal(output interface{}) error {
 			byteSizeDecodeHook,
 			stringFromFileDecodeHook,
 			pemBlocksFromFileDecodeHook,
+<<<<<<< HEAD
 			kafkaVersionDecodeHook,
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		),
 	}
 

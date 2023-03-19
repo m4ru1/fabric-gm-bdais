@@ -11,8 +11,11 @@ import (
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os/exec"
 	"testing"
 	"time"
@@ -61,9 +64,13 @@ func TestArugments(t *testing.T) {
 func TestMissingFile(t *testing.T) {
 	gt := NewWithT(t)
 
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "empty-test-dir")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	detectCmd, err := gexec.Build("github.com/hyperledger/fabric/ccaas_builder/cmd/detect")
 	gt.Expect(err).NotTo(HaveOccurred())

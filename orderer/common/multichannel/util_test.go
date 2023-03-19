@@ -142,7 +142,11 @@ func makeConfigTxMig(chainID string, i int) *cb.Envelope {
 	gConf.Orderer.Capabilities = map[string]bool{
 		capabilities.OrdererV2_0: true,
 	}
+<<<<<<< HEAD
 	gConf.Orderer.OrdererType = "kafka"
+=======
+	gConf.Orderer.OrdererType = "solo"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	channelGroup, err := encoder.NewChannelGroup(gConf)
 	if err != nil {
 		return nil

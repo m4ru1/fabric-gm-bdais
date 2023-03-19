@@ -21,8 +21,12 @@ import (
 	"github.com/hyperledger/fabric/core/common/ccprovider"
 	"github.com/hyperledger/fabric/core/common/sysccprovider"
 	"github.com/hyperledger/fabric/core/scc"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/pkg/errors"
 )
@@ -88,6 +92,10 @@ var _ = Describe("Handler", func() {
 		fakeApplicationConfig := &mock.ApplicationConfig{}
 		fakeCapabilites = &mock.ApplicationCapabilities{}
 		fakeCapabilites.KeyLevelEndorsementReturns(true)
+<<<<<<< HEAD
+=======
+		fakeCapabilites.PurgePvtDataReturns(true)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		fakeApplicationConfig.CapabilitiesReturns(fakeCapabilites)
 		fakeApplicationConfigRetriever = &fake.ApplicationConfigRetriever{}
 		fakeApplicationConfigRetriever.GetApplicationConfigReturns(fakeApplicationConfig, true)
@@ -466,7 +474,11 @@ var _ = Describe("Handler", func() {
 						msg := fakeChatStream.SendArgsForCall(0)
 						Expect(msg.Type).To(Equal(pb.ChaincodeMessage_ERROR))
 						Expect(msg.Txid).To(Equal("tx-id"))
+<<<<<<< HEAD
 						Expect(string(msg.Payload)).To(HavePrefix("INVOKE_CHAINCODE failed: transaction ID: tx-id: unmarshal failed: proto: "))
+=======
+						Expect(string(msg.Payload)).To(HavePrefix("INVOKE_CHAINCODE failed: transaction ID: tx-id"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 					})
 				})
 			})
@@ -529,7 +541,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandlePutState(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -680,6 +697,20 @@ var _ = Describe("Handler", func() {
 			})
 		})
 
+<<<<<<< HEAD
+=======
+		Context("when purge private data is not supported", func() {
+			BeforeEach(func() {
+				fakeCapabilites.PurgePvtDataReturns(false)
+			})
+
+			It("returns an error", func() {
+				_, err := handler.HandlePurgePrivateData(incomingMessage, txContext)
+				Expect(err).To(MatchError("purge private data is not enabled, channel application capability of V2_5 or later is required"))
+			})
+		})
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		Context("when unmarshalling the request fails", func() {
 			BeforeEach(func() {
 				incomingMessage.Payload = []byte("this-is-a-bogus-payload")
@@ -687,7 +718,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandlePutStateMetadata(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -813,7 +849,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleDelState(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -932,7 +973,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleGetState(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -1138,7 +1184,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleGetPrivateDataHash(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -1231,7 +1282,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleGetStateMetadata(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -1537,7 +1593,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleGetStateByRange(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -1649,7 +1710,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleQueryStateNext(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -1760,7 +1826,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleQueryStateClose(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -1951,7 +2022,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleGetQueryResult(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -1962,7 +2038,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleGetQueryResult(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("marshal failed: proto: Marshal called with nil"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("marshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 
 			It("cleans up the query context", func() {
@@ -1978,6 +2059,120 @@ var _ = Describe("Handler", func() {
 		})
 	})
 
+<<<<<<< HEAD
+=======
+	Describe("HandlePurgePrivateData", func() {
+		var incomingMessage *pb.ChaincodeMessage
+		var request *pb.PurgePrivateState
+
+		BeforeEach(func() {
+			request = &pb.PurgePrivateState{
+				Key: "purge-state-key",
+			}
+			payload, err := proto.Marshal(request)
+			Expect(err).NotTo(HaveOccurred())
+
+			incomingMessage = &pb.ChaincodeMessage{
+				Type:      pb.ChaincodeMessage_PURGE_PRIVATE_DATA,
+				Payload:   payload,
+				Txid:      "tx-id",
+				ChannelId: "channel-id",
+			}
+		})
+
+		Context("when unmarshalling the request fails", func() {
+			BeforeEach(func() {
+				incomingMessage.Payload = []byte("this-is-a-bogus-payload")
+			})
+
+			It("returns an error", func() {
+				_, err := handler.HandlePurgePrivateData(incomingMessage, txContext)
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed"))
+			})
+		})
+
+		Context("when collection is not set", func() {
+			It("calls PurgePrivateState on the transaction simulator", func() {
+				_, err := handler.HandlePurgePrivateData(incomingMessage, txContext)
+				Expect(err).To(MatchError("only applicable for private data"))
+			})
+
+			Context("when PurgePrivateState returns an error", func() {
+				BeforeEach(func() {
+					fakeTxSimulator.PurgePrivateDataReturns(errors.New("orange"))
+					request.Collection = "collection-name"
+					payload, err := proto.Marshal(request)
+					Expect(err).NotTo(HaveOccurred())
+					incomingMessage.Payload = payload
+					fakeCollectionStore.RetrieveReadWritePermissionReturns(false, true, nil) // to
+				})
+
+				It("return an error", func() {
+					_, err := handler.HandlePurgePrivateData(incomingMessage, txContext)
+					Expect(err).To(MatchError("orange"))
+				})
+			})
+		})
+
+		Context("when collection is set", func() {
+			BeforeEach(func() {
+				request.Collection = "collection-name"
+				payload, err := proto.Marshal(request)
+				Expect(err).NotTo(HaveOccurred())
+				incomingMessage.Payload = payload
+				fakeCollectionStore.RetrieveReadWritePermissionReturns(false, true, nil) // to
+			})
+
+			It("calls PurgePrivateData on the transaction simulator", func() {
+				_, err := handler.HandlePurgePrivateData(incomingMessage, txContext)
+				Expect(err).NotTo(HaveOccurred())
+
+				Expect(fakeTxSimulator.PurgePrivateDataCallCount()).To(Equal(1))
+				ccname, collection, key := fakeTxSimulator.PurgePrivateDataArgsForCall(0)
+				Expect(ccname).To(Equal("cc-instance-name"))
+				Expect(collection).To(Equal("collection-name"))
+				Expect(key).To(Equal("purge-state-key"))
+			})
+
+			Context("when PurgePrivateData fails due to ledger error", func() {
+				BeforeEach(func() {
+					fakeTxSimulator.PurgePrivateDataReturns(errors.New("mango"))
+				})
+
+				It("returns an error", func() {
+					_, err := handler.HandlePurgePrivateData(incomingMessage, txContext)
+					Expect(err).To(MatchError("mango"))
+				})
+			})
+
+			Context("when PurgePrivateData fails due to Init transaction", func() {
+				BeforeEach(func() {
+					txContext.IsInitTransaction = true
+				})
+
+				It("returns the error from errorIfInitTransaction", func() {
+					_, err := handler.HandlePurgePrivateData(incomingMessage, txContext)
+					Expect(err).To(MatchError("private data APIs are not allowed in chaincode Init()"))
+				})
+			})
+
+			Context("when PurgePrivateData fails due to no write access permission", func() {
+				BeforeEach(func() {
+					fakeCollectionStore.RetrieveReadWritePermissionReturns(false, false, nil)
+				})
+
+				It("returns the error from errorIfCreatorHasNoWriteAccess", func() {
+					_, err := handler.HandlePurgePrivateData(incomingMessage, txContext)
+					Expect(err).To(MatchError("tx creator does not have write access" +
+						" permission on privatedata in chaincodeName:cc-instance-name" +
+						" collectionName: collection-name"))
+				})
+			})
+		})
+	})
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	Describe("HandleGetHistoryForKey", func() {
 		var (
 			request               *pb.GetHistoryForKey
@@ -2049,7 +2244,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleGetHistoryForKey(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -2093,7 +2293,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleGetHistoryForKey(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("marshal failed: proto: Marshal called with nil"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("marshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 
 			It("cleans up the query context", func() {
@@ -2348,7 +2553,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleInvokeChaincode(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("unmarshal failed: proto: can't skip unknown wire type 4"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("unmarshal failed"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 
@@ -2359,7 +2569,12 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				_, err := handler.HandleInvokeChaincode(incomingMessage, txContext)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("marshal failed: proto: Marshal called with nil"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("marshal failed:"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})

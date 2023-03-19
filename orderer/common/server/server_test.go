@@ -78,11 +78,15 @@ func (mds *mockDeliverSrv) Send(br *ab.DeliverResponse) error {
 }
 
 func testMsgTrace(handler func(dir string, msg *cb.Envelope) recvr, t *testing.T) {
+<<<<<<< HEAD
 	dir, err := ioutil.TempDir("", "TestMsgTrace")
 	if err != nil {
 		t.Fatalf("Could not create temp dir")
 	}
 	defer os.RemoveAll(dir)
+=======
+	dir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	msg := &cb.Envelope{Payload: []byte("somedata")}
 

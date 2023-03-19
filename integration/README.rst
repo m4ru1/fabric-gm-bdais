@@ -28,7 +28,11 @@ You must have the following installed:
 
 ::
 
+<<<<<<< HEAD
     $ go get github.com/onsi/ginkgo/ginkgo
+=======
+    $ go get github.com/onsi/ginkgo/v2
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 Ensure that you have Docker for `Linux`_, `Mac`_ or `Windows`_ 1.12 or higher properly installed on
 your machine.
@@ -44,8 +48,12 @@ your machine.
 Caveats, Gotchas, and Good-To-Knows
 -----------------------------------
 * The tests in this repository only exercise components that originate in the Fabric repository.
+<<<<<<< HEAD
 * Currently, docker is only used in the ginkgo tests when using chaincode, kafka, zookeeper,
   or couchdb images.
+=======
+* Currently, docker is only used in the ginkgo tests when using chaincode or couchdb images.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 
 Getting Started

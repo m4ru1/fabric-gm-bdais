@@ -28,12 +28,15 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+<<<<<<< HEAD
 type endorserResponse struct {
 	action         *peer.ChaincodeEndorsedAction
 	err            *gp.ErrorDetail
 	timeoutExpired bool
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // Evaluate will invoke the transaction function as specified in the SignedProposal
 func (gs *Server) Evaluate(ctx context.Context, request *gp.EvaluateRequest) (*gp.EvaluateResponse, error) {
 	if request == nil {

@@ -480,6 +480,7 @@ func TestMain(m *testing.M) {
 	// setup the MSP manager so that we can sign/verify
 	err := msptesttools.LoadMSPSetupForTesting()
 	if err != nil {
+<<<<<<< HEAD
 		os.Exit(-1)
 		fmt.Printf("Could not initialize msp")
 		return
@@ -495,13 +496,32 @@ func TestMain(m *testing.M) {
 		os.Exit(-1)
 		fmt.Printf("Could not get signer")
 		return
+=======
+		fmt.Printf("Could not initialize msp")
+		os.Exit(-1)
+	}
+	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	if err != nil {
+		fmt.Printf("Could not initialize cryptoProvider")
+		os.Exit(-1)
+	}
+	signer, err = mspmgmt.GetLocalMSP(cryptoProvider).GetDefaultSigningIdentity()
+	if err != nil {
+		fmt.Printf("Could not get signer")
+		os.Exit(-1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	signerSerialized, err = signer.Serialize()
 	if err != nil {
+<<<<<<< HEAD
 		os.Exit(-1)
 		fmt.Printf("Could not serialize identity")
 		return
+=======
+		fmt.Printf("Could not serialize identity")
+		os.Exit(-1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	os.Exit(m.Run())
@@ -526,14 +546,24 @@ func TestInvokedChaincodeName(t *testing.T) {
 
 	t.Run("BadProposalBytes", func(t *testing.T) {
 		_, err := protoutil.InvokedChaincodeName([]byte("garbage"))
+<<<<<<< HEAD
 		require.EqualError(t, err, "could not unmarshal proposal: proto: can't skip unknown wire type 7")
+=======
+		require.Error(t, err)
+		require.Contains(t, err.Error(), "could not unmarshal proposal")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("BadChaincodeProposalBytes", func(t *testing.T) {
 		_, err := protoutil.InvokedChaincodeName(protoutil.MarshalOrPanic(&pb.Proposal{
 			Payload: []byte("garbage"),
 		}))
+<<<<<<< HEAD
 		require.EqualError(t, err, "could not unmarshal chaincode proposal payload: proto: can't skip unknown wire type 7")
+=======
+		require.Error(t, err)
+		require.Contains(t, err.Error(), "could not unmarshal chaincode proposal payload")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("BadChaincodeInvocationSpec", func(t *testing.T) {
@@ -542,7 +572,12 @@ func TestInvokedChaincodeName(t *testing.T) {
 				Input: []byte("garbage"),
 			}),
 		}))
+<<<<<<< HEAD
 		require.EqualError(t, err, "could not unmarshal chaincode invocation spec: proto: can't skip unknown wire type 7")
+=======
+		require.Error(t, err)
+		require.Contains(t, err.Error(), "could not unmarshal chaincode invocation spec")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("NilChaincodeSpec", func(t *testing.T) {

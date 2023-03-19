@@ -96,9 +96,13 @@ func TestPeerAddress(t *testing.T) {
 }
 
 func TestGetServerConfig(t *testing.T) {
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "peer-clientcert")
 	require.NoError(t, err)
 	defer os.RemoveAll(tempdir)
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// good config without TLS
 	viper.Set("peer.tls.enabled", false)
@@ -180,9 +184,13 @@ func TestGetServerConfig(t *testing.T) {
 }
 
 func TestGetClientCertificate(t *testing.T) {
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "peer-clientcert")
 	require.NoError(t, err)
 	defer os.RemoveAll(tempdir)
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	ca, err := tlsgen.NewCA()
 	require.NoError(t, err)
@@ -418,9 +426,16 @@ func TestPropagateEnvironment(t *testing.T) {
 	viper.Set("peer.address", "localhost:8080")
 	viper.Set("chaincode.externalBuilders", &[]ExternalBuilder{
 		{
+<<<<<<< HEAD
 			Name:        "testName",
 			Environment: []string{"KEY=VALUE"},
 			Path:        "/testPath",
+=======
+			Name:                 "testName",
+			Environment:          []string{"KEY=VALUE"},
+			PropagateEnvironment: []string{},
+			Path:                 "/testPath",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		},
 		{
 			Name:                 "testName",

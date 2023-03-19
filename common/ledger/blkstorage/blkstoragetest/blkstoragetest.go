@@ -9,7 +9,10 @@ package blkstoragetest
 import (
 	"crypto/sha256"
 	"hash"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os"
 	"path/filepath"
 	"testing"
@@ -41,8 +44,12 @@ var (
 func BootstrapBlockstoreFromSnapshot(t *testing.T, ledgerName string, blocks []*common.Block) (*blkstorage.BlockStore, func()) {
 	require.NotEqual(t, 0, len(blocks))
 
+<<<<<<< HEAD
 	testDir, err := ioutil.TempDir("", ledgerName)
 	require.NoError(t, err)
+=======
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	snapshotDir := filepath.Join(testDir, "snapshot")
 	require.NoError(t, os.Mkdir(snapshotDir, 0o755))
 
@@ -76,7 +83,10 @@ func BootstrapBlockstoreFromSnapshot(t *testing.T, ledgerName string, blocks []*
 
 	cleanup := func() {
 		provider.Close()
+<<<<<<< HEAD
 		os.RemoveAll(testDir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	return blockStore, cleanup
 }

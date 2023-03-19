@@ -9,7 +9,10 @@ package pvtdatastorage
 import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
+<<<<<<< HEAD
 	"github.com/hyperledger/fabric/common/ledger/util/leveldbhelper"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/core/ledger"
 	"github.com/hyperledger/fabric/core/ledger/internal/version"
 )
@@ -37,6 +40,7 @@ func v11DecodePvtRwSet(encodedBytes []byte) (*rwset.TxPvtReadWriteSet, error) {
 	return writeset, proto.Unmarshal(encodedBytes, writeset)
 }
 
+<<<<<<< HEAD
 func v11RetrievePvtdata(itr *leveldbhelper.Iterator, filter ledger.PvtNsCollFilter) ([]*ledger.TxPvtData, error) {
 	var blkPvtData []*ledger.TxPvtData
 	txPvtData, err := v11DecodeKV(itr.Key(), itr.Value(), filter)
@@ -55,6 +59,9 @@ func v11RetrievePvtdata(itr *leveldbhelper.Iterator, filter ledger.PvtNsCollFilt
 }
 
 func v11DecodeKV(k, v []byte, filter ledger.PvtNsCollFilter) (*ledger.TxPvtData, error) {
+=======
+func v11DecodeKV(k, v []byte) (*ledger.TxPvtData, error) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	bNum, tNum, err := v11DecodePK(k)
 	if err != nil {
 		return nil, err
@@ -64,6 +71,7 @@ func v11DecodeKV(k, v []byte, filter ledger.PvtNsCollFilter) (*ledger.TxPvtData,
 		return nil, err
 	}
 	logger.Debugf("Retrieved V11 private data write set for block [%d] tran [%d]", bNum, tNum)
+<<<<<<< HEAD
 	filteredWSet := v11TrimPvtWSet(pvtWSet, filter)
 	return &ledger.TxPvtData{SeqInBlock: tNum, WriteSet: filteredWSet}, nil
 }
@@ -98,4 +106,7 @@ func v11TrimPvtWSet(pvtWSet *rwset.TxPvtReadWriteSet, filter ledger.PvtNsCollFil
 		}
 	}
 	return filteredTxPvtRwSet
+=======
+	return &ledger.TxPvtData{SeqInBlock: tNum, WriteSet: pvtWSet}, nil
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }

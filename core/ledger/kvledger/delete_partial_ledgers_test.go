@@ -15,9 +15,14 @@ import (
 )
 
 func TestDeleteUnderDeletionLedger(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	conf.HistoryDBConfig.Enabled = true
 	defer cleanup()
+=======
+	conf := testConfig(t)
+	conf.HistoryDBConfig.Enabled = true
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
@@ -40,9 +45,14 @@ func TestDeleteUnderDeletionLedger(t *testing.T) {
 }
 
 func TestDeletePartialLedgers(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	conf.HistoryDBConfig.Enabled = true
 	defer cleanup()
+=======
+	conf := testConfig(t)
+	conf.HistoryDBConfig.Enabled = true
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 	defer provider.Close()
@@ -65,9 +75,14 @@ func TestDeletePartialLedgers(t *testing.T) {
 }
 
 func TestNewProviderDeletesPartialLedgers(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	conf.HistoryDBConfig.Enabled = true
 	defer cleanup()
+=======
+	conf := testConfig(t)
+	conf.HistoryDBConfig.Enabled = true
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	provider := testutilNewProvider(conf, t, &mock.DeployedChaincodeInfoProvider{})
 

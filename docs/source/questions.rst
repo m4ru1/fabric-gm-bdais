@@ -8,10 +8,16 @@ Fabric not answered here, please use
 `StackOverflow <https://stackoverflow.com/questions/tagged/hyperledger-fabric>`__.
 Another approach to getting your questions answered to send an email to
 the `mailing
+<<<<<<< HEAD
 list <https://lists.hyperledger.org/mailman/listinfo/hyperledger-fabric>`__
 (fabric@lists.hyperledger.org), or ask your questions on
 `RocketChat <https://chat.hyperledger.org/>`__ (an alternative to Slack)
 on the #fabric or #fabric-questions channel.
+=======
+list <https://lists.hyperledger.org/g/fabric>`__
+(fabric@lists.hyperledger.org), or ask your questions on one of the Fabric
+`Discord channels <https://discord.com/invite/hyperledger>`__.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 .. note:: Please, when asking about problems you are facing tell us
           about the environment in which you are experiencing those

@@ -9,8 +9,14 @@
 VERSION=2.4.7
 # if ca version not passed in, default to latest released version
 CA_VERSION=1.5.5
+<<<<<<< HEAD
 ARCH=$(echo "$(uname -s|tr '[:upper:]' '[:lower:]'|sed 's/mingw64_nt.*/windows/')-$(uname -m | sed 's/x86_64/amd64/g')")
 MARCH=$(uname -m)
+=======
+ARCH=$(echo "$(uname -s|tr '[:upper:]' '[:lower:]'|sed 's/mingw64_nt.*/windows/')-$(uname -m |sed 's/x86_64/amd64/g')" |sed 's/darwin-arm64/darwin-amd64/g')
+MARCH=$(uname -m)
+: ${CONTAINER_CLI:="docker"}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 printHelp() {
     echo "Usage: bootstrap.sh [version [ca_version]] [options]"
@@ -39,9 +45,15 @@ dockerPull() {
     do
         image_name="$1"
         echo "====> hyperledger/fabric-$image_name:$three_digit_image_tag"
+<<<<<<< HEAD
         docker pull "hyperledger/fabric-$image_name:$three_digit_image_tag"
         docker tag "hyperledger/fabric-$image_name:$three_digit_image_tag" "hyperledger/fabric-$image_name"
         docker tag "hyperledger/fabric-$image_name:$three_digit_image_tag" "hyperledger/fabric-$image_name:$two_digit_image_tag"
+=======
+        ${CONTAINER_CLI} pull "hyperledger/fabric-$image_name:$three_digit_image_tag"
+        ${CONTAINER_CLI} tag "hyperledger/fabric-$image_name:$three_digit_image_tag" "hyperledger/fabric-$image_name"
+        ${CONTAINER_CLI} tag "hyperledger/fabric-$image_name:$three_digit_image_tag" "hyperledger/fabric-$image_name:$two_digit_image_tag"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
         shift
     done
 }
@@ -106,7 +118,11 @@ pullBinaries() {
 }
 
 pullDockerImages() {
+<<<<<<< HEAD
     command -v docker >& /dev/null
+=======
+    command -v ${CONTAINER_CLI} >& /dev/null
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     NODOCKER=$?
     if [ "${NODOCKER}" == 0 ]; then
         FABRIC_IMAGES=(peer orderer ccenv tools)
@@ -123,10 +139,17 @@ pullDockerImages() {
         CA_IMAGE=(ca)
         dockerPull "${CA_TAG}" "${CA_IMAGE[@]}"
         echo "===> List out hyperledger docker images"
+<<<<<<< HEAD
         docker images | grep hyperledger
     else
         echo "========================================================="
         echo "Docker not installed, bypassing download of Fabric images"
+=======
+        ${CONTAINER_CLI} images | grep hyperledger
+    else
+        echo "========================================================="
+        echo "${CONTAINER_CLI} not installed, bypassing download of Fabric images"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
         echo "========================================================="
     fi
 }

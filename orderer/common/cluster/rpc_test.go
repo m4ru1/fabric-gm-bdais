@@ -109,22 +109,41 @@ func TestRPCChangeDestination(t *testing.T) {
 	// of rpc.SendSubmit to node 2 doesn't send the message to node 1.
 	comm := &mocks.Communicator{}
 
+<<<<<<< HEAD
 	client1 := &mocks.ClusterClient{}
 	client2 := &mocks.ClusterClient{}
 
 	metrics := cluster.NewMetrics(&disabled.Provider{})
 
+=======
+	metrics := cluster.NewMetrics(&disabled.Provider{})
+
+	fakeStream1 := &mocks.StepClientStream{}
+	fakeStream2 := &mocks.StepClientStream{}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	comm.On("Remote", "mychannel", uint64(1)).Return(&cluster.RemoteContext{
 		SendBuffSize: 10,
 		Metrics:      metrics,
 		Logger:       flogging.MustGetLogger("test"),
+<<<<<<< HEAD
 		Client:       client1,
 		ProbeConn:    func(_ *grpc.ClientConn) error { return nil },
 	}, nil)
+=======
+		ProbeConn:    func(_ *grpc.ClientConn) error { return nil },
+		GetStreamFunc: func(ctx context.Context) (cluster.StepClientStream, error) {
+			return fakeStream1, nil
+		},
+		Channel: "mychannel",
+	}, nil)
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	comm.On("Remote", "mychannel", uint64(2)).Return(&cluster.RemoteContext{
 		SendBuffSize: 10,
 		Metrics:      metrics,
 		Logger:       flogging.MustGetLogger("test"),
+<<<<<<< HEAD
 		Client:       client2,
 		ProbeConn:    func(_ *grpc.ClientConn) error { return nil },
 	}, nil)
@@ -137,6 +156,15 @@ func TestRPCChangeDestination(t *testing.T) {
 	client1.On("Step", mock.Anything).Return(streamToNode1, nil).Once()
 	client2.On("Step", mock.Anything).Return(streamToNode2, nil).Once()
 
+=======
+		ProbeConn:    func(_ *grpc.ClientConn) error { return nil },
+		GetStreamFunc: func(ctx context.Context) (cluster.StepClientStream, error) {
+			return fakeStream2, nil
+		},
+		Channel: "mychannel",
+	}, nil)
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	rpc := &cluster.RPC{
 		Logger:        flogging.MustGetLogger("test"),
 		Timeout:       time.Hour,
@@ -151,17 +179,36 @@ func TestRPCChangeDestination(t *testing.T) {
 	signalSent := func(_ mock.Arguments) {
 		sent.Done()
 	}
+<<<<<<< HEAD
 	streamToNode1.On("Send", mock.Anything).Return(nil).Run(signalSent).Once()
 	streamToNode2.On("Send", mock.Anything).Return(nil).Run(signalSent).Once()
 	streamToNode1.On("Recv").Return(nil, io.EOF)
 	streamToNode2.On("Recv").Return(nil, io.EOF)
+=======
+
+	fakeStream1.On("Context", mock.Anything).Return(context.Background())
+	fakeStream1.On("Auth").Return(nil).Once()
+	fakeStream1.On("Send", mock.Anything).Return(nil).Run(signalSent).Once()
+	fakeStream1.On("Recv").Return(nil, io.EOF)
+
+	fakeStream2.On("Context", mock.Anything).Return(context.Background())
+	fakeStream2.On("Auth").Return(nil).Once()
+	fakeStream2.On("Send", mock.Anything).Return(nil).Run(signalSent).Once()
+	fakeStream2.On("Recv").Return(nil, io.EOF)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	rpc.SendSubmit(1, &orderer.SubmitRequest{Channel: "mychannel"}, noopReport)
 	rpc.SendSubmit(2, &orderer.SubmitRequest{Channel: "mychannel"}, noopReport)
 
 	sent.Wait()
+<<<<<<< HEAD
 	streamToNode1.AssertNumberOfCalls(t, "Send", 1)
 	streamToNode2.AssertNumberOfCalls(t, "Send", 1)
+=======
+
+	fakeStream1.AssertNumberOfCalls(t, "Send", 1)
+	fakeStream2.AssertNumberOfCalls(t, "Send", 1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 func TestSend(t *testing.T) {
@@ -199,7 +246,10 @@ func TestSend(t *testing.T) {
 		sendReturns    error
 		sendCalledWith *orderer.StepRequest
 		receiveReturns []interface{}
+<<<<<<< HEAD
 		stepReturns    []interface{}
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		remoteError    error
 		expectedErr    string
 	}
@@ -211,9 +261,16 @@ func TestSend(t *testing.T) {
 
 	var sendCalls uint32
 
+<<<<<<< HEAD
 	stream := &mocks.StepClient{}
 	stream.On("Context", mock.Anything).Return(context.Background())
 	stream.On("Send", mock.Anything).Return(func(*orderer.StepRequest) error {
+=======
+	fakeStream1 := &mocks.StepClientStream{}
+	fakeStream1.On("Context", mock.Anything).Return(context.Background())
+	fakeStream1.On("Auth").Return(nil)
+	fakeStream1.On("Send", mock.Anything).Return(func(*orderer.StepRequest) error {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		l.Lock()
 		defer l.Unlock()
 		atomic.AddUint32(&sendCalls, 1)
@@ -226,7 +283,10 @@ func TestSend(t *testing.T) {
 			name:           "Send and Receive submit succeed",
 			method:         submit,
 			sendReturns:    nil,
+<<<<<<< HEAD
 			stepReturns:    []interface{}{stream, nil},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			receiveReturns: []interface{}{submitResponse, nil},
 			sendCalledWith: submitReq,
 		},
@@ -234,14 +294,20 @@ func TestSend(t *testing.T) {
 			name:           "Send step succeed",
 			method:         step,
 			sendReturns:    nil,
+<<<<<<< HEAD
 			stepReturns:    []interface{}{stream, nil},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			sendCalledWith: consensusReq,
 		},
 		{
 			name:           "Send submit fails",
 			method:         submit,
 			sendReturns:    errors.New("oops"),
+<<<<<<< HEAD
 			stepReturns:    []interface{}{stream, nil},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			sendCalledWith: submitReq,
 			expectedErr:    "stream is aborted",
 		},
@@ -249,7 +315,10 @@ func TestSend(t *testing.T) {
 			name:           "Send step fails",
 			method:         step,
 			sendReturns:    errors.New("oops"),
+<<<<<<< HEAD
 			stepReturns:    []interface{}{stream, nil},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			sendCalledWith: consensusReq,
 			expectedErr:    "stream is aborted",
 		},
@@ -257,13 +326,19 @@ func TestSend(t *testing.T) {
 			name:        "Remote() fails",
 			method:      submit,
 			remoteError: errors.New("timed out"),
+<<<<<<< HEAD
 			stepReturns: []interface{}{stream, nil},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			expectedErr: "timed out",
 		},
 		{
 			name:        "Submit fails with Send",
 			method:      submit,
+<<<<<<< HEAD
 			stepReturns: []interface{}{nil, errors.New("deadline exceeded")},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			expectedErr: "deadline exceeded",
 		},
 	} {
@@ -275,14 +350,25 @@ func TestSend(t *testing.T) {
 			atomic.StoreUint32(&sendCalls, 0)
 			isSend := testCase.receiveReturns == nil
 			comm := &mocks.Communicator{}
+<<<<<<< HEAD
 			client := &mocks.ClusterClient{}
 			client.On("Step", mock.Anything).Return(testCase.stepReturns...)
+=======
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			rm := &cluster.RemoteContext{
 				Metrics:      cluster.NewMetrics(&disabled.Provider{}),
 				SendBuffSize: 1,
 				Logger:       flogging.MustGetLogger("test"),
 				ProbeConn:    func(_ *grpc.ClientConn) error { return nil },
+<<<<<<< HEAD
 				Client:       client,
+=======
+				GetStreamFunc: func(ctx context.Context) (cluster.StepClientStream, error) {
+					return fakeStream1, nil
+				},
+				Channel: "mychannel",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 			defer rm.Abort()
 			comm.On("Remote", "mychannel", uint64(1)).Return(rm, testCase.remoteError)
@@ -295,6 +381,7 @@ func TestSend(t *testing.T) {
 				Comm:          comm,
 			}
 
+<<<<<<< HEAD
 			err := testCase.method(rpc)
 			if testCase.remoteError == nil && testCase.stepReturns[1] == nil {
 				<-sent
@@ -308,6 +395,15 @@ func TestSend(t *testing.T) {
 
 			if testCase.remoteError == nil && testCase.expectedErr == "" && isSend {
 				stream.AssertCalled(t, "Send", testCase.sendCalledWith)
+=======
+			_ = testCase.method(rpc)
+			if testCase.remoteError == nil {
+				<-sent
+			}
+
+			if testCase.remoteError == nil && testCase.expectedErr == "" && isSend {
+				fakeStream1.AssertCalled(t, "Send", testCase.sendCalledWith)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				// Ensure that if we succeeded - only 1 stream was created despite 2 calls
 				// to Send() were made
 				err := testCase.method(rpc)
@@ -315,7 +411,10 @@ func TestSend(t *testing.T) {
 
 				require.NoError(t, err)
 				require.Equal(t, 2, int(atomic.LoadUint32(&sendCalls)))
+<<<<<<< HEAD
 				client.AssertNumberOfCalls(t, "Step", 1)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 		})
 	}
@@ -329,15 +428,28 @@ func TestRPCGarbageCollection(t *testing.T) {
 	// The first stream should be cleaned from the mapping.
 
 	comm := &mocks.Communicator{}
+<<<<<<< HEAD
 	client := &mocks.ClusterClient{}
 	stream := &mocks.StepClient{}
+=======
+
+	fakeStream1 := &mocks.StepClientStream{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	remote := &cluster.RemoteContext{
 		SendBuffSize: 10,
 		Metrics:      cluster.NewMetrics(&disabled.Provider{}),
 		Logger:       flogging.MustGetLogger("test"),
+<<<<<<< HEAD
 		Client:       client,
 		ProbeConn:    func(_ *grpc.ClientConn) error { return nil },
+=======
+		ProbeConn:    func(_ *grpc.ClientConn) error { return nil },
+		GetStreamFunc: func(ctx context.Context) (cluster.StepClientStream, error) {
+			return fakeStream1, nil
+		},
+		Channel: "mychannel",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	var sent sync.WaitGroup
@@ -345,12 +457,21 @@ func TestRPCGarbageCollection(t *testing.T) {
 	defineMocks := func(destination uint64) {
 		sent.Add(1)
 		comm.On("Remote", "mychannel", destination).Return(remote, nil)
+<<<<<<< HEAD
 		stream.On("Context", mock.Anything).Return(context.Background())
 		client.On("Step", mock.Anything).Return(stream, nil).Once()
 		stream.On("Send", mock.Anything).Return(nil).Once().Run(func(_ mock.Arguments) {
 			sent.Done()
 		})
 		stream.On("Recv").Return(nil, nil)
+=======
+		fakeStream1.On("Context", mock.Anything).Return(context.Background())
+		fakeStream1.On("Auth").Return(nil)
+		fakeStream1.On("Send", mock.Anything).Return(nil).Run(func(_ mock.Arguments) {
+			sent.Done()
+		}).Once()
+		fakeStream1.On("Recv").Return(nil, nil)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	mapping := cluster.NewStreamsByType()
@@ -372,7 +493,11 @@ func TestRPCGarbageCollection(t *testing.T) {
 	require.Len(t, mapping[cluster.SubmitOperation], 1)
 	require.Equal(t, uint64(1), mapping[cluster.SubmitOperation][1].ID)
 	// And the underlying gRPC stream indeed had Send invoked on it.
+<<<<<<< HEAD
 	stream.AssertNumberOfCalls(t, "Send", 1)
+=======
+	fakeStream1.AssertNumberOfCalls(t, "Send", 1)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// Abort all streams we currently have that are associated to the remote.
 	remote.Abort()

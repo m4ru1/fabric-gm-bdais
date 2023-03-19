@@ -735,9 +735,15 @@ func (d *gossipDiscoveryImpl) expireDeadMembers(dead []common.PKIidType) {
 
 	d.lock.Unlock()
 
+<<<<<<< HEAD
 	for _, member2Expire := range deadMembers2Expire {
 		d.logger.Warning("Closing connection to", member2Expire)
 		d.comm.CloseConn(&member2Expire)
+=======
+	for i := range deadMembers2Expire {
+		d.logger.Warning("Closing connection to", deadMembers2Expire[i])
+		d.comm.CloseConn(&deadMembers2Expire[i])
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 }
 

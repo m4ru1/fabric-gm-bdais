@@ -45,13 +45,21 @@ func TestBasicTxValidity(t *testing.T) {
 		},
 		{
 			[]byte("bad env"), &pkgtx.InvalidErr{
+<<<<<<< HEAD
 				ActualErr:      errors.New("error unmarshalling Envelope: unexpected EOF"),
+=======
+				ActualErr:      errors.New("error unmarshalling Envelope"),
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				ValidationCode: peer.TxValidationCode_INVALID_OTHER_REASON,
 			},
 		},
 		{
 			protoutil.MarshalOrPanic(&common.Envelope{Payload: []byte("bad payload"), Signature: []byte("signature")}), &pkgtx.InvalidErr{
+<<<<<<< HEAD
 				ActualErr:      errors.New("error unmarshalling Payload: unexpected EOF"),
+=======
+				ActualErr:      errors.New("error unmarshalling Payload"),
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				ValidationCode: peer.TxValidationCode_BAD_PAYLOAD,
 			},
 		},
@@ -81,13 +89,21 @@ func TestBasicTxValidity(t *testing.T) {
 		},
 		{
 			protoutil.MarshalOrPanic(&common.Envelope{Payload: protoutil.MarshalOrPanic(&common.Payload{Header: &common.Header{ChannelHeader: []byte("bad channel header"), SignatureHeader: protoutil.MarshalOrPanic(&common.SignatureHeader{Creator: []byte("creator"), Nonce: []byte("nonce")})}}), Signature: []byte("signature")}), &pkgtx.InvalidErr{
+<<<<<<< HEAD
 				ActualErr:      errors.New("error unmarshalling ChannelHeader: unexpected EOF"),
+=======
+				ActualErr:      errors.New("error unmarshalling ChannelHeader"),
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				ValidationCode: peer.TxValidationCode_BAD_PAYLOAD,
 			},
 		},
 		{
 			protoutil.MarshalOrPanic(&common.Envelope{Payload: protoutil.MarshalOrPanic(&common.Payload{Header: &common.Header{ChannelHeader: protoutil.MarshalOrPanic(&common.ChannelHeader{ChannelId: "myc", TxId: "tid"}), SignatureHeader: []byte("bad sig hdr")}}), Signature: []byte("signature")}), &pkgtx.InvalidErr{
+<<<<<<< HEAD
 				ActualErr:      errors.New("error unmarshalling SignatureHeader: unexpected EOF"),
+=======
+				ActualErr:      errors.New("error unmarshalling SignatureHeader"),
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				ValidationCode: peer.TxValidationCode_BAD_PAYLOAD,
 			},
 		},
@@ -95,7 +111,11 @@ func TestBasicTxValidity(t *testing.T) {
 
 	for _, ic := range invalidConfigs {
 		_, _, err := f.CreateProcessor(ic.env)
+<<<<<<< HEAD
 		require.Equal(t, err.Error(), ic.expectedErr.Error())
+=======
+		require.ErrorContains(t, err, ic.expectedErr.Error())
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	// NOTE: common.HeaderType_CONFIG is a valid type and this should succeed when we populate ProcessorFactory (and signifies successful validation). Till then, a negative test

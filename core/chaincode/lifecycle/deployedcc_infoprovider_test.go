@@ -27,7 +27,11 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 )
 
@@ -233,7 +237,12 @@ var _ = Describe("ValidatorCommitter", func() {
 
 			It("wraps and returns that error", func() {
 				_, err := vc.ChaincodeInfo("channel-name", "cc-name", fakeQueryExecutor)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not get info about chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo: proto: can't skip unknown wire type 7"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("could not get info about chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})
@@ -368,7 +377,12 @@ var _ = Describe("ValidatorCommitter", func() {
 
 			It("wraps and returns that error", func() {
 				_, err := vc.AllChaincodesInfo("channel-name", fakeQueryExecutor)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not get info about chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo: proto: can't skip unknown wire type 7"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("could not get info about chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})
@@ -437,7 +451,12 @@ var _ = Describe("ValidatorCommitter", func() {
 
 			It("wraps and returns that error", func() {
 				_, err := vc.CollectionInfo("channel-name", "cc-name", "collection-name", fakeQueryExecutor)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not get chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo: proto: can't skip unknown wire type 7"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("could not get chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})
@@ -622,7 +641,12 @@ var _ = Describe("ValidatorCommitter", func() {
 
 			It("wraps and returns that error", func() {
 				_, err := vc.AllCollectionsConfigPkg("channel-name", "cc-name", fakeQueryExecutor)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not get info about chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo: proto: can't skip unknown wire type 7"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("could not get info about chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})
@@ -685,7 +709,12 @@ var _ = Describe("ValidatorCommitter", func() {
 
 			It("wraps and returns that error", func() {
 				_, _, uerr, _ := vc.ValidationInfo("channel-id", "cc-name", fakeQueryExecutor)
+<<<<<<< HEAD
 				Expect(uerr).To(MatchError("could not get chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo: proto: can't skip unknown wire type 7"))
+=======
+				Expect(uerr).To(Not(BeNil()))
+				Expect(uerr.Error()).To(HavePrefix("could not get chaincode: could not deserialize chaincode definition for chaincode cc-name: could not unmarshal state for key namespaces/fields/cc-name/ValidationInfo"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 	})

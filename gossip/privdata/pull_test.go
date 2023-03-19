@@ -9,8 +9,11 @@ package privdata
 import (
 	"bytes"
 	"crypto/rand"
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"sync"
 	"testing"
 
@@ -1068,11 +1071,15 @@ func TestPullerIntegratedWithDataRetreiver(t *testing.T) {
 	p2 := gn.newPuller("p2", policyStore, factoryMock, membership(peerData{"p1", uint64(1)})...)
 
 	committer := &mocks.Committer{}
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "ts")
 	if err != nil {
 		t.Fatalf("Failed to create test directory, got err %s", err)
 		return
 	}
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	storeProvider, err := transientstore.NewStoreProvider(tempdir)
 	if err != nil {
 		t.Fatalf("Failed to open store, got err %s", err)
@@ -1084,7 +1091,10 @@ func TestPullerIntegratedWithDataRetreiver(t *testing.T) {
 		return
 	}
 	defer storeProvider.Close()
+<<<<<<< HEAD
 	defer os.RemoveAll(tempdir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	result := []*ledger.TxPvtData{
 		{
 			WriteSet: &rwset.TxPvtReadWriteSet{

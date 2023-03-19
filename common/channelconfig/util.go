@@ -153,6 +153,7 @@ func ChannelRestrictionsValue(maxChannelCount uint64) *StandardConfigValue {
 	}
 }
 
+<<<<<<< HEAD
 // KafkaBrokersValue returns the config definition for the addresses of the ordering service's Kafka brokers.
 // It is a value for the /Channel/Orderer group.
 func KafkaBrokersValue(brokers []string) *StandardConfigValue {
@@ -164,6 +165,8 @@ func KafkaBrokersValue(brokers []string) *StandardConfigValue {
 	}
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // MSPValue returns the config definition for an MSP.
 // It is a value for the /Channel/Orderer/*, /Channel/Application/*, and /Channel/Consortiums/*/*/* groups.
 func MSPValue(mspDef *mspprotos.MSPConfig) *StandardConfigValue {
@@ -193,6 +196,19 @@ func CapabilitiesValue(capabilities map[string]bool) *StandardConfigValue {
 	}
 }
 
+<<<<<<< HEAD
+=======
+func OrderersValue(consenters []*cb.Consenter) *StandardConfigValue {
+	o := &cb.Orderers{
+		ConsenterMapping: consenters,
+	}
+	return &StandardConfigValue{
+		key:   OrderersKey,
+		value: o,
+	}
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // EndpointsValue returns the config definition for the orderer addresses at an org scoped level.
 // It is a value for the /Channel/Orderer/<OrgName> group.
 func EndpointsValue(addresses []string) *StandardConfigValue {

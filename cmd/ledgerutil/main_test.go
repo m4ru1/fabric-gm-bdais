@@ -38,7 +38,23 @@ func TestArguments(t *testing.T) {
 		},
 		"one-snapshot": {
 			exitCode: 1,
+<<<<<<< HEAD
 			args:     []string{"compare, snapshotDir1"},
+=======
+			args:     []string{"compare", "snapshotDir1"},
+		},
+		"invalid-snapshot-dirs": {
+			exitCode: 1,
+			args:     []string{"compare", "/non-existent/snapshot1", "/non-existent/snapshot2"},
+		},
+		"identifytxs-help": {
+			exitCode: 0,
+			args:     []string{"identifytxs", "--help"},
+		},
+		"identifytxs": {
+			exitCode: 1,
+			args:     []string{"identifytxs"},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		},
 	}
 

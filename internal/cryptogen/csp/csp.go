@@ -129,7 +129,11 @@ func (e *ECDSASigner) Sign(rand io.Reader, digest []byte, opts crypto.SignerOpts
 		},
 	)
 
+<<<<<<< HEAD
 	// return marshaled aignature
+=======
+	// return marshaled signature
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	return asn1.Marshal(sig)
 }
 

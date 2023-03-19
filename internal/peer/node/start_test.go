@@ -8,8 +8,11 @@ package node
 
 import (
 	"bytes"
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"strconv"
 	"testing"
 	"time"
@@ -30,9 +33,13 @@ func TestStartCmd(t *testing.T) {
 	defer viper.Reset()
 	g := NewGomegaWithT(t)
 
+<<<<<<< HEAD
 	tempDir, err := ioutil.TempDir("", "startcmd")
 	g.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(tempDir)
+=======
+	tempDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	viper.Set("peer.address", "localhost:6051")
 	viper.Set("peer.listenAddress", "0.0.0.0:6051")
@@ -155,7 +162,11 @@ func TestComputeChaincodeEndpoint(t *testing.T) {
 }
 
 func TestGetDockerHostConfig(t *testing.T) {
+<<<<<<< HEAD
 	testutil.SetupTestConfig()
+=======
+	testutil.SetupTestConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	hostConfig := getDockerHostConfig()
 	require.NotNil(t, hostConfig)
 	require.Equal(t, "host", hostConfig.NetworkMode)

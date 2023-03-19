@@ -255,10 +255,21 @@ func newTestNodeWithMetrics(t *testing.T, metrics cluster.MetricsProvider, tlsCo
 		bindAddress:  gRPCServer.Address(),
 		handler:      handler,
 		nodeInfo: cluster.RemoteNode{
+<<<<<<< HEAD
 			Endpoint:      gRPCServer.Address(),
 			ID:            nextUnusedID(),
 			ServerTLSCert: serverKeyPair.TLSCert.Raw,
 			ClientTLSCert: clientKeyPair.TLSCert.Raw,
+=======
+			NodeAddress: cluster.NodeAddress{
+				Endpoint: gRPCServer.Address(),
+				ID:       nextUnusedID(),
+			},
+			NodeCerts: cluster.NodeCerts{
+				ServerTLSCert: serverKeyPair.TLSCert.Raw,
+				ClientTLSCert: clientKeyPair.TLSCert.Raw,
+			},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		},
 		srv: gRPCServer,
 	}
@@ -424,10 +435,15 @@ func TestBlockingSend(t *testing.T) {
 			config := []cluster.RemoteNode{node1.nodeInfo, node2.nodeInfo}
 			node1.c.Configure(testChannel, config)
 			node2.c.Configure(testChannel, config)
+<<<<<<< HEAD
+=======
+			node2.handler.On("OnSubmit", testChannel, node1.nodeInfo.ID, mock.Anything).Return(errors.Errorf("whoops")).Once()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			rm, err := node1.c.Remote(testChannel, node2.nodeInfo.ID)
 			require.NoError(t, err)
 
+<<<<<<< HEAD
 			client := &mocks.ClusterClient{}
 			fakeStream := &mocks.StepClient{}
 
@@ -439,6 +455,19 @@ func TestBlockingSend(t *testing.T) {
 			// Configure client to return the mock stream
 			fakeStream.On("Context", mock.Anything).Return(context.Background())
 			client.On("Step", mock.Anything).Return(fakeStream, nil).Once()
+=======
+			fakeStream := &mocks.StepClientStream{}
+			rm.GetStreamFunc = func(ctx context.Context) (cluster.StepClientStream, error) {
+				return fakeStream, nil
+			}
+
+			rm.ProbeConn = func(_ *grpc.ClientConn) error {
+				return nil
+			}
+
+			fakeStream.On("Context", mock.Anything).Return(context.Background())
+			fakeStream.On("Auth").Return(nil).Once()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			unBlock := make(chan struct{})
 			var sendInvoked sync.WaitGroup
@@ -639,9 +668,17 @@ func TestStreamAbort(t *testing.T) {
 	defer node2.stop()
 
 	invalidNodeInfo := cluster.RemoteNode{
+<<<<<<< HEAD
 		ID:            node2.nodeInfo.ID,
 		ServerTLSCert: []byte{1, 2, 3},
 		ClientTLSCert: []byte{1, 2, 3},
+=======
+		NodeAddress: cluster.NodeAddress{ID: node2.nodeInfo.ID},
+		NodeCerts: cluster.NodeCerts{
+			ServerTLSCert: []byte{1, 2, 3},
+			ClientTLSCert: []byte{1, 2, 3},
+		},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 
 	for _, tst := range []struct {
@@ -1426,14 +1463,22 @@ func TestCertExpirationWarningEgress(t *testing.T) {
 	stub, err := node1.c.Remote(testChannel, node2.nodeInfo.ID)
 	require.NoError(t, err)
 
+<<<<<<< HEAD
+=======
+	node2.handler.On("OnSubmit", testChannel, node1.nodeInfo.ID, mock.Anything).Return(nil)
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	mockgRPC := &mocks.StepClient{}
 	mockgRPC.On("Send", mock.Anything).Return(nil)
 	mockgRPC.On("Context").Return(context.Background())
 	mockClient := &mocks.ClusterClient{}
 	mockClient.On("Step", mock.Anything).Return(mockgRPC, nil)
 
+<<<<<<< HEAD
 	stub.Client = mockClient
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	stream := assertEventualEstablishStream(t, stub)
 
 	alerts := make(chan struct{}, 100)
@@ -1518,8 +1563,13 @@ func assertEventualEstablishStream(t *testing.T, rpc *cluster.RemoteContext) *cl
 	return res
 }
 
+<<<<<<< HEAD
 func assertEventualSendMessage(t *testing.T, rpc *cluster.RemoteContext, req *orderer.SubmitRequest) orderer.Cluster_StepClient {
 	var res orderer.Cluster_StepClient
+=======
+func assertEventualSendMessage(t *testing.T, rpc *cluster.RemoteContext, req *orderer.SubmitRequest) *cluster.Stream {
+	var res *cluster.Stream
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	gt := gomega.NewGomegaWithT(t)
 	gt.Eventually(func() error {
 		stream, err := rpc.NewStream(time.Hour)

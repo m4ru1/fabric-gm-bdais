@@ -8,9 +8,13 @@ package main
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
 	"net"
 	"os"
+=======
+	"net"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os/exec"
 	"path/filepath"
 	"testing"
@@ -30,9 +34,13 @@ func TestPluginLoadingFailure(t *testing.T) {
 	parentDir, err := filepath.Abs("../..")
 	gt.Expect(err).NotTo(HaveOccurred())
 
+<<<<<<< HEAD
 	tempDir, err := ioutil.TempDir("", "plugin-failure")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(tempDir)
+=======
+	tempDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	peerListener, err := net.Listen("tcp", "localhost:0")
 	gt.Expect(err).NotTo(HaveOccurred())

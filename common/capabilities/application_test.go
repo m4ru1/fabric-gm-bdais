@@ -89,6 +89,28 @@ func TestApplicationV20(t *testing.T) {
 	require.True(t, ap.StorePvtDataOfInvalidTx())
 }
 
+<<<<<<< HEAD
+=======
+func TestApplicationV25(t *testing.T) {
+	ap := NewApplicationProvider(map[string]*cb.Capability{
+		ApplicationV2_5: {},
+	})
+	require.NoError(t, ap.Supported())
+	require.True(t, ap.ForbidDuplicateTXIdInBlock())
+	require.True(t, ap.V1_1Validation())
+	require.True(t, ap.V1_2Validation())
+	require.True(t, ap.V1_3Validation())
+	require.True(t, ap.V2_0Validation())
+	require.True(t, ap.KeyLevelEndorsement())
+	require.True(t, ap.ACLs())
+	require.True(t, ap.CollectionUpgrade())
+	require.True(t, ap.PrivateChannelData())
+	require.True(t, ap.LifecycleV20())
+	require.True(t, ap.StorePvtDataOfInvalidTx())
+	require.True(t, ap.PurgePvtData())
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func TestApplicationPvtDataExperimental(t *testing.T) {
 	ap := NewApplicationProvider(map[string]*cb.Capability{
 		ApplicationPvtDataExperimental: {},
@@ -102,6 +124,10 @@ func TestHasCapability(t *testing.T) {
 	require.True(t, ap.HasCapability(ApplicationV1_2))
 	require.True(t, ap.HasCapability(ApplicationV1_3))
 	require.True(t, ap.HasCapability(ApplicationV2_0))
+<<<<<<< HEAD
+=======
+	require.True(t, ap.HasCapability(ApplicationV2_5))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.True(t, ap.HasCapability(ApplicationPvtDataExperimental))
 	require.True(t, ap.HasCapability(ApplicationResourcesTreeExperimental))
 	require.False(t, ap.HasCapability("default"))

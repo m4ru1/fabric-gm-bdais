@@ -213,11 +213,15 @@ func TestCreateChainWithOutputBlock(t *testing.T) {
 	cmd := createCmd(mockCF)
 	AddFlags(cmd)
 
+<<<<<<< HEAD
 	tempDir, err := ioutil.TempDir("", "create-output")
 	if err != nil {
 		t.Fatalf("failed to create temporary directory")
 	}
 	defer os.RemoveAll(tempDir)
+=======
+	tempDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	outputBlockPath := filepath.Join(tempDir, "output.block")
 	args := []string{"-c", mockchain, "-o", "localhost:7050", "--outputBlock", outputBlockPath}
@@ -457,11 +461,15 @@ func TestCreateChainFromTx(t *testing.T) {
 	defer cleanup()
 
 	mockchannel := "mockchannel"
+<<<<<<< HEAD
 	dir, err := ioutil.TempDir("", "createtestfromtx-")
 	if err != nil {
 		t.Fatalf("couldn't create temp dir")
 	}
 	defer os.RemoveAll(dir) // clean up
+=======
+	dir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// this could be created by the create command
 	defer os.Remove(mockchannel + ".block")
@@ -520,12 +528,16 @@ func TestCreateChainInvalidTx(t *testing.T) {
 
 	mockchannel := "mockchannel"
 
+<<<<<<< HEAD
 	dir, err := ioutil.TempDir("", "createinvaltest-")
 	if err != nil {
 		t.Fatalf("couldn't create temp dir")
 	}
 
 	defer os.RemoveAll(dir) // clean up
+=======
+	dir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// this is created by create command
 	defer os.Remove(mockchannel + ".block")
@@ -595,9 +607,13 @@ func TestCreateChainNilCF(t *testing.T) {
 	defer cleanup()
 
 	mockchannel := "mockchannel"
+<<<<<<< HEAD
 	dir, err := ioutil.TempDir("", "createinvaltest-")
 	require.NoError(t, err, "Couldn't create temp dir")
 	defer os.RemoveAll(dir) // clean up
+=======
+	dir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// this is created by create command
 	defer os.Remove(mockchannel + ".block")
@@ -609,7 +625,11 @@ func TestCreateChainNilCF(t *testing.T) {
 	AddFlags(cmd)
 	args := []string{"-c", mockchannel, "-f", file, "-o", "localhost:7050"}
 	cmd.SetArgs(args)
+<<<<<<< HEAD
 	err = cmd.Execute()
+=======
+	err := cmd.Execute()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.Error(t, err)
 	require.Contains(t, err.Error(), "failed to create deliver client")
 

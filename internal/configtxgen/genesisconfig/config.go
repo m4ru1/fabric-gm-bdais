@@ -21,7 +21,11 @@ import (
 )
 
 const (
+<<<<<<< HEAD
 	// The type key for etcd based RAFT consensus.
+=======
+	// EtcdRaft The type key for etcd based RAFT consensus.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	EtcdRaft = "etcdraft"
 )
 
@@ -38,6 +42,7 @@ const (
 	// only the sample MSP and uses solo for ordering.
 	SampleSingleMSPSoloProfile = "SampleSingleMSPSolo"
 
+<<<<<<< HEAD
 	// SampleInsecureKafkaProfile references the sample profile which does not
 	// include any MSPs and uses Kafka for ordering.
 	SampleInsecureKafkaProfile = "SampleInsecureKafka"
@@ -48,6 +53,8 @@ const (
 	// only the sample MSP and uses Kafka for ordering.
 	SampleSingleMSPKafkaProfile = "SampleSingleMSPKafka"
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	// SampleDevModeEtcdRaftProfile references the sample profile used for testing
 	// the etcd/raft-based ordering service.
 	SampleDevModeEtcdRaftProfile = "SampleDevModeEtcdRaft"
@@ -55,7 +62,11 @@ const (
 	// SampleAppChannelInsecureSoloProfile references the sample profile which
 	// does not include any MSPs and uses solo for ordering.
 	SampleAppChannelInsecureSoloProfile = "SampleAppChannelInsecureSolo"
+<<<<<<< HEAD
 	// SampleApppChannelEtcdRaftProfile references the sample profile used for
+=======
+	// SampleAppChannelEtcdRaftProfile references the sample profile used for
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	// testing the etcd/raft-based ordering service using the channel
 	// participation API.
 	SampleAppChannelEtcdRaftProfile = "SampleAppChannelEtcdRaft"
@@ -150,6 +161,7 @@ type AnchorPeer struct {
 
 // Orderer contains configuration associated to a channel.
 type Orderer struct {
+<<<<<<< HEAD
 	OrdererType   string                   `yaml:"OrdererType"`
 	Addresses     []string                 `yaml:"Addresses"`
 	BatchTimeout  time.Duration            `yaml:"BatchTimeout"`
@@ -160,6 +172,18 @@ type Orderer struct {
 	MaxChannels   uint64                   `yaml:"MaxChannels"`
 	Capabilities  map[string]bool          `yaml:"Capabilities"`
 	Policies      map[string]*Policy       `yaml:"Policies"`
+=======
+	OrdererType      string                   `yaml:"OrdererType"`
+	Addresses        []string                 `yaml:"Addresses"`
+	BatchTimeout     time.Duration            `yaml:"BatchTimeout"`
+	BatchSize        BatchSize                `yaml:"BatchSize"`
+	ConsenterMapping []*Consenter             `yaml:"ConsenterMapping"`
+	EtcdRaft         *etcdraft.ConfigMetadata `yaml:"EtcdRaft"`
+	Organizations    []*Organization          `yaml:"Organizations"`
+	MaxChannels      uint64                   `yaml:"MaxChannels"`
+	Capabilities     map[string]bool          `yaml:"Capabilities"`
+	Policies         map[string]*Policy       `yaml:"Policies"`
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 // BatchSize contains configuration affecting the size of batches.
@@ -169,9 +193,20 @@ type BatchSize struct {
 	PreferredMaxBytes uint32 `yaml:"PreferredMaxBytes"`
 }
 
+<<<<<<< HEAD
 // Kafka contains configuration for the Kafka-based orderer.
 type Kafka struct {
 	Brokers []string `yaml:"Brokers"`
+=======
+type Consenter struct {
+	ID            uint32 `yaml:"ID"`
+	Host          string `yaml:"Host"`
+	Port          uint32 `yaml:"Port"`
+	MSPID         string `yaml:"MSPID"`
+	Identity      string `yaml:"Identity"`
+	ClientTLSCert string `yaml:"ClientTLSCert"`
+	ServerTLSCert string `yaml:"ServerTLSCert"`
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 var genesisDefaults = TopLevel{
@@ -183,9 +218,12 @@ var genesisDefaults = TopLevel{
 			AbsoluteMaxBytes:  10 * 1024 * 1024,
 			PreferredMaxBytes: 2 * 1024 * 1024,
 		},
+<<<<<<< HEAD
 		Kafka: Kafka{
 			Brokers: []string{"127.0.0.1:9092"},
 		},
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		EtcdRaft: &etcdraft.ConfigMetadata{
 			Options: &etcdraft.Options{
 				TickInterval:         "500ms",
@@ -332,11 +370,14 @@ loop:
 	switch ord.OrdererType {
 	case "solo":
 		// nothing to be done here
+<<<<<<< HEAD
 	case "kafka":
 		if ord.Kafka.Brokers == nil {
 			logger.Infof("Orderer.Kafka unset, setting to %v", genesisDefaults.Orderer.Kafka.Brokers)
 			ord.Kafka.Brokers = genesisDefaults.Orderer.Kafka.Brokers
 		}
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	case EtcdRaft:
 		if ord.EtcdRaft == nil {
 			logger.Panicf("%s configuration missing", EtcdRaft)
@@ -405,6 +446,14 @@ loop:
 			cf.TranslatePathInPlace(configDir, &serverCertPath)
 			c.ServerTlsCert = []byte(serverCertPath)
 		}
+<<<<<<< HEAD
+=======
+	case "BFT":
+		if len(ord.ConsenterMapping) == 0 {
+			logger.Panic("Orderer.Orderers.ConsenterMapping missing")
+		}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	default:
 		logger.Panicf("unknown orderer type: %s", ord.OrdererType)
 	}

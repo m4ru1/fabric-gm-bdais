@@ -7,11 +7,18 @@ SPDX-License-Identifier: Apache-2.0
 package pvtdatastorage
 
 import (
+<<<<<<< HEAD
+=======
+	"github.com/bits-and-blooms/bitset"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
 	"github.com/hyperledger/fabric/common/ledger/util/leveldbhelper"
 	"github.com/hyperledger/fabric/core/ledger"
 	"github.com/pkg/errors"
+<<<<<<< HEAD
 	"github.com/willf/bitset"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 // CommitPvtDataOfOldBlocks commits the pvtData (i.e., previously missing data) of old blockp.

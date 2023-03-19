@@ -20,8 +20,12 @@ import (
 )
 
 func TestStateListener(t *testing.T) {
+<<<<<<< HEAD
 	conf, cleanup := testConfig(t)
 	defer cleanup()
+=======
+	conf := testConfig(t)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// create a listener and register it to listen to state change in a namespace
 	channelid := "testLedger"

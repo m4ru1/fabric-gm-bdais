@@ -39,6 +39,17 @@ func InitFactories(config *FactoryOpts) error {
 
 func initFactories(config *FactoryOpts) error {
 	// Take some precautions on default opts
+<<<<<<< HEAD
+=======
+	// 如果不传config，或者config配置不全，则启用默认配置
+	/*
+		Default: "SW",
+		SW: &SwOpts{
+			Hash:     "SHA2",
+			Security: 256,
+		},
+	*/
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if config == nil {
 		config = GetDefaultOpts()
 	}

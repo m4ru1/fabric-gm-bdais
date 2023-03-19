@@ -80,9 +80,14 @@ func TestIsConsenterOfChannel(t *testing.T) {
 			configBlock:   &common.Block{Header: &common.BlockHeader{}},
 		},
 		{
+<<<<<<< HEAD
 			name: "invalid envelope inside block",
 			expectedError: "failed to unmarshal payload from envelope:" +
 				" error unmarshalling Payload: proto: common.Payload: illegal tag 0 (wire type 1)",
+=======
+			name:          "invalid envelope inside block",
+			expectedError: "failed to unmarshal payload from envelope:",
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			configBlock: &common.Block{
 				Header: &common.BlockHeader{},
 				Data: &common.BlockData{
@@ -115,7 +120,11 @@ func TestIsConsenterOfChannel(t *testing.T) {
 			}
 			err = consenterCertificate.IsConsenterOfChannel(testCase.configBlock)
 			if testCase.expectedError != "" {
+<<<<<<< HEAD
 				require.EqualError(t, err, testCase.expectedError)
+=======
+				require.ErrorContains(t, err, testCase.expectedError)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			} else {
 				require.NoError(t, err)
 			}

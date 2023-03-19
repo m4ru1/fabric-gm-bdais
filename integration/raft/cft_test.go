@@ -16,9 +16,13 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+<<<<<<< HEAD
 	"strconv"
 	"strings"
 	"sync"
+=======
+	"strings"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"syscall"
 	"time"
 
@@ -34,12 +38,20 @@ import (
 	"github.com/hyperledger/fabric/integration/nwo/commands"
 	"github.com/hyperledger/fabric/integration/ordererclient"
 	"github.com/hyperledger/fabric/protoutil"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"github.com/tedsuo/ifrit"
+<<<<<<< HEAD
 	"github.com/tedsuo/ifrit/ginkgomon"
+=======
+	ginkgomon "github.com/tedsuo/ifrit/ginkgomon_v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/tedsuo/ifrit/grouper"
 )
 
@@ -106,7 +118,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			Eventually(o1Proc.Ready(), network.EventuallyTimeout).Should(BeClosed())
 			Eventually(ordererProc.Ready(), network.EventuallyTimeout).Should(BeClosed())
 
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{o1Runner})
+=======
+			FindLeader([]*ginkgomon.Runner{o1Runner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("performing operation with orderer1")
 			env := CreateBroadcastEnvelope(network, o1, network.SystemChannel.Name, []byte("foo"))
@@ -136,7 +152,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			o1Runner = network.OrdererRunner(o1)
 			o1Proc = ifrit.Invoke(o1Runner)
 			Eventually(o1Proc.Ready(), network.EventuallyTimeout).Should(BeClosed())
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{o1Runner})
+=======
+			FindLeader([]*ginkgomon.Runner{o1Runner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("broadcasting envelope to restarted orderer")
 			resp, err = ordererclient.Broadcast(network, o1, env)
@@ -319,7 +339,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			Eventually(o4process.Ready(), network.EventuallyTimeout).Should(BeClosed())
 
 			By("Pick ordering service node to be evicted")
+<<<<<<< HEAD
 			victimIdx := findLeader(ordererRunners) - 1
+=======
+			victimIdx := FindLeader(ordererRunners) - 1
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			victim := orderers[victimIdx]
 			victimCertBytes, err := ioutil.ReadFile(filepath.Join(network.OrdererLocalTLSDir(victim), "server.crt"))
 			Expect(err).NotTo(HaveOccurred())
@@ -347,7 +371,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 				"systemchannel": 2,
 			}, remainedOrderers, peer, network)
 			By("Making sure OSN was evicted and configuration applied")
+<<<<<<< HEAD
 			findLeader(remainedRunners)
+=======
+			FindLeader(remainedRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Restarting all nodes")
 			o4process.Signal(syscall.SIGTERM)
@@ -365,7 +393,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			ordererGroup = grouper.NewParallel(syscall.SIGTERM, orderersMembers)
 			ordererProc = ifrit.Invoke(ordererGroup)
 			Eventually(ordererProc.Ready(), network.EventuallyTimeout).Should(BeClosed())
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{r1, r2})
+=======
+			FindLeader([]*ginkgomon.Runner{r1, r2})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Submitting several transactions to trigger snapshot")
 			env := CreateBroadcastEnvelope(network, remainedOrderers[1], "systemchannel", make([]byte, 2000))
@@ -402,7 +434,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			ordererGroup = grouper.NewParallel(syscall.SIGTERM, orderersMembers)
 			ordererProc = ifrit.Invoke(ordererGroup)
 			Eventually(ordererProc.Ready(), network.EventuallyTimeout).Should(BeClosed())
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{r0, r1})
+=======
+			FindLeader([]*ginkgomon.Runner{r0, r1})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Asserting that orderer1 receives and persists snapshot")
 			Eventually(func() int {
@@ -429,7 +465,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			ordererGroup = grouper.NewParallel(syscall.SIGTERM, orderersMembers)
 			ordererProc = ifrit.Invoke(ordererGroup)
 			Eventually(ordererProc.Ready(), network.EventuallyTimeout).Should(BeClosed())
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{r0, r2})
+=======
+			FindLeader([]*ginkgomon.Runner{r0, r2})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			for i := 1; i <= 10; i++ {
 				blko1 := FetchBlock(network, remainedOrderers[0], uint64(i), "systemchannel")
@@ -475,7 +515,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			By("Waiting for them to elect a leader")
 			ordererProcesses := []ifrit.Process{o1Proc, o2Proc, o3Proc}
 			remainingAliveRunners := []*ginkgomon.Runner{o1Runner, o2Runner, o3Runner}
+<<<<<<< HEAD
 			leader := findLeader(remainingAliveRunners)
+=======
+			leader := FindLeader(remainingAliveRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			leaderIndex := leader - 1
 			By(fmt.Sprintf("Killing the leader (%d)", leader))
@@ -487,7 +531,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			remainingAliveRunners = append(remainingAliveRunners[:leaderIndex], remainingAliveRunners[leaderIndex+1:]...)
 
 			By("Waiting for a new leader to be elected")
+<<<<<<< HEAD
 			leader = findLeader(remainingAliveRunners)
+=======
+			leader = FindLeader(remainingAliveRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			By(fmt.Sprintf("Orderer %d took over as a leader", leader))
 		})
 	})
@@ -519,7 +567,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			By("Waiting for them to elect a leader")
 			ordererProcesses := []ifrit.Process{o1Proc, o2Proc, o3Proc}
 			remainingAliveRunners := []*ginkgomon.Runner{o1Runner, o2Runner, o3Runner}
+<<<<<<< HEAD
 			leaderID := findLeader(remainingAliveRunners)
+=======
+			leaderID := FindLeader(remainingAliveRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			leaderIndex := leaderID - 1
 			leader := orderers[leaderIndex]
 
@@ -653,7 +705,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			Eventually(o3Proc.Ready(), network.EventuallyTimeout).Should(BeClosed())
 
 			By("Waiting for a leader to be elected")
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{o1Runner, o2Runner, o3Runner})
+=======
+			FindLeader([]*ginkgomon.Runner{o1Runner, o2Runner, o3Runner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Killing orderers")
 			o1Proc.Signal(syscall.SIGTERM)
@@ -724,7 +780,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			Eventually(o3Proc.Ready(), network.EventuallyTimeout).Should(BeClosed())
 
 			By("Waiting for a leader to be elected")
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{o1Runner, o2Runner, o3Runner})
+=======
+			FindLeader([]*ginkgomon.Runner{o1Runner, o2Runner, o3Runner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("submitting config updates to orderers with expired TLS certs to replace the expired certs")
 			timeShift := 5 * time.Minute
@@ -771,7 +831,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			Eventually(o3Proc.Ready(), network.EventuallyTimeout).Should(BeClosed())
 
 			By("Waiting for a leader to be elected")
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{o1Runner, o2Runner, o3Runner})
+=======
+			FindLeader([]*ginkgomon.Runner{o1Runner, o2Runner, o3Runner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		})
 
 		It("disregards certificate renewal if only the validity period changed", func() {
@@ -806,7 +870,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			Eventually(o3Proc.Ready(), network.EventuallyTimeout).Should(BeClosed())
 
 			By("Waiting for them to elect a leader")
+<<<<<<< HEAD
 			findLeader(ordererRunners)
+=======
+			FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Creating a channel")
 			network.CreateChannel("foo", o1, peer)
@@ -838,7 +906,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			o3Proc = ordererProcesses[2]
 
 			By("Waiting for them to elect a leader once again")
+<<<<<<< HEAD
 			findLeader(ordererRunners)
+=======
+			FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Creating a channel again")
 			network.CreateChannel("bar", o1, peer)
@@ -906,7 +978,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			ordererProc = ifrit.Invoke(runner)
 
 			By("Waiting for orderer to elect a leader")
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{runner})
+=======
+			FindLeader([]*ginkgomon.Runner{runner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Creating config update that adds another orderer admin")
 			bootBlockPath := filepath.Join(network.RootDir, fmt.Sprintf("%s_block.pb", network.SystemChannel.Name))
@@ -954,7 +1030,11 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 			ordererProc = ifrit.Invoke(runner)
 
 			By("Waiting for orderer to launch again")
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{runner})
+=======
+			FindLeader([]*ginkgomon.Runner{runner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Updating channel config and succeeding")
 			p, err = ordererclient.Broadcast(network, orderer, channelCreateTxn)
@@ -978,6 +1058,7 @@ var _ = Describe("EndToEnd Crash Fault Tolerance", func() {
 	})
 })
 
+<<<<<<< HEAD
 func findLeader(ordererRunners []*ginkgomon.Runner) int {
 	var wg sync.WaitGroup
 	wg.Add(len(ordererRunners))
@@ -1024,6 +1105,8 @@ func findLeader(ordererRunners []*ginkgomon.Runner) int {
 	return firstLeader
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 func renewOrdererCertificates(network *nwo.Network, orderers ...*nwo.Orderer) {
 	if len(orderers) == 0 {
 		return

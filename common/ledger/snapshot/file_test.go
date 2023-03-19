@@ -26,8 +26,12 @@ var testNewHashFunc = func() (hash.Hash, error) {
 }
 
 func TestFileCreateAndRead(t *testing.T) {
+<<<<<<< HEAD
 	testDir := testPath(t)
 	defer os.RemoveAll(testDir)
+=======
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// create file and encode some data
 	fileCreator, err := CreateFile(path.Join(testDir, "dataFile"), byte(5), testNewHashFunc)
@@ -99,8 +103,12 @@ func TestFileCreateAndRead(t *testing.T) {
 }
 
 func TestFileCreateAndLargeValue(t *testing.T) {
+<<<<<<< HEAD
 	testDir := testPath(t)
 	defer os.RemoveAll(testDir)
+=======
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// create file and encode some data
 	fileWriter, err := CreateFile(path.Join(testDir, "dataFile"), byte(5), testNewHashFunc)
@@ -126,8 +134,12 @@ func TestFileCreateAndLargeValue(t *testing.T) {
 }
 
 func TestFileCreatorErrorPropagation(t *testing.T) {
+<<<<<<< HEAD
 	testPath := testPath(t)
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// error propagation from CreateFile function when file already exists
 	existingFilePath := path.Join(testPath, "an-existing-file")
@@ -167,8 +179,12 @@ func TestFileCreatorErrorPropagation(t *testing.T) {
 }
 
 func TestFileReaderErrorPropagation(t *testing.T) {
+<<<<<<< HEAD
 	testPath := testPath(t)
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// non-existent-file cuases an error
 	nonExistentFile := path.Join(testPath, "non-existent-file")
@@ -224,12 +240,15 @@ func computeSha256(t *testing.T, file string) []byte {
 	return sha[:]
 }
 
+<<<<<<< HEAD
 func testPath(t *testing.T) string {
 	path, err := ioutil.TempDir("", "test-file-encoder-")
 	require.NoError(t, err)
 	return path
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 type errorCausingWriter struct {
 	err error
 }

@@ -315,7 +315,11 @@ func TestHTTPHandler_ServeHTTP_Join(t *testing.T) {
 		resp := httptest.NewRecorder()
 		req := genJoinRequestFormData(t, []byte{1, 2, 3, 4})
 		h.ServeHTTP(resp, req)
+<<<<<<< HEAD
 		checkErrorResponse(t, http.StatusBadRequest, "cannot unmarshal file part config-block into a block: proto: common.Block: illegal tag 0 (wire type 1)", resp)
+=======
+		checkErrorResponse(t, http.StatusBadRequest, "cannot unmarshal file part config-block into a block", resp)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("bad body - invalid join block", func(t *testing.T) {
@@ -507,7 +511,11 @@ func checkErrorResponse(t *testing.T, expectedCode int, expectedErrMsg string, r
 	respErr := &types.ErrorResponse{}
 	err := decoder.Decode(respErr)
 	require.NoError(t, err, "body: %s", resp.Body.String())
+<<<<<<< HEAD
 	require.Equal(t, expectedErrMsg, respErr.Error)
+=======
+	require.Contains(t, respErr.Error, expectedErrMsg)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 func genJoinRequestFormData(t *testing.T, blockBytes []byte) *http.Request {

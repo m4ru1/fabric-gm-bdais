@@ -24,9 +24,13 @@ import (
 )
 
 func TestWriteFileToPackage(t *testing.T) {
+<<<<<<< HEAD
 	tempDir, err := ioutil.TempDir("", "utiltest")
 	require.NoError(t, err)
 	defer os.RemoveAll(tempDir)
+=======
+	tempDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	buf := bytes.NewBuffer(nil)
 	gw := gzip.NewWriter(buf)
@@ -36,7 +40,11 @@ func TestWriteFileToPackage(t *testing.T) {
 	filename := "test.txt"
 	filecontent := "hello"
 	filePath := filepath.Join(tempDir, filename)
+<<<<<<< HEAD
 	err = ioutil.WriteFile(filePath, bytes.NewBufferString(filecontent).Bytes(), 0o600)
+=======
+	err := ioutil.WriteFile(filePath, bytes.NewBufferString(filecontent).Bytes(), 0o600)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.NoError(t, err, "Error creating file %s", filePath)
 
 	err = WriteFileToPackage(filePath, filename, tw)
@@ -169,14 +177,22 @@ func TestWriteFolderToTarPackage5(t *testing.T) {
 
 // Failure case 1: no files in directory
 func TestWriteFolderToTarPackageFailure1(t *testing.T) {
+<<<<<<< HEAD
 	srcPath, err := ioutil.TempDir("", "utiltest")
 	require.NoError(t, err)
 	defer os.RemoveAll(srcPath)
+=======
+	srcPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	tw := tar.NewWriter(bytes.NewBuffer(nil))
 	defer tw.Close()
 
+<<<<<<< HEAD
 	err = WriteFolderToTarPackage(tw, srcPath, []string{}, nil, nil)
+=======
+	err := WriteFolderToTarPackage(tw, srcPath, []string{}, nil, nil)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.Contains(t, err.Error(), "no source files found")
 }
 
@@ -216,11 +232,17 @@ func Test_WriteFolderToTarPackageFailure4(t *testing.T) {
 		t.Skip("unable to chmod execute permission on windows directory")
 	}
 
+<<<<<<< HEAD
 	tempDir, err := ioutil.TempDir("", "WriteFolderToTarPackageFailure4BadFileMode")
 	require.NoError(t, err)
 	defer os.RemoveAll(tempDir)
 	testFile := filepath.Join(tempDir, "test.java")
 	err = ioutil.WriteFile(testFile, []byte("Content"), 0o644)
+=======
+	tempDir := t.TempDir()
+	testFile := filepath.Join(tempDir, "test.java")
+	err := ioutil.WriteFile(testFile, []byte("Content"), 0o644)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	require.NoError(t, err, "Error creating file", testFile)
 	err = os.Chmod(tempDir, 0o644)
 	require.NoError(t, err)

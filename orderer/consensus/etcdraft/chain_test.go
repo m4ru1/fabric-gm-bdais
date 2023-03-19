@@ -34,12 +34,21 @@ import (
 	consensusmocks "github.com/hyperledger/fabric/orderer/consensus/mocks"
 	mockblockcutter "github.com/hyperledger/fabric/orderer/mocks/common/blockcutter"
 	"github.com/hyperledger/fabric/protoutil"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/types"
 	"github.com/pkg/errors"
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"
+=======
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/types"
+	"github.com/pkg/errors"
+	raft "go.etcd.io/etcd/raft/v3"
+	"go.etcd.io/etcd/raft/v3/raftpb"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"go.uber.org/zap"
 )
 
@@ -212,7 +221,12 @@ var _ = Describe("Chain", func() {
 		}
 
 		JustBeforeEach(func() {
+<<<<<<< HEAD
 			chain, err = etcdraft.NewChain(support, opts, configurator, nil, cryptoProvider, noOpBlockPuller, fakeHaltCallbacker.HaltCallback, observeC)
+=======
+			rpc := &mocks.FakeRPC{}
+			chain, err = etcdraft.NewChain(support, opts, configurator, rpc, cryptoProvider, noOpBlockPuller, fakeHaltCallbacker.HaltCallback, observeC)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			Expect(err).NotTo(HaveOccurred())
 
 			chain.Start()
@@ -2382,6 +2396,7 @@ var _ = Describe("Chain", func() {
 					close(c1.stopped)
 
 					var newLeader, remainingFollower *chain
+<<<<<<< HEAD
 					for newLeader == nil || remainingFollower == nil {
 						var state raft.SoftState
 						select {
@@ -2397,6 +2412,38 @@ var _ = Describe("Chain", func() {
 
 						if state.RaftState == raft.StateFollower && state.Lead != raft.None {
 							remainingFollower = network.chains[state.Lead]
+=======
+					var c2state raft.SoftState
+					var c3state raft.SoftState
+					retry := 1
+					for newLeader == nil || remainingFollower == nil {
+						select {
+						case c2state = <-c2.observe:
+						case c3state = <-c3.observe:
+						case <-time.After(LongEventualTimeout):
+							// abdicateleader might fail to transfer the leadership when the next candidate
+							// busy with applying committed entries; in that case,
+							// send an artificial MsgTimeoutNow to node to pick next leader
+							if retry > 0 {
+								retry -= 1
+								By("leadership transfer not complete, hence retrying")
+								c2.Consensus(&orderer.ConsensusRequest{Payload: protoutil.MarshalOrPanic(&raftpb.Message{Type: raftpb.MsgTimeoutNow, To: 2})}, 0)
+								continue
+							}
+							Fail("Expected a new leader to present")
+						}
+
+						// an agreed leader among the two, which is one of the two remaining nodes
+						if ((c2state.RaftState == raft.StateFollower && c3state.RaftState == raft.StateLeader) ||
+							(c2state.RaftState == raft.StateLeader && c3state.RaftState == raft.StateFollower)) &&
+							c2state.Lead == c3state.Lead && c2state.Lead != raft.None {
+							newLeader = network.chains[c2state.Lead]
+							if c2state.RaftState == raft.StateFollower {
+								remainingFollower = c2
+							} else {
+								remainingFollower = c3
+							}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 						}
 					}
 
@@ -2989,6 +3036,88 @@ var _ = Describe("Chain", func() {
 					c1.opts.SnapshotCatchUpEntries = 1
 				})
 
+<<<<<<< HEAD
+=======
+				It("take snapshot on accumlated bytes condition met", func() {
+					// change the SnapshotIntervalSize on the chains
+					c3.opts.SnapshotIntervalSize = 1
+					c3.opts.SnapshotCatchUpEntries = 1
+					c2.opts.SnapshotIntervalSize = 1
+					c2.opts.SnapshotCatchUpEntries = 1
+
+					countSnapShotsForChain := func(cn *chain) int {
+						files, err := ioutil.ReadDir(cn.opts.SnapDir)
+						Expect(err).NotTo(HaveOccurred())
+						return len(files)
+					}
+
+					Expect(countSnapShotsForChain(c1)).Should(Equal(0))
+					Expect(countSnapShotsForChain(c3)).Should(Equal(0))
+
+					By("order envelop on node 1 to accumulate bytes")
+					c1.cutter.CutNext = true
+					err := c1.Order(env, 0)
+					Expect(err).NotTo(HaveOccurred())
+
+					// all three nodes should take snapshots
+					network.exec(
+						func(c *chain) {
+							Eventually(func() int { return c.support.WriteBlockCallCount() }, LongEventualTimeout).Should(Equal(1))
+						})
+
+					// order data on all nodes except node 3, empty the raft message directed to node 3
+					// node 1 should take a snapshot but node 3 should not
+					snapshots_on_node3 := countSnapShotsForChain(c3)
+					step1 := c1.getStepFunc()
+
+					c1.setStepFunc(func(dest uint64, msg *orderer.ConsensusRequest) error {
+						stepMsg := &raftpb.Message{}
+						Expect(proto.Unmarshal(msg.Payload, stepMsg)).NotTo(HaveOccurred())
+						if dest == 3 && stepMsg.Type == raftpb.MsgApp && len(stepMsg.Entries) > 0 {
+							stepMsg.Entries = stepMsg.Entries[0:1]
+							stepMsg.Entries[0].Data = nil
+							msg.Payload = protoutil.MarshalOrPanic(stepMsg)
+						}
+						return step1(dest, msg)
+					})
+
+					err = c1.Order(env, 0)
+					Expect(err).NotTo(HaveOccurred())
+
+					Eventually(c1.support.WriteBlockCallCount, LongEventualTimeout).Should(Equal(2))
+					Eventually(c3.support.WriteBlockCallCount, LongEventualTimeout).Should(Equal(1))
+
+					// order data on all nodes except node 3, send raft raftpb.EntryConfChange message to node 3
+					// node 1 should take a snapshot but node 3 should not
+					c1.setStepFunc(func(dest uint64, msg *orderer.ConsensusRequest) error {
+						stepMsg := &raftpb.Message{}
+						Expect(proto.Unmarshal(msg.Payload, stepMsg)).NotTo(HaveOccurred())
+						if dest == 3 && stepMsg.Type == raftpb.MsgApp && len(stepMsg.Entries) > 0 {
+							stepMsg.Entries = stepMsg.Entries[0:1]
+							// change message type to raftpb.EntryConfChange
+							stepMsg.Entries[0].Type = raftpb.EntryConfChange
+							cc := &raftpb.ConfChange{NodeID: uint64(3), Type: raftpb.ConfChangeRemoveNode}
+							data, err := cc.Marshal()
+							Expect(err).NotTo(HaveOccurred())
+							stepMsg.Entries[0].Data = data
+							msg.Payload = protoutil.MarshalOrPanic(stepMsg)
+						}
+						return step1(dest, msg)
+					})
+
+					err = c1.Order(env, 0)
+					Expect(err).NotTo(HaveOccurred())
+
+					Eventually(c1.support.WriteBlockCallCount, LongEventualTimeout).Should(Equal(3))
+					Eventually(c3.support.WriteBlockCallCount, LongEventualTimeout).Should(Equal(1))
+					countSnapShotsForc1 := func() int { return countSnapShotsForChain(c1) }
+					Eventually(countSnapShotsForc1, LongEventualTimeout).Should(Equal(3))
+					// No snapshot would be taken for node 3 after this orrderer request
+					addtional_snapshots_for_node3 := countSnapShotsForChain(c3) - snapshots_on_node3
+					Expect(addtional_snapshots_for_node3).Should(Equal(0))
+				})
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				It("keeps running if some entries in memory are purged", func() {
 					// Scenario: snapshotting is enabled on node 1 and it purges memory storage
 					// per every snapshot. Cluster should be correctly functioning.
@@ -3285,10 +3414,21 @@ func nodeConfigFromMetadata(consenterMetadata *raftprotos.ConfigMetadata) []clus
 		serverDER, _ := pem.Decode(consenter.ServerTlsCert)
 		clientDER, _ := pem.Decode(consenter.ClientTlsCert)
 		node := cluster.RemoteNode{
+<<<<<<< HEAD
 			ID:            uint64(i + 1),
 			Endpoint:      "localhost:7050",
 			ServerTLSCert: serverDER.Bytes,
 			ClientTLSCert: clientDER.Bytes,
+=======
+			NodeAddress: cluster.NodeAddress{
+				ID:       uint64(i + 1),
+				Endpoint: "localhost:7050",
+			},
+			NodeCerts: cluster.NodeCerts{
+				ServerTLSCert: serverDER.Bytes,
+				ClientTLSCert: clientDER.Bytes,
+			},
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		}
 		nodes = append(nodes, node)
 	}

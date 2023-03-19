@@ -22,7 +22,11 @@ func TestBlockfileStream(t *testing.T) {
 }
 
 func testBlockfileStream(t *testing.T, numBlocks int) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	ledgerid := "testledger"
 	w := newTestBlockfileWrapper(env, ledgerid)
@@ -63,7 +67,11 @@ func TestBlockFileStreamUnexpectedEOF(t *testing.T) {
 }
 
 func testBlockFileStreamUnexpectedEOF(t *testing.T, numBlocks int, partialBlockBytes []byte) {
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	w := newTestBlockfileWrapper(env, "testLedger")
 	blockfileMgr := w.blockfileMgr
@@ -93,7 +101,11 @@ func TestBlockStream(t *testing.T) {
 
 func testBlockStream(t *testing.T, numFiles int) {
 	ledgerID := "testLedger"
+<<<<<<< HEAD
 	env := newTestEnv(t, NewConf(testPath(), 0))
+=======
+	env := newTestEnv(t, NewConf(t.TempDir(), 0))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 	w := newTestBlockfileWrapper(env, ledgerID)
 	defer w.close()

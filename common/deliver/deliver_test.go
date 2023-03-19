@@ -26,7 +26,11 @@ import (
 	"github.com/hyperledger/fabric/common/metrics/metricsfakes"
 	"github.com/hyperledger/fabric/common/util"
 	"github.com/hyperledger/fabric/protoutil"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/pkg/errors"
 )
@@ -651,6 +655,19 @@ var _ = Describe("Deliver", func() {
 			Expect(resp).To(Equal(cb.Status_SUCCESS))
 		})
 
+<<<<<<< HEAD
+=======
+		It("HandleAttestation sends requested block", func() {
+			err := handler.HandleAttestation(context.Background(), server, envelope)
+			Expect(err).NotTo(HaveOccurred())
+			Expect(fakeResponseSender.SendBlockResponseCallCount()).To(Equal(1))
+			b, _, _, _ := fakeResponseSender.SendBlockResponseArgsForCall(0)
+			Expect(b).To(Equal(&cb.Block{
+				Header: &cb.BlockHeader{Number: 100},
+			}))
+		})
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		Context("when sending the success status fails", func() {
 			BeforeEach(func() {
 				fakeResponseSender.SendStatusResponseReturns(errors.New("send-success-fails"))
@@ -660,6 +677,14 @@ var _ = Describe("Deliver", func() {
 				err := handler.Handle(context.Background(), server)
 				Expect(err).To(MatchError("send-success-fails"))
 			})
+<<<<<<< HEAD
+=======
+
+			It("HandleAttestation returns the error", func() {
+				err := handler.HandleAttestation(context.Background(), server, envelope)
+				Expect(err).To(MatchError("send-success-fails"))
+			})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		})
 
 		Context("when receive fails", func() {
@@ -703,6 +728,18 @@ var _ = Describe("Deliver", func() {
 				resp := fakeResponseSender.SendStatusResponseArgsForCall(0)
 				Expect(resp).To(Equal(cb.Status_BAD_REQUEST))
 			})
+<<<<<<< HEAD
+=======
+
+			It("sends a bad envelope to HandleAttestation", func() {
+				err := handler.HandleAttestation(context.Background(), server, envelope)
+				Expect(err).NotTo(HaveOccurred())
+
+				Expect(fakeResponseSender.SendStatusResponseCallCount()).To(Equal(1))
+				resp := fakeResponseSender.SendStatusResponseArgsForCall(0)
+				Expect(resp).To(Equal(cb.Status_BAD_REQUEST))
+			})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		})
 
 		Context("when unmarshalling the channel header fails", func() {

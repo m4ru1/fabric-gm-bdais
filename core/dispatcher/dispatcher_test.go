@@ -10,7 +10,11 @@ import (
 	"fmt"
 	"time"
 
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 
 	"github.com/hyperledger/fabric/core/dispatcher"
@@ -127,7 +131,12 @@ var _ = Describe("Dispatcher", func() {
 		Context("when the input bytes cannot be unmarshaled", func() {
 			It("wraps and returns the error", func() {
 				_, err := d.Dispatch([]byte("garbage"), "GoodFunc", testReceiver)
+<<<<<<< HEAD
 				Expect(err).To(MatchError("could not decode input arg for dispatcher_test.TestReceiver.GoodFunc: proto: can't skip unknown wire type 7"))
+=======
+				Expect(err).To(Not(BeNil()))
+				Expect(err.Error()).To(HavePrefix("could not decode input arg for dispatcher_test.TestReceiver.GoodFunc"))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			})
 		})
 

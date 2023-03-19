@@ -118,6 +118,22 @@ func (s *txSimulator) DeletePrivateData(ns, coll, key string) error {
 	return s.SetPrivateData(ns, coll, key, nil)
 }
 
+<<<<<<< HEAD
+=======
+// PurgePrivateData implements method in interface `ledger.TxSimulator`
+func (s *txSimulator) PurgePrivateData(ns, coll, key string) error {
+	if err := s.queryExecutor.validateCollName(ns, coll); err != nil {
+		return err
+	}
+	if err := s.checkWritePrecondition(key, nil); err != nil {
+		return err
+	}
+	s.writePerformed = true
+	s.rwsetBuilder.AddToHashedWriteSetPurge(ns, coll, key)
+	return nil
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // SetPrivateDataMultipleKeys implements method in interface `ledger.TxSimulator`
 func (s *txSimulator) SetPrivateDataMultipleKeys(ns, coll string, kvs map[string][]byte) error {
 	for k, v := range kvs {

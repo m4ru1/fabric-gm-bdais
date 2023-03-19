@@ -41,6 +41,7 @@ func TestBatchTimeout(t *testing.T) {
 	oc = &OrdererConfig{protos: &OrdererProtos{BatchTimeout: &ab.BatchTimeout{Timeout: "0s"}}}
 	require.Error(t, oc.validateBatchTimeout(), "Zero batch timeout")
 }
+<<<<<<< HEAD
 
 func TestKafkaBrokers(t *testing.T) {
 	oc := &OrdererConfig{protos: &OrdererProtos{KafkaBrokers: &ab.KafkaBrokers{Brokers: []string{"127.0.0.1:9092", "foo.bar:9092"}}}}
@@ -49,3 +50,5 @@ func TestKafkaBrokers(t *testing.T) {
 	oc = &OrdererConfig{protos: &OrdererProtos{KafkaBrokers: &ab.KafkaBrokers{Brokers: []string{"127.0.0.1", "foo.bar", "127.0.0.1:-1", "localhost:65536", "foo.bar.:9092", ".127.0.0.1:9092", "-foo.bar:9092"}}}}
 	require.Error(t, oc.validateKafkaBrokers(), "Invalid kafka brokers")
 }
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19

@@ -7,8 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package transientstore
 
 import (
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"path/filepath"
 	"strings"
 	"testing"
@@ -27,9 +30,13 @@ func TestUnderDeletionValue(t *testing.T) {
 }
 
 func TestNewStoreProvider(t *testing.T) {
+<<<<<<< HEAD
 	tempdir, err := ioutil.TempDir("", "ts")
 	require.NoErrorf(t, err, "failed to create test directory [%s]", tempdir)
 	defer os.RemoveAll(tempdir)
+=======
+	tempdir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	storedir := filepath.Join(tempdir, "transientstore")
 	p, err := NewStoreProvider(storedir)
@@ -39,7 +46,10 @@ func TestNewStoreProvider(t *testing.T) {
 
 func TestMarkStorageForDelete(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	ledgerID := "doomed-transient-storage"
 
 	// env.storeProvider is an interface type StoreProvider.  Use a golang
@@ -79,7 +89,10 @@ func TestMarkStorageForDelete(t *testing.T) {
 
 func TestMultipleStoragesMarkedForDeletion(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	doomed1 := "doomed-1"
 	doomed2 := "doomed-2"
@@ -129,7 +142,10 @@ func TestMultipleStoragesMarkedForDeletion(t *testing.T) {
 
 func TestUnmarkDeletionTag(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	doomed1 := "doomed-1"
 	doomed2 := "doomed-2"
@@ -171,7 +187,10 @@ func TestUnmarkDeletionTag(t *testing.T) {
 
 func TestClearDeletionTagNotPresent(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	doomed1 := "doomed-1"
 	doomed2 := "doomed-2"
@@ -221,7 +240,10 @@ func TestClearDeletionTagNotPresent(t *testing.T) {
 
 func TestProcessPendingStorageDeletions(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	sp := env.storeProvider.(*storeProvider)
 	require.NotNil(t, sp)
@@ -255,7 +277,10 @@ func TestProcessPendingStorageDeletions(t *testing.T) {
 // Drop a storage without access to a provider.
 func TestPackageDropTransientStorage(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	populateTestStore(t, env.store)
 	empty, err := env.store.db.IsEmpty()
@@ -283,7 +308,10 @@ func TestPackageDropTransientStorage(t *testing.T) {
 
 func TestLockFileIsAdjacentToTransientStorageFolder(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	sp := env.storeProvider.(*storeProvider)
 	require.NotNil(t, sp)
@@ -301,7 +329,10 @@ func TestLockFileIsAdjacentToTransientStorageFolder(t *testing.T) {
 // Make sure that closing the transient storage releases the peer start file lock.
 func TestCloseStoreReleasesFileLock(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	require.NotNil(t, env.storeProvider)
 	sp := env.storeProvider.(*storeProvider)
@@ -322,7 +353,10 @@ func TestCloseStoreReleasesFileLock(t *testing.T) {
 // There may be only one transient storage provider open at a time.
 func TestOneAndOnlyOneTransientStorageProviderMayBeOpened(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// env already has a storage provider opened.  Close it to make the double open case explicit.
 	env.storeProvider.Close()
@@ -348,7 +382,10 @@ func TestOneAndOnlyOneTransientStorageProviderMayBeOpened(t *testing.T) {
 // Drop() while the peer is open is a lock error.
 func TestDropWithRunningPeerIsError(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	// env maintains an opened transient storage provider.
 	sp := env.storeProvider.(*storeProvider)
@@ -364,7 +401,10 @@ func TestDropWithRunningPeerIsError(t *testing.T) {
 // Same test as above, but checks with a simulated lock and a closed provider.
 func TestPackageDropWithPeerLockIsError(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	env.storeProvider.Close()
 
@@ -381,7 +421,10 @@ func TestPackageDropWithPeerLockIsError(t *testing.T) {
 // Mimic the crash recovery scenario: pending transient stores are deleted at peer / provider launch
 func TestProviderRestartAfterFailedDeletionScrubsPendingDeletions(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	ledgerID := "vanishing-ledger"
 	sp := env.storeProvider.(*storeProvider)
@@ -422,7 +465,10 @@ func TestProviderRestartAfterFailedDeletionScrubsPendingDeletions(t *testing.T) 
 
 func TestDeleteTransientStorageIsCaseSensitive(t *testing.T) {
 	env := initTestEnv(t)
+<<<<<<< HEAD
 	defer env.cleanup()
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	sp := env.storeProvider.(*storeProvider)
 

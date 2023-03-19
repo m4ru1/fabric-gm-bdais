@@ -131,7 +131,11 @@ gossip:
     endpoint:
 
     # This is an endpoint that is published to peers outside of the organization.
+<<<<<<< HEAD
     # If this isn't set, the peer will not be known to other organizations.
+=======
+    # If this isn't set, the peer will not be known to other organizations and will not be exposed via service discovery.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     externalEndpoint:
 
     # NOTE: orgLeader and useLeaderElection parameters are mutual exclusive.

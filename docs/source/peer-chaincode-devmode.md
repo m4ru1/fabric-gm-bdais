@@ -33,7 +33,17 @@ Throughout this tutorial, all commands are performed from the `fabric/` folder. 
     ```
     export FABRIC_CFG_PATH=$(pwd)/sampleconfig
     ```
+<<<<<<< HEAD
 5. Generate the genesis block for the ordering service. Run the following command to generate the genesis block and store it in `$(pwd)/sampleconfig/genesisblock` so that it can be used by the orderer in the next step when the orderer is started.
+=======
+5. Create the `hyperledger` subdirectory in the `/var` directory. This is the default location Fabric uses to store blocks as defined in the orderer `orderer.yaml` and peer `core.yaml` files. To create the `hyperledger` subdirectory, execute these commands, replacing the question marks with your username:
+
+    ```
+    sudo mkdir /var/hyperledger
+    sudo chown ????? /var/hyperledger
+    ```
+6. Generate the genesis block for the ordering service. Run the following command to generate the genesis block and store it in `$(pwd)/sampleconfig/genesisblock` so that it can be used by the orderer in the next step when the orderer is started.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
     ```
     configtxgen -profile SampleDevModeSolo -channelID syschannel -outputBlock genesisblock -configPath $FABRIC_CFG_PATH -outputBlock "$(pwd)/sampleconfig/genesisblock"
     ```
@@ -62,8 +72,19 @@ When it is successful you should see results similar to:
 
 ## Start the peer in DevMode
 
+<<<<<<< HEAD
 Open another terminal window and set the required environment variables to override the peer configuration and start the peer node. Starting the peer with the `--peer-chaincodedev=true` flag puts the peer into DevMode.
 
+=======
+Open another terminal window and set the required environment variables to override the peer configuration and start the peer node.
+
+**Note:** If you intend to keep the orderer and peer in the same environment (not in separate containers), only then set the `CORE_OPERATIONS_LISTENADDRESS` environment variable (port can be anything except 9443).
+```
+export CORE_OPERATIONS_LISTENADDRESS=127.0.0.1:9444
+```
+
+Starting the peer with the `--peer-chaincodedev=true` flag puts the peer into DevMode.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 ```
 export PATH=$(pwd)/build/bin:$PATH
 export FABRIC_CFG_PATH=$(pwd)/sampleconfig
@@ -151,7 +172,11 @@ You can issue CLI commands to invoke and query the chaincode as needed to verify
 
 ```
 CORE_PEER_ADDRESS=127.0.0.1:7051 peer chaincode invoke -o 127.0.0.1:7050 -C ch1 -n mycc -c '{"Args":["init","a","100","b","200"]}' --isInit
+<<<<<<< HEAD
 CORE_PEER_ADDRESS=127.0.0.1:7051 peer chaincode invoke -o 127.0.0.1:7050 -C ch1 -n mycc -c '{"Args":["invoke","a","b","10"]}
+=======
+CORE_PEER_ADDRESS=127.0.0.1:7051 peer chaincode invoke -o 127.0.0.1:7050 -C ch1 -n mycc -c '{"Args":["invoke","a","b","10"]}'
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 CORE_PEER_ADDRESS=127.0.0.1:7051 peer chaincode invoke -o 127.0.0.1:7050 -C ch1 -n mycc -c '{"Args":["query","a"]}'
 ```
 

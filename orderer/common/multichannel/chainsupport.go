@@ -38,7 +38,11 @@ type ChainSupport struct {
 
 	// The registrar is not aware of the exact type that the Chain is, e.g. etcdraft, inactive, or follower.
 	// Therefore, we let each chain report its cluster relation and status through this interface. Non cluster
+<<<<<<< HEAD
 	// type chains (solo, kafka) are assigned a static reporter.
+=======
+	// type chains (solo) are assigned a static reporter.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	consensus.StatusReporter
 }
 
@@ -95,7 +99,11 @@ func newChainSupport(
 	}
 
 	cs.StatusReporter, ok = cs.Chain.(consensus.StatusReporter)
+<<<<<<< HEAD
 	if !ok { // Non-cluster types: solo, kafka
+=======
+	if !ok { // Non-cluster types: solo
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		cs.StatusReporter = consensus.StaticStatusReporter{ConsensusRelation: types.ConsensusRelationOther, Status: types.StatusActive}
 	}
 

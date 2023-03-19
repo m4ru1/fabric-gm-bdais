@@ -32,12 +32,20 @@ import (
 	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
 	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
 	"github.com/hyperledger/fabric/protoutil"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
+=======
+	. "github.com/onsi/ginkgo/v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"github.com/tedsuo/ifrit"
+<<<<<<< HEAD
 	"github.com/tedsuo/ifrit/ginkgomon"
+=======
+	ginkgomon "github.com/tedsuo/ifrit/ginkgomon_v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
@@ -183,7 +191,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			}()
 
 			By("Waiting for system channel to be ready")
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{runner})
+=======
+			FindLeader([]*ginkgomon.Runner{runner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Creating malformed channel creation config tx")
 			channel := "testchannel"
@@ -263,7 +275,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			launch(orderer)
 
 			By("Checking that it elected itself as a leader")
+<<<<<<< HEAD
 			findLeader(ordererRunners)
+=======
+			FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Extending the network configuration to add a new orderer")
 			orderer2 := &nwo.Orderer{
@@ -304,7 +320,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			By("Launching the second orderer")
 			launch(orderer2)
 			By("Waiting for a leader to be re-elected")
+<<<<<<< HEAD
 			findLeader(ordererRunners)
+=======
+			FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			// In the next part of the test we're going to bring up a third node
 			// with a different TLS root CA. We're then going to remove the TLS
@@ -390,7 +410,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			)
 
 			By("Waiting for orderer3 to see the leader")
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{ordererRunners[2]})
+=======
+			FindLeader([]*ginkgomon.Runner{ordererRunners[2]})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Attemping to add a consenter with invalid certs")
 			// create new certs that are not in the channel config
@@ -471,7 +495,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			}
 
 			By("Finding leader")
+<<<<<<< HEAD
 			leader := findLeader(ordererRunners)
+=======
+			leader := FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			leaderIndex := leader - 1
 			blockSeq := 0
 
@@ -945,7 +973,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 
 		It("refuses to reconfig if it results in quorum loss", func() {
 			By("Waiting for them to elect a leader")
+<<<<<<< HEAD
 			findLeader(ordererRunners)
+=======
+			FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			extendNetwork(network)
 			certificatesOfOrderers := refreshOrdererPEMs(network)
@@ -1016,7 +1048,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			orderers := []*nwo.Orderer{o1, o2, o3}
 
 			By("Waiting for them to elect a leader")
+<<<<<<< HEAD
 			firstEvictedNode := findLeader(ordererRunners) - 1
+=======
+			firstEvictedNode := FindLeader(ordererRunners) - 1
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Removing the leader from 3-node channel")
 			server1CertBytes, err := ioutil.ReadFile(filepath.Join(network.OrdererLocalTLSDir(orderers[firstEvictedNode]), "server.crt"))
@@ -1033,7 +1069,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 				survivedOrdererRunners = append(survivedOrdererRunners, ordererRunners[i])
 			}
 
+<<<<<<< HEAD
 			secondEvictedNode := findLeader(survivedOrdererRunners) - 1
+=======
+			secondEvictedNode := FindLeader(survivedOrdererRunners) - 1
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			var survivor int
 			for i := range orderers {
@@ -1055,7 +1095,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			Expect(err).To(Not(HaveOccurred()))
 
 			removeConsenter(network, peer, orderers[survivor], "systemchannel", server2CertBytes)
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{ordererRunners[survivor]})
+=======
+			FindLeader([]*ginkgomon.Runner{ordererRunners[survivor]})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			fmt.Fprintln(GinkgoWriter, "Ensuring the other orderer detect the eviction of the node on channel systemchannel")
 			Eventually(ordererRunners[secondEvictedNode].Err(), network.EventuallyTimeout, time.Second).Should(gbytes.Say(stopMsg))
@@ -1089,7 +1133,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 				o3 := network.Orderer("orderer3")
 
 				By("Waiting for them to elect a leader")
+<<<<<<< HEAD
 				findLeader(ordererRunners)
+=======
+				FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 				By("Creating an application channel testchannel")
 				network.CreateChannel("testchannel", o1, peer)
@@ -1164,7 +1212,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			orderers := []*nwo.Orderer{o1, o2, o3}
 
 			By("Waiting for them to elect a leader")
+<<<<<<< HEAD
 			findLeader(ordererRunners)
+=======
+			FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Creating a channel")
 			network.CreateChannel("testchannel", o1, peer)
@@ -1233,7 +1285,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			})
 
 			By("Ensuring the re-added orderer joins the Raft cluster")
+<<<<<<< HEAD
 			findLeader([]*ginkgomon.Runner{ordererRunner})
+=======
+			FindLeader([]*ginkgomon.Runner{ordererRunner})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		})
 	})
 
@@ -1290,7 +1346,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 				launch(i)
 			}
 
+<<<<<<< HEAD
 			leader := findLeader(ordererRunners[:3])
+=======
+			leader := FindLeader(ordererRunners[:3])
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			By("Checking that all orderers are online")
 			assertBlockReception(map[string]int{
@@ -1349,7 +1409,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 				}, []*nwo.Orderer{orderers[i]}, peer, network)
 			}
 
+<<<<<<< HEAD
 			Expect(findLeader(ordererRunners[4:])).To(Equal(leader))
+=======
+			Expect(FindLeader(ordererRunners[4:])).To(Equal(leader))
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 			// Later on, when we start [1, 4, 5, 6, 7], we want to make sure that leader
 			// is elected from [5, 6, 7], who are unknown to [4]. So we can assert that
@@ -1365,7 +1429,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 			By("Submitting another tx to increment Raft index on alive orderers")
 			if leader == 1 {
 				// if orderer1 was leader, we should expect a new leader being elected before going forward
+<<<<<<< HEAD
 				findLeader([]*ginkgomon.Runner{ordererRunners[4]})
+=======
+				FindLeader([]*ginkgomon.Runner{ordererRunners[4]})
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 
 			env := CreateBroadcastEnvelope(network, orderers[4], network.SystemChannel.Name, []byte("hello"))
@@ -1476,7 +1544,11 @@ var _ = Describe("EndToEnd reconfiguration and onboarding", func() {
 		}
 
 		By("Waiting for system channel to be ready")
+<<<<<<< HEAD
 		findLeader(ordererRunners)
+=======
+		FindLeader(ordererRunners)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		peer := network.Peer("Org1", "peer0")
 		channel := "systemchannel"

@@ -7,15 +7,25 @@ SPDX-License-Identifier: Apache-2.0
 package main
 
 import (
+<<<<<<< HEAD
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os"
 	"os/exec"
 	"path"
 	"testing"
 	"time"
+<<<<<<< HEAD
+=======
+
+	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/onsi/gomega/gexec"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 func TestArugments(t *testing.T) {
@@ -57,9 +67,13 @@ func TestGoodPath(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer gexec.CleanupBuildArtifacts()
 
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "test-ccaas-release-")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	os.MkdirAll(path.Join(testPath, "in-builder-dir"), 0755)
 	gt.Expect(err).NotTo(HaveOccurred())
@@ -96,9 +110,13 @@ func TestMissingConnection(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer gexec.CleanupBuildArtifacts()
 
+<<<<<<< HEAD
 	testPath, err := ioutil.TempDir("", "test-ccaas-release-")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(testPath)
+=======
+	testPath := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	os.MkdirAll(path.Join(testPath, "in-builder-dir"), 0755)
 	gt.Expect(err).NotTo(HaveOccurred())

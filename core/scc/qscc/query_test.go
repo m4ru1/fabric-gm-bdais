@@ -8,7 +8,10 @@ package qscc
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"os"
 	"testing"
 
@@ -31,6 +34,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+<<<<<<< HEAD
 func setupTestLedger(chainid string, path string) (*shimtest.MockStub, *peer.Peer, func(), error) {
 	mockAclProvider.Reset()
 
@@ -39,6 +43,13 @@ func setupTestLedger(chainid string, path string) (*shimtest.MockStub, *peer.Pee
 	if err != nil {
 		return nil, nil, nil, err
 	}
+=======
+func setupTestLedger(t *testing.T, chainid string, path string) (*shimtest.MockStub, *peer.Peer, func(), error) {
+	mockAclProvider.Reset()
+
+	viper.Set("peer.fileSystemPath", path)
+	testDir := t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
 	if err != nil {
@@ -51,7 +62,10 @@ func setupTestLedger(chainid string, path string) (*shimtest.MockStub, *peer.Pee
 
 	cleanup := func() {
 		ledgerMgr.Close()
+<<<<<<< HEAD
 		os.RemoveAll(testDir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	peerInstance := &peer.Peer{
 		LedgerMgr:      ledgerMgr,
@@ -89,6 +103,7 @@ func resetProvider(res, chainid string, prop *peer2.SignedProposal, retErr error
 	return prop
 }
 
+<<<<<<< HEAD
 func tempDir(t *testing.T, stem string) string {
 	path, err := ioutil.TempDir("", "qscc-"+stem)
 	require.NoError(t, err)
@@ -101,6 +116,13 @@ func TestQueryGetChainInfo(t *testing.T) {
 	defer os.RemoveAll(path)
 
 	stub, _, cleanup, err := setupTestLedger(chainid, path)
+=======
+func TestQueryGetChainInfo(t *testing.T) {
+	chainid := "mytestchainid1"
+	path := t.TempDir()
+
+	stub, _, cleanup, err := setupTestLedger(t, chainid, path)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -122,10 +144,16 @@ func TestQueryGetChainInfo(t *testing.T) {
 
 func TestQueryGetTransactionByID(t *testing.T) {
 	chainid := "mytestchainid2"
+<<<<<<< HEAD
 	path := tempDir(t, "test2")
 	defer os.RemoveAll(path)
 
 	stub, _, cleanup, err := setupTestLedger(chainid, path)
+=======
+	path := t.TempDir()
+
+	stub, _, cleanup, err := setupTestLedger(t, chainid, path)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -148,10 +176,16 @@ func TestQueryGetTransactionByID(t *testing.T) {
 
 func TestQueryGetBlockByNumber(t *testing.T) {
 	chainid := "mytestchainid3"
+<<<<<<< HEAD
 	path := tempDir(t, "test3")
 	defer os.RemoveAll(path)
 
 	stub, _, cleanup, err := setupTestLedger(chainid, path)
+=======
+	path := t.TempDir()
+
+	stub, _, cleanup, err := setupTestLedger(t, chainid, path)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -176,10 +210,16 @@ func TestQueryGetBlockByNumber(t *testing.T) {
 
 func TestQueryGetBlockByHash(t *testing.T) {
 	chainid := "mytestchainid4"
+<<<<<<< HEAD
 	path := tempDir(t, "test4")
 	defer os.RemoveAll(path)
 
 	stub, _, cleanup, err := setupTestLedger(chainid, path)
+=======
+	path := t.TempDir()
+
+	stub, _, cleanup, err := setupTestLedger(t, chainid, path)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -197,10 +237,16 @@ func TestQueryGetBlockByHash(t *testing.T) {
 
 func TestQueryGetBlockByTxID(t *testing.T) {
 	chainid := "mytestchainid5"
+<<<<<<< HEAD
 	path := tempDir(t, "test5")
 	defer os.RemoveAll(path)
 
 	stub, _, cleanup, err := setupTestLedger(chainid, path)
+=======
+	path := t.TempDir()
+
+	stub, _, cleanup, err := setupTestLedger(t, chainid, path)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -224,7 +270,11 @@ func TestFailingCC2CC(t *testing.T) {
 		resetProvider(resources.Qscc_GetChainInfo, "testchannel", sProp, nil)
 		res := stub.MockInvokeWithSignedProposal("2", args, sProp)
 		require.Equal(t, int32(shim.ERROR), res.Status, "GetChainInfo must fail: %s", res.Message)
+<<<<<<< HEAD
 		require.Contains(t, res.Message, "Failed to identify the called chaincode: could not unmarshal proposal: proto: can't skip unknown wire type 7")
+=======
+		require.Contains(t, res.Message, "Failed to identify the called chaincode: could not unmarshal proposal")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("DifferentInvokedCC", func(t *testing.T) {
@@ -251,10 +301,16 @@ func TestFailingCC2CC(t *testing.T) {
 
 func TestFailingAccessControl(t *testing.T) {
 	chainid := "mytestchainid6"
+<<<<<<< HEAD
 	path := tempDir(t, "test6")
 	defer os.RemoveAll(path)
 
 	_, p, cleanup, err := setupTestLedger(chainid, path)
+=======
+	path := t.TempDir()
+
+	_, p, cleanup, err := setupTestLedger(t, chainid, path)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -372,10 +428,16 @@ func TestFailingAccessControl(t *testing.T) {
 
 func TestQueryNonexistentFunction(t *testing.T) {
 	chainid := "mytestchainid7"
+<<<<<<< HEAD
 	path := tempDir(t, "test7")
 	defer os.RemoveAll(path)
 
 	stub, _, cleanup, err := setupTestLedger(chainid, path)
+=======
+	path := t.TempDir()
+
+	stub, _, cleanup, err := setupTestLedger(t, chainid, path)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -391,10 +453,16 @@ func TestQueryNonexistentFunction(t *testing.T) {
 // that contains two transactions
 func TestQueryGeneratedBlock(t *testing.T) {
 	chainid := "mytestchainid8"
+<<<<<<< HEAD
 	path := tempDir(t, "test8")
 	defer os.RemoveAll(path)
 
 	stub, p, cleanup, err := setupTestLedger(chainid, path)
+=======
+	path := t.TempDir()
+
+	stub, p, cleanup, err := setupTestLedger(t, chainid, path)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

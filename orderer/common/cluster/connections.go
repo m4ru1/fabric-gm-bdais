@@ -28,9 +28,15 @@ type SecureDialer interface {
 
 // ConnectionMapper maps certificates to connections
 type ConnectionMapper interface {
+<<<<<<< HEAD
 	Lookup(cert []byte) (*grpc.ClientConn, bool)
 	Put(cert []byte, conn *grpc.ClientConn)
 	Remove(cert []byte)
+=======
+	Lookup(key []byte) (*grpc.ClientConn, bool)
+	Put(key []byte, conn *grpc.ClientConn)
+	Remove(key []byte)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	Size() int
 }
 

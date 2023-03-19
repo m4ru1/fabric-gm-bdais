@@ -19,14 +19,22 @@ import (
 	"github.com/hyperledger/fabric/common/crypto/tlsgen"
 	"github.com/hyperledger/fabric/core/container/externalbuilder"
 	"github.com/hyperledger/fabric/integration/nwo"
+<<<<<<< HEAD
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/tedsuo/ifrit"
 	"github.com/tedsuo/ifrit/ginkgomon"
+=======
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+	"github.com/tedsuo/ifrit"
+	ginkgomon "github.com/tedsuo/ifrit/ginkgomon_v2"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 var _ = Describe("ChaincodeAsExternalServer", func() {
 	var (
+<<<<<<< HEAD
 		testDir                string
 		network                *nwo.Network
 		chaincode              nwo.Chaincode
@@ -34,6 +42,15 @@ var _ = Describe("ChaincodeAsExternalServer", func() {
 		assetDir               string
 		process                ifrit.Process
 		ccserver               ifrit.Process
+=======
+		testDir                     string
+		network                     *nwo.Network
+		chaincode                   nwo.Chaincode
+		chaincodeServerAddress      string
+		assetDir                    string
+		ordererProcess, peerProcess ifrit.Process
+		ccserver                    ifrit.Process
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	)
 
 	BeforeEach(func() {
@@ -41,7 +58,11 @@ var _ = Describe("ChaincodeAsExternalServer", func() {
 		testDir, err = ioutil.TempDir("", "external-chaincode-server")
 		Expect(err).NotTo(HaveOccurred())
 
+<<<<<<< HEAD
 		network = nwo.New(nwo.BasicSolo(), testDir, nil, StartPort(), components)
+=======
+		network = nwo.New(nwo.BasicEtcdRaft(), testDir, nil, StartPort(), components)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		network.GenerateConfigTree()
 		network.Bootstrap()
 
@@ -65,9 +86,20 @@ var _ = Describe("ChaincodeAsExternalServer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		// Setup the network
+<<<<<<< HEAD
 		networkRunner := network.NetworkGroupRunner()
 		process = ifrit.Invoke(networkRunner)
 		Eventually(process.Ready(), network.EventuallyTimeout).Should(BeClosed())
+=======
+		ordererRunner := network.OrdererRunner(network.Orderer("orderer"))
+		ordererProcess = ifrit.Invoke(ordererRunner)
+
+		peerRunner := network.PeerGroupRunner()
+		peerProcess = ifrit.Invoke(peerRunner)
+
+		Eventually(ordererProcess.Ready(), network.EventuallyTimeout).Should(BeClosed())
+		Eventually(peerProcess.Ready(), network.EventuallyTimeout).Should(BeClosed())
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 		network.CreateAndJoinChannel(network.Orderer("orderer"), "testchannel")
 		nwo.EnableCapabilities(
@@ -103,10 +135,20 @@ var _ = Describe("ChaincodeAsExternalServer", func() {
 			ccserver.Signal(syscall.SIGTERM)
 			Eventually(ccserver.Wait(), network.EventuallyTimeout).Should(Receive())
 		}
+<<<<<<< HEAD
 
 		if process != nil {
 			process.Signal(syscall.SIGTERM)
 			Eventually(process.Wait(), network.EventuallyTimeout).Should(Receive())
+=======
+		if peerProcess != nil {
+			peerProcess.Signal(syscall.SIGTERM)
+			Eventually(peerProcess.Wait(), network.EventuallyTimeout).Should(Receive())
+		}
+		if ordererProcess != nil {
+			ordererProcess.Signal(syscall.SIGTERM)
+			Eventually(ordererProcess.Wait(), network.EventuallyTimeout).Should(Receive())
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		}
 		if network != nil {
 			network.Cleanup()
@@ -114,7 +156,11 @@ var _ = Describe("ChaincodeAsExternalServer", func() {
 		os.RemoveAll(testDir)
 	})
 
+<<<<<<< HEAD
 	It("executes a basic solo network with 2 orgs and external chaincode server", func() {
+=======
+	It("executes a basic etcdraft network with 2 orgs and external chaincode server", func() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		orderer := network.Orderer("orderer")
 		peer := network.Peer("Org1", "peer0")
 		peers := network.PeersWithChannel("testchannel")

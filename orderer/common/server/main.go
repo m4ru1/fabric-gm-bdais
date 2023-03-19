@@ -49,7 +49,10 @@ import (
 	"github.com/hyperledger/fabric/orderer/common/onboarding"
 	"github.com/hyperledger/fabric/orderer/consensus"
 	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
+<<<<<<< HEAD
 	"github.com/hyperledger/fabric/orderer/consensus/kafka"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/orderer/consensus/solo"
 	"github.com/hyperledger/fabric/protoutil"
 	"go.uber.org/zap/zapcore"
@@ -806,18 +809,26 @@ func initializeMultichannelRegistrar(
 
 	consenters := map[string]consensus.Consenter{}
 
+<<<<<<< HEAD
 	var icr etcdraft.InactiveChainRegistry
 	if conf.General.BootstrapMethod == "file" || conf.General.BootstrapMethod == "none" {
 		if bootstrapBlock != nil && isClusterType(bootstrapBlock, bccsp) {
 			// with a system channel
 			etcdConsenter := initializeEtcdraftConsenter(consenters, conf, lf, clusterDialer, bootstrapBlock, repInitiator, srvConf, srv, registrar, metricsProvider, bccsp)
 			icr = etcdConsenter.InactiveChainRegistry
+=======
+	if conf.General.BootstrapMethod == "file" || conf.General.BootstrapMethod == "none" {
+		if bootstrapBlock != nil && isClusterType(bootstrapBlock, bccsp) {
+			// with a system channel
+			initializeEtcdraftConsenter(consenters, conf, lf, clusterDialer, bootstrapBlock, repInitiator, srvConf, srv, registrar, metricsProvider, bccsp)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		} else if bootstrapBlock == nil {
 			// without a system channel: assume cluster type, InactiveChainRegistry == nil, no go-routine.
 			consenters["etcdraft"] = etcdraft.New(clusterDialer, conf, srvConf, srv, registrar, nil, metricsProvider, bccsp)
 		}
 	}
 
+<<<<<<< HEAD
 	consenters["solo"] = solo.New()
 	var kafkaMetrics *kafka.Metrics
 	consenters["kafka"], kafkaMetrics = kafka.New(conf.Kafka, metricsProvider, healthChecker, icr, registrar.CreateChain)
@@ -825,10 +836,16 @@ func initializeMultichannelRegistrar(
 	// Note, we pass a 'nil' channel here, we could pass a channel that
 	// closes if we wished to cleanup this routine on exit.
 	go kafkaMetrics.PollGoMetricsUntilStop(time.Minute, nil)
+=======
+	// TODO Orderer v3: remove once all tests stop using solo https://github.com/hyperledger/fabric/issues/3514
+	consenters["solo"] = solo.New()
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	registrar.Initialize(consenters)
 	return registrar
 }
 
+<<<<<<< HEAD
 func initializeEtcdraftConsenter(
 	consenters map[string]consensus.Consenter,
 	conf *localconfig.TopLevel,
@@ -842,6 +859,9 @@ func initializeEtcdraftConsenter(
 	metricsProvider metrics.Provider,
 	bccsp bccsp.BCCSP,
 ) *etcdraft.Consenter {
+=======
+func initializeEtcdraftConsenter(consenters map[string]consensus.Consenter, conf *localconfig.TopLevel, lf blockledger.Factory, clusterDialer *cluster.PredicateDialer, bootstrapBlock *cb.Block, ri *onboarding.ReplicationInitiator, srvConf comm.ServerConfig, srv *comm.GRPCServer, registrar *multichannel.Registrar, metricsProvider metrics.Provider, bccsp bccsp.BCCSP) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	systemChannelName, err := protoutil.GetChannelIDFromBlock(bootstrapBlock)
 	if err != nil {
 		logger.Panicf("Failed extracting system channel name from bootstrap block: %v", err)
@@ -863,9 +883,15 @@ func initializeEtcdraftConsenter(
 	ri.ChannelLister = icr
 
 	go icr.Run()
+<<<<<<< HEAD
 	raftConsenter := etcdraft.New(clusterDialer, conf, srvConf, srv, registrar, icr, metricsProvider, bccsp)
 	consenters["etcdraft"] = raftConsenter
 	return raftConsenter
+=======
+
+	raftConsenter := etcdraft.New(clusterDialer, conf, srvConf, srv, registrar, icr, metricsProvider, bccsp)
+	consenters["etcdraft"] = raftConsenter
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 func newOperationsSystem(ops localconfig.Operations, metrics localconfig.Metrics) *operations.System {

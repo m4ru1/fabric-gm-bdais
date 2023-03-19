@@ -19,8 +19,13 @@ import (
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/protoutil"
+<<<<<<< HEAD
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"
+=======
+	"go.etcd.io/etcd/raft/v3"
+	"go.etcd.io/etcd/raft/v3/raftpb"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 )
 
 type node struct {
@@ -33,8 +38,14 @@ type node struct {
 
 	tracker *Tracker
 
+<<<<<<< HEAD
 	storage *RaftStorage
 	config  *raft.Config
+=======
+	storage   *RaftStorage
+	config    *raft.Config
+	confState atomic.Value // stores raft ConfState
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	rpc RPC
 
@@ -57,8 +68,13 @@ func (n *node) start(fresh, join bool) {
 	var campaign bool
 	if fresh {
 		if join {
+<<<<<<< HEAD
 			raftPeers = nil
 			n.logger.Info("Starting raft node to join an existing channel")
+=======
+			n.logger.Info("Starting raft node to join an existing channel")
+			n.Node = raft.RestartNode(n.config)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		} else {
 			n.logger.Info("Starting raft node as part of a new channel")
 
@@ -69,8 +85,13 @@ func (n *node) start(fresh, join bool) {
 			if n.config.ID == number%uint64(len(raftPeers))+1 {
 				campaign = true
 			}
+<<<<<<< HEAD
 		}
 		n.Node = raft.StartNode(n.config, raftPeers)
+=======
+			n.Node = raft.StartNode(n.config, raftPeers)
+		}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	} else {
 		n.logger.Info("Restarting raft node")
 		n.Node = raft.RestartNode(n.config)
@@ -201,6 +222,17 @@ func (n *node) send(msgs []raftpb.Message) {
 
 		status := raft.SnapshotFinish
 
+<<<<<<< HEAD
+=======
+		// Replace node list in snapshot with CURRENT node list in cluster.
+		if msg.Type == raftpb.MsgSnap {
+			state := n.confState.Load()
+			if state != nil {
+				msg.Snapshot.Metadata.ConfState = *state.(*raftpb.ConfState)
+			}
+		}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		msgBytes := protoutil.MarshalOrPanic(&msg)
 		err := n.rpc.SendConsensus(msg.To, &orderer.ConsensusRequest{Channel: n.chainID, Payload: msgBytes})
 		if err != nil {
@@ -247,7 +279,11 @@ func (n *node) abdicateLeader(currentLead uint64) {
 				continue // skip self
 			}
 
+<<<<<<< HEAD
 			if pr.RecentActive && !pr.Paused {
+=======
+			if pr.RecentActive && !pr.IsPaused() {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 				transferee = id
 				break
 			}
@@ -296,3 +332,12 @@ func (n *node) lastIndex() uint64 {
 	i, _ := n.storage.ram.LastIndex()
 	return i
 }
+<<<<<<< HEAD
+=======
+
+func (n *node) ApplyConfChange(cc raftpb.ConfChange) *raftpb.ConfState {
+	state := n.Node.ApplyConfChange(cc)
+	n.confState.Store(state)
+	return state
+}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19

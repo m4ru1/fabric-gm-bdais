@@ -14,7 +14,10 @@ import (
 	"testing"
 	"time"
 
+<<<<<<< HEAD
 	"github.com/Shopify/sarama"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/orderer/mocks/util"
 	"github.com/stretchr/testify/require"
@@ -51,6 +54,7 @@ func TestEnvSlice(t *testing.T) {
 	require.Exactly(t, expected, uconf.Inner.Slice, "did not get the expected slice")
 }
 
+<<<<<<< HEAD
 func TestKafkaVersionDecode(t *testing.T) {
 	type testKafkaVersion struct {
 		Inner struct {
@@ -112,6 +116,8 @@ func TestKafkaVersionDecode(t *testing.T) {
 	}
 }
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 type testByteSize struct {
 	Inner struct {
 		ByteSize uint32

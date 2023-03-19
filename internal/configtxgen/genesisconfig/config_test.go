@@ -7,7 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package genesisconfig
 
 import (
+<<<<<<< HEAD
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
@@ -21,11 +24,19 @@ func TestLoadProfile(t *testing.T) {
 	defer cleanup()
 
 	pNames := []string{
+<<<<<<< HEAD
 		SampleDevModeKafkaProfile,
 		SampleDevModeSoloProfile,
 		SampleSingleMSPChannelProfile,
 		SampleSingleMSPKafkaProfile,
 		SampleSingleMSPSoloProfile,
+=======
+		SampleDevModeSoloProfile,
+		SampleSingleMSPChannelProfile,
+		SampleSingleMSPSoloProfile,
+		SampleDevModeEtcdRaftProfile,
+		SampleAppChannelEtcdRaftProfile,
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	for _, pName := range pNames {
 		t.Run(pName, func(t *testing.T) {
@@ -39,11 +50,19 @@ func TestLoadProfileWithPath(t *testing.T) {
 	devConfigDir := configtest.GetDevConfigDir()
 
 	pNames := []string{
+<<<<<<< HEAD
 		SampleDevModeKafkaProfile,
 		SampleDevModeSoloProfile,
 		SampleSingleMSPChannelProfile,
 		SampleSingleMSPKafkaProfile,
 		SampleSingleMSPSoloProfile,
+=======
+		SampleDevModeSoloProfile,
+		SampleSingleMSPChannelProfile,
+		SampleSingleMSPSoloProfile,
+		SampleDevModeEtcdRaftProfile,
+		SampleAppChannelEtcdRaftProfile,
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	for _, pName := range pNames {
 		t.Run(pName, func(t *testing.T) {
@@ -112,6 +131,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 			},
 		}
 		profile.completeInitialization(devConfigDir)
+<<<<<<< HEAD
 		require.Nil(t, profile.Orderer.Kafka.Brokers, "Kafka config settings should not be set")
 	})
 
@@ -123,6 +143,9 @@ func TestConsensusSpecificInit(t *testing.T) {
 		}
 		profile.completeInitialization(devConfigDir)
 		require.NotNil(t, profile.Orderer.Kafka.Brokers, "Kafka config settings should be set")
+=======
+		require.NotNil(t, profile.Orderer.BatchSize)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("raft", func(t *testing.T) {
@@ -290,7 +313,10 @@ func TestLoadConfigCache(t *testing.T) {
 	// With the caching behavior, the update should not be reflected.
 	initial, err := c.load(cfg, configPath)
 	require.NoError(t, err)
+<<<<<<< HEAD
 	os.Setenv("ORDERER_KAFKA_RETRY_SHORTINTERVAL", "120s")
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	updated, err := c.load(cfg, configPath)
 	require.NoError(t, err)
 	require.Equal(t, initial, updated, "expected %#v to equal %#v", updated, initial)

@@ -286,7 +286,11 @@ func (nsPvtRwSet *NsPvtRwSet) toProtoMsg() (*rwset.NsPvtReadWriteSet, error) {
 	var err error
 	var collPvtRwSetProtoMsg *rwset.CollectionPvtReadWriteSet
 	for _, collPvtRwSet := range nsPvtRwSet.CollPvtRwSets {
+<<<<<<< HEAD
 		if collPvtRwSetProtoMsg, err = collPvtRwSet.toProtoMsg(); err != nil {
+=======
+		if collPvtRwSetProtoMsg, err = collPvtRwSet.ToProtoMsg(); err != nil {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			return nil, err
 		}
 		protoMsg.CollectionPvtRwset = append(protoMsg.CollectionPvtRwset, collPvtRwSetProtoMsg)
@@ -299,7 +303,11 @@ func nsPvtRwSetFromProtoMsg(protoMsg *rwset.NsPvtReadWriteSet) (*NsPvtRwSet, err
 	for _, collPvtRwSetProtoMsg := range protoMsg.CollectionPvtRwset {
 		var err error
 		var collPvtRwSet *CollPvtRwSet
+<<<<<<< HEAD
 		if collPvtRwSet, err = collPvtRwSetFromProtoMsg(collPvtRwSetProtoMsg); err != nil {
+=======
+		if collPvtRwSet, err = CollPvtRwSetFromProtoMsg(collPvtRwSetProtoMsg); err != nil {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			return nil, err
 		}
 		nsPvtRwSet.CollPvtRwSets = append(nsPvtRwSet.CollPvtRwSets, collPvtRwSet)
@@ -307,7 +315,11 @@ func nsPvtRwSetFromProtoMsg(protoMsg *rwset.NsPvtReadWriteSet) (*NsPvtRwSet, err
 	return nsPvtRwSet, nil
 }
 
+<<<<<<< HEAD
 func (collPvtRwSet *CollPvtRwSet) toProtoMsg() (*rwset.CollectionPvtReadWriteSet, error) {
+=======
+func (collPvtRwSet *CollPvtRwSet) ToProtoMsg() (*rwset.CollectionPvtReadWriteSet, error) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	var err error
 	protoMsg := &rwset.CollectionPvtReadWriteSet{CollectionName: collPvtRwSet.CollectionName}
 	if protoMsg.Rwset, err = proto.Marshal(collPvtRwSet.KvRwSet); err != nil {
@@ -316,7 +328,11 @@ func (collPvtRwSet *CollPvtRwSet) toProtoMsg() (*rwset.CollectionPvtReadWriteSet
 	return protoMsg, nil
 }
 
+<<<<<<< HEAD
 func collPvtRwSetFromProtoMsg(protoMsg *rwset.CollectionPvtReadWriteSet) (*CollPvtRwSet, error) {
+=======
+func CollPvtRwSetFromProtoMsg(protoMsg *rwset.CollectionPvtReadWriteSet) (*CollPvtRwSet, error) {
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	collPvtRwSet := &CollPvtRwSet{CollectionName: protoMsg.CollectionName, KvRwSet: &kvrwset.KVRWSet{}}
 	if err := proto.Unmarshal(protoMsg.Rwset, collPvtRwSet.KvRwSet); err != nil {
 		return nil, err
@@ -362,6 +378,14 @@ func newPvtKVWriteAndHash(key string, value []byte) (*kvrwset.KVWrite, *kvrwset.
 	return kvWrite, &kvrwset.KVWriteHash{KeyHash: keyHash, IsDelete: kvWrite.IsDelete, ValueHash: valueHash}
 }
 
+<<<<<<< HEAD
+=======
+func newKVWriteHashPurge(key string) *kvrwset.KVWriteHash {
+	keyHash := util.ComputeStringHash(key)
+	return &kvrwset.KVWriteHash{KeyHash: keyHash, IsDelete: true, IsPurge: true}
+}
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 // IsKVWriteDelete returns true if the kvWrite indicates a delete operation. See FAB-18386 for details.
 func IsKVWriteDelete(kvWrite *kvrwset.KVWrite) bool {
 	return kvWrite.IsDelete || len(kvWrite.Value) == 0

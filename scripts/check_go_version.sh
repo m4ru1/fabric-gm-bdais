@@ -33,6 +33,14 @@ patch () {
 # go release must be >= ci release
 [ "$(release "$GO_VERSION")" -ge "$(release "$CI_VERSION")" ] || fail
 
+<<<<<<< HEAD
+=======
+# If go release is greater than the expected ci release, things may not work, print a warning.
+if [ "$(release "$GO_VERSION")" -gt "$(release "$CI_VERSION")" ]; then
+  echo "WARNING: Your Go release $GO_VERSION is greater than expected release $CI_VERSION, CI may or may not work depending on Go changes."
+fi
+
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 # if releases are equal, patch must be >= ci patch
 if [ "$(release "$GO_VERSION")" -eq "$(release "$CI_VERSION")" ]; then
     [ "$(patch "$GO_VERSION")" -ge "$(patch "$CI_VERSION")" ] || fail

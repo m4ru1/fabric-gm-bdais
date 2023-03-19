@@ -9,7 +9,10 @@ package statecouchdb
 import (
 	"fmt"
 	"io/ioutil"
+<<<<<<< HEAD
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
@@ -151,6 +154,7 @@ func TestCouchdbRedoLogger(t *testing.T) {
 }
 
 func redologTestSetup(t *testing.T) (p *redoLoggerProvider, cleanup func()) {
+<<<<<<< HEAD
 	dbPath, err := ioutil.TempDir("", "redolog")
 	if err != nil {
 		t.Fatalf("Failed to create redo log directory: %s", err)
@@ -160,6 +164,13 @@ func redologTestSetup(t *testing.T) (p *redoLoggerProvider, cleanup func()) {
 	cleanup = func() {
 		p.close()
 		require.NoError(t, os.RemoveAll(dbPath))
+=======
+	dbPath := t.TempDir()
+	p, err := newRedoLoggerProvider(dbPath)
+	require.NoError(t, err)
+	cleanup = func() {
+		p.close()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	}
 	return
 }

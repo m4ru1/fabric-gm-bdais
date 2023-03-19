@@ -18,7 +18,11 @@ import (
 
 func TestStatsBlockchainHeight(t *testing.T) {
 	testMetricProvider := testutilConstructMetricProvider()
+<<<<<<< HEAD
 	env := newTestEnvWithMetricsProvider(t, NewConf(testPath(), 0), testMetricProvider.fakeProvider)
+=======
+	env := newTestEnvWithMetricsProvider(t, NewConf(t.TempDir(), 0), testMetricProvider.fakeProvider)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 
 	provider := env.provider
@@ -71,7 +75,11 @@ func TestStatsBlockchainHeight(t *testing.T) {
 
 func TestStatsBlockCommit(t *testing.T) {
 	testMetricProvider := testutilConstructMetricProvider()
+<<<<<<< HEAD
 	env := newTestEnvWithMetricsProvider(t, NewConf(testPath(), 0), testMetricProvider.fakeProvider)
+=======
+	env := newTestEnvWithMetricsProvider(t, NewConf(t.TempDir(), 0), testMetricProvider.fakeProvider)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	defer env.Cleanup()
 
 	provider := env.provider

@@ -29,7 +29,11 @@ func newMockOrdererConfig(migration bool, state orderer.ConsensusType_State) *mo
 	mockCapabilities := &mocks.OrdererCapabilities{}
 	mockCapabilities.ConsensusTypeMigrationReturns(migration)
 	mockOrderer.CapabilitiesReturns(mockCapabilities)
+<<<<<<< HEAD
 	mockOrderer.ConsensusTypeReturns("kafka")
+=======
+	mockOrderer.ConsensusTypeReturns("solo")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	mockOrderer.ConsensusStateReturns(state)
 	return mockOrderer
 }
@@ -54,7 +58,11 @@ func TestMaintenanceDisabled(t *testing.T) {
 	require.NoError(t, err)
 	mf := NewMaintenanceFilter(msInactive, cryptoProvider)
 	require.NotNil(t, mf)
+<<<<<<< HEAD
 	current := consensusTypeInfo{ordererType: "kafka", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
+=======
+	current := consensusTypeInfo{ordererType: "solo", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	t.Run("Good", func(t *testing.T) {
 		configTx := makeConfigEnvelopeWithExtraStuff(t, current, current, 3)
@@ -63,7 +71,11 @@ func TestMaintenanceDisabled(t *testing.T) {
 	})
 
 	t.Run("Block entry to maintenance", func(t *testing.T) {
+<<<<<<< HEAD
 		next := consensusTypeInfo{ordererType: "kafka", metadata: []byte{}, state: orderer.ConsensusType_STATE_MAINTENANCE}
+=======
+		next := consensusTypeInfo{ordererType: "solo", metadata: []byte{}, state: orderer.ConsensusType_STATE_MAINTENANCE}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.EqualError(t, err,
@@ -71,11 +83,19 @@ func TestMaintenanceDisabled(t *testing.T) {
 	})
 
 	t.Run("Block type change", func(t *testing.T) {
+<<<<<<< HEAD
 		next := consensusTypeInfo{ordererType: "solo", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.EqualError(t, err,
 			"config transaction inspection failed: next config attempted to change ConsensusType.Type from kafka to solo, but capability is disabled")
+=======
+		next := consensusTypeInfo{ordererType: "etcdraft", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
+		configTx := makeConfigEnvelope(t, current, next)
+		err := mf.Apply(configTx)
+		require.EqualError(t, err,
+			"config transaction inspection failed: next config attempted to change ConsensusType.Type from solo to etcdraft, but capability is disabled")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 }
 
@@ -166,10 +186,17 @@ func TestMaintenanceInspectEntry(t *testing.T) {
 	mf := NewMaintenanceFilter(msActive, cryptoProvider)
 	require.NotNil(t, mf)
 	bogusMetadata := []byte{1, 2, 3, 4}
+<<<<<<< HEAD
 	current := consensusTypeInfo{ordererType: "kafka", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
 
 	t.Run("Good", func(t *testing.T) {
 		next := consensusTypeInfo{ordererType: "kafka", metadata: []byte{}, state: orderer.ConsensusType_STATE_MAINTENANCE}
+=======
+	current := consensusTypeInfo{ordererType: "solo", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
+
+	t.Run("Good", func(t *testing.T) {
+		next := consensusTypeInfo{ordererType: "solo", metadata: []byte{}, state: orderer.ConsensusType_STATE_MAINTENANCE}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.NoError(t, err)
@@ -180,7 +207,11 @@ func TestMaintenanceInspectEntry(t *testing.T) {
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.EqualError(t, err,
+<<<<<<< HEAD
 			"config transaction inspection failed: attempted to change ConsensusType.Type from kafka to etcdraft, but ConsensusType.State is changing from STATE_NORMAL to STATE_MAINTENANCE")
+=======
+			"config transaction inspection failed: attempted to change ConsensusType.Type from solo to etcdraft, but ConsensusType.State is changing from STATE_NORMAL to STATE_MAINTENANCE")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("Bad: change consensus type not in maintenance", func(t *testing.T) {
@@ -188,7 +219,11 @@ func TestMaintenanceInspectEntry(t *testing.T) {
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.EqualError(t, err,
+<<<<<<< HEAD
 			"config transaction inspection failed: attempted to change consensus type from kafka to etcdraft, but current config ConsensusType.State is not in maintenance mode")
+=======
+			"config transaction inspection failed: attempted to change consensus type from solo to etcdraft, but current config ConsensusType.State is not in maintenance mode")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 }
 
@@ -202,7 +237,11 @@ func TestMaintenanceInspectChange(t *testing.T) {
 	require.NotNil(t, mf)
 	bogusMetadata := []byte{1, 2, 3, 4}
 	validMetadata := protoutil.MarshalOrPanic(&etcdraft.ConfigMetadata{})
+<<<<<<< HEAD
 	current := consensusTypeInfo{ordererType: "kafka", metadata: []byte{}, state: orderer.ConsensusType_STATE_MAINTENANCE}
+=======
+	current := consensusTypeInfo{ordererType: "solo", metadata: []byte{}, state: orderer.ConsensusType_STATE_MAINTENANCE}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 	t.Run("Good type change", func(t *testing.T) {
 		next := consensusTypeInfo{ordererType: "etcdraft", metadata: validMetadata, state: orderer.ConsensusType_STATE_MAINTENANCE}
@@ -212,7 +251,11 @@ func TestMaintenanceInspectChange(t *testing.T) {
 	})
 
 	t.Run("Good exit, no change", func(t *testing.T) {
+<<<<<<< HEAD
 		next := consensusTypeInfo{ordererType: "kafka", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
+=======
+		next := consensusTypeInfo{ordererType: "solo", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.NoError(t, err)
@@ -223,7 +266,11 @@ func TestMaintenanceInspectChange(t *testing.T) {
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.EqualError(t, err,
+<<<<<<< HEAD
 			"config transaction inspection failed: attempted to change consensus type from kafka to unsupported, transition not supported")
+=======
+			"config transaction inspection failed: attempted to change consensus type from solo to unsupported, transition not supported")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("Bad: concurrent change to consensus type & state", func(t *testing.T) {
@@ -231,7 +278,11 @@ func TestMaintenanceInspectChange(t *testing.T) {
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.EqualError(t, err,
+<<<<<<< HEAD
 			"config transaction inspection failed: attempted to change ConsensusType.Type from kafka to etcdraft, but ConsensusType.State is changing from STATE_MAINTENANCE to STATE_NORMAL")
+=======
+			"config transaction inspection failed: attempted to change ConsensusType.Type from solo to etcdraft, but ConsensusType.State is changing from STATE_MAINTENANCE to STATE_NORMAL")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("Bad: etcdraft metadata", func(t *testing.T) {
@@ -267,11 +318,19 @@ func TestMaintenanceInspectExit(t *testing.T) {
 	})
 
 	t.Run("Bad: concurrent change to consensus type & state", func(t *testing.T) {
+<<<<<<< HEAD
 		next := consensusTypeInfo{ordererType: "kafka", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
 		configTx := makeConfigEnvelope(t, current, next)
 		err := mf.Apply(configTx)
 		require.EqualError(t, err,
 			"config transaction inspection failed: attempted to change ConsensusType.Type from etcdraft to kafka, but ConsensusType.State is changing from STATE_MAINTENANCE to STATE_NORMAL")
+=======
+		next := consensusTypeInfo{ordererType: "solo", metadata: []byte{}, state: orderer.ConsensusType_STATE_NORMAL}
+		configTx := makeConfigEnvelope(t, current, next)
+		err := mf.Apply(configTx)
+		require.EqualError(t, err,
+			"config transaction inspection failed: attempted to change ConsensusType.Type from etcdraft to solo, but ConsensusType.State is changing from STATE_MAINTENANCE to STATE_NORMAL")
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	})
 
 	t.Run("Bad: exit with extra group", func(t *testing.T) {
@@ -304,7 +363,11 @@ func TestMaintenanceExtra(t *testing.T) {
 	require.NoError(t, err)
 	mf := NewMaintenanceFilter(msActive, cryptoProvider)
 	require.NotNil(t, mf)
+<<<<<<< HEAD
 	current := consensusTypeInfo{ordererType: "kafka", metadata: nil, state: orderer.ConsensusType_STATE_MAINTENANCE}
+=======
+	current := consensusTypeInfo{ordererType: "solo", metadata: nil, state: orderer.ConsensusType_STATE_MAINTENANCE}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	validMetadata := protoutil.MarshalOrPanic(&etcdraft.ConfigMetadata{})
 
 	t.Run("Good: with extra group", func(t *testing.T) {
@@ -337,7 +400,11 @@ func TestMaintenanceMissingConsensusType(t *testing.T) {
 	require.NoError(t, err)
 	mf := NewMaintenanceFilter(msActive, cryptoProvider)
 	require.NotNil(t, mf)
+<<<<<<< HEAD
 	current := consensusTypeInfo{ordererType: "kafka", metadata: nil, state: orderer.ConsensusType_STATE_MAINTENANCE}
+=======
+	current := consensusTypeInfo{ordererType: "solo", metadata: nil, state: orderer.ConsensusType_STATE_MAINTENANCE}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	for i := 1; i < 4; i++ {
 		configTx := makeConfigEnvelopeWithExtraStuff(t, current, current, i)
 		err := mf.Apply(configTx)
@@ -459,7 +526,11 @@ func makeBaseConfig(t *testing.T) *common.Config {
 	gConf.Orderer.Capabilities = map[string]bool{
 		capabilities.OrdererV1_4_2: true,
 	}
+<<<<<<< HEAD
 	gConf.Orderer.OrdererType = "kafka"
+=======
+	gConf.Orderer.OrdererType = "solo"
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	channelGroup, err := encoder.NewChannelGroup(gConf)
 	require.NoError(t, err)
 	original := &common.Config{

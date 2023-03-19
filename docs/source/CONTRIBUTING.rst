@@ -54,6 +54,7 @@ As a developer:
   `GitHub epic backlog <https://github.com/hyperledger/fabric/labels/Epic>`_,
   contact the Epic assignee via the GitHub issue.
 
+<<<<<<< HEAD
 Getting a Linux Foundation account
 ----------------------------------
 
@@ -83,6 +84,8 @@ already have one.
 
 6. Access `RocketChat <https://chat.hyperledger.org/>`__ to confirm access.
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 Contributing documentation
 --------------------------
 
@@ -145,7 +148,11 @@ and reviews (a month or more) demonstrating a renewed commitment to the project.
 Releases
 ~~~~~~~~
 
+<<<<<<< HEAD
 Fabric provides a release approximately once every four months with new features and improvements.
+=======
+Fabric provides periodic releases with new features and improvements.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 New feature work is merged to the Fabric main branch on `GitHub <https://github.com/hyperledger/fabric>`__.
 Releases branches are created prior to each release so that the code can stabilize while
 new features continue to get merged to the main branch.
@@ -185,6 +192,7 @@ Release roadmap
 The Fabric release roadmap is managed as a list of
 `GitHub issues with Epic label <https://github.com/hyperledger/fabric/labels/Epic>`__.
 
+<<<<<<< HEAD
 Communications
 ~~~~~~~~~~~~~~
 
@@ -194,6 +202,26 @@ development planning and prioritization is done using a
 `GitHub Issues ZenHub board <https://app.zenhub.com/workspaces/fabric-57c43689b6f3d8060d082cf1/board>`__, and we take longer running
 discussions/decisions to the `Fabric contributor meeting <https://wiki.hyperledger.org/display/fabric/Contributor+Meetings>`__
 or `mailing list <https://lists.hyperledger.org/mailman/listinfo/hyperledger-fabric>`__.
+=======
+Communications and Getting Help
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We use the `Fabric mailing list <https://lists.hyperledger.org/g/fabric/>`__ for formal communication and
+`Discord <https://discord.com/invite/hyperledger/>`__ for community chat.
+Feel free to reach out for help on one of the Fabric channels!
+If you'd like contribution help or suggestions reach out on the #fabric-code-contributors channel.
+
+Our development planning and prioritization is done using a
+`GitHub Issues ZenHub board <https://app.zenhub.com/workspaces/fabric-57c43689b6f3d8060d082cf1/board>`__, and we take longer running
+discussions/decisions to the `Fabric contributor meeting <https://wiki.hyperledger.org/display/fabric/Contributor+Meetings>`__.
+
+The mailing list, Discord, and GitHub each require their own login which you can request upon your first interaction.
+
+The Hyperledger Fabric `wiki <https://wiki.hyperledger.org/display/fabric>`__
+and the legacy issue management system in `Jira <https://jira.hyperledger.org/projects/FAB/issues>`__
+require a `Linux Foundation ID <https://identity.linuxfoundation.org/>`__,
+but these resources are primarily for read-only reference and you will likely not need an ID.
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 
 Contribution guide
 ------------------
@@ -206,6 +234,7 @@ you have all the :doc:`prerequisites <prereqs>` installed on the platform(s)
 on which you'll be developing blockchain applications and/or operating
 Hyperledger Fabric.
 
+<<<<<<< HEAD
 Getting help
 ~~~~~~~~~~~~
 
@@ -220,6 +249,8 @@ and will be glad to help. The only silly question is the one you don't
 ask. Questions are in fact a great way to help improve the project as
 they highlight where our documentation could be clearer.
 
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 Reporting bugs
 ~~~~~~~~~~~~~~
 
@@ -240,7 +271,11 @@ sufficient information for someone else to reproduce the
 issue. One of the project's maintainers should respond to your issue within 24
 hours. If not, please bump the issue with a comment and request that it be
 reviewed. You can also post to the relevant Hyperledger Fabric channel in
+<<<<<<< HEAD
 `Hyperledger Chat <https://chat.hyperledger.org>`__.  For example, a doc bug should
+=======
+`Hyperledger Discord <https://discord.com/servers/hyperledger-foundation-905194001349627914>`__.  For example, a doc bug should
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 be broadcast to ``#fabric-documentation``, a database bug to ``#fabric-ledger``,
 and so on...
 

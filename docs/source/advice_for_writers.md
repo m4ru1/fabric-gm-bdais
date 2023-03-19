@@ -8,7 +8,11 @@ language translations provided by Fabric.
 In this topic, we're going to cover:
 
 * [How to get started](#getting-started)
+<<<<<<< HEAD
 * [Using Rocket chat](#rocket-chat)
+=======
+* [Using Discord chat](#discord)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 * [Documentation workgroup call](#documentation-workgroup-call)
 * [Join a language translation workgroup](#join-a-language-translation-workgroup)
 * [Other ways to connect](#other-ways-to-connect)
@@ -16,6 +20,7 @@ In this topic, we're going to cover:
 ## Getting started
 
 Before you make a documentation change, you might like to connect with other
+<<<<<<< HEAD
 people working on the Fabric documentation. Your [Linux Foundation
 account](./CONTRIBUTING.html#getting-a-linux-foundation-account) will give you
 access to many different resources to help you connect with other contributors
@@ -52,6 +57,23 @@ A great place to meet people working on documentation is the Documentation workg
 call. These are held twice every Friday at a time convenient for both
 Eastern and Western hemispheres. The agenda is published in advance, and
 there are minutes and recordings of each session.  Find out more on the
+=======
+people working on the Fabric documentation. Use any or all of the following
+mechanisms to connect with others.
+
+## Discord
+
+Hyperledger Fabric uses [Discord](https://discord.com/invite/hyperledger) for
+interactive discussions on a variety of project topics.
+Reach out to us on the fabric-documentation channel to discuss documentation
+topics including contributions, questions, feedback, and translation.
+
+## Documentation workgroup call
+
+A great place to meet people working on documentation is the monthly Documentation workgroup
+call. The agenda is published in advance, and
+there are minutes and recordings of each session. Find out more on the
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 [Documentation
 wiki](https://wiki.hyperledger.org/display/fabric/Documentation+Working+Group).
 
@@ -66,7 +88,11 @@ Each workgroup has a list of members and their contact information.
 ## Other ways to connect
 
 Hyperledger Fabric has many other collaboration mechanisms such as mailing
+<<<<<<< HEAD
 lists, contributor meetings and maintainer meetings. Find out about these and
+=======
+list and contributor meetings. Find out about these and
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 more [here](./CONTRIBUTING.html).
 
 Good luck getting started and thanks for your contribution.

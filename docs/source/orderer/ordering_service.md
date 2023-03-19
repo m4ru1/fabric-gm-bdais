@@ -257,7 +257,11 @@ single organization. With Raft, each organization can have its own ordering
 nodes, participating in the ordering service, which leads to a more decentralized
 system.
 
+<<<<<<< HEAD
 * Raft is supported natively, which means that users are required to get the requisite images and
+=======
+* Kafka is supported natively, which means that users are required to get the requisite images and
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 learn how to use Kafka and ZooKeeper on their own. Likewise, support for
 Kafka-related issues is handled through [Apache](https://kafka.apache.org/), the
 open-source developer of Kafka, not Hyperledger Fabric. The Fabric Raft implementation,

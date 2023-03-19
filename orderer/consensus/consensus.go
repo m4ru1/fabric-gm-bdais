@@ -54,8 +54,13 @@ type MetadataValidator interface {
 // Note, that in order to allow flexibility in the implementation, it is the responsibility of the implementer
 // to take the ordered messages, send them through the blockcutter.Receiver supplied via HandleChain to cut blocks,
 // and ultimately write the ledger also supplied via HandleChain.  This design allows for two primary flows
+<<<<<<< HEAD
 // 1. Messages are ordered into a stream, the stream is cut into blocks, the blocks are committed (solo, kafka)
 // 2. Messages are cut into blocks, the blocks are ordered, then the blocks are committed (sbft)
+=======
+// 1. Messages are ordered into a stream, the stream is cut into blocks, the blocks are committed (solo)
+// 2. Messages are cut into blocks, the blocks are ordered, then the blocks are committed (etcdraft)
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 type Chain interface {
 	// Order accepts a message which has been processed at a given configSeq.
 	// If the configSeq advances, it is the responsibility of the consenter

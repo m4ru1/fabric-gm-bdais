@@ -11,8 +11,11 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+<<<<<<< HEAD
 	"io/ioutil"
 	"os"
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	"reflect"
 	"testing"
 	"time"
@@ -161,11 +164,15 @@ type testTransientStore struct {
 func newTransientStore(t *testing.T) *testTransientStore {
 	s := &testTransientStore{}
 	var err error
+<<<<<<< HEAD
 	s.tempdir, err = ioutil.TempDir("", "ts")
 	if err != nil {
 		t.Fatalf("Failed to create test directory, got err %s", err)
 		return s
 	}
+=======
+	s.tempdir = t.TempDir()
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	s.storeProvider, err = transientstore.NewStoreProvider(s.tempdir)
 	if err != nil {
 		t.Fatalf("Failed to open store, got err %s", err)
@@ -181,7 +188,10 @@ func newTransientStore(t *testing.T) *testTransientStore {
 
 func (s *testTransientStore) tearDown() {
 	s.storeProvider.Close()
+<<<<<<< HEAD
 	os.RemoveAll(s.tempdir)
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 }
 
 func (s *testTransientStore) Persist(txid string, blockHeight uint64,
@@ -607,14 +617,20 @@ func TestCoordinatorStoreInvalidBlock(t *testing.T) {
 			iterator, err := store.GetTxPvtRWSetByTxid(txn, nil)
 			if err != nil {
 				t.Fatalf("Failed iterating, got err %s", err)
+<<<<<<< HEAD
 				iterator.Close()
 				return
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 			res, err := iterator.Next()
 			if err != nil {
 				t.Fatalf("Failed iterating, got err %s", err)
+<<<<<<< HEAD
 				iterator.Close()
 				return
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 			require.Nil(t, res)
 			iterator.Close()
@@ -634,7 +650,11 @@ func TestCoordinatorStoreInvalidBlock(t *testing.T) {
 	pvtData := pdFactory.create()
 	committer.On("DoesPvtDataInfoExistInLedger", mock.Anything).Return(false, nil)
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -719,7 +739,11 @@ func TestCoordinatorStoreInvalidBlock(t *testing.T) {
 	committer.On("DoesPvtDataInfoExistInLedger", mock.Anything).Return(false, nil)
 
 	capabilityProvider = &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability = &privdatamocks.AppCapabilities{}
+=======
+	appCapability = &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(false)
 	coordinator = NewCoordinator(mspID, Support{
@@ -776,7 +800,11 @@ func TestCoordinatorStoreInvalidBlock(t *testing.T) {
 	pvtData = pdFactory.addRWSet().addNSRWSet("ns1", "c1", "c2").create()
 	committer.On("DoesPvtDataInfoExistInLedger", mock.Anything).Return(false, nil)
 	capabilityProvider = &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability = &privdatamocks.AppCapabilities{}
+=======
+	appCapability = &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	digKeys = []privdatacommon.DigKey{}
@@ -928,14 +956,20 @@ func TestCoordinatorToFilterOutPvtRWSetsWithWrongHash(t *testing.T) {
 			iterator, err := store.GetTxPvtRWSetByTxid(txn, nil)
 			if err != nil {
 				t.Fatalf("Failed iterating, got err %s", err)
+<<<<<<< HEAD
 				iterator.Close()
 				return
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 			res, err := iterator.Next()
 			if err != nil {
 				t.Fatalf("Failed iterating, got err %s", err)
+<<<<<<< HEAD
 				iterator.Close()
 				return
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 			require.Nil(t, res)
 			iterator.Close()
@@ -972,7 +1006,11 @@ func TestCoordinatorToFilterOutPvtRWSetsWithWrongHash(t *testing.T) {
 	metrics := metrics.NewGossipMetrics(&disabled.Provider{}).PrivdataMetrics
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -1094,7 +1132,11 @@ func TestCoordinatorStoreBlock(t *testing.T) {
 	committer.On("DoesPvtDataInfoExistInLedger", mock.Anything).Return(false, nil)
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -1368,7 +1410,11 @@ func TestCoordinatorStoreBlockWhenPvtDataExistInLedger(t *testing.T) {
 	metrics := metrics.NewGossipMetrics(&disabled.Provider{}).PrivdataMetrics
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -1433,14 +1479,20 @@ func TestProceedWithoutPrivateData(t *testing.T) {
 			iterator, err := store.GetTxPvtRWSetByTxid(txn, nil)
 			if err != nil {
 				t.Fatalf("Failed iterating, got err %s", err)
+<<<<<<< HEAD
 				iterator.Close()
 				return
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 			res, err := iterator.Next()
 			if err != nil {
 				t.Fatalf("Failed iterating, got err %s", err)
+<<<<<<< HEAD
 				iterator.Close()
 				return
+=======
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 			}
 			require.Nil(t, res)
 			iterator.Close()
@@ -1484,7 +1536,11 @@ func TestProceedWithoutPrivateData(t *testing.T) {
 	committer.On("DoesPvtDataInfoExistInLedger", mock.Anything).Return(false, nil)
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -1559,7 +1615,11 @@ func TestProceedWithInEligiblePrivateData(t *testing.T) {
 	metrics := metrics.NewGossipMetrics(&disabled.Provider{}).PrivdataMetrics
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -1606,7 +1666,11 @@ func TestCoordinatorGetBlocks(t *testing.T) {
 	committer.On("DoesPvtDataInfoExistInLedger", mock.Anything).Return(false, nil)
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 
@@ -1732,7 +1796,11 @@ func TestPurgeBelowHeight(t *testing.T) {
 	metrics := metrics.NewGossipMetrics(&disabled.Provider{}).PrivdataMetrics
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -1779,7 +1847,11 @@ func TestCoordinatorStorePvtData(t *testing.T) {
 	committer.On("DoesPvtDataInfoExistInLedger", mock.Anything).Return(false, nil)
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -1878,7 +1950,11 @@ func TestIgnoreReadOnlyColRWSets(t *testing.T) {
 	metrics := metrics.NewGossipMetrics(&disabled.Provider{}).PrivdataMetrics
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
@@ -1963,7 +2039,11 @@ func TestCoordinatorMetrics(t *testing.T) {
 	committer.On("DoesPvtDataInfoExistInLedger", mock.Anything).Return(false, nil)
 
 	capabilityProvider := &privdatamocks.CapabilityProvider{}
+<<<<<<< HEAD
 	appCapability := &privdatamocks.AppCapabilities{}
+=======
+	appCapability := &privdatamocks.ApplicationCapabilities{}
+>>>>>>> a5405e2ca41902d62fe0fa9caa102e0d818c2f19
 	capabilityProvider.On("Capabilities").Return(appCapability)
 	appCapability.On("StorePvtDataOfInvalidTx").Return(true)
 	coordinator := NewCoordinator(mspID, Support{
