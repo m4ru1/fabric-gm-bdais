@@ -11,9 +11,9 @@ import (
 	"io/ioutil"
 	"time"
 
-	"github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
-	"github.com/hyperledger/fabric/internal/pkg/peer/orderers"
+	"github.com/m4ru1/fabric-gm-bdais/core/config"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/comm"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/peer/orderers"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"

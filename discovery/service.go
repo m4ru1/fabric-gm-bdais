@@ -13,11 +13,11 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric-protos-go/discovery"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/discovery/protoext"
-	common2 "github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/common/util"
+	"github.com/m4ru1/fabric-gm-bdais/discovery/protoext"
+	common2 "github.com/m4ru1/fabric-gm-bdais/gossip/common"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/pkg/errors"
 )
 

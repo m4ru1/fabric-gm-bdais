@@ -12,14 +12,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/deliverservice"
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/election"
-	"github.com/hyperledger/fabric/gossip/util"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
-	"github.com/hyperledger/fabric/internal/pkg/peer/blocksprovider"
-	"github.com/hyperledger/fabric/internal/pkg/peer/orderers"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/core/deliverservice"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/api"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/election"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/util"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/comm"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/peer/blocksprovider"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/peer/orderers"
 	"github.com/stretchr/testify/require"
 )
 

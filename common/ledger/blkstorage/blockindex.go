@@ -15,10 +15,10 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/ledger/snapshot"
-	"github.com/hyperledger/fabric/common/ledger/util"
-	"github.com/hyperledger/fabric/common/ledger/util/leveldbhelper"
-	"github.com/hyperledger/fabric/internal/pkg/txflags"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/snapshot"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/util"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/util/leveldbhelper"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/txflags"
 	"github.com/pkg/errors"
 )
 

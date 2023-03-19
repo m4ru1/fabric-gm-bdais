@@ -21,9 +21,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/sw"
-	"github.com/hyperledger/fabric/bccsp/utils"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/sw"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/utils"
 	"github.com/miekg/pkcs11"
 	"github.com/stretchr/testify/require"
 )

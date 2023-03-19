@@ -12,7 +12,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

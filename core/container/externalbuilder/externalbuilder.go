@@ -17,9 +17,9 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	"github.com/hyperledger/fabric/core/peer"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/core/container/ccintf"
+	"github.com/m4ru1/fabric-gm-bdais/core/peer"
 	"github.com/pkg/errors"
 )
 

@@ -9,7 +9,7 @@ package lifecycle
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/chaincode"
+	"github.com/m4ru1/fabric-gm-bdais/common/chaincode"
 )
 
 // MetadataUpdateListener runs whenever there is a change to

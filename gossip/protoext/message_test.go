@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/protoext"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/protoext"
 	"github.com/stretchr/testify/require"
 )
 

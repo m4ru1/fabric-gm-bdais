@@ -14,10 +14,10 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/viperutil"
-	cf "github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/common/viperutil"
+	cf "github.com/m4ru1/fabric-gm-bdais/core/config"
+	"github.com/m4ru1/fabric-gm-bdais/msp"
 )
 
 const (

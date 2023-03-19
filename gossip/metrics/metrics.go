@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 package metrics
 
-import "github.com/hyperledger/fabric/common/metrics"
+import "github.com/m4ru1/fabric-gm-bdais/common/metrics"
 
 // GossipMetrics encapsulates all of gossip metrics
 type GossipMetrics struct {

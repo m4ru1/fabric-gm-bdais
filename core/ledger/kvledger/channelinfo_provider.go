@@ -9,13 +9,13 @@ package kvledger
 import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/ledger/queryresult"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/common/ledger/blkstorage"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/factory"
+	"github.com/m4ru1/fabric-gm-bdais/common/channelconfig"
+	commonledger "github.com/m4ru1/fabric-gm-bdais/common/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/blkstorage"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/pkg/errors"
 )
 

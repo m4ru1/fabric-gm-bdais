@@ -10,8 +10,8 @@ import (
 	"context"
 	"strings"
 
-	"github.com/hyperledger/fabric/common/semaphore"
-	"github.com/hyperledger/fabric/core/peer"
+	"github.com/m4ru1/fabric-gm-bdais/common/semaphore"
+	"github.com/m4ru1/fabric-gm-bdais/core/peer"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )

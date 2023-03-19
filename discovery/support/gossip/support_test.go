@@ -10,11 +10,11 @@ import (
 	"testing"
 
 	gp "github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/discovery/support/gossip"
-	"github.com/hyperledger/fabric/discovery/support/gossip/mocks"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/protoext"
+	"github.com/m4ru1/fabric-gm-bdais/discovery/support/gossip"
+	"github.com/m4ru1/fabric-gm-bdais/discovery/support/gossip/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/common"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/discovery"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/protoext"
 	"github.com/stretchr/testify/require"
 )
 

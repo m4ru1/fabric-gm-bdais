@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	cluster "github.com/hyperledger/fabric/orderer/common/cluster"
+	cluster "github.com/m4ru1/fabric-gm-bdais/orderer/common/cluster"
 	grpc "google.golang.org/grpc"
 
 	mock "github.com/stretchr/testify/mock"

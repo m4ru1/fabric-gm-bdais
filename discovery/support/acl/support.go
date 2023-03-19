@@ -8,10 +8,10 @@ package acl
 
 import (
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/channelconfig"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/common/policies"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/pkg/errors"
 )
 

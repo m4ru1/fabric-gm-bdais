@@ -11,11 +11,11 @@ import (
 	"hash"
 	"path/filepath"
 
-	"github.com/hyperledger/fabric/common/ledger/snapshot"
-	"github.com/hyperledger/fabric/core/ledger/internal/version"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/bookkeeping"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/internal/fileutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/snapshot"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/internal/version"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/bookkeeping"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/m4ru1/fabric-gm-bdais/internal/fileutil"
 	"github.com/pkg/errors"
 )
 

@@ -9,7 +9,7 @@ package middleware
 import (
 	"net/http"
 
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
 )
 
 var logger = flogging.MustGetLogger("middleware")

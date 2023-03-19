@@ -12,12 +12,12 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/comm"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/gossip/algo"
-	"github.com/hyperledger/fabric/gossip/protoext"
-	"github.com/hyperledger/fabric/gossip/util"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/comm"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/common"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/discovery"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/gossip/algo"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/protoext"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/util"
 	"github.com/pkg/errors"
 	"go.uber.org/zap/zapcore"
 )

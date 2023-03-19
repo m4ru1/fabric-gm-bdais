@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"go.uber.org/zap"

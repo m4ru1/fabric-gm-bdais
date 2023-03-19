@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/channelconfig"
+	"github.com/m4ru1/fabric-gm-bdais/common/crypto"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/pkg/errors"
 )
 

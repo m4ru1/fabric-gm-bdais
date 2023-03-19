@@ -12,13 +12,13 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/ledger/queryresult"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/core/ledger/internal/version"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/privacyenabledstate"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	btltestutil "github.com/hyperledger/fabric/core/ledger/pvtdatapolicy/testutil"
-	"github.com/hyperledger/fabric/core/ledger/util"
+	commonledger "github.com/m4ru1/fabric-gm-bdais/common/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/testutil"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/internal/version"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/txmgmt/privacyenabledstate"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/txmgmt/rwsetutil"
+	btltestutil "github.com/m4ru1/fabric-gm-bdais/core/ledger/pvtdatapolicy/testutil"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/util"
 	"github.com/stretchr/testify/require"
 )
 

@@ -19,8 +19,8 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/crypto/tlsgen"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/stretchr/testify/require"
 )
 

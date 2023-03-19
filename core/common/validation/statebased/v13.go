@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package statebased
 
 import (
-	commonerrors "github.com/hyperledger/fabric/common/errors"
-	validation "github.com/hyperledger/fabric/core/handlers/validation/api/policies"
-	"github.com/hyperledger/fabric/protoutil"
+	commonerrors "github.com/m4ru1/fabric-gm-bdais/common/errors"
+	validation "github.com/m4ru1/fabric-gm-bdais/core/handlers/validation/api/policies"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/pkg/errors"
 )
 

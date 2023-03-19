@@ -11,10 +11,10 @@ import (
 	"math"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/common/capabilities"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/common/capabilities"
+	"github.com/m4ru1/fabric-gm-bdais/common/util"
+	"github.com/m4ru1/fabric-gm-bdais/msp"
 	"github.com/pkg/errors"
 )
 

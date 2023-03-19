@@ -13,7 +13,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/hyperledger/fabric/internal/fileutil"
+	"github.com/m4ru1/fabric-gm-bdais/internal/fileutil"
 	"github.com/pkg/errors"
 )
 

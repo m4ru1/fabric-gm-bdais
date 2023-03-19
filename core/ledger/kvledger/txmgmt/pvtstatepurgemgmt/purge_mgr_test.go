@@ -10,14 +10,14 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/ledger/internal/version"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/bookkeeping"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/privacyenabledstate"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/pvtdatapolicy"
-	btltestutil "github.com/hyperledger/fabric/core/ledger/pvtdatapolicy/testutil"
-	"github.com/hyperledger/fabric/core/ledger/util"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/internal/version"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/bookkeeping"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/txmgmt/privacyenabledstate"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/pvtdatapolicy"
+	btltestutil "github.com/m4ru1/fabric-gm-bdais/core/ledger/pvtdatapolicy/testutil"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/util"
 	"github.com/stretchr/testify/require"
 )
 

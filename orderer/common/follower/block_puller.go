@@ -10,11 +10,11 @@ import (
 	"encoding/pem"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/identity"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/cluster"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/localconfig"
 	"github.com/pkg/errors"
 )
 

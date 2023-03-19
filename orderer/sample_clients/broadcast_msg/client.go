@@ -12,12 +12,12 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
-	"github.com/hyperledger/fabric/msp"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/factory"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/identity"
+	"github.com/m4ru1/fabric-gm-bdais/msp"
+	mspmgmt "github.com/m4ru1/fabric-gm-bdais/msp/mgmt"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/localconfig"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"google.golang.org/grpc"
 	pb "gopkg.in/cheggaaa/pb.v1"
 )

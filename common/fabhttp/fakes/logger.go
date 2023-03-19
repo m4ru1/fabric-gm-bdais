@@ -4,7 +4,7 @@ package fakes
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/fabhttp"
+	"github.com/m4ru1/fabric-gm-bdais/common/fabhttp"
 )
 
 type Logger struct {

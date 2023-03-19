@@ -11,8 +11,8 @@ import (
 	fmt "fmt"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/common/util"
+	"github.com/m4ru1/fabric-gm-bdais/common/metrics/disabled"
+	"github.com/m4ru1/fabric-gm-bdais/common/util"
 	"github.com/stretchr/testify/require"
 )
 

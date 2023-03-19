@@ -13,8 +13,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/flogging/mock"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging/mock"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap/zapcore"
 )

@@ -10,7 +10,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/hyperledger/fabric/gossip/common"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/common"
 	"github.com/stretchr/testify/require"
 )
 

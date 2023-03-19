@@ -14,9 +14,9 @@ import (
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
 	"github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric-protos-go/transientstore"
-	"github.com/hyperledger/fabric/core/ledger"
-	privdatacommon "github.com/hyperledger/fabric/gossip/privdata/common"
-	"github.com/hyperledger/fabric/gossip/privdata/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger"
+	privdatacommon "github.com/m4ru1/fabric-gm-bdais/gossip/privdata/common"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/privdata/mocks"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

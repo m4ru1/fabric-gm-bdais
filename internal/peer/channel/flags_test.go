@@ -9,7 +9,7 @@ package channel
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/internal/peer/common"
+	"github.com/m4ru1/fabric-gm-bdais/internal/peer/common"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"

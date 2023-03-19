@@ -7,7 +7,7 @@ package event
 
 import (
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger"
 	"github.com/pkg/errors"
 )
 

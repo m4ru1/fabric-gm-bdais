@@ -8,7 +8,7 @@ package etcdraft
 
 import (
 	"github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
 	"github.com/pkg/errors"
 )
 

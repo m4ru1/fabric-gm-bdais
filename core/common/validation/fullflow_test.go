@@ -15,11 +15,11 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/bccsp/sw"
-	"github.com/hyperledger/fabric/msp"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	msptesttools "github.com/hyperledger/fabric/msp/mgmt/testtools"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/sw"
+	"github.com/m4ru1/fabric-gm-bdais/msp"
+	mspmgmt "github.com/m4ru1/fabric-gm-bdais/msp/mgmt"
+	msptesttools "github.com/m4ru1/fabric-gm-bdais/msp/mgmt/testtools"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/stretchr/testify/require"
 )
 

@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package testdata
 
 import (
-	goo "github.com/hyperledger/fabric/common/metrics"
+	goo "github.com/m4ru1/fabric-gm-bdais/common/metrics"
 )
 
 // These variables should be discovered as valid metric options

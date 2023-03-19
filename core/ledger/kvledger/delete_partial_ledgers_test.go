@@ -9,8 +9,8 @@ package kvledger
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/ledger/kvledger/msgs"
-	"github.com/hyperledger/fabric/core/ledger/mock"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/msgs"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/mock"
 	"github.com/stretchr/testify/require"
 )
 

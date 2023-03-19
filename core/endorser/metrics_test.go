@@ -9,7 +9,7 @@ package endorser
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/metrics/metricsfakes"
+	"github.com/m4ru1/fabric-gm-bdais/common/metrics/metricsfakes"
 	. "github.com/onsi/gomega"
 )
 

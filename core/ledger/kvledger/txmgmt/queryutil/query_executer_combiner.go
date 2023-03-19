@@ -7,11 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package queryutil
 
 import (
-	"github.com/hyperledger/fabric/common/flogging"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/privacyenabledstate"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/util"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	commonledger "github.com/m4ru1/fabric-gm-bdais/common/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/txmgmt/privacyenabledstate"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/util"
 )
 
 var logger = flogging.MustGetLogger("util")

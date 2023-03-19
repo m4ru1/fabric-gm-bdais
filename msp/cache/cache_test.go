@@ -11,8 +11,8 @@ import (
 	"testing"
 
 	msp2 "github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/msp"
+	"github.com/m4ru1/fabric-gm-bdais/msp/mocks"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"

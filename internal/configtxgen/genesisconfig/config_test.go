@@ -11,8 +11,8 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	"github.com/hyperledger/fabric/common/viperutil"
-	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/m4ru1/fabric-gm-bdais/common/viperutil"
+	"github.com/m4ru1/fabric-gm-bdais/core/config/configtest"
 	"github.com/stretchr/testify/require"
 )
 

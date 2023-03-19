@@ -19,9 +19,9 @@ import (
 	"github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/hyperledger/fabric-protos-go/gossip"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/cmd/common"
-	discoveryclient "github.com/hyperledger/fabric/discovery/client"
-	"github.com/hyperledger/fabric/gossip/protoext"
+	"github.com/m4ru1/fabric-gm-bdais/cmd/common"
+	discoveryclient "github.com/m4ru1/fabric-gm-bdais/discovery/client"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/protoext"
 	"github.com/pkg/errors"
 )
 

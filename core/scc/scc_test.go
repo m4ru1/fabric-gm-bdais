@@ -9,9 +9,9 @@ package scc_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle"
-	"github.com/hyperledger/fabric/core/scc"
-	"github.com/hyperledger/fabric/core/scc/mock"
+	"github.com/m4ru1/fabric-gm-bdais/core/chaincode/lifecycle"
+	"github.com/m4ru1/fabric-gm-bdais/core/scc"
+	"github.com/m4ru1/fabric-gm-bdais/core/scc/mock"
 	. "github.com/onsi/gomega"
 )
 

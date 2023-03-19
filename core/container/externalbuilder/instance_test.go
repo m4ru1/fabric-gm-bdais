@@ -19,10 +19,10 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/types"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	"github.com/hyperledger/fabric/core/container/externalbuilder"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/core/container/ccintf"
+	"github.com/m4ru1/fabric-gm-bdais/core/container/externalbuilder"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/comm"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

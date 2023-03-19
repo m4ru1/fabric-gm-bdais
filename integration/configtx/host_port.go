@@ -10,7 +10,7 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/hyperledger/fabric/integration/nwo"
+	"github.com/m4ru1/fabric-gm-bdais/integration/nwo"
 	. "github.com/onsi/gomega"
 )
 

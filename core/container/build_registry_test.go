@@ -12,7 +12,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"github.com/hyperledger/fabric/core/container"
+	"github.com/m4ru1/fabric-gm-bdais/core/container"
 )
 
 var _ = Describe("BuildRegistry", func() {

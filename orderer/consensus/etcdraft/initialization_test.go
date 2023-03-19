@@ -9,13 +9,13 @@ package etcdraft_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp/sw"
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/sw"
+	"github.com/m4ru1/fabric-gm-bdais/common/metrics/disabled"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/comm"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/cluster"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/localconfig"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/consensus/etcdraft"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/consensus/etcdraft/mocks"
 	"github.com/stretchr/testify/require"
 )
 

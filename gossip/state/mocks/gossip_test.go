@@ -10,9 +10,9 @@ import (
 	"testing"
 
 	proto "github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/discovery"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/api"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/common"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/discovery"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

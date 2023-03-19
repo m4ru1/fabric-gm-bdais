@@ -13,7 +13,7 @@ import (
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/util"
+	"github.com/m4ru1/fabric-gm-bdais/common/util"
 	"github.com/stretchr/testify/require"
 )
 

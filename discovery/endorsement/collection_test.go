@@ -14,11 +14,11 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/gossip/api"
-	gcommon "github.com/hyperledger/fabric/gossip/common"
-	disc "github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/policies"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/api"
+	gcommon "github.com/m4ru1/fabric-gm-bdais/gossip/common"
+	disc "github.com/m4ru1/fabric-gm-bdais/gossip/discovery"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/stretchr/testify/require"
 )
 

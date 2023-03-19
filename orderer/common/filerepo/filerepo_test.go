@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/orderer/common/filerepo"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/filerepo"
 	"github.com/stretchr/testify/require"
 )
 

@@ -8,8 +8,8 @@ package pvtdatastorage
 
 import (
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
-	"github.com/hyperledger/fabric/common/ledger/util/leveldbhelper"
-	"github.com/hyperledger/fabric/core/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/util/leveldbhelper"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger"
 	"github.com/pkg/errors"
 	"github.com/willf/bitset"
 )

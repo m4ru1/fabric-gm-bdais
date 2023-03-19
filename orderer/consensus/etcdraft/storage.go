@@ -14,7 +14,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
 	"github.com/pkg/errors"
 	"go.etcd.io/etcd/etcdserver/api/snap"
 	"go.etcd.io/etcd/pkg/fileutil"

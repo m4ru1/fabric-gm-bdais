@@ -4,7 +4,7 @@ package mocks
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/internal/pkg/identity"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/identity"
 )
 
 type SignerSerializer struct {

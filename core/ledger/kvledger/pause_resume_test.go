@@ -10,9 +10,9 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	configtxtest "github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/msgs"
-	"github.com/hyperledger/fabric/core/ledger/mock"
+	configtxtest "github.com/m4ru1/fabric-gm-bdais/common/configtx/test"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/kvledger/msgs"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/mock"
 	"github.com/stretchr/testify/require"
 )
 

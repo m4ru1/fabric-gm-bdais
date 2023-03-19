@@ -9,7 +9,7 @@ package channelconfig
 import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/capabilities"
+	"github.com/m4ru1/fabric-gm-bdais/common/capabilities"
 	"github.com/pkg/errors"
 )
 

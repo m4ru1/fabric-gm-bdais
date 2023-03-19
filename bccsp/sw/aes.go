@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/hyperledger/fabric/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp"
 )
 
 // GetRandomBytes returns len random looking bytes

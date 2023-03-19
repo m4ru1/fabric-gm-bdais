@@ -13,7 +13,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/hyperledger/fabric/core/chaincode/persistence"
+	"github.com/m4ru1/fabric-gm-bdais/core/chaincode/persistence"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

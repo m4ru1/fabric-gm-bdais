@@ -5,11 +5,11 @@ import (
 	"sync"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/orderer/common/blockcutter"
-	"github.com/hyperledger/fabric/orderer/common/msgprocessor"
-	"github.com/hyperledger/fabric/orderer/consensus"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/channelconfig"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/blockcutter"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/msgprocessor"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/consensus"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 )
 
 type FakeConsenterSupport struct {

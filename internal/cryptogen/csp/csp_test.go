@@ -20,7 +20,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/internal/cryptogen/csp"
+	"github.com/m4ru1/fabric-gm-bdais/internal/cryptogen/csp"
 	"github.com/stretchr/testify/require"
 )
 

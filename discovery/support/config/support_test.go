@@ -19,13 +19,13 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/discovery/support/config"
-	"github.com/hyperledger/fabric/discovery/support/mocks"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/channelconfig"
+	"github.com/m4ru1/fabric-gm-bdais/common/configtx/test"
+	"github.com/m4ru1/fabric-gm-bdais/discovery/support/config"
+	"github.com/m4ru1/fabric-gm-bdais/discovery/support/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/internal/configtxgen/encoder"
+	"github.com/m4ru1/fabric-gm-bdais/internal/configtxgen/genesisconfig"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/onsi/gomega/gexec"
 	"github.com/stretchr/testify/require"
 )
@@ -41,7 +41,7 @@ func TestMSPIDMapping(t *testing.T) {
 	os.Mkdir(dir, 0o700)
 	defer os.RemoveAll(dir)
 
-	cryptogen, err := gexec.Build("github.com/hyperledger/fabric/cmd/cryptogen")
+	cryptogen, err := gexec.Build("github.com/m4ru1/fabric-gm-bdais/cmd/cryptogen")
 	require.NoError(t, err)
 	defer os.Remove(cryptogen)
 

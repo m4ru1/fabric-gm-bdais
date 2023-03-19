@@ -9,14 +9,14 @@ import (
 	"context"
 
 	peerproto "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/peer"
-	"github.com/hyperledger/fabric/core/scc"
-	gdiscovery "github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
-	"github.com/hyperledger/fabric/internal/pkg/gateway/commit"
-	"github.com/hyperledger/fabric/internal/pkg/gateway/config"
-	"github.com/hyperledger/fabric/internal/pkg/gateway/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/core/peer"
+	"github.com/m4ru1/fabric-gm-bdais/core/scc"
+	gdiscovery "github.com/m4ru1/fabric-gm-bdais/gossip/discovery"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/comm"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/gateway/commit"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/gateway/config"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/gateway/ledger"
 	"google.golang.org/grpc"
 )
 

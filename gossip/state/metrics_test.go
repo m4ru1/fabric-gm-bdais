@@ -11,12 +11,12 @@ import (
 	"testing"
 
 	proto "github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/metrics"
-	gmetricsmocks "github.com/hyperledger/fabric/gossip/metrics/mocks"
-	"github.com/hyperledger/fabric/gossip/protoext"
-	"github.com/hyperledger/fabric/gossip/state/mocks"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/discovery"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/metrics"
+	gmetricsmocks "github.com/m4ru1/fabric-gm-bdais/gossip/metrics/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/protoext"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/state/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

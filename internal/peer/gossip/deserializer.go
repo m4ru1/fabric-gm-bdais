@@ -8,9 +8,9 @@ package gossip
 
 import (
 	mspproto "github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/mgmt"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/msp"
+	"github.com/m4ru1/fabric-gm-bdais/msp/mgmt"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 )
 
 // DeserializersManager is a support interface to

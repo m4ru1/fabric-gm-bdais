@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package inquire
 
 import (
-	"github.com/hyperledger/fabric/common/policies"
+	"github.com/m4ru1/fabric-gm-bdais/common/policies"
 )
 
 // ComparablePrincipalSets aggregate ComparablePrincipalSets

@@ -26,9 +26,9 @@ import (
 	"time"
 
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
-	fabricmsp "github.com/hyperledger/fabric/msp"
+	"github.com/m4ru1/fabric-gm-bdais/integration/nwo"
+	"github.com/m4ru1/fabric-gm-bdais/integration/nwo/commands"
+	fabricmsp "github.com/m4ru1/fabric-gm-bdais/msp"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
@@ -104,7 +104,7 @@ var _ = Describe("MSPs with RSA Certificate Authorities", func() {
 		chaincode := nwo.Chaincode{
 			Name:            "mycc",
 			Version:         "0.0",
-			Path:            components.Build("github.com/hyperledger/fabric/integration/chaincode/simple/cmd"),
+			Path:            components.Build("github.com/m4ru1/fabric-gm-bdais/integration/chaincode/simple/cmd"),
 			Lang:            "binary",
 			PackageFile:     filepath.Join(testDir, "simplecc.tar.gz"),
 			Ctor:            `{"Args":["init","a","100","b","200"]}`,

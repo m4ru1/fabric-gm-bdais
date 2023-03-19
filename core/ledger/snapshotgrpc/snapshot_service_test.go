@@ -14,11 +14,11 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt/ledgermgmttest"
-	"github.com/hyperledger/fabric/core/ledger/snapshotgrpc/mock"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/configtx/test"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/ledgermgmt"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/ledgermgmt/ledgermgmttest"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/snapshotgrpc/mock"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/stretchr/testify/require"
 )
 

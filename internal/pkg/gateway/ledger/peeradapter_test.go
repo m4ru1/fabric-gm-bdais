@@ -9,7 +9,7 @@ package ledger
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/peer"
+	"github.com/m4ru1/fabric-gm-bdais/core/peer"
 	"github.com/stretchr/testify/require"
 )
 

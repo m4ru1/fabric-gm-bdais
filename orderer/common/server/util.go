@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package server
 
 import (
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	"github.com/hyperledger/fabric/common/ledger/blockledger/fileledger"
-	"github.com/hyperledger/fabric/common/metrics"
-	config "github.com/hyperledger/fabric/orderer/common/localconfig"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/blockledger"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/blockledger/fileledger"
+	"github.com/m4ru1/fabric-gm-bdais/common/metrics"
+	config "github.com/m4ru1/fabric-gm-bdais/orderer/common/localconfig"
 	"github.com/pkg/errors"
 )
 

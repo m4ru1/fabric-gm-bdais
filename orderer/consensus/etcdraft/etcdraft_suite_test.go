@@ -8,8 +8,8 @@ package etcdraft_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/m4ru1/fabric-gm-bdais/common/channelconfig"
+	"github.com/m4ru1/fabric-gm-bdais/msp"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

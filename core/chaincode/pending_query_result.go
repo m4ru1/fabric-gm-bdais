@@ -9,7 +9,7 @@ package chaincode
 import (
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
+	commonledger "github.com/m4ru1/fabric-gm-bdais/common/ledger"
 )
 
 type PendingQueryResult struct {

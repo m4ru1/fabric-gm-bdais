@@ -4,8 +4,8 @@ package fake
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/internal/pkg/peer/blocksprovider"
-	"github.com/hyperledger/fabric/internal/pkg/peer/orderers"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/peer/blocksprovider"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/peer/orderers"
 )
 
 type OrdererConnectionSource struct {

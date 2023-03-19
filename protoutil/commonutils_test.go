@@ -14,8 +14,8 @@ import (
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/protoutil/fakes"
+	"github.com/m4ru1/fabric-gm-bdais/common/crypto"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil/fakes"
 	"github.com/stretchr/testify/require"
 )
 

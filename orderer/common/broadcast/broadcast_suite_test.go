@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric/common/metrics"
+	"github.com/m4ru1/fabric-gm-bdais/common/metrics"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

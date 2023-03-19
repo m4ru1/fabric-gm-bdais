@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package validation
 
 import (
-	validation "github.com/hyperledger/fabric/core/handlers/validation/api"
+	validation "github.com/m4ru1/fabric-gm-bdais/core/handlers/validation/api"
 )
 
 // State defines interaction with the world state

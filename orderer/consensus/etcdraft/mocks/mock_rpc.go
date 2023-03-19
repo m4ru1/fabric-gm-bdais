@@ -5,7 +5,7 @@ import (
 	"sync"
 
 	"github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/consensus/etcdraft"
 )
 
 type FakeRPC struct {

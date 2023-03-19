@@ -6,8 +6,8 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle"
-	"github.com/hyperledger/fabric/core/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/core/chaincode/lifecycle"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger"
 )
 
 type LegacyDeployedCCInfoProvider struct {

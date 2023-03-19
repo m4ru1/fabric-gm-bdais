@@ -9,8 +9,8 @@ package discovery_test
 import (
 	"testing"
 
-	discovery "github.com/hyperledger/fabric/discovery/cmd"
-	"github.com/hyperledger/fabric/discovery/cmd/mocks"
+	discovery "github.com/m4ru1/fabric-gm-bdais/discovery/cmd"
+	"github.com/m4ru1/fabric-gm-bdais/discovery/cmd/mocks"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/alecthomas/kingpin.v2"

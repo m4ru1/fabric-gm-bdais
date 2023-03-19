@@ -10,9 +10,9 @@ import (
 	"sync"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/core/common/privdata"
-	"github.com/hyperledger/fabric/core/ledger"
+	commonledger "github.com/m4ru1/fabric-gm-bdais/common/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/core/common/privdata"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger"
 )
 
 type TransactionContext struct {

@@ -12,8 +12,8 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	txpkg "github.com/hyperledger/fabric/pkg/tx"
-	"github.com/hyperledger/fabric/protoutil"
+	txpkg "github.com/m4ru1/fabric-gm-bdais/pkg/tx"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

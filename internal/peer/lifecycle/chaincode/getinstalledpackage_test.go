@@ -13,9 +13,9 @@ import (
 	"path/filepath"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/bccsp/sw"
-	"github.com/hyperledger/fabric/internal/peer/lifecycle/chaincode"
-	"github.com/hyperledger/fabric/internal/peer/lifecycle/chaincode/mock"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/sw"
+	"github.com/m4ru1/fabric-gm-bdais/internal/peer/lifecycle/chaincode"
+	"github.com/m4ru1/fabric-gm-bdais/internal/peer/lifecycle/chaincode/mock"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 

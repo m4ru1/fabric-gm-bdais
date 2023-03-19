@@ -14,7 +14,7 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp/pkcs11"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/pkcs11"
 	"github.com/stretchr/testify/require"
 )
 

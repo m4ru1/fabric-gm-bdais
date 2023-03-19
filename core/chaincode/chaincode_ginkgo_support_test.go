@@ -11,10 +11,10 @@ import (
 	"unicode/utf8"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/chaincode"
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle"
-	"github.com/hyperledger/fabric/core/chaincode/mock"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
+	"github.com/m4ru1/fabric-gm-bdais/core/chaincode"
+	"github.com/m4ru1/fabric-gm-bdais/core/chaincode/lifecycle"
+	"github.com/m4ru1/fabric-gm-bdais/core/chaincode/mock"
+	"github.com/m4ru1/fabric-gm-bdais/core/common/ccprovider"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

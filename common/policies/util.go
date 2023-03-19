@@ -8,7 +8,7 @@ package policies
 
 import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 )
 
 // ConfigPolicy defines a common representation for different *cb.ConfigPolicy values.

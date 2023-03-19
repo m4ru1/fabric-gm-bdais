@@ -9,7 +9,7 @@ package history
 import (
 	"bytes"
 
-	"github.com/hyperledger/fabric/common/ledger/util"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/util"
 	"github.com/pkg/errors"
 )
 

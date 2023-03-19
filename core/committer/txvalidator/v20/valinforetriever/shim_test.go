@@ -11,10 +11,10 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 
-	"github.com/hyperledger/fabric/core/committer/txvalidator/v20/valinforetriever"
-	"github.com/hyperledger/fabric/core/committer/txvalidator/v20/valinforetriever/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/core/committer/txvalidator/v20/valinforetriever"
+	"github.com/m4ru1/fabric-gm-bdais/core/committer/txvalidator/v20/valinforetriever/mocks"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 )

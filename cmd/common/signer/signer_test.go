@@ -15,8 +15,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp/utils"
-	"github.com/hyperledger/fabric/common/util"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp/utils"
+	"github.com/m4ru1/fabric-gm-bdais/common/util"
 	"github.com/stretchr/testify/require"
 )
 

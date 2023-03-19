@@ -19,7 +19,7 @@ import (
 	"crypto/sha256"
 	"errors"
 
-	"github.com/hyperledger/fabric/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp"
 )
 
 type aesPrivateKey struct {

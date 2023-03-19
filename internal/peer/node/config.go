@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"time"
 
-	coreconfig "github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/core/ledger"
+	coreconfig "github.com/m4ru1/fabric-gm-bdais/core/config"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger"
 	"github.com/spf13/viper"
 )
 

@@ -11,10 +11,10 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/core/aclmgmt/resources"
-	"github.com/hyperledger/fabric/core/policy"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/policies"
+	"github.com/m4ru1/fabric-gm-bdais/core/aclmgmt/resources"
+	"github.com/m4ru1/fabric-gm-bdais/core/policy"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 )
 
 const (

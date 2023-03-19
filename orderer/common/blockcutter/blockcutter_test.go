@@ -12,8 +12,8 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric/orderer/common/blockcutter"
-	"github.com/hyperledger/fabric/orderer/common/blockcutter/mock"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/blockcutter"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/blockcutter/mock"
 )
 
 var _ = Describe("Blockcutter", func() {

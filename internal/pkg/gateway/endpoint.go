@@ -13,8 +13,8 @@ import (
 
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
+	"github.com/m4ru1/fabric-gm-bdais/gossip/common"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/comm"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 )

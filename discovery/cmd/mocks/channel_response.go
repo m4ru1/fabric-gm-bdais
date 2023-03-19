@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	client "github.com/hyperledger/fabric/discovery/client"
+	client "github.com/m4ru1/fabric-gm-bdais/discovery/client"
 
 	discovery "github.com/hyperledger/fabric-protos-go/discovery"
 

@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	chaincode "github.com/hyperledger/fabric/common/chaincode"
+	chaincode "github.com/m4ru1/fabric-gm-bdais/common/chaincode"
 	mock "github.com/stretchr/testify/mock"
 )
 

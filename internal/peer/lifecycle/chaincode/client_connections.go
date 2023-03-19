@@ -10,9 +10,9 @@ import (
 	"crypto/tls"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/internal/peer/common"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
+	"github.com/m4ru1/fabric-gm-bdais/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/internal/peer/common"
+	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/identity"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )

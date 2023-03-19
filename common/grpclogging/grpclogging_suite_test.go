@@ -20,7 +20,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/common/grpclogging/testpb"
+	"github.com/m4ru1/fabric-gm-bdais/common/grpclogging/testpb"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

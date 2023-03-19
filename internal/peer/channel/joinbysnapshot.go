@@ -10,8 +10,8 @@ import (
 	"errors"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/scc/cscc"
-	"github.com/hyperledger/fabric/internal/peer/common"
+	"github.com/m4ru1/fabric-gm-bdais/core/scc/cscc"
+	"github.com/m4ru1/fabric-gm-bdais/internal/peer/common"
 	"github.com/spf13/cobra"
 )
 

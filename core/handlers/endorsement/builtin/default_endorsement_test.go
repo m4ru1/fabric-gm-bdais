@@ -10,9 +10,9 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/endorser/mocks"
-	"github.com/hyperledger/fabric/core/handlers/endorsement/builtin"
-	mocks2 "github.com/hyperledger/fabric/core/handlers/endorsement/builtin/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/core/endorser/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/core/handlers/endorsement/builtin"
+	mocks2 "github.com/m4ru1/fabric-gm-bdais/core/handlers/endorsement/builtin/mocks"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"

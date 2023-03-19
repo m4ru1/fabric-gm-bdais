@@ -12,8 +12,8 @@ import (
 	"testing"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	mockpolicies "github.com/hyperledger/fabric/common/configtx/mock"
-	"github.com/hyperledger/fabric/common/policies"
+	mockpolicies "github.com/m4ru1/fabric-gm-bdais/common/configtx/mock"
+	"github.com/m4ru1/fabric-gm-bdais/common/policies"
 	"github.com/stretchr/testify/require"
 )
 

@@ -16,9 +16,9 @@ import (
 	"time"
 
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
-	"github.com/hyperledger/fabric/integration/nwo/fabricconfig"
+	"github.com/m4ru1/fabric-gm-bdais/integration/nwo"
+	"github.com/m4ru1/fabric-gm-bdais/integration/nwo/commands"
+	"github.com/m4ru1/fabric-gm-bdais/integration/nwo/fabricconfig"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -84,7 +84,7 @@ var _ = Describe("EndToEnd", func() {
 		chaincode = nwo.Chaincode{
 			Name:            "mycc",
 			Version:         "0.0",
-			Path:            components.Build("github.com/hyperledger/fabric/integration/chaincode/simple/cmd"),
+			Path:            components.Build("github.com/m4ru1/fabric-gm-bdais/integration/chaincode/simple/cmd"),
 			Lang:            "binary",
 			PackageFile:     filepath.Join(testDir, "simplecc.tar.gz"),
 			Ctor:            `{"Args":["init","a","100","b","200"]}`,
@@ -139,7 +139,7 @@ func compilePlugin(pluginType string) string {
 		"-x", // print build commands while running
 		"-buildmode=plugin",
 		"-o", pluginFilePath,
-		fmt.Sprintf("github.com/hyperledger/fabric/integration/pluggable/testdata/plugins/%s", pluginType),
+		fmt.Sprintf("github.com/m4ru1/fabric-gm-bdais/integration/pluggable/testdata/plugins/%s", pluginType),
 	)
 	pw := gexec.NewPrefixedWriter(fmt.Sprintf("[build-plugin-%s] ", pluginType), GinkgoWriter)
 	sess, err := gexec.Start(cmd, pw, pw)

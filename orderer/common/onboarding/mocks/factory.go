@@ -4,7 +4,7 @@ package mocks
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/blockledger"
 )
 
 type Factory struct {

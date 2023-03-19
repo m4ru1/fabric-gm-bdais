@@ -11,9 +11,9 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	"github.com/hyperledger/fabric/core/ledger/util"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/ledgermgmt"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger/util"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

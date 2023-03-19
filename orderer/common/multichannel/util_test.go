@@ -10,17 +10,17 @@ import (
 	"fmt"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/capabilities"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/hyperledger/fabric/orderer/common/blockcutter"
-	"github.com/hyperledger/fabric/orderer/common/msgprocessor"
-	"github.com/hyperledger/fabric/orderer/common/types"
-	"github.com/hyperledger/fabric/orderer/consensus"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/common/capabilities"
+	"github.com/m4ru1/fabric-gm-bdais/common/channelconfig"
+	"github.com/m4ru1/fabric-gm-bdais/common/configtx"
+	"github.com/m4ru1/fabric-gm-bdais/core/config/configtest"
+	"github.com/m4ru1/fabric-gm-bdais/internal/configtxgen/encoder"
+	"github.com/m4ru1/fabric-gm-bdais/internal/configtxgen/genesisconfig"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/blockcutter"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/msgprocessor"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/types"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/consensus"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 )
 
 type mockChainCluster struct {

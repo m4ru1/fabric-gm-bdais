@@ -9,7 +9,7 @@ package commit
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/core/ledger"
+	"github.com/m4ru1/fabric-gm-bdais/core/ledger"
 )
 
 type blockListener interface {

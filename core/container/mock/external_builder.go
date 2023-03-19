@@ -5,7 +5,7 @@ import (
 	"io"
 	"sync"
 
-	"github.com/hyperledger/fabric/core/container"
+	"github.com/m4ru1/fabric-gm-bdais/core/container"
 )
 
 type ExternalBuilder struct {

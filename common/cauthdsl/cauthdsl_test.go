@@ -15,8 +15,8 @@ import (
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	mb "github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/common/policydsl"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/m4ru1/fabric-gm-bdais/common/policydsl"
+	"github.com/m4ru1/fabric-gm-bdais/msp"
 	"github.com/stretchr/testify/require"
 )
 

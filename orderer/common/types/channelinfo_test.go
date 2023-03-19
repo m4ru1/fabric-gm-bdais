@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/hyperledger/fabric/orderer/common/types"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/types"
 	"github.com/stretchr/testify/require"
 )
 

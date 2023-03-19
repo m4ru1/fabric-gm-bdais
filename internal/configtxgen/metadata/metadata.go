@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/hyperledger/fabric/common/metadata"
+	"github.com/m4ru1/fabric-gm-bdais/common/metadata"
 )
 
 const ProgramName = "configtxgen"

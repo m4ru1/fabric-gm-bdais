@@ -18,11 +18,11 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/orderer/common/channelparticipation"
-	"github.com/hyperledger/fabric/orderer/common/channelparticipation/mocks"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/orderer/common/types"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/channelparticipation"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/channelparticipation/mocks"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/localconfig"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/types"
+	"github.com/m4ru1/fabric-gm-bdais/protoutil"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 )

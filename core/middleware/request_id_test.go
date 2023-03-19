@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/hyperledger/fabric/core/middleware"
-	"github.com/hyperledger/fabric/core/middleware/fakes"
+	"github.com/m4ru1/fabric-gm-bdais/core/middleware"
+	"github.com/m4ru1/fabric-gm-bdais/core/middleware/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

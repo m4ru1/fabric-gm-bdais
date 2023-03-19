@@ -10,7 +10,7 @@ import (
 	"context"
 
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/handlers/auth"
+	"github.com/m4ru1/fabric-gm-bdais/core/handlers/auth"
 )
 
 // NewFilter creates a new Filter

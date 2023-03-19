@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/orderer/common/types"
+	"github.com/m4ru1/fabric-gm-bdais/orderer/common/types"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

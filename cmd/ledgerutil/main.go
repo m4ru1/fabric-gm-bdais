@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hyperledger/fabric/internal/ledgerutil"
+	"github.com/m4ru1/fabric-gm-bdais/internal/ledgerutil"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 

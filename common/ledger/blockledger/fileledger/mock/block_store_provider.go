@@ -4,7 +4,7 @@ package mock
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/ledger/blkstorage"
+	"github.com/m4ru1/fabric-gm-bdais/common/ledger/blkstorage"
 )
 
 type BlockStoreProvider struct {
