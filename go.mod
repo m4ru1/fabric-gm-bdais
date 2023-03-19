@@ -1,4 +1,4 @@
-module github.com/hyperledger/fabric
+module github.com/m4ru1/fabric-gm-bdais
 
 go 1.14
 
