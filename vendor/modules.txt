@@ -137,7 +137,7 @@ github.com/eapache/go-xerial-snappy
 # github.com/eapache/queue v1.1.0
 ## explicit
 github.com/eapache/queue
-# github.com/frankban/quicktest v1.11.3
+# github.com/frankban/quicktest v1.14.3
 ## explicit
 # github.com/fsnotify/fsnotify v1.4.9
 github.com/fsnotify/fsnotify
@@ -172,6 +172,8 @@ github.com/golang/protobuf/ptypes/timestamp
 # github.com/golang/snappy v0.0.3-0.20201103224600-674baa8c7fc3
 ## explicit
 github.com/golang/snappy
+# github.com/google/go-cmp v0.5.8
+## explicit
 # github.com/gorilla/handlers v1.4.0
 ## explicit
 github.com/gorilla/handlers
@@ -246,10 +248,10 @@ github.com/inconshreveable/mousetrap
 github.com/konsorten/go-windows-terminal-sequences
 # github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515
 github.com/kr/logfmt
-# github.com/kr/pretty v0.2.1
+# github.com/kr/pretty v0.3.0
 ## explicit
 github.com/kr/pretty
-# github.com/kr/text v0.1.0
+# github.com/kr/text v0.2.0
 github.com/kr/text
 # github.com/magiconair/properties v1.8.1
 ## explicit
@@ -348,13 +350,12 @@ github.com/opencontainers/go-digest
 # github.com/opencontainers/image-spec v1.0.1
 github.com/opencontainers/image-spec/specs-go
 github.com/opencontainers/image-spec/specs-go/v1
-# github.com/opencontainers/runc v1.0.0-rc8
-## explicit
+# github.com/opencontainers/runc v0.1.1
 github.com/opencontainers/runc/libcontainer/user
-# github.com/pelletier/go-toml v1.8.0
+# github.com/pelletier/go-toml v1.9.5
 ## explicit
 github.com/pelletier/go-toml
-# github.com/pierrec/lz4 v2.6.0+incompatible
+# github.com/pierrec/lz4 v2.6.1+incompatible
 ## explicit
 github.com/pierrec/lz4
 github.com/pierrec/lz4/internal/xxh32
@@ -381,6 +382,9 @@ github.com/prometheus/procfs/internal/util
 # github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475
 ## explicit
 github.com/rcrowley/go-metrics
+# github.com/rogpeppe/go-internal v1.9.0
+## explicit
+github.com/rogpeppe/go-internal/fmtsort
 # github.com/sirupsen/logrus v1.6.0
 github.com/sirupsen/logrus
 # github.com/spf13/afero v1.3.1
@@ -483,7 +487,8 @@ golang.org/x/net/internal/timeseries
 golang.org/x/net/trace
 # golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.0.0-20210420205809-ac73e9fd8988
+# golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8
+## explicit
 golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix

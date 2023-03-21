@@ -13,6 +13,7 @@ trap 'rm -rf "$dep_tempdir"' EXIT
 
 # copy go.mod and go.sum to the temporary directory we created
 fabric_dir="$(cd "$(dirname "$0")/.." && pwd)"
+echo $fabric_dir
 cp "${fabric_dir}/go.mod" "${dep_tempdir}/"
 cp "${fabric_dir}/go.sum" "${dep_tempdir}/"
 
