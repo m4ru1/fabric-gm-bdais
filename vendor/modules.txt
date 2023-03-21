@@ -8,6 +8,9 @@ github.com/Azure/go-ansiterm/winterm
 # github.com/DataDog/zstd v1.4.5
 ## explicit
 github.com/DataDog/zstd
+# github.com/Hyperledger-TWGC/ccs-gm v1.0.0
+## explicit
+github.com/Hyperledger-TWGC/ccs-gm/sm4
 # github.com/IBM/idemix v0.0.0-20220112103229-701e7610d405
 ## explicit
 github.com/IBM/idemix
@@ -472,10 +475,11 @@ go.uber.org/zap/internal/exit
 go.uber.org/zap/zapcore
 go.uber.org/zap/zapgrpc
 go.uber.org/zap/zaptest/observer
-# golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2
+# golang.org/x/crypto v0.0.0-20220214200702-86341886e292
 ## explicit
 golang.org/x/crypto/sha3
-# golang.org/x/net v0.0.0-20210226172049-e18ecbb05110
+# golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
+## explicit
 golang.org/x/net/html
 golang.org/x/net/html/atom
 golang.org/x/net/html/charset
@@ -493,7 +497,7 @@ golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/text v0.3.3
+# golang.org/x/text v0.3.6
 golang.org/x/text/encoding
 golang.org/x/text/encoding/charmap
 golang.org/x/text/encoding/htmlindex

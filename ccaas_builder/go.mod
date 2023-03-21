@@ -9,7 +9,8 @@ require (
 )
 
 require (
-	golang.org/x/net v0.0.0-20210428140749-89ef3d95e781 // indirect
+	github.com/Hyperledger-TWGC/ccs-gm v1.0.0 // indirect
+	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 	golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8 // indirect
 	golang.org/x/text v0.3.6 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

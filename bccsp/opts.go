@@ -59,6 +59,19 @@ const (
 
 	// X509Certificate Label for X509 certificate related operation
 	X509Certificate = "X509Certificate"
+
+	// GM Opts
+	SM2 = "SM2"
+
+	SM2_ReRand = "SM2_ReRand"
+
+	SM3 = "SM3"
+
+	SM4 = "SM4"
+
+	SM4_HMAC = "SM4_HMAC"
+
+	SM4_HMACTruncated128 = "SM4_HMACTruncated128"
 )
 
 // ECDSAKeyGenOpts contains options for ECDSA key generation.
@@ -262,5 +275,209 @@ func (opts *X509PublicKeyImportOpts) Algorithm() string {
 // Ephemeral returns true if the key to generate has to be ephemeral,
 // false otherwise.
 func (opts *X509PublicKeyImportOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// SM2KeyGenOpts contains options for SM2 key generation.
+type SM2KeyGenOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key generation algorithm identifier (to be used).
+func (opts *SM2KeyGenOpts) Algorithm() string {
+	return SM2
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *SM2KeyGenOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// SM2PKIXPublicKeyImportOpts contains options for SM2 public key importation in PKIX format
+type SM2PKIXPublicKeyImportOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key importation algorithm identifier (to be used).
+func (opts *SM2PKIXPublicKeyImportOpts) Algorithm() string {
+	return SM2
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *SM2PKIXPublicKeyImportOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// SM2PrivateKeyImportOpts contains options for SM2 secret key importation in DER format
+// or PKCS#8 format.
+type SM2PrivateKeyImportOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key importation algorithm identifier (to be used).
+func (opts *SM2PrivateKeyImportOpts) Algorithm() string {
+	return SM2
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *SM2PrivateKeyImportOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// SM2GoPublicKeyImportOpts contains options for SM2 key importation from SM2.PublicKey
+type SM2GoPublicKeyImportOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key importation algorithm identifier (to be used).
+func (opts *SM2GoPublicKeyImportOpts) Algorithm() string {
+	return SM2
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *SM2GoPublicKeyImportOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// SM2ReRandKeyOpts contains options for SM2 key re-randomization.
+type SM2ReRandKeyOpts struct {
+	Temporary bool
+	Expansion []byte
+}
+
+// Algorithm returns the key derivation algorithm identifier (to be used).
+func (opts *SM2ReRandKeyOpts) Algorithm() string {
+	return SM2_ReRand
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *SM2ReRandKeyOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// ExpansionValue returns the re-randomization factor
+func (opts *SM2ReRandKeyOpts) ExpansionValue() []byte {
+	return opts.Expansion
+}
+
+// SM4KeyGenOpts contains options for SM4 key generation at default security level
+type SM4KeyGenOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key generation algorithm identifier (to be used).
+func (opts *SM4KeyGenOpts) Algorithm() string {
+	return SM4
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *SM4KeyGenOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// HMACTruncated128SM4DeriveKeyOpts contains options for HMAC truncated
+// at 128 bits key derivation.
+type HMACTruncated128SM4DeriveKeyOpts struct {
+	Temporary bool
+	Arg       []byte
+}
+
+// Algorithm returns the key derivation algorithm identifier (to be used).
+func (opts *HMACTruncated128SM4DeriveKeyOpts) Algorithm() string {
+	return SM4_HMACTruncated128
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *HMACTruncated128SM4DeriveKeyOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// Argument returns the argument to be passed to the HMAC
+func (opts *HMACTruncated128SM4DeriveKeyOpts) Argument() []byte {
+	return opts.Arg
+}
+
+// SM4_HMACDeriveKeyOpts contains options for HMAC key derivation.
+type SM4_HMACDeriveKeyOpts struct {
+	Temporary bool
+	Arg       []byte
+}
+
+// Algorithm returns the key derivation algorithm identifier (to be used).
+func (opts *SM4_HMACDeriveKeyOpts) Algorithm() string {
+	return HMAC
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *SM4_HMACDeriveKeyOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// Argument returns the argument to be passed to the HMAC
+func (opts *SM4_HMACDeriveKeyOpts) Argument() []byte {
+	return opts.Arg
+}
+
+// SM4128ImportKeyOpts contains options for importing SM4 128 keys.
+type SM4128ImportKeyOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key importation algorithm identifier (to be used).
+func (opts *SM4128ImportKeyOpts) Algorithm() string {
+	return SM4
+}
+
+// Ephemeral returns true if the key generated has to be ephemeral,
+// false otherwise.
+func (opts *SM4128ImportKeyOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// SM4_HMACImportKeyOpts contains options for importing HMAC keys.
+type SM4_HMACImportKeyOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key importation algorithm identifier (to be used).
+func (opts *SM4_HMACImportKeyOpts) Algorithm() string {
+	return HMAC
+}
+
+// Ephemeral returns true if the key generated has to be ephemeral,
+// false otherwise.
+func (opts *SM4_HMACImportKeyOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
+// SM3Opts contains options for computing SM3.
+type SM3Opts struct{}
+
+// Algorithm returns the hash algorithm identifier (to be used).
+func (opts *SM3Opts) Algorithm() string {
+	return SHA
+}
+
+// GM_X509PublicKeyImportOpts contains options for importing public keys from an GM-x509 certificate
+type GM_X509PublicKeyImportOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key importation algorithm identifier (to be used).
+func (opts *GM_X509PublicKeyImportOpts) Algorithm() string {
+	return X509Certificate
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *GM_X509PublicKeyImportOpts) Ephemeral() bool {
 	return opts.Temporary
 }
