@@ -12,7 +12,7 @@ func GetDefaultOpts() *FactoryOpts {
 	return &FactoryOpts{
 		Default: "SW",
 		SW: &SwOpts{
-			Hash:     "SHA2",
+			Hash:     "SM3",
 			Security: 256,
 		},
 	}

@@ -8,8 +8,9 @@ package signer
 
 import (
 	"crypto"
-	"crypto/x509"
 	"io"
+
+	gmx509 "github.com/Hyperledger-TWGC/ccs-gm/x509"
 
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
 	"github.com/pkg/errors"
@@ -47,7 +48,8 @@ func New(csp bccsp.BCCSP, key bccsp.Key) (crypto.Signer, error) {
 		return nil, errors.Wrap(err, "failed marshalling public key")
 	}
 
-	pk, err := x509.ParsePKIXPublicKey(raw)
+	//pk, err := x509.ParsePKIXPublicKey(raw)
+	pk, err := gmx509.ParsePKIXPublicKey(raw) // 方法替换，副作用未知，尚未进行测试
 	if err != nil {
 		return nil, errors.Wrap(err, "failed marshalling der to public key")
 	}

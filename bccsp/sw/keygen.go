@@ -21,7 +21,9 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"fmt"
+	"io"
 
+	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
 )
 
@@ -49,4 +51,26 @@ func (kg *aesKeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
 	}
 
 	return &aesPrivateKey{lowLevelKey, false}, nil
+}
+
+type sm2KeyGenerator struct{}
+
+func (kg *sm2KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
+	priv, err := sm2.GenerateKey(rand.Reader)
+	if err != nil {
+		return nil, err
+	}
+	return &sm2PrivateKey{priv}, nil
+}
+
+type sm4KeyGenerator struct{}
+
+func (kg *sm4KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
+	// 利用伪随机数生成128bit数据作为密钥
+	key := make([]byte, 16)
+	_, err := io.ReadFull(rand.Reader, key)
+	if err != nil {
+		fmt.Println("Key Generates Fail")
+	}
+	return &sm4PrivateKey{key, false}, nil
 }

@@ -253,6 +253,23 @@ func aesToEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
 	return pem.EncodeToMemory(block), nil
 }
 
+func keyToEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
+	if pwd != nil {
+		block, err := x509.EncryptPEMBlock(rand.Reader,
+			"SM4 ENCRYPTED KEY", raw, pwd, x509.PEMCipherAES256)
+		if err != nil {
+			return nil, err
+		}
+		return pem.EncodeToMemory(block), nil
+	} else {
+		block := &pem.Block{
+			Type:  "SM4 KEY",
+			Bytes: raw,
+		}
+		return pem.EncodeToMemory(block), nil
+	}
+}
+
 func publicKeyToPEM(publicKey interface{}, pwd []byte) ([]byte, error) {
 	if len(pwd) != 0 {
 		return publicKeyToEncryptedPEM(publicKey, pwd)

@@ -12,6 +12,7 @@ import (
 	"crypto/sha512"
 	"reflect"
 
+	"github.com/Hyperledger-TWGC/ccs-gm/sm3"
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/sha3"
@@ -54,16 +55,21 @@ func NewWithParams(securityLevel int, hashFamily string, keyStore bccsp.KeyStore
 
 	// Set the Encryptors
 	swbccsp.AddWrapper(reflect.TypeOf(&aesPrivateKey{}), &aescbcpkcs7Encryptor{})
+	swbccsp.AddWrapper(reflect.TypeOf(&sm4PrivateKey{}), &sm4Encryptor{})
 
 	// Set the Decryptors
 	swbccsp.AddWrapper(reflect.TypeOf(&aesPrivateKey{}), &aescbcpkcs7Decryptor{})
+	swbccsp.AddWrapper(reflect.TypeOf(&sm4PrivateKey{}), &sm4Decryptor{})
 
 	// Set the Signers
 	swbccsp.AddWrapper(reflect.TypeOf(&ecdsaPrivateKey{}), &ecdsaSigner{})
+	swbccsp.AddWrapper(reflect.TypeOf(&sm2PrivateKey{}), &sm2Signer{})
 
 	// Set the Verifiers
 	swbccsp.AddWrapper(reflect.TypeOf(&ecdsaPrivateKey{}), &ecdsaPrivateKeyVerifier{})
 	swbccsp.AddWrapper(reflect.TypeOf(&ecdsaPublicKey{}), &ecdsaPublicKeyKeyVerifier{})
+	swbccsp.AddWrapper(reflect.TypeOf(&sm2PrivateKey{}), &sm2PrivateKeyVerifier{})
+	swbccsp.AddWrapper(reflect.TypeOf(&sm2PublicKey{}), &sm2PublicKeyVerifier{})
 
 	// Set the Hashers
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SHAOpts{}), &hasher{hash: conf.hashFunction})
@@ -71,6 +77,7 @@ func NewWithParams(securityLevel int, hashFamily string, keyStore bccsp.KeyStore
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SHA384Opts{}), &hasher{hash: sha512.New384})
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SHA3_256Opts{}), &hasher{hash: sha3.New256})
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SHA3_384Opts{}), &hasher{hash: sha3.New384})
+	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SM3Opts{}), &hasher{hash: sm3.New})
 
 	// Set the key generators
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.ECDSAKeyGenOpts{}), &ecdsaKeyGenerator{curve: conf.ellipticCurve})
@@ -80,11 +87,16 @@ func NewWithParams(securityLevel int, hashFamily string, keyStore bccsp.KeyStore
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.AES256KeyGenOpts{}), &aesKeyGenerator{length: 32})
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.AES192KeyGenOpts{}), &aesKeyGenerator{length: 24})
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.AES128KeyGenOpts{}), &aesKeyGenerator{length: 16})
+	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SM2KeyGenOpts{}), &sm2KeyGenerator{})
+	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SM4KeyGenOpts{}), &sm4KeyGenerator{})
 
 	// Set the key deriver
 	swbccsp.AddWrapper(reflect.TypeOf(&ecdsaPrivateKey{}), &ecdsaPrivateKeyKeyDeriver{})
 	swbccsp.AddWrapper(reflect.TypeOf(&ecdsaPublicKey{}), &ecdsaPublicKeyKeyDeriver{})
 	swbccsp.AddWrapper(reflect.TypeOf(&aesPrivateKey{}), &aesPrivateKeyKeyDeriver{conf: conf})
+	swbccsp.AddWrapper(reflect.TypeOf(&sm2PrivateKey{}), &smKeyDeriver{})
+	swbccsp.AddWrapper(reflect.TypeOf(&sm2PublicKey{}), &smKeyDeriver{})
+	swbccsp.AddWrapper(reflect.TypeOf(&sm4PrivateKey{}), &smKeyDeriver{})
 
 	// Set the key importers
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.AES256ImportKeyOpts{}), &aes256ImportKeyOptsKeyImporter{})
@@ -93,6 +105,9 @@ func NewWithParams(securityLevel int, hashFamily string, keyStore bccsp.KeyStore
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.ECDSAPrivateKeyImportOpts{}), &ecdsaPrivateKeyImportOptsKeyImporter{})
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.ECDSAGoPublicKeyImportOpts{}), &ecdsaGoPublicKeyImportOptsKeyImporter{})
 	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.X509PublicKeyImportOpts{}), &x509PublicKeyImportOptsKeyImporter{bccsp: swbccsp})
+	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SM2PrivateKeyImportOpts{}), &sm2PrivateKeyOptsKeyImporter{})
+	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SM2PublicKeyImportOpts{}), &sm2PublicKeyOptsKeyImporter{})
+	swbccsp.AddWrapper(reflect.TypeOf(&bccsp.SM4128ImportKeyOpts{}), &sm4ImportKeyOptsKeyImporter{})
 
 	return swbccsp, nil
 }

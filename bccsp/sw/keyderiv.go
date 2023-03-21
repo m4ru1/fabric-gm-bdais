@@ -148,3 +148,10 @@ func (kd *aesPrivateKeyKeyDeriver) KeyDeriv(k bccsp.Key, opts bccsp.KeyDerivOpts
 		return nil, fmt.Errorf("Unsupported 'KeyDerivOpts' provided [%v]", opts)
 	}
 }
+
+// KeyDeriv method non referenced, so temporarily i have not implemented it. :)
+type smKeyDeriver struct{}
+
+func (kd *smKeyDeriver) KeyDeriv(k bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
+	return nil, errors.New("GM KeyDeriv method non referenced, so temporarily i have not implemented it. :)")
+}

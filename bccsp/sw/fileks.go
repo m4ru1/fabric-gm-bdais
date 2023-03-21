@@ -19,6 +19,8 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
+	"github.com/Hyperledger-TWGC/ccs-gm/utils"
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
 )
 
@@ -191,6 +193,21 @@ func (ks *fileBasedKeyStore) StoreKey(k bccsp.Key) (err error) {
 		if err != nil {
 			return fmt.Errorf("failed storing AES key [%s]", err)
 		}
+	case *sm4PrivateKey:
+		err = ks.sm4StoreKey(hex.EncodeToString(k.SKI()), kk.privKey)
+		if err != nil {
+			return fmt.Errorf("failed storing SM4 key [%s]", err)
+		}
+	case *sm2PrivateKey:
+		err = ks.gmStorePrivateKey(hex.EncodeToString(k.SKI()), kk.privKey)
+		if err != nil {
+			return fmt.Errorf("failed storing SM2 private key [%s]", err)
+		}
+	case *sm2PublicKey:
+		err = ks.gmStorePublicKey(hex.EncodeToString(k.SKI()), kk.pubKey)
+		if err != nil {
+			return fmt.Errorf("failed storing SM2 private key [%s]", err)
+		}
 
 	default:
 		return fmt.Errorf("key type not reconigned [%s]", k)
@@ -271,6 +288,28 @@ func (ks *fileBasedKeyStore) storePrivateKey(alias string, privateKey interface{
 	return nil
 }
 
+func (ks *fileBasedKeyStore) gmStorePrivateKey(alias string, privateKey interface{}) error {
+
+	// type convert
+	privKey, ok := privateKey.(*sm2.PrivateKey)
+	if !ok {
+		return errors.New("Failed converting interface{} to *sm2.PrivateKey")
+	}
+	rawKey, err := utils.PrivateKeyToPEM(privKey, ks.pwd)
+	if err != nil {
+		logger.Errorf("Failed converting private key to PEM [%s]: [%s]", alias, err)
+		return err
+	}
+
+	err = ioutil.WriteFile(ks.getPathForAlias(alias, "sk"), rawKey, 0o600)
+	if err != nil {
+		logger.Errorf("Failed storing private key [%s]: [%s]", alias, err)
+		return err
+	}
+
+	return nil
+}
+
 func (ks *fileBasedKeyStore) storePublicKey(alias string, publicKey interface{}) error {
 	rawKey, err := publicKeyToPEM(publicKey, ks.pwd)
 	if err != nil {
@@ -280,7 +319,28 @@ func (ks *fileBasedKeyStore) storePublicKey(alias string, publicKey interface{})
 
 	err = ioutil.WriteFile(ks.getPathForAlias(alias, "pk"), rawKey, 0o600)
 	if err != nil {
-		logger.Errorf("Failed storing private key [%s]: [%s]", alias, err)
+		logger.Errorf("Failed storing public key [%s]: [%s]", alias, err)
+		return err
+	}
+
+	return nil
+}
+
+func (ks *fileBasedKeyStore) gmStorePublicKey(alias string, publicKey interface{}) error {
+
+	// type convert
+	pubKey, ok := publicKey.(*sm2.PublicKey)
+	if !ok {
+		return errors.New("Failed converting interface{} to *sm2.PublicKey")
+	}
+	rawKey, err := utils.PublicKeyToPEM(pubKey, ks.pwd)
+	if err != nil {
+		logger.Errorf("Failed converting public key to PEM [%s]: [%s]", alias, err)
+		return err
+	}
+	err = ioutil.WriteFile(ks.getPathForAlias(alias, "pk"), rawKey, 0o600)
+	if err != nil {
+		logger.Errorf("Failed storing public key [%s]: [%s]", alias, err)
 		return err
 	}
 
@@ -289,6 +349,22 @@ func (ks *fileBasedKeyStore) storePublicKey(alias string, publicKey interface{})
 
 func (ks *fileBasedKeyStore) storeKey(alias string, key []byte) error {
 	pem, err := aesToEncryptedPEM(key, ks.pwd)
+	if err != nil {
+		logger.Errorf("Failed converting key to PEM [%s]: [%s]", alias, err)
+		return err
+	}
+
+	err = ioutil.WriteFile(ks.getPathForAlias(alias, "key"), pem, 0o600)
+	if err != nil {
+		logger.Errorf("Failed storing key [%s]: [%s]", alias, err)
+		return err
+	}
+
+	return nil
+}
+
+func (ks *fileBasedKeyStore) sm4StoreKey(alias string, key []byte) error {
+	pem, err := keyToEncryptedPEM(key, ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed converting key to PEM [%s]: [%s]", alias, err)
 		return err
