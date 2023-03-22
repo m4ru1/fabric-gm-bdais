@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package chaincode
 
 import (
-	"crypto/tls"
+	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"

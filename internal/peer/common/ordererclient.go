@@ -7,7 +7,7 @@ package common
 
 import (
 	"context"
-	"crypto/tls"
+	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/pkg/errors"

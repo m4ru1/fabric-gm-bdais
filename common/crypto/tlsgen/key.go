@@ -8,26 +8,27 @@ package tlsgen
 
 import (
 	"crypto"
-	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/sha256"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"math/big"
 	"net"
 	"time"
 
+	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
+
 	"github.com/pkg/errors"
 )
 
-func newPrivKey() (*ecdsa.PrivateKey, []byte, error) {
-	privateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+func newPrivKey() (*sm2.PrivateKey, []byte, error) {
+	privateKey, err := sm2.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, nil, err
 	}
-	privBytes, err := x509.MarshalPKCS8PrivateKey(privateKey)
+	privBytes, err := x509.MarshalECPrivateKey(privateKey)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -117,7 +118,7 @@ func encodePEM(keyType string, data []byte) []byte {
 }
 
 // RFC 7093, Section 2, Method 4
-func computeSKI(key *ecdsa.PublicKey) []byte {
+func computeSKI(key *sm2.PublicKey) []byte {
 	raw := elliptic.Marshal(key.Curve, key.X, key.Y)
 	hash := sha256.Sum256(raw)
 	return hash[:]

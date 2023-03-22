@@ -8,7 +8,7 @@ package protoutil
 
 import (
 	"bytes"
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 	"encoding/pem"
 	"fmt"
 	"strings"

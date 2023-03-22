@@ -8,7 +8,7 @@ package common
 
 import (
 	"context"
-	"crypto/tls"
+	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 	"io/ioutil"
 	"time"
 

@@ -10,7 +10,7 @@ import (
 	"crypto"
 	"crypto/ecdsa"
 	"crypto/rand"
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 	"encoding/asn1"
 	"encoding/pem"
 	"io/ioutil"

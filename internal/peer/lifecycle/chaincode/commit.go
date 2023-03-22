@@ -8,7 +8,7 @@ package chaincode
 
 import (
 	"context"
-	"crypto/tls"
+	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 	"time"
 
 	"github.com/golang/protobuf/proto"

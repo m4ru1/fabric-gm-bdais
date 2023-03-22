@@ -8,12 +8,13 @@ package msp
 
 import (
 	"bytes"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"encoding/hex"
 	"encoding/pem"
 	"strings"
+
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 
 	"github.com/golang/protobuf/proto"
 	m "github.com/hyperledger/fabric-protos-go/msp"
@@ -229,7 +230,7 @@ func (msp *bccspmsp) getSigningIdentityFromConf(sidInfo *m.SigningIdentityInfo) 
 		if pemKey == nil {
 			return nil, errors.Errorf("%s: wrong PEM encoding", sidInfo.PrivateSigner.KeyIdentifier)
 		}
-		privKey, err = msp.bccsp.KeyImport(pemKey.Bytes, &bccsp.ECDSAPrivateKeyImportOpts{Temporary: true})
+		privKey, err = msp.bccsp.KeyImport(pemKey.Bytes, &bccsp.SM2PrivateKeyImportOpts{Temporary: true})
 		if err != nil {
 			return nil, errors.WithMessage(err, "getIdentityFromBytes error: Failed to import EC private key")
 		}
@@ -768,7 +769,8 @@ func verifyLegacyNameConstraints(chain []*x509.Certificate) error {
 	// would fail in Go 1.14.
 	for _, c := range chain[1:] {
 		if oidInExtensions(oidExtensionNameConstraints, c.Extensions) {
-			return x509.CertificateInvalidError{Cert: chain[0], Reason: x509.NameConstraintsWithoutSANs}
+			// x509.NameConstraintsWithoutSANs : 6
+			return x509.CertificateInvalidError{Cert: chain[0], Reason: 6}
 		}
 	}
 	return nil
@@ -885,11 +887,11 @@ func (msp *bccspmsp) getCertificationChainIdentifierFromChain(chain []*x509.Cert
 	return hf.Sum(nil), nil
 }
 
-// sanitizeCert ensures that x509 certificates signed using ECDSA
+// sanitizeCert ensures that x509 certificates signed using SM2
 // do have signatures in Low-S. If this is not the case, the certificate
 // is regenerated to have a Low-S signature.
 func (msp *bccspmsp) sanitizeCert(cert *x509.Certificate) (*x509.Certificate, error) {
-	if isECDSASignedCert(cert) {
+	if isSM2SignedCert(cert) {
 		// Lookup for a parent certificate to perform the sanitization
 		var parentCert *x509.Certificate
 		chain, err := msp.getUniqueValidationChain(cert, msp.getValidityOptsForCert(cert))
@@ -907,7 +909,7 @@ func (msp *bccspmsp) sanitizeCert(cert *x509.Certificate) (*x509.Certificate, er
 		}
 
 		// Sanitize
-		cert, err = sanitizeECDSASignedCert(cert, parentCert)
+		cert, err = sanitizeSM2SignedCert(cert, parentCert)
 		if err != nil {
 			return nil, err
 		}
@@ -940,7 +942,7 @@ func (msp *bccspmsp) IsWellFormed(identity *m.SerializedIdentity) error {
 		return err
 	}
 
-	if !isECDSASignedCert(cert) {
+	if !isSM2SignedCert(cert) {
 		return nil
 	}
 
@@ -948,12 +950,12 @@ func (msp *bccspmsp) IsWellFormed(identity *m.SerializedIdentity) error {
 }
 
 func isIdentitySignedInCanonicalForm(sig []byte, mspID string, pemEncodedIdentity []byte) error {
-	r, s, err := utils.UnmarshalECDSASignature(sig)
+	r, s, err := utils.UnmarshalSM2Signature(sig)
 	if err != nil {
 		return err
 	}
 
-	expectedSig, err := utils.MarshalECDSASignature(r, s)
+	expectedSig, err := utils.MarshalSM2Signature(r, s)
 	if err != nil {
 		return err
 	}

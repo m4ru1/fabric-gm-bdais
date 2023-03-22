@@ -7,11 +7,9 @@ package ca
 
 import (
 	"crypto"
-	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/sha256"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"io/ioutil"
@@ -21,6 +19,9 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 
 	"github.com/m4ru1/fabric-gm-bdais/internal/cryptogen/csp"
 	"github.com/pkg/errors"
@@ -36,6 +37,7 @@ type CA struct {
 	PostalCode         string
 	Signer             crypto.Signer
 	SignCert           *x509.Certificate
+	Sm2Key             *sm2.PrivateKey
 }
 
 // NewCA creates an instance of CA and saves the signing key pair in
@@ -82,7 +84,7 @@ func NewCA(
 	template.Subject = subject
 	template.SubjectKeyId = computeSKI(priv)
 
-	x509Cert, err := genCertificateECDSA(
+	x509Cert, err := genCertificateSM2(
 		baseDir,
 		name,
 		&template,
@@ -95,7 +97,7 @@ func NewCA(
 	}
 	ca = &CA{
 		Name: name,
-		Signer: &csp.ECDSASigner{
+		Signer: &csp.SM2Signer{
 			PrivateKey: priv,
 		},
 		SignCert:           x509Cert,
@@ -117,7 +119,7 @@ func (ca *CA) SignCertificate(
 	name string,
 	orgUnits,
 	alternateNames []string,
-	pub *ecdsa.PublicKey,
+	pub *sm2.PublicKey,
 	ku x509.KeyUsage,
 	eku []x509.ExtKeyUsage,
 ) (*x509.Certificate, error) {
@@ -149,7 +151,7 @@ func (ca *CA) SignCertificate(
 		}
 	}
 
-	cert, err := genCertificateECDSA(
+	cert, err := genCertificateSM2(
 		baseDir,
 		name,
 		&template,
@@ -165,7 +167,7 @@ func (ca *CA) SignCertificate(
 }
 
 // compute Subject Key Identifier using RFC 7093, Section 2, Method 4
-func computeSKI(privKey *ecdsa.PrivateKey) []byte {
+func computeSKI(privKey *sm2.PrivateKey) []byte {
 	// Marshall the public key
 	raw := elliptic.Marshal(privKey.Curve, privKey.PublicKey.X, privKey.PublicKey.Y)
 
@@ -236,13 +238,13 @@ func x509Template() x509.Certificate {
 	return x509
 }
 
-// generate a signed X509 certificate using ECDSA
-func genCertificateECDSA(
+// generate a signed X509 certificate using SM2
+func genCertificateSM2(
 	baseDir,
 	name string,
 	template,
 	parent *x509.Certificate,
-	pub *ecdsa.PublicKey,
+	pub *sm2.PublicKey,
 	priv interface{},
 ) (*x509.Certificate, error) {
 	// create the x509 public cert
@@ -271,8 +273,8 @@ func genCertificateECDSA(
 	return x509Cert, nil
 }
 
-// LoadCertificateECDSA load a ecdsa cert from a file in cert path
-func LoadCertificateECDSA(certPath string) (*x509.Certificate, error) {
+// LoadCertificateSM2 load a sm2 cert from a file in cert path
+func LoadCertificateSM2(certPath string) (*x509.Certificate, error) {
 	var cert *x509.Certificate
 	var err error
 

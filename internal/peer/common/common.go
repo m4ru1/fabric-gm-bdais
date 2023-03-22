@@ -8,12 +8,13 @@ package common
 
 import (
 	"context"
-	"crypto/tls"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 
 	"github.com/golang/protobuf/proto"
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
@@ -104,7 +105,9 @@ func (cc *CommonClient) Certificate() tls.Certificate {
 	if err != nil {
 		panic(err)
 	}
-	return cert
+	// leaf is a *x509.Certificate, 这种转化是递归的，可能需要专门写一个函数做转化
+	cert_gm := tls.Certificate{Certificate: cert.Certificate, PrivateKey: cert.PrivateKey, OCSPStaple: cert.OCSPStaple, SignedCertificateTimestamps: cert.SignedCertificateTimestamps, Leaf: nil}
+	return cert_gm
 }
 
 // Dial will create a new gRPC client connection to the provided

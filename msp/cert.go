@@ -19,13 +19,15 @@ package msp
 import (
 	"bytes"
 	"crypto/ecdsa"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"encoding/pem"
 	"fmt"
 	"math/big"
 	"time"
+
+	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 
 	"github.com/m4ru1/fabric-gm-bdais/bccsp/utils"
 	"github.com/pkg/errors"
@@ -62,11 +64,63 @@ type tbsCertificate struct {
 	Extensions         []pkix.Extension `asn1:"optional,explicit,tag:3"`
 }
 
+func isSM2SignedCert(cert *x509.Certificate) bool {
+	return cert.SignatureAlgorithm == x509.SM2WithSHA1 ||
+		cert.SignatureAlgorithm == x509.SM2WithSHA256 ||
+		cert.SignatureAlgorithm == x509.SM2WithSM3
+}
+
 func isECDSASignedCert(cert *x509.Certificate) bool {
 	return cert.SignatureAlgorithm == x509.ECDSAWithSHA1 ||
 		cert.SignatureAlgorithm == x509.ECDSAWithSHA256 ||
 		cert.SignatureAlgorithm == x509.ECDSAWithSHA384 ||
 		cert.SignatureAlgorithm == x509.ECDSAWithSHA512
+}
+
+// sanitizeSM2SignedCert checks that the signatures signing a cert
+// is in low-S. This is checked against the public key of parentCert.
+// If the signature is not in low-S, then a new certificate is generated
+// that is equals to cert but the signature that is in low-S.
+func sanitizeSM2SignedCert(cert *x509.Certificate, parentCert *x509.Certificate) (*x509.Certificate, error) {
+	if cert == nil {
+		return nil, errors.New("certificate must be different from nil")
+	}
+	if parentCert == nil {
+		return nil, errors.New("parent certificate must be different from nil")
+	}
+
+	expectedSig, err := utils.SignatureToLowS_SM2(parentCert.PublicKey.(*sm2.PublicKey), cert.Signature)
+	if err != nil {
+		return nil, err
+	}
+
+	// if sig == cert.Signature, nothing needs to be done
+	if bytes.Equal(cert.Signature, expectedSig) {
+		return cert, nil
+	}
+	// otherwise create a new certificate with the new signature
+
+	// 1. Unmarshal cert.Raw to get an instance of certificate,
+	//    the lower level interface that represent an x509 certificate
+	//    encoding
+	var newCert certificate
+	newCert, err = certFromX509Cert(cert)
+	if err != nil {
+		return nil, err
+	}
+
+	// 2. Change the signature
+	newCert.SignatureValue = asn1.BitString{Bytes: expectedSig, BitLength: len(expectedSig) * 8}
+
+	// 3. marshal again newCert. Raw must be nil
+	newCert.Raw = nil
+	newRaw, err := asn1.Marshal(newCert)
+	if err != nil {
+		return nil, errors.Wrap(err, "marshalling of the certificate failed")
+	}
+
+	// 4. parse newRaw to get an x509 certificate
+	return x509.ParseCertificate(newRaw)
 }
 
 // sanitizeECDSASignedCert checks that the signatures signing a cert
