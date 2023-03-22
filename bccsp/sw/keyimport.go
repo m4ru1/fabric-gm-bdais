@@ -137,9 +137,12 @@ func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		// This path only exists to support environments that use RSA certificate
 		// authorities to issue ECDSA certificates.
 		return &rsaPublicKey{pubKey: pk}, nil
-	case *sm2.PrivateKey:
+	case *sm2.PublicKey:
 		// 思路就是通过反射找到对应的导入器，对该密钥内容进行导入
 		return ki.bccsp.KeyImporters[reflect.TypeOf(&bccsp.SM2PublicKeyImportOpts{})].KeyImport(pk, &bccsp.SM2PublicKeyImportOpts{Temporary: opts.Ephemeral()})
+	case *sm2.PrivateKey:
+		// 思路就是通过反射找到对应的导入器，对该密钥内容进行导入
+		return ki.bccsp.KeyImporters[reflect.TypeOf(&bccsp.SM2PrivateKeyImportOpts{})].KeyImport(pk, &bccsp.SM2PrivateKeyImportOpts{Temporary: opts.Ephemeral()})
 	default:
 		return nil, errors.New("Certificate's public key type not recognized. Supported keys: [ECDSA, RSA]")
 	}
