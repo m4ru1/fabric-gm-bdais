@@ -12,17 +12,17 @@ import (
 	"strconv"
 	"time"
 
-	"crypto/tls"
+	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 
-	//"github.com/Hyperledger-TWGC/ccs-gm/tls/credentials"
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 
 	"github.com/m4ru1/fabric-gm-bdais/common/crypto/tlsgen"
+	"github.com/m4ru1/fabric-gm-bdais/credentials"
 	"github.com/m4ru1/fabric-gm-bdais/gossip/api"
 	"github.com/m4ru1/fabric-gm-bdais/gossip/common"
 	"github.com/m4ru1/fabric-gm-bdais/internal/pkg/comm"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
+	//"google.golang.org/grpc/credentials"
 )
 
 // CA that generates TLS key-pairs

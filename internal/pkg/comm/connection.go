@@ -7,14 +7,16 @@ SPDX-License-Identifier: Apache-2.0
 package comm
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"sync"
+
+	"github.com/Hyperledger-TWGC/ccs-gm/tls"
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 
 	"github.com/m4ru1/fabric-gm-bdais/common/channelconfig"
 	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	"github.com/m4ru1/fabric-gm-bdais/credentials"
 	"github.com/m4ru1/fabric-gm-bdais/msp"
-	"google.golang.org/grpc/credentials"
+	grpcCred "google.golang.org/grpc/credentials"
 )
 
 var commLogger = flogging.MustGetLogger("comm")
@@ -52,7 +54,7 @@ func (cs *CredentialSupport) GetClientCertificate() tls.Certificate {
 
 // GetPeerCredentials returns gRPC transport credentials for use by gRPC
 // clients which communicate with remote peer endpoints.
-func (cs *CredentialSupport) GetPeerCredentials() credentials.TransportCredentials {
+func (cs *CredentialSupport) GetPeerCredentials() grpcCred.TransportCredentials {
 	cs.mutex.RLock()
 	defer cs.mutex.RUnlock()
 

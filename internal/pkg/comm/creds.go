@@ -8,14 +8,16 @@ package comm
 
 import (
 	"context"
-	"crypto/tls"
-	"crypto/x509"
 	"errors"
 	"net"
 	"sync"
 	"time"
 
+	"github.com/Hyperledger-TWGC/ccs-gm/tls"
+	"github.com/Hyperledger-TWGC/ccs-gm/x509"
+
 	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
+	gmcredentials "github.com/m4ru1/fabric-gm-bdais/credentials"
 	"google.golang.org/grpc/credentials"
 )
 
@@ -110,7 +112,7 @@ func (sc *serverCreds) ServerHandshake(rawConn net.Conn) (net.Conn, credentials.
 		return nil, nil, err
 	}
 	l.Debugf("Server TLS handshake completed in %s", time.Since(start))
-	return conn, credentials.TLSInfo{State: conn.ConnectionState()}, nil
+	return conn, gmcredentials.TLSInfo{State: conn.ConnectionState()}, nil
 }
 
 // Info provides the ProtocolInfo of this TransportCredentials.
@@ -144,7 +146,7 @@ func (dtc *DynamicClientCredentials) latestConfig() *tls.Config {
 
 func (dtc *DynamicClientCredentials) ClientHandshake(ctx context.Context, authority string, rawConn net.Conn) (net.Conn, credentials.AuthInfo, error) {
 	l := tlsClientLogger.With("remote address", rawConn.RemoteAddr().String())
-	creds := credentials.NewTLS(dtc.latestConfig())
+	creds := gmcredentials.NewTLS(dtc.latestConfig())
 	start := time.Now()
 	conn, auth, err := creds.ClientHandshake(ctx, authority, rawConn)
 	if err != nil {
@@ -160,11 +162,11 @@ func (dtc *DynamicClientCredentials) ServerHandshake(rawConn net.Conn) (net.Conn
 }
 
 func (dtc *DynamicClientCredentials) Info() credentials.ProtocolInfo {
-	return credentials.NewTLS(dtc.latestConfig()).Info()
+	return gmcredentials.NewTLS(dtc.latestConfig()).Info()
 }
 
 func (dtc *DynamicClientCredentials) Clone() credentials.TransportCredentials {
-	return credentials.NewTLS(dtc.latestConfig())
+	return gmcredentials.NewTLS(dtc.latestConfig())
 }
 
 func (dtc *DynamicClientCredentials) OverrideServerName(name string) error {

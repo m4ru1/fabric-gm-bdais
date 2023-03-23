@@ -8,7 +8,6 @@ package node
 
 import (
 	"context"
-	"crypto/tls"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -272,8 +271,8 @@ func serve(args []string) error {
 			logger.Fatalf("Failed to set TLS client certificate (%s)", err)
 		}
 		// leaf is a *x509.Certificate, 这种转化是递归的，可能需要专门写一个函数做转化
-		clientCert := tls.Certificate{Certificate: cert.Certificate, PrivateKey: cert.PrivateKey, OCSPStaple: cert.OCSPStaple, SignedCertificateTimestamps: cert.SignedCertificateTimestamps, Leaf: nil}
-		cs.SetClientCertificate(clientCert)
+		//clientCert := tls.Certificate{Certificate: cert.Certificate, PrivateKey: cert.PrivateKey, OCSPStaple: cert.OCSPStaple, SignedCertificateTimestamps: cert.SignedCertificateTimestamps, Leaf: nil}
+		cs.SetClientCertificate(cert)
 	}
 
 	transientStoreProvider, err := transientstore.NewStoreProvider(
