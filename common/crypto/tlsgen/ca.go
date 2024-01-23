@@ -8,7 +8,8 @@ package tlsgen
 
 import (
 	"crypto"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 )
 
 // CertKeyPair denotes a TLS certificate and corresponding key,

@@ -20,13 +20,14 @@ SPDX-License-Identifier: Apache-2.0
 package peer
 
 import (
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"path/filepath"
 	"runtime"
 	"time"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
 
 	"github.com/m4ru1/fabric-gm-bdais/common/viperutil"
 	"github.com/m4ru1/fabric-gm-bdais/core/config"

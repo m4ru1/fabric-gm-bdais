@@ -13,8 +13,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/pkg/errors"

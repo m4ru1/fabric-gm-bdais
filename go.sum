@@ -8,8 +8,6 @@ github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/DataDog/zstd v1.4.5 h1:EndNeuB0l9syBZhut0wns3gV1hL8zX8LIu6ZiVHWLIQ=
 github.com/DataDog/zstd v1.4.5/go.mod h1:1jcaCB/ufaK+sKp1NBhlGmpz41jOoPQ35bpF36t7BBo=
-github.com/Hyperledger-TWGC/ccs-gm v1.0.0 h1:AGddK+026TtKcvhaI7apzr68opGKMVWxr8StIcviMLQ=
-github.com/Hyperledger-TWGC/ccs-gm v1.0.0/go.mod h1:PI8nz8Zbf0aA4zXaAVlwTq2eSNNmR5XpQoKpVYVa46s=
 github.com/IBM/idemix v0.0.0-20220112103229-701e7610d405 h1:7cKDQL0CWDXO9acHJCCc7SUYpMcJ9H9NGVjLvwG66Nc=
 github.com/IBM/idemix v0.0.0-20220112103229-701e7610d405/go.mod h1:tBeRCKH37b2OkQRJVomLoYk8OjIMYQm+oRWFiJF0jQI=
 github.com/IBM/mathlib v0.0.0-20220112091634-0a7378db6912 h1:rySf+WTiafw7zS7P8GUcZGDd2nDTgLDUx51aIcCFuX4=

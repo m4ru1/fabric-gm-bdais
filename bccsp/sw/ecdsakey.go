@@ -19,9 +19,10 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/sha256"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 	"errors"
 	"fmt"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
 )

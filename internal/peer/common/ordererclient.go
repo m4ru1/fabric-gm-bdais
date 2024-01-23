@@ -7,7 +7,8 @@ package common
 
 import (
 	"context"
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
 
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/pkg/errors"

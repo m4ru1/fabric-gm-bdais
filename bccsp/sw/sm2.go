@@ -3,8 +3,8 @@ package sw
 import (
 	"crypto/rand"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/sm2"
 )
 
 type sm2Signer struct{}

@@ -9,13 +9,14 @@ package comm
 import (
 	"bytes"
 	"context"
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 	"encoding/hex"
 	"fmt"
 	"reflect"
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
 
 	proto "github.com/hyperledger/fabric-protos-go/gossip"
 	"github.com/m4ru1/fabric-gm-bdais/gossip/api"

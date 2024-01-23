@@ -8,12 +8,13 @@ package msp
 
 import (
 	"bytes"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"math/big"
 	"reflect"
 	"time"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 
 	"github.com/pkg/errors"
 )

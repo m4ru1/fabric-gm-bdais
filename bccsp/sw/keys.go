@@ -10,11 +10,12 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 	"encoding/asn1"
 	"encoding/pem"
 	"errors"
 	"fmt"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 )
 
 type pkcs8Info struct {

@@ -8,14 +8,6 @@ github.com/Azure/go-ansiterm/winterm
 # github.com/DataDog/zstd v1.4.5
 ## explicit
 github.com/DataDog/zstd
-# github.com/Hyperledger-TWGC/ccs-gm v1.0.0
-## explicit
-github.com/Hyperledger-TWGC/ccs-gm/sm2
-github.com/Hyperledger-TWGC/ccs-gm/sm3
-github.com/Hyperledger-TWGC/ccs-gm/sm4
-github.com/Hyperledger-TWGC/ccs-gm/tls
-github.com/Hyperledger-TWGC/ccs-gm/utils
-github.com/Hyperledger-TWGC/ccs-gm/x509
 # github.com/IBM/idemix v0.0.0-20220112103229-701e7610d405
 ## explicit
 github.com/IBM/idemix

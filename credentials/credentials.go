@@ -20,8 +20,8 @@ import (
 	"net"
 	"strings"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc/credentials"
 )
