@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 // Copyright 2009 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
@@ -41,12 +42,12 @@ const (
 	alertNoApplicationProtocol  alert = 120
 
 	// specific types for GMT0024
-	alertUnspporttedSite2Site   alert = 200
-	alertNoArea                 alert = 201
-	alertUnspportedAreaType     alert = 202
-	alertBadIBCParam            alert = 203
-	alertUnspportedIBCParam     alert = 204
-	alertIdentityNeed           alert = 205
+	alertUnspporttedSite2Site alert = 200
+	alertNoArea               alert = 201
+	alertUnspportedAreaType   alert = 202
+	alertBadIBCParam          alert = 203
+	alertUnspportedIBCParam   alert = 204
+	alertIdentityNeed         alert = 205
 )
 
 var alertText = map[alert]string{
@@ -76,12 +77,12 @@ var alertText = map[alert]string{
 	alertNoApplicationProtocol:  "no application protocol",
 
 	//specific types for GM
-	alertUnspporttedSite2Site:   "不支持site2site",
-	alertNoArea              :   "没有保护域",
-	alertUnspportedAreaType  :   "不支持的保护域类型",
-	alertBadIBCParam         :   "接收到一个无效的ibc公共参数",
-	alertUnspportedIBCParam  :   "不支持ibc参数中定义的信息",
-	alertIdentityNeed        :   "缺少对方的ibc标识",
+	alertUnspporttedSite2Site: "不支持site2site",
+	alertNoArea:               "没有保护域",
+	alertUnspportedAreaType:   "不支持的保护域类型",
+	alertBadIBCParam:          "接收到一个无效的ibc公共参数",
+	alertUnspportedIBCParam:   "不支持ibc参数中定义的信息",
+	alertIdentityNeed:         "缺少对方的ibc标识",
 }
 
 func (e alert) String() string {

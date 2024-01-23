@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 // Copyright 2012 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
@@ -42,7 +43,6 @@ const (
 /*
  * reference to RFC5959 and RFC2898
  */
-
 
 var (
 	oidPBES1  = asn1.ObjectIdentifier{1, 2, 840, 113549, 1, 5, 3}  // pbeWithMD5AndDES-CBC(PBES1)
@@ -233,14 +233,14 @@ func DecryptPEMBlock(b *pem.Block, password []byte) ([]byte, error) {
 
 	//un-padding
 	dataLen := len(encryptedKey)
-	padLen := int(encryptedKey[dataLen - 1])
+	padLen := int(encryptedKey[dataLen-1])
 	for i := 0; i < padLen; i++ {
-		if int(encryptedKey[dataLen - padLen + i]) != padLen {
+		if int(encryptedKey[dataLen-padLen+i]) != padLen {
 			return nil, errors.New("padding info incorrect")
 		}
 	}
 
-	return encryptedKey[:dataLen - padLen], nil
+	return encryptedKey[:dataLen-padLen], nil
 }
 
 // EncryptPEMBlock returns a PEM block of the specified type holding the

@@ -78,11 +78,8 @@ regen:
 	x1, y1 := key.Curve.ScalarBaseMult(k.Bytes())
 
 	var x2, y2 *big.Int
-	if opt, ok := key.Curve.(optMethod); ok && (key.PreComputed != nil) {
-		x2, y2 = opt.PreScalarMult(key.PreComputed, k.Bytes())
-	} else {
-		x2, y2 = key.Curve.ScalarMult(key.X, key.Y, k.Bytes())
-	}
+
+	x2, y2 = key.Curve.ScalarMult(key.X, key.Y, k.Bytes())
 
 	xBuf := x2.Bytes()
 	yBuf := y2.Bytes()

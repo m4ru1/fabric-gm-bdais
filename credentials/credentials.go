@@ -14,6 +14,7 @@ limitations under the License.
 package credentials
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -22,7 +23,6 @@ import (
 
 	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
 	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc/credentials"
 )
 

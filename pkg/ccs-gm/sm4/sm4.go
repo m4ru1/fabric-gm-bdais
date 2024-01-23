@@ -20,7 +20,7 @@ type Sm4Cipher struct {
 	rk []uint32
 }
 
-//sbox，(b0,b1,b2,b3)=τ(A)=(sBox(a0),sBox(a1),sBox(a2),sBox(a3))
+// sbox，(b0,b1,b2,b3)=τ(A)=(sBox(a0),sBox(a1),sBox(a2),sBox(a3))
 func scSbox(in byte) byte {
 	var x, y int
 	x = (int)(in >> 4 & 0x0f)
@@ -28,12 +28,12 @@ func scSbox(in byte) byte {
 	return sbox[x][y]
 }
 
-//linear transformation L，C=L(B)=B^(B<<<2)^(B<<<10)^(B<<<18)^(B<<<24)
+// linear transformation L，C=L(B)=B^(B<<<2)^(B<<<10)^(B<<<18)^(B<<<24)
 func l(in uint32) uint32 {
 	return in ^ leftRotate(in, 2) ^ leftRotate(in, 10) ^ leftRotate(in, 18) ^ leftRotate(in, 24)
 }
 
-//linear transformation L'，C=L'(B)=B^(B<<<13)^(B<<<23)
+// linear transformation L'，C=L'(B)=B^(B<<<13)^(B<<<23)
 func key_l(in uint32) uint32 {
 	return in ^ leftRotate(in, 13) ^ leftRotate(in, 23)
 }
@@ -48,7 +48,7 @@ func leftRotate(x uint32, r int) uint32 {
 	return ((x << rr) | (x >> (32 - rr))) & 0xffffffff
 }
 
-//linear transformation τ()
+// linear transformation τ()
 func tt(in uint32) uint32 {
 	var tmp [4]byte
 	var re uint32
@@ -63,17 +63,17 @@ func tt(in uint32) uint32 {
 	return re
 }
 
-//T
+// T
 func t3(in uint32) uint32 {
 	return l(tt(in))
 }
 
-//T'
+// T'
 func key_t(in uint32) uint32 {
 	return key_l(tt(in))
 }
 
-//key expansion
+// key expansion
 func keyExp(key [4]uint32) []uint32 {
 	var k [36]uint32
 	var rk [32]uint32
@@ -87,7 +87,7 @@ func keyExp(key [4]uint32) []uint32 {
 	return rk[:]
 }
 
-//crypt block,F(X0,X1,X2,X3)=X0^T(X1^X2^X3^rk)
+// crypt block,F(X0,X1,X2,X3)=X0^T(X1^X2^X3^rk)
 func cryptBlock(rk []uint32, dst, src []byte, mode cryptMode) {
 	var x uint32
 	b := make([]uint32, 4)
@@ -187,7 +187,7 @@ func pkcs7UnPadding(src []byte) ([]byte, error) {
 	return src[:(length - unpadding)], nil
 }
 
-//sm4 ecb mode
+// sm4 ecb mode
 func Sm4Ecb(key []byte, in []byte, mode cryptMode) (out []byte, err error) {
 	if len(key) != BlockSize {
 		return nil, KeySizeError(len(key))
@@ -235,7 +235,7 @@ func xor(in, iv []byte) (out []byte) {
 	return
 }
 
-//sm4 cbc mode
+// sm4 cbc mode
 func Sm4Cbc(key []byte, in []byte, mode cryptMode) (out []byte, err error) {
 	if len(key) != BlockSize {
 		return nil, KeySizeError(len(key))

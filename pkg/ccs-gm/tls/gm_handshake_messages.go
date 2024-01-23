@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 // Copyright 2009 The Go Authors. All rights reserved.
 // Copyright 2009 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
@@ -10,8 +11,8 @@ import "bytes"
 type certificateRequestMsgGM struct {
 	raw []byte
 
-	certificateTypes             []byte
-	certificateAuthorities       [][]byte
+	certificateTypes       []byte
+	certificateAuthorities [][]byte
 }
 
 func (m *certificateRequestMsgGM) equal(i interface{}) bool {
@@ -119,4 +120,3 @@ func (m *certificateRequestMsgGM) unmarshal(data []byte) bool {
 
 	return len(data) == 0
 }
-

@@ -16,8 +16,7 @@ import (
 
 type PublicKey struct {
 	elliptic.Curve
-	X, Y        *big.Int
-	PreComputed *[37][64 * 8]uint64 //precomputation
+	X, Y *big.Int
 }
 
 type PrivateKey struct {
@@ -73,9 +72,7 @@ func GenerateKey(rand io.Reader) (*PrivateKey, error) {
 	priv.DInv = new(big.Int).Add(k, one)
 	priv.DInv.ModInverse(priv.DInv, c.Params().N)
 	priv.PublicKey.X, priv.PublicKey.Y = c.ScalarBaseMult(k.Bytes())
-	if opt, ok := c.(optMethod); ok {
-		priv.PreComputed = opt.InitPubKeyTable(priv.PublicKey.X, priv.PublicKey.Y)
-	}
+
 	return priv, nil
 }
 
@@ -116,7 +113,7 @@ func getZById(pub *PublicKey, id []byte) []byte {
 
 	z = append(z, ENTLa...)
 	z = append(z, id...)
-	z = append(z, SM2PARAM_A...)
+	z = append(z, p256.A.Bytes()...)
 	z = append(z, c.Params().B.Bytes()...)
 	z = append(z, c.Params().Gx.Bytes()...)
 	z = append(z, c.Params().Gy.Bytes()...)
@@ -233,13 +230,10 @@ func Verify(pub *PublicKey, msg []byte, r, s *big.Int) bool {
 	// Check if implements S1*g + S2*p
 	//Using fast multiplication CombinedMult.
 	var x1 *big.Int
-	if opt, ok := c.(optMethod); ok && (pub.PreComputed != nil) {
-		x1, _ = opt.CombinedMult(pub.PreComputed, s.Bytes(), t.Bytes())
-	} else {
-		x11, y11 := c.ScalarMult(pub.X, pub.Y, t.Bytes())
-		x12, y12 := c.ScalarBaseMult(s.Bytes())
-		x1, _ = c.Add(x11, y11, x12, y12)
-	}
+
+	x11, y11 := c.ScalarMult(pub.X, pub.Y, t.Bytes())
+	x12, y12 := c.ScalarBaseMult(s.Bytes())
+	x1, _ = c.Add(x11, y11, x12, y12)
 
 	e.Add(e, x1)
 	e.Mod(e, n)
@@ -266,13 +260,11 @@ func VerifyWithDigest(pub *PublicKey, digest []byte, r, s *big.Int) bool {
 	// Check if implements S1*g + S2*p
 	//Using fast multiplication CombinedMult.
 	var x1 *big.Int
-	if opt, ok := c.(optMethod); ok && (pub.PreComputed != nil) {
-		x1, _ = opt.CombinedMult(pub.PreComputed, s.Bytes(), t.Bytes())
-	} else {
-		x11, y11 := c.ScalarMult(pub.X, pub.Y, t.Bytes())
-		x12, y12 := c.ScalarBaseMult(s.Bytes())
-		x1, _ = c.Add(x11, y11, x12, y12)
-	}
+
+	x11, y11 := c.ScalarMult(pub.X, pub.Y, t.Bytes())
+	x12, y12 := c.ScalarBaseMult(s.Bytes())
+	x1, _ = c.Add(x11, y11, x12, y12)
+
 	e.Add(e, x1)
 	e.Mod(e, n)
 
@@ -291,85 +283,3 @@ func (z *zr) Read(dst []byte) (n int, err error) {
 }
 
 var zeroReader = &zr{}
-
-//func OptSign(rand io.Reader, priv *PrivateKey, msg []byte) (r, s *big.Int, err error) {
-//	//var one = new(big.Int).SetInt64(1)
-//	//if len(hash) < 32 {
-//	//	err = errors.New("The length of hash has short than what SM2 need.")
-//	//	return
-//	//}
-//
-//	var m = make([]byte, 32+len(msg))
-//	copy(m, getZ(&priv.PublicKey))
-//	copy(m[32:], msg)
-//
-//	//h := sm3.New()
-//	//hash := h.Sum(m)
-//	hash := sm3.SumSM3(m)
-//	e := new(big.Int).SetBytes(hash[:])
-//	k := generateRandK(rand, priv.PublicKey.Curve)
-//
-//	x1, _ := priv.PublicKey.Curve.ScalarBaseMult(k.Bytes())
-//
-//	n := priv.PublicKey.Curve.Params().N
-//
-//	r = new(big.Int).Add(e, x1)
-//
-//	r.Mod(r, n)
-//
-//	s1 := new(big.Int).Mul(r, priv.D)
-//	//s1.Mod(s1, n)
-//	s1.Sub(k, s1)
-//	s1.Mod(s1, n)
-//
-//	//s2 := new(big.Int).Add(one, priv.D)
-//	//s2.Mod(s2, n)
-//	//s2.ModInverse(s2, n)
-//	s = new(big.Int).Mul(s1, priv.DInv)
-//	s.Mod(s, n)
-//
-//	return
-//}
-//
-//func OptVerify(pub *PublicKey, msg []byte, r, s *big.Int) bool {
-//	c := pub.Curve
-//	N := c.Params().N
-//
-//	if r.Sign() <= 0 || s.Sign() <= 0 {
-//		return false
-//	}
-//	if r.Cmp(N) >= 0 || s.Cmp(N) >= 0 {
-//		return false
-//	}
-//
-//	n := c.Params().N
-//
-//	var m = make([]byte, 32+len(msg))
-//	copy(m, getZ(pub))
-//	copy(m[32:], msg)
-//	//h := sm3.New()
-//	//hash := h.Sum(m)
-//	hash := sm3.SumSM3(m)
-//	e := new(big.Int).SetBytes(hash[:])
-//
-//	t := new(big.Int).Add(r, s)
-//
-//	// Check if implements S1*g + S2*p
-//	//Using fast multiplication CombinedMult.
-//	var x1 *big.Int
-//	if opt, ok := c.(optMethod); ok {
-//		//x11, y11 := opt.PreScalarMult(pub.PreComputed,t.Bytes())
-//		//x12, y12 := c.ScalarBaseMult(s.Bytes())
-//		//x1, _ = c.Add(x11, y11, x12, y12)
-//		x1, _ = opt.CombinedMult(pub.PreComputed, s.Bytes(), t.Bytes())
-//	} else {
-//		x11, y11 := c.ScalarMult(pub.X, pub.Y, t.Bytes())
-//		x12, y12 := c.ScalarBaseMult(s.Bytes())
-//		x1, _ = c.Add(x11, y11, x12, y12)
-//	}
-//
-//	x := new(big.Int).Add(e, x1)
-//	x = x.Mod(x, n)
-//
-//	return x.Cmp(r) == 0
-//}

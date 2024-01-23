@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 // Copyright 2011 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
@@ -55,7 +56,7 @@ func (d *digest) Reset() {
 	d.len = 0
 }
 
-func GetFunc() (func() hash.Hash){
+func GetFunc() func() hash.Hash {
 	return hashFunc
 }
 
@@ -103,7 +104,7 @@ func (d0 *digest) Sum(in []byte) []byte {
 	return append(in, hash[:]...)
 }
 
-func (d0 *digest)ConstantTimeSum(b []byte) []byte {
+func (d0 *digest) ConstantTimeSum(b []byte) []byte {
 	return d0.Sum(b)
 }
 
