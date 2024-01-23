@@ -73,6 +73,35 @@ func TestVerifyECDSA(t *testing.T) {
 	require.Contains(t, err.Error(), "Invalid S. Must be smaller than half the order [")
 }
 
+func TestVerifyCustomCurve(t *testing.T) {
+	t.Parallel()
+
+	// Generate a key
+	lowLevelKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	require.NoError(t, err)
+
+	msg := []byte("hello world")
+	sigma, err := signECDSA(lowLevelKey, msg, nil)
+	require.NoError(t, err)
+
+	valid, err := verifyECDSA(&lowLevelKey.PublicKey, sigma, msg, nil)
+	require.NoError(t, err)
+	require.True(t, valid)
+
+	_, err = verifyECDSA(&lowLevelKey.PublicKey, nil, msg, nil)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "Failed unmashalling signature [")
+
+	R, S, err := utils.UnmarshalECDSASignature(sigma)
+	require.NoError(t, err)
+	S.Add(utils.GetCurveHalfOrdersAt(elliptic.P256()), big.NewInt(1))
+	sigmaWrongS, err := utils.MarshalECDSASignature(R, S)
+	require.NoError(t, err)
+	_, err = verifyECDSA(&lowLevelKey.PublicKey, sigmaWrongS, msg, nil)
+	require.Error(t, err)
+	require.Contains(t, err.Error(), "Invalid S. Must be smaller than half the order [")
+}
+
 func TestEcdsaSignerSign(t *testing.T) {
 	t.Parallel()
 
