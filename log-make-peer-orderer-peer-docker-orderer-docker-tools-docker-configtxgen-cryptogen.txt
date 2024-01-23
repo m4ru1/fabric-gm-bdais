@@ -1,0 +1,296 @@
+Untagged: hyperledger/fabric-orderer:2.4
+Untagged: hyperledger/fabric-orderer:2.4.7
+Untagged: hyperledger/fabric-orderer:amd64-2.4.7-snapshot-882901b
+Untagged: hyperledger/fabric-orderer:latest
+Deleted: sha256:6b1b20a0b6631cba8bf4e755d2a96a38d675c1a2273493379a4e889fb6ad38a5
+Untagged: hyperledger/fabric-peer:2.4
+Untagged: hyperledger/fabric-peer:2.4.7
+Untagged: hyperledger/fabric-peer:amd64-2.4.7-snapshot-882901b
+Untagged: hyperledger/fabric-peer:latest
+Deleted: sha256:b8495481bd74ddf941b88232a6162db5758ebe62cfbb555002f3f6160e7757af
+Untagged: hyperledger/fabric-tools:2.4
+Untagged: hyperledger/fabric-tools:2.4.7
+Untagged: hyperledger/fabric-tools:amd64-2.4.7-snapshot-882901b
+Untagged: hyperledger/fabric-tools:latest
+Deleted: sha256:29fb4ece4d83c6c8a6f385cf5b0e4565896a3fe4b6b9bb4a024eaa9b22132f3f
+Building build/bin/peer
+GOBIN=/home/thanhpp/go/src/github.com/thanhpp/fabric-gm/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/peer
+Building build/bin/orderer
+GOBIN=/home/thanhpp/go/src/github.com/thanhpp/fabric-gm/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/orderer
+Building Docker image hyperledger/fabric-peer
+docker build --force-rm  -f images/peer/Dockerfile \
+	--build-arg GO_VER=1.18.7 \
+	--build-arg ALPINE_VER=3.16 \
+	--build-arg GO_TAGS= \
+	-t hyperledger/fabric-peer ./
+#1 [internal] load build definition from Dockerfile
+#1 sha256:345aa05ada3a765cc2a3cb94d0d546842ab643c87bb63fc38e85f0121777fb16
+#1 transferring dockerfile: 1.36kB done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:d56fe614b7ddc15b43e13cb53c035ab6fdf83ccaf0819a1f846d759a53584689
+#2 transferring context: 35B done
+#2 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.16
+#4 sha256:02810eb7af2ecf796b5d25e2905b57a57840c0a7fbac3dde70479557e36d6cac
+#4 DONE 0.8s
+
+#3 [internal] load metadata for docker.io/library/golang:1.18.7-alpine3.16
+#3 sha256:aeaa9c40e9d19e78885cc97daf468c169b32829c5afd8a1975a2bf075baee36c
+#3 DONE 0.8s
+
+#8 [golang 1/4] FROM docker.io/library/golang:1.18.7-alpine3.16@sha256:29c658ca42040ee2e6a0eca20d8ee3580bd284dd2dae33bc8a28517e3bc3f36e
+#8 sha256:acdc7814461343e1898f7a1f90c0c90087d3f3e3d7fae09889bfb307ada05e6f
+#8 DONE 0.0s
+
+#5 [peer-base 1/3] FROM docker.io/library/alpine:3.16@sha256:e4cdb7d47b06ba0a062ad2a97a7d154967c8f83934594d9f2bd3efa89292996b
+#5 sha256:63caf86a0958df2dbf20683be838353bcffe3cc0e3956ec4020054bb5d6c3d51
+#5 DONE 0.0s
+
+#10 [internal] load build context
+#10 sha256:ed5a28c3c0dca1a45574212b7cb43821740f82a856dc6d95f0af6d371a73c74a
+#10 transferring context: 507.94kB 0.1s done
+#10 DONE 0.1s
+
+#9 [golang 2/4] RUN apk add --no-cache 	bash 	binutils-gold 	gcc 	git 	make 	musl-dev
+#9 sha256:f0375a3044821a6ca40ce7ada6729615a5660cafe3ed86dfce2fb8069c5bc2ec
+#9 CACHED
+
+#11 [golang 3/4] ADD . /go/src/github.com/hyperledger/fabric
+#11 sha256:d33676831ffcb7e866670213c6964522cd76701d8628981ba4487f291f071d8b
+#11 DONE 0.5s
+
+#12 [golang 4/4] WORKDIR /go/src/github.com/hyperledger/fabric
+#12 sha256:61ef606908d505e80d73972cb623523b458a32399ac7ef8c6e39e0df51822109
+#12 DONE 0.0s
+
+#13 [peer 1/2] RUN make peer GO_TAGS=
+#13 sha256:a0ae890f6ca15726e4885c0a14411a86993ad25c0fe8bd4b32725183f0cdb42b
+#13 0.236 Building build/bin/peer
+#13 0.237 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/peer
+#13 DONE 34.3s
+
+#14 [peer 2/2] RUN make ccaasbuilder
+#14 sha256:0e92be9fce17fc81437a260ed78ca0506378a6a5c4ceb15bac09c4d31d2ee5d8
+#14 0.285 cd ccaas_builder && go test -v ./cmd/detect && GOOS=linux GOARCH=amd64 go build -mod=mod -buildvcs=false -o ../release/linux-amd64/builders/ccaas/bin/ ./cmd/detect/
+#14 0.659 ?   	github.com/m4ru1/fabric-gm-bdais/ccaas_builder/cmd/detect	[no test files]
+#14 0.664 go: downloading github.com/pkg/errors v0.9.1
+#14 0.970 cd ccaas_builder && go test -v ./cmd/build && GOOS=linux GOARCH=amd64 go build -mod=mod -buildvcs=false -o ../release/linux-amd64/builders/ccaas/bin/ ./cmd/build/
+#14 1.355 ?   	github.com/m4ru1/fabric-gm-bdais/ccaas_builder/cmd/build	[no test files]
+#14 1.360 go: downloading github.com/otiai10/copy v1.9.0
+#14 1.571 go: downloading golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8
+#14 2.466 cd ccaas_builder && go test -v ./cmd/release && GOOS=linux GOARCH=amd64 go build -mod=mod -buildvcs=false -o ../release/linux-amd64/builders/ccaas/bin/ ./cmd/release/
+#14 2.523 ?   	github.com/m4ru1/fabric-gm-bdais/ccaas_builder/cmd/release	[no test files]
+#14 DONE 2.7s
+
+#17 [stage-3 3/4] COPY --from=peer /go/src/github.com/hyperledger/fabric/sampleconfig/core.yaml /etc/hyperledger/fabric/core.yaml
+#17 sha256:d9d6afa2e0a282f0f81123c41bb110d8afcd195a90a1893995bf4a27264b83ef
+#17 CACHED
+
+#6 [peer-base 2/3] RUN apk add --no-cache tzdata
+#6 sha256:aaf74eba9b2bdc44e4e44a80ddaaa64fc19882a7a588dcad9b26362041b912ab
+#6 CACHED
+
+#7 [peer-base 3/3] RUN echo 'hosts: files dns' > /etc/nsswitch.conf
+#7 sha256:d386be76ca98001d146fb6e19a85cc0d2efaf5818cacf6759fe9f17adc26277a
+#7 CACHED
+
+#15 [stage-3 1/4] COPY --from=peer /go/src/github.com/hyperledger/fabric/build/bin /usr/local/bin
+#15 sha256:c7a97af30b9b1c5d921b4a3cceda659f0ae766fbceddc147852276716cdb8c89
+#15 CACHED
+
+#16 [stage-3 2/4] COPY --from=peer /go/src/github.com/hyperledger/fabric/sampleconfig/msp /etc/hyperledger/fabric/msp
+#16 sha256:733f0e5895927036ceef5d2548ecff3398b07dc11fe2f76377656b0274a102dc
+#16 CACHED
+
+#18 [stage-3 4/4] COPY --from=peer /go/src/github.com/hyperledger/fabric/release/linux-amd64/builders/ccaas/bin/ /opt/hyperledger/ccaas_builder/bin/
+#18 sha256:882c59ace8fd579e0e77a2af2a1869a301a190708c9adc4ee37025ddf4f6e081
+#18 CACHED
+
+#19 exporting to image
+#19 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#19 exporting layers done
+#19 writing image sha256:b8495481bd74ddf941b88232a6162db5758ebe62cfbb555002f3f6160e7757af done
+#19 naming to docker.io/hyperledger/fabric-peer done
+#19 DONE 0.0s
+docker tag hyperledger/fabric-peer hyperledger/fabric-peer:2.4.7
+docker tag hyperledger/fabric-peer hyperledger/fabric-peer:2.4
+docker tag hyperledger/fabric-peer hyperledger/fabric-peer:amd64-2.4.7-snapshot-882901b
+Building Docker image hyperledger/fabric-orderer
+docker build --force-rm  -f images/orderer/Dockerfile \
+	--build-arg GO_VER=1.18.7 \
+	--build-arg ALPINE_VER=3.16 \
+	--build-arg GO_TAGS= \
+	-t hyperledger/fabric-orderer ./
+#1 [internal] load build definition from Dockerfile
+#1 sha256:89083a927691584e06e698e6b64943c6f11995223129a70602a2d746dac7c939
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 sha256:89083a927691584e06e698e6b64943c6f11995223129a70602a2d746dac7c939
+#1 transferring dockerfile: 1.33kB done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:3923f90c1c63e158995ffbc4484b9350b43011b15b584ef8b1533eaea8a0037b
+#2 transferring context: 35B done
+#2 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.16
+#4 sha256:02810eb7af2ecf796b5d25e2905b57a57840c0a7fbac3dde70479557e36d6cac
+#4 DONE 0.8s
+
+#3 [internal] load metadata for docker.io/library/golang:1.18.7-alpine3.16
+#3 sha256:aeaa9c40e9d19e78885cc97daf468c169b32829c5afd8a1975a2bf075baee36c
+#3 DONE 0.8s
+
+#5 [base 1/3] FROM docker.io/library/alpine:3.16@sha256:e4cdb7d47b06ba0a062ad2a97a7d154967c8f83934594d9f2bd3efa89292996b
+#5 sha256:63caf86a0958df2dbf20683be838353bcffe3cc0e3956ec4020054bb5d6c3d51
+#5 DONE 0.0s
+
+#8 [golang 1/4] FROM docker.io/library/golang:1.18.7-alpine3.16@sha256:29c658ca42040ee2e6a0eca20d8ee3580bd284dd2dae33bc8a28517e3bc3f36e
+#8 sha256:acdc7814461343e1898f7a1f90c0c90087d3f3e3d7fae09889bfb307ada05e6f
+#8 DONE 0.0s
+
+#10 [internal] load build context
+#10 sha256:74eeea9cb29207133cabf84cc47a5cb4848be03f9dd4d82c0550c6bde877b386
+#10 transferring context: 513.06kB 0.1s done
+#10 DONE 0.1s
+
+#9 [golang 2/4] RUN apk add --no-cache 	bash 	binutils-gold 	gcc 	git 	make 	musl-dev
+#9 sha256:f0375a3044821a6ca40ce7ada6729615a5660cafe3ed86dfce2fb8069c5bc2ec
+#9 CACHED
+
+#11 [golang 3/4] ADD . /go/src/github.com/hyperledger/fabric
+#11 sha256:912308bd7f765f44812ed301837671acb3129312264c2e1a67cd42ad7b17477e
+#11 DONE 0.5s
+
+#12 [golang 4/4] WORKDIR /go/src/github.com/hyperledger/fabric
+#12 sha256:98687695f72989c37ab73628f7a19dd05067412de052392c11345712ccbf4eff
+#12 DONE 0.0s
+
+#13 [orderer 1/1] RUN make orderer GO_TAGS=
+#13 sha256:51742f8d05cb33cc59b68ea480bbac93d6eaf3b3465a161360d30ed8234fe598
+#13 0.209 Building build/bin/orderer
+#13 0.209 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/orderer
+#13 DONE 32.2s
+
+#6 [base 2/3] RUN apk add --no-cache tzdata
+#6 sha256:aaf74eba9b2bdc44e4e44a80ddaaa64fc19882a7a588dcad9b26362041b912ab
+#6 CACHED
+
+#7 [base 3/3] RUN  `[ -e /etc/nsswitch.conf ]` && echo 'hosts: files dns' > /etc/nsswitch.conf
+#7 sha256:1544774b8d07cad04b1269828849385b4ae9613700e2b94c67f6d58cd0a4a39e
+#7 CACHED
+
+#14 [stage-3 1/4] COPY --from=orderer /go/src/github.com/hyperledger/fabric/build/bin /usr/local/bin
+#14 sha256:6a24357cba97d6616cad0ee486a2bc243c037d74c012f4360fe24f622f9d8b8b
+#14 CACHED
+
+#15 [stage-3 2/4] COPY --from=orderer /go/src/github.com/hyperledger/fabric/sampleconfig/msp /etc/hyperledger/fabric/msp
+#15 sha256:2bf8e8652e119ebbc169430c5a86f1104d2f27d3f7e8322c2810a919d7d31259
+#15 CACHED
+
+#16 [stage-3 3/4] COPY --from=orderer /go/src/github.com/hyperledger/fabric/sampleconfig/orderer.yaml /etc/hyperledger/fabric
+#16 sha256:3cc0d9a49ea7bb53be438d68ba3dff06f48f98437895071c5c2ad8c11a2de67a
+#16 CACHED
+
+#17 [stage-3 4/4] COPY --from=orderer /go/src/github.com/hyperledger/fabric/sampleconfig/configtx.yaml /etc/hyperledger/fabric
+#17 sha256:4c321a32f1092a4bb0e8b2814169a275dd9407c76dcd5945d1f0baf2068d0958
+#17 CACHED
+
+#18 exporting to image
+#18 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#18 exporting layers done
+#18 writing image sha256:6b1b20a0b6631cba8bf4e755d2a96a38d675c1a2273493379a4e889fb6ad38a5 done
+#18 naming to docker.io/hyperledger/fabric-orderer done
+#18 DONE 0.0s
+docker tag hyperledger/fabric-orderer hyperledger/fabric-orderer:2.4.7
+docker tag hyperledger/fabric-orderer hyperledger/fabric-orderer:2.4
+docker tag hyperledger/fabric-orderer hyperledger/fabric-orderer:amd64-2.4.7-snapshot-882901b
+Building Docker image hyperledger/fabric-tools
+docker build --force-rm  -f images/tools/Dockerfile \
+	--build-arg GO_VER=1.18.7 \
+	--build-arg ALPINE_VER=3.16 \
+	--build-arg GO_TAGS= \
+	-t hyperledger/fabric-tools ./
+#1 [internal] load build definition from Dockerfile
+#1 sha256:cd85a6cc3ca6d6ebb70d6d0816d2969db997fcd3044123163c87de864f7921f8
+#1 transferring dockerfile: 842B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:ace4feff968c925e5dc675fa1e9f4917aadde1246a4bceb097b326ff2e5b90f1
+#2 transferring context: 35B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.18.7-alpine3.16
+#3 sha256:aeaa9c40e9d19e78885cc97daf468c169b32829c5afd8a1975a2bf075baee36c
+#3 DONE 0.8s
+
+#4 [golang 1/4] FROM docker.io/library/golang:1.18.7-alpine3.16@sha256:29c658ca42040ee2e6a0eca20d8ee3580bd284dd2dae33bc8a28517e3bc3f36e
+#4 sha256:acdc7814461343e1898f7a1f90c0c90087d3f3e3d7fae09889bfb307ada05e6f
+#4 DONE 0.0s
+
+#7 [internal] load build context
+#7 sha256:caef83cabd158b64ba90a2d679851f2160b001a4b8bd368c32fb8970ee42b2f0
+#7 transferring context: 517.15kB 0.1s done
+#7 DONE 0.1s
+
+#6 [golang 2/4] RUN apk add --no-cache 	bash 	binutils-gold 	gcc 	git 	make 	musl-dev;
+#6 sha256:dd564bdc2ca2bbbf2308f9bfc2b0d017b7014ebecfeda34fa8cceda69c6a5c25
+#6 CACHED
+
+#8 [golang 3/4] ADD . /go/src/github.com/hyperledger/fabric
+#8 sha256:9aff767e596d34b43d33cd0a7bde0d0c79342566529e88c29334c5675dd1e648
+#8 DONE 0.5s
+
+#9 [golang 4/4] WORKDIR /go/src/github.com/hyperledger/fabric
+#9 sha256:8c21d76a4dcd7f416b67f1f27e89d255dede27d6b63b25a90e41fa153ea5f96f
+#9 DONE 0.0s
+
+#10 [tools 1/1] RUN make tools GO_TAGS=
+#10 sha256:769512ed6f3b314ce753cd5055978f7b06e885b220e6949612e98f4dac09d064
+#10 0.205 Building build/bin/configtxgen
+#10 0.206 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/configtxgen
+#10 29.95 Building build/bin/configtxlator
+#10 29.95 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/configtxlator
+#10 30.81 Building build/bin/cryptogen
+#10 30.81 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/cryptogen
+#10 31.26 Building build/bin/discover
+#10 31.26 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/discover
+#10 32.31 Building build/bin/ledgerutil
+#10 32.31 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/ledgerutil
+#10 34.79 Building build/bin/osnadmin
+#10 34.79 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/osnadmin
+#10 35.24 Building build/bin/peer
+#10 35.24 GOBIN=/go/src/github.com/hyperledger/fabric/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/peer
+#10 DONE 40.1s
+
+#5 [stage-2 2/4] RUN apk add --no-cache 	bash 	git 	jq 	tzdata;
+#5 sha256:de432a4011cc810a2a9eaa131d3abdd5944637606250dd8d45ff1e571c7107d0
+#5 CACHED
+
+#11 [stage-2 3/4] COPY --from=tools /go/src/github.com/hyperledger/fabric/build/bin /usr/local/bin
+#11 sha256:c75823655260525c18eefda1e2521b956ef5d2fa6839cb44bcaa4a2d69723b2e
+#11 CACHED
+
+#12 [stage-2 4/4] COPY --from=tools /go/src/github.com/hyperledger/fabric/sampleconfig /etc/hyperledger/fabric
+#12 sha256:580ebc8643eac60776b4b0642310c56219a2a94b8b07f51b908d3eb2faad7152
+#12 CACHED
+
+#13 exporting to image
+#13 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#13 exporting layers done
+#13 writing image sha256:29fb4ece4d83c6c8a6f385cf5b0e4565896a3fe4b6b9bb4a024eaa9b22132f3f done
+#13 naming to docker.io/hyperledger/fabric-tools done
+#13 DONE 0.0s
+docker tag hyperledger/fabric-tools hyperledger/fabric-tools:2.4.7
+docker tag hyperledger/fabric-tools hyperledger/fabric-tools:2.4
+docker tag hyperledger/fabric-tools hyperledger/fabric-tools:amd64-2.4.7-snapshot-882901b
+Building build/bin/configtxgen
+GOBIN=/home/thanhpp/go/src/github.com/thanhpp/fabric-gm/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/configtxgen
+Building build/bin/cryptogen
+GOBIN=/home/thanhpp/go/src/github.com/thanhpp/fabric-gm/build/bin go install -tags "" -ldflags "-X github.com/m4ru1/fabric-gm-bdais/common/metadata.Version=2.4.7 -X github.com/m4ru1/fabric-gm-bdais/common/metadata.CommitSHA=882901b -X github.com/m4ru1/fabric-gm-bdais/common/metadata.BaseDockerLabel=org.hyperledger.fabric -X github.com/m4ru1/fabric-gm-bdais/common/metadata.DockerNamespace=hyperledger" -buildvcs=false github.com/m4ru1/fabric-gm-bdais/cmd/cryptogen
