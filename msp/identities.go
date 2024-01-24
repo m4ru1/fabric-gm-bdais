@@ -9,12 +9,13 @@ package msp
 import (
 	"crypto"
 	"crypto/rand"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 	"encoding/hex"
 	"encoding/pem"
 	"fmt"
 	"sync"
 	"time"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/msp"

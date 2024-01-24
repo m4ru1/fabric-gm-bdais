@@ -14,15 +14,15 @@ limitations under the License.
 package credentials
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"strings"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
-	"golang.org/x/net/context"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 	"google.golang.org/grpc/credentials"
 )
 

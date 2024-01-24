@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/sm2"
 )
 
 type SM2Signature struct {

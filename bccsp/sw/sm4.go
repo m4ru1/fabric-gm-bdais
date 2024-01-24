@@ -3,8 +3,8 @@ package sw
 import (
 	"fmt"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/sm4"
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/sm4"
 )
 
 type sm4Encryptor struct{}

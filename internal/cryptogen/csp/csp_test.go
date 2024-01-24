@@ -7,11 +7,11 @@ package csp_test
 
 import (
 	"crypto/ecdsa"
-	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/asn1"
+	"encoding/hex"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
@@ -21,6 +21,8 @@ import (
 	"testing"
 
 	"github.com/m4ru1/fabric-gm-bdais/internal/cryptogen/csp"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/sm2"
+	gmx509 "github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 	"github.com/stretchr/testify/require"
 )
 
@@ -125,20 +127,38 @@ func TestGeneratePrivateKey(t *testing.T) {
 }
 
 func TestECDSASigner(t *testing.T) {
-	priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	curve := sm2.P256()
+	t.Logf("curve info:\nName: %s\nP: %s\nN: %s\nB: %s\nGx: %s\nGy: %s\nBitSize: %d\nA: %s\n\n",
+		curve.Params().Name,
+		hex.EncodeToString(curve.Params().P.Bytes()),
+		hex.EncodeToString(curve.Params().N.Bytes()),
+		hex.EncodeToString(curve.Params().B.Bytes()),
+		hex.EncodeToString(curve.Params().Gx.Bytes()),
+		hex.EncodeToString(curve.Params().Gy.Bytes()),
+		curve.Params().BitSize,
+		sm2.P256CurveA().String(),
+	)
+	priv, err := ecdsa.GenerateKey(curve, rand.Reader)
 	if err != nil {
 		t.Fatalf("Failed to generate private key: %s", err)
 	}
+	privBytes, err := gmx509.MarshalPKCS8PrivateKey(priv)
+	if err != nil {
+		t.Fatalf("Failed to marshal private key: %s", err)
+	}
+
+	t.Logf("private key: %s\n\n", hex.EncodeToString(privBytes))
 
 	signer := csp.ECDSASigner{
 		PrivateKey: priv,
 	}
 	require.Equal(t, priv.Public(), signer.Public().(*ecdsa.PublicKey))
-	digest := []byte{1}
+	digest := []byte("Hello, world")
 	sig, err := signer.Sign(rand.Reader, digest, nil)
 	if err != nil {
 		t.Fatalf("Failed to create signature: %s", err)
 	}
+	t.Logf("sign - digest: %s, sig: %s\n\n", hex.EncodeToString(digest), hex.EncodeToString(sig))
 
 	// unmarshal signature
 	ecdsaSig := &csp.ECDSASignature{}
@@ -156,6 +176,8 @@ func TestECDSASigner(t *testing.T) {
 	// ensure signature is valid by using standard verify function
 	ok := ecdsa.Verify(&priv.PublicKey, digest, ecdsaSig.R, ecdsaSig.S)
 	require.True(t, ok, "Expected valid signature")
+
+	t.Logf("verify - R: %s, S: %s", ecdsaSig.R.String(), ecdsaSig.S.String())
 }
 
 func checkForFile(file string) bool {

@@ -10,6 +10,7 @@ function filterExcludedAndGeneratedFiles {
         '\.block$'
         '^\.build/'
         '^build/'
+        '^release/'
         '(^|/)ci\.properties$'
         '(^|/)\.git/'
         '\.gen\.go$'

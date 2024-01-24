@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"hash"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/sm3"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/sm3"
 	"golang.org/x/crypto/sha3"
 )
 

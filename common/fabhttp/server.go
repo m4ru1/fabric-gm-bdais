@@ -8,11 +8,12 @@ package fabhttp
 
 import (
 	"context"
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 	"net"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
 
 	"github.com/m4ru1/fabric-gm-bdais/common/flogging"
 	"github.com/m4ru1/fabric-gm-bdais/common/util"

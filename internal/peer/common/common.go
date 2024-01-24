@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
 
 	"github.com/golang/protobuf/proto"
 	pcommon "github.com/hyperledger/fabric-protos-go/common"

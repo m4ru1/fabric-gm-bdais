@@ -19,9 +19,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
-	"github.com/Hyperledger-TWGC/ccs-gm/utils"
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/sm2"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/utils"
 )
 
 // NewFileBasedKeyStore instantiated a file-based key store at a given position.

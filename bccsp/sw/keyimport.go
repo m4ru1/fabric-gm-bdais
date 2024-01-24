@@ -10,15 +10,15 @@ import (
 	"crypto/ecdsa"
 	"crypto/rsa"
 
-	//"github.com/Hyperledger-TWGC/ccs-gm/x509"
+	//"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 	"errors"
 	"fmt"
 	"reflect"
 
-	"github.com/Hyperledger-TWGC/ccs-gm/sm2"
-	"github.com/Hyperledger-TWGC/ccs-gm/utils"
-	"github.com/Hyperledger-TWGC/ccs-gm/x509"
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/sm2"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/utils"
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 )
 
 type aes256ImportKeyOptsKeyImporter struct{}

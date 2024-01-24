@@ -10,7 +10,7 @@ import (
 	"crypto"
 	"io"
 
-	gmx509 "github.com/Hyperledger-TWGC/ccs-gm/x509"
+	gmx509 "github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/x509"
 
 	"github.com/m4ru1/fabric-gm-bdais/bccsp"
 	"github.com/pkg/errors"

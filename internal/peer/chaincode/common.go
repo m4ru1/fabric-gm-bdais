@@ -8,13 +8,14 @@ package chaincode
 
 import (
 	"context"
-	"github.com/Hyperledger-TWGC/ccs-gm/tls"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"math"
 	"strings"
 	"sync"
+
+	"github.com/m4ru1/fabric-gm-bdais/pkg/ccs-gm/tls"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-chaincode-go/shim"
