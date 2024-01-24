@@ -128,13 +128,13 @@ func TestGeneratePrivateKey(t *testing.T) {
 
 func TestECDSASigner(t *testing.T) {
 	curve := sm2.P256()
-	t.Logf("curve info:\nName: %s\nP: %s\nN: %s\nB: %s\nGx: %s\nGy: %s\nBitSize: %d\n\nA: %s\n",
+	t.Logf("curve info:\nName: %s\nP: %s\nN: %s\nB: %s\nGx: %s\nGy: %s\nBitSize: %d\nA: %s\n\n",
 		curve.Params().Name,
-		curve.Params().P.String(),
-		curve.Params().N.String(),
-		curve.Params().B.String(),
-		curve.Params().Gx.String(),
-		curve.Params().Gy.String(),
+		hex.EncodeToString(curve.Params().P.Bytes()),
+		hex.EncodeToString(curve.Params().N.Bytes()),
+		hex.EncodeToString(curve.Params().B.Bytes()),
+		hex.EncodeToString(curve.Params().Gx.Bytes()),
+		hex.EncodeToString(curve.Params().Gy.Bytes()),
 		curve.Params().BitSize,
 		sm2.P256CurveA().String(),
 	)
@@ -142,12 +142,12 @@ func TestECDSASigner(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to generate private key: %s", err)
 	}
-	privBytes, err := gmx509.MarshalECPrivateKey(priv)
+	privBytes, err := gmx509.MarshalPKCS8PrivateKey(priv)
 	if err != nil {
 		t.Fatalf("Failed to marshal private key: %s", err)
 	}
 
-	t.Logf("private key: %s", hex.EncodeToString(privBytes))
+	t.Logf("private key: %s\n\n", hex.EncodeToString(privBytes))
 
 	signer := csp.ECDSASigner{
 		PrivateKey: priv,
@@ -158,7 +158,7 @@ func TestECDSASigner(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create signature: %s", err)
 	}
-	t.Logf("sign - digest: %s, sig: %s", hex.EncodeToString(digest), hex.EncodeToString(sig))
+	t.Logf("sign - digest: %s, sig: %s\n\n", hex.EncodeToString(digest), hex.EncodeToString(sig))
 
 	// unmarshal signature
 	ecdsaSig := &csp.ECDSASignature{}
